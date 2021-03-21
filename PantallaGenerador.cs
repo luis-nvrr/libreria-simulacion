@@ -13,7 +13,6 @@ namespace Numeros_aleatorios
 {
     public partial class PantallaGenerador : Form
     {
-        //DataTable dataTable;
         int CANT_ITERACIONES = 20;
         int x0;
         int k;

@@ -12,14 +12,18 @@ namespace Numeros_aleatorios.ejemplo_grafico
 {
     public partial class Prueba_Grafico_Generador : Form
     {
-
+        int CANTIDAD_DECIMALES = 4;
         Random random;
+
         int cantidadNumeros;
         int cantidadIntervalos;
-        int CANTIDAD_DECIMALES = 4;
+
         float[] inicioIntervalos; // inicio de cada intervalo
         float[] finIntervalos; // inicio de cada intervalo
-        int[] contador; //
+
+        int[] frecuenciaObservada; //
+        int[] frecuenciaEsperada;
+
         EjemploGrafico graficador;
 
         public Prueba_Grafico_Generador()
@@ -29,17 +33,21 @@ namespace Numeros_aleatorios.ejemplo_grafico
 
         private void Prueba_Grafico_Generador_Load(object sender, EventArgs e)
         {
-            cantidadNumeros = 100;
-            cantidadIntervalos = 20;
+            cantidadNumeros = 100;  //entrada
+            cantidadIntervalos = 5; // entrada 
+
+            frecuenciaObservada = new int[cantidadIntervalos];
+            frecuenciaEsperada = new int[cantidadIntervalos];
+
             generarIntervalos();
             mostrarIntervalos();
             generarSerie();
             mostrarContador();
 
             graficador = new EjemploGrafico();
-            graficador.DataValues = contador;
-            graficador.rangeValuesStart = inicioIntervalos;
-            graficador.rangeValuesEnd = finIntervalos;
+            graficador.DataValues = frecuenciaObservada;
+            graficador.frecuenciaEsperada = frecuenciaEsperada;
+
             graficador.cantidadIntervalos = cantidadIntervalos;
             graficador.cantidadNumeros = cantidadNumeros;
             graficador.ShowDialog();
@@ -49,7 +57,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
         {
             random = new Random();
 
-            for (int i = 0; i <= cantidadNumeros; i++)
+            for (int i = 0; i < cantidadNumeros; i++)
             {
                 double nro = random.NextDouble();
                 float aleatorioTruncado = truncarDecimales(nro);
@@ -59,7 +67,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
         
         private float truncarDecimales(double numero)
         {
-            int factor = 10000;
+            int factor = (int)Math.Pow(10, CANTIDAD_DECIMALES);
             return (float)Math.Truncate(factor * numero) / factor;
         }
 
@@ -69,7 +77,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             {
                 if (numero >= inicioIntervalos[i] && numero <= finIntervalos[i])
                 {
-                    contador[i] += 1;
+                    frecuenciaObservada[i] += 1;
                 }
             }
         }
@@ -78,14 +86,14 @@ namespace Numeros_aleatorios.ejemplo_grafico
         {
             inicioIntervalos = new float[cantidadIntervalos];
             finIntervalos = new float[cantidadIntervalos];
-            contador = new int[cantidadIntervalos];
 
             float rangoIntervalo = calcularRangoIntervalos();
             float inicioActual = 0;
             float finActual = rangoIntervalo;
-            float rangoInicio = 1.0f / cantidadIntervalos;
+            float rangoInicio = 1f / cantidadIntervalos;
             double auxiliar = 0;
-            
+
+            MessageBox.Show(rangoIntervalo.ToString());
             for(int i=0; i<cantidadIntervalos; i++)
             {
                 inicioIntervalos[i] = inicioActual;
@@ -93,6 +101,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
                 auxiliar += rangoInicio;
                 inicioActual = (float) Math.Round(auxiliar,2);
                 finActual = truncarDecimales(auxiliar + rangoIntervalo);
+                frecuenciaEsperada[i] = cantidadNumeros / cantidadIntervalos;
             }
         }
 
@@ -116,7 +125,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             string res = " ";
             for (int i = 0; i < cantidadIntervalos; i++)
             {
-                res += inicioIntervalos[i] + " " + finIntervalos[i] + "=" + contador[i].ToString();
+                res += inicioIntervalos[i] + " " + finIntervalos[i] + "=" + frecuenciaObservada[i].ToString();
                 res += "\n";
             }
             MessageBox.Show(res);

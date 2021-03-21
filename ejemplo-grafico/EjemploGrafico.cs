@@ -31,9 +31,10 @@ namespace Numeros_aleatorios
         //private Label[] rangeLabels = new Label[10]; // 10 es 2* la cantidad de intervalos
 
         public int[] DataValues { get; set; }
+        public int[] frecuenciaEsperada { get; set; }
         private Label[] Labels;
-        public float[] rangeValuesStart { get; set; }
-        public float[] rangeValuesEnd { get; set; }
+        //public float[] rangeValuesStart { get; set; } // no hace falta poner rangos
+        //public float[] rangeValuesEnd { get; set; }
         private Label[] rangeLabels;
         public int cantidadIntervalos { get; set; }
         public int cantidadNumeros { get; set; }
@@ -43,7 +44,7 @@ namespace Numeros_aleatorios
         {
             Labels = new Label[cantidadIntervalos];
             rangeLabels = new Label[cantidadIntervalos];
-            MAX_VALUE = cantidadNumeros;
+            MAX_VALUE = cantidadNumeros/(cantidadIntervalos/3);
             //Random rnd = new Random();
 
             // Create data.
@@ -59,7 +60,7 @@ namespace Numeros_aleatorios
                 // Make a range label.
                 rangeLabels[i] = new Label();
                 rangeLabels[i].Parent = picHisto;
-                rangeLabels[i].Text = rangeValuesStart[i] + "-" + rangeValuesEnd[i];
+                rangeLabels[i].Text = (i+1).ToString();
                 rangeLabels[i].ForeColor = Color.Black;
                 rangeLabels[i].BackColor = Color.White;
                 rangeLabels[i].AutoSize = true;
@@ -92,10 +93,7 @@ namespace Numeros_aleatorios
             int[] values, int width, int height)
         {
             Color[] Colors = new Color[] {
-        Color.Red, Color.LightGreen, Color.Blue,
-        Color.Pink, Color.Green, Color.LightBlue,
-        Color.Orange, Color.Yellow, Color.Purple
-    };
+        Color.Black, Color.DarkRed, Color.DarkGreen};
 
             gr.Clear(back_color);
 
@@ -116,14 +114,35 @@ namespace Numeros_aleatorios
             {
                 for (int i = 0; i < values.Length; i++)
                 {
-                    RectangleF rect = new RectangleF(i, 0, 1, values[i]);
+                     // primer rectangulo del grupo
+                    RectangleF rect = new RectangleF(i, 0, 1/3f, values[i]);
                     using (Brush the_brush =
-                         new SolidBrush(Colors[i % Colors.Length]))
+                         new SolidBrush(Colors[0]))
                     {
                         gr.FillRectangle(the_brush, rect);
                         gr.DrawRectangle(thin_pen, rect.X, rect.Y,
                             rect.Width, rect.Height);
                     }
+
+                    // segundo rectangulo del grupo
+                    RectangleF rect2 = new RectangleF(i+(1/3f), 0, 1 / 3f, frecuenciaEsperada[i]);
+                    using (Brush the_brush =
+                         new SolidBrush(Colors[1]))
+                    {
+                        gr.FillRectangle(the_brush, rect2);
+                        gr.DrawRectangle(thin_pen, rect2.X, rect2.Y,
+                            rect2.Width, rect2.Height);
+                    }
+                    // tercer rectangulo del grupo
+                    RectangleF rect3 = new RectangleF(i + (2 / 3f), 0, 1 / 3f, frecuenciaEsperada[i]);
+                    using (Brush the_brush =
+                         new SolidBrush(Colors[2]))
+                    {
+                        gr.FillRectangle(the_brush, rect3);
+                        gr.DrawRectangle(thin_pen, rect3.X, rect3.Y,
+                            rect3.Width, rect3.Height);
+                    }
+
 
                     // Position the value's label.
                     PointF[] point =
@@ -138,7 +157,7 @@ namespace Numeros_aleatorios
                     // Position the range's values
                     PointF[] pointRange =
                      {
-                new PointF(rect.Left + rect.Width / 6f, rect.Y-3f*MAX_VALUE/100),
+                new PointF(rect.Left + rect.Width / 2f, rect.Y-3f*MAX_VALUE/100),
             };
                     transformation.TransformPoints(pointRange);
                     rangeLabels[i].Location = new Point(
@@ -162,5 +181,6 @@ namespace Numeros_aleatorios
             MessageBox.Show("Item " + i + " has value " + DataValues[i],
                 "Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
     }
 }
