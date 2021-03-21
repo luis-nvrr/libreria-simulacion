@@ -279,7 +279,7 @@ namespace Numeros_aleatorios
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(236, 303);
+            this.grdResultados.Size = new System.Drawing.Size(229, 303);
             this.grdResultados.TabIndex = 0;
             // 
             // iteracion
@@ -296,7 +296,7 @@ namespace Numeros_aleatorios
             // 
             // btnMostrar
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(542, 28);
+            this.btnMostrar.Location = new System.Drawing.Point(515, 31);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(118, 27);
             this.btnMostrar.TabIndex = 1;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Numeros_aleatorios.LibreriaSimulacion;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +15,23 @@ namespace Numeros_aleatorios
     public partial class PantallaGenerador : Form
     {
         int CANT_ITERACIONES = 20;
+
+        // parametros
         int x0;
         int k;
         int g;
         int c;
         int a;
         long m;
+
+        // indice para agregar fila
         int indice;
-        long entradaAnterior;
-        long entradaActual;
-        double aleatorioActual;
-        float aleatorioActualTruncado;
+
+        // generadores
+        GeneradorCongruencialLineal lineal;
+        GeneradorCongruencialMultiplicativo multiplicativo;
+
+        Truncador truncador;
 
 
         public PantallaGenerador()
@@ -32,17 +39,21 @@ namespace Numeros_aleatorios
             InitializeComponent();
         }
 
+        private void Ejercicio1_Load(object sender, EventArgs e)
+        {
+            truncador = new Truncador(4);
+        }
+
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             grdResultados.Rows.Clear();
             indice = -1;
+
             x0 = int.Parse(semilla.Text);
             k = int.Parse(enteroK.Text);
             g = int.Parse(enteroG.Text);
             a = int.Parse(constanteMultiplicativa.Text);
             m = long.Parse(modulo.Text);
-
-            entradaAnterior = x0;
 
             if (rbLineal.Checked)
             {
@@ -55,25 +66,36 @@ namespace Numeros_aleatorios
 
         private void congruencialLineal()
         {
-            for (int i = 1; i <= CANT_ITERACIONES; i++)
+            lineal = new GeneradorCongruencialLineal(truncador, x0, c, a, m);
+            float[] aleatorios = lineal.generarSerie(CANT_ITERACIONES); 
+
+            for (int i = 0; i < CANT_ITERACIONES; i++)
             {
-                agregarCongruencialLineal();
+                agregarFila(aleatorios[i]);
             }
         }
 
-
-        private void agregarCongruencialLineal()
+        private void congruencialMultiplicativo()
         {
-            generarAleatorioLineal();
-            aleatorioActualTruncado = truncarDecimales(aleatorioActual);
-            agregarFila(aleatorioActualTruncado);
+            multiplicativo = new GeneradorCongruencialMultiplicativo(truncador, x0, a, m);
+            float[] aleatorios = multiplicativo.generarSerie(CANT_ITERACIONES);
+
+            for (int i = 0; i < CANT_ITERACIONES; i++)
+            {
+                agregarFila(aleatorios[i]);
+            }
         }
 
-        private void generarAleatorioLineal()
+        private void btnMostrar_Click(object sender, EventArgs e)
         {
-            entradaActual = ((a * entradaAnterior) + c) % (m);
-            aleatorioActual = (double)entradaActual / (m-1); // (m-1) para incluir el 1 
-            entradaAnterior = entradaActual;
+            if (rbLineal.Checked)
+            {
+                agregarFila(lineal.siguienteAleatorio());
+            }
+            else
+            {
+                agregarFila(multiplicativo.siguienteAleatorio());
+            }
         }
 
         private void agregarFila(float numeroAleatorio)
@@ -88,47 +110,6 @@ namespace Numeros_aleatorios
         private void enfocarFila()
         {
             grdResultados.CurrentCell = grdResultados.Rows[indice].Cells[0];
-        }
-
-        private float truncarDecimales(double numero)
-        {
-            int factor = 10000;
-            return (float) Math.Truncate(factor * numero) / factor;
-        }
-
-        private void congruencialMultiplicativo()
-        {
-            for (int i = 1; i <= CANT_ITERACIONES; i++)
-            {
-                agregarCongruencialMultiplicativo();
-            }
-        }
-
-        private void agregarCongruencialMultiplicativo()
-        {
-            generarAleatorioMultiplicativo();
-            aleatorioActualTruncado = truncarDecimales(aleatorioActual);
-            agregarFila(aleatorioActualTruncado);
-        }
-
-        private void generarAleatorioMultiplicativo()
-        {
-            entradaActual = (a * entradaAnterior) % (m);
-            aleatorioActual = (double)entradaActual / (m-1); // (m-1) para incluir el 1 
-            entradaAnterior = entradaActual;
-        }
-
-
-        private void btnMostrar_Click(object sender, EventArgs e)
-        {
-            if (rbLineal.Checked)
-            {
-                agregarCongruencialLineal();
-            }
-            else
-            {
-                agregarCongruencialMultiplicativo();
-            }
         }
 
 
@@ -172,7 +153,7 @@ namespace Numeros_aleatorios
         {
             m = long.Parse(modulo.Text);
             g = (int)Math.Log2(m);
-            enteroG.Text = g + "";
+            enteroG.Text = g.ToString();
         }
 
         private void actualizarM()
@@ -180,7 +161,7 @@ namespace Numeros_aleatorios
             g = int.Parse(enteroG.Text);
             m = (long)Math.Pow(2, g);
 
-            modulo.Text = m + "";
+            modulo.Text = m.ToString() ;
         }
 
         private void actualizarA()
@@ -189,12 +170,12 @@ namespace Numeros_aleatorios
             if (rbLineal.Checked)
             {
                 a = 1 + 4 * k;
-                constanteMultiplicativa.Text = a + "";
+                constanteMultiplicativa.Text = a.ToString();
             }
             else
             {
                 a = 3 + 8 * k;
-                constanteMultiplicativa.Text = a + "";
+                constanteMultiplicativa.Text = a.ToString();
             }
         }
 
@@ -204,18 +185,15 @@ namespace Numeros_aleatorios
             if (rbLineal.Checked)
             {
                 k = (a - 1) / 4;
-                enteroK.Text = k + "";
+                enteroK.Text = k.ToString();
             }
             else
             {
                 k = (a - 3) / 8;
-                enteroK.Text = k + "";
+                enteroK.Text = k.ToString();
             }
         }
 
-        private void Ejercicio1_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }

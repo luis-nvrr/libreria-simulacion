@@ -40,7 +40,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         public float[] generarSerie(int cantidadAleatorios)
         {
             float[] serieAleatorios = new float[cantidadAleatorios];
-            for (int i = 1; i <= cantidadAleatorios; i++)
+            for (int i = 0; i < cantidadAleatorios; i++)
             {
                 serieAleatorios[i] = siguienteAleatorio();
             }
