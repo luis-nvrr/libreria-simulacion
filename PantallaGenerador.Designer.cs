@@ -1,7 +1,7 @@
 ﻿
 namespace Numeros_aleatorios
 {
-    partial class Generador
+    partial class PantallaGenerador
     {
         /// <summary>
         ///  Required designer variable.
@@ -240,7 +240,7 @@ namespace Numeros_aleatorios
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1364, 71);
+            this.panel1.Size = new System.Drawing.Size(1347, 71);
             this.panel1.TabIndex = 2;
             // 
             // lblTitulo
@@ -304,18 +304,18 @@ namespace Numeros_aleatorios
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
-            // Generador
+            // PantallaGenerador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1381, 711);
+            this.ClientSize = new System.Drawing.Size(1364, 711);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbOpcion);
-            this.Name = "Generador";
+            this.Name = "PantallaGenerador";
             this.Text = "Ejercicio 1 - Simulacion";
             this.Load += new System.EventHandler(this.Ejercicio1_Load);
             this.gbOpcion.ResumeLayout(false);
