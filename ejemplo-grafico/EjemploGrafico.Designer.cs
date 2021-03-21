@@ -57,7 +57,9 @@
             this.Controls.Add(this.picHisto);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "EjemploGrafico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "howto_histogram";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picHisto)).EndInit();
             this.ResumeLayout(false);

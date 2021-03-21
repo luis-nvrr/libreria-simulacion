@@ -19,22 +19,32 @@ namespace Numeros_aleatorios
         }
 
         private const int MIN_VALUE = 0;
-        private const int MAX_VALUE = 30;
+        private int MAX_VALUE; //cantidad de numeros
 
         // private float[] DataValues = new float[]{0.15f, 0.22f, 0.41f, 0.65f, 0.84f, 0.81f, 0.62f, 0.45f, 0.32f, 0.07f, 0.11f, 0.29f, 0.58f, 0.73f, 0.93f,0.97f, 0.79f, 0.55f, 0.35f, 0.09f,
         //   0.99f, 0.51f, 0.35f, 0.02f, 0.19f, 0.24f, 0.98f, 0.10f, 0.31f, 0.17f};
 
-        private float[] DataValues = new float[] { 8f, 7f, 5f, 4f, 6f }; // arreglo con las frecuencias
-        private Label[] Labels = new Label[5]; // 5 es la cantidad de intervalos
-        private float[] rangeValuesStart = new float[] { 0f, 0.2f, 0.4f, 0.6f, 0.8f }; // inicio de cada intervalo
-        private float[] rangeValuesEnd = new float[] { 0.19f, 0.39f, 0.59f, 0.79f, 0.99f }; // inicio de cada intervalo
-        private Label[] rangeLabels = new Label[10]; // 10 es 2* la cantidad de intervalos
+        //private float[] DataValues = new float[] { 8f, 7f, 5f, 4f, 6f }; // arreglo con las frecuencias
+        //private Label[] Labels = new Label[5]; // 5 es la cantidad de intervalos
+        //private float[] rangeValuesStart = new float[] { 0f, 0.2f, 0.4f, 0.6f, 0.8f }; // inicio de cada intervalo
+        //private float[] rangeValuesEnd = new float[] { 0.19f, 0.39f, 0.59f, 0.79f, 0.99f }; // inicio de cada intervalo
+        //private Label[] rangeLabels = new Label[10]; // 10 es 2* la cantidad de intervalos
 
+        public int[] DataValues { get; set; }
+        private Label[] Labels;
+        public float[] rangeValuesStart { get; set; }
+        public float[] rangeValuesEnd { get; set; }
+        private Label[] rangeLabels;
+        public int cantidadIntervalos { get; set; }
+        public int cantidadNumeros { get; set; }
 
         // Make some random data.
         private void Form1_Load(object sender, EventArgs e)
         {
-            Random rnd = new Random();
+            Labels = new Label[cantidadIntervalos];
+            rangeLabels = new Label[cantidadIntervalos];
+            MAX_VALUE = cantidadNumeros;
+            //Random rnd = new Random();
 
             // Create data.
             for (int i = 0; i < DataValues.Length; i++)
@@ -79,7 +89,7 @@ namespace Numeros_aleatorios
 
         // Draw a histogram.
         private void DrawHistogram(Graphics gr, Color back_color,
-            float[] values, int width, int height)
+            int[] values, int width, int height)
         {
             Color[] Colors = new Color[] {
         Color.Red, Color.LightGreen, Color.Blue,
@@ -91,7 +101,7 @@ namespace Numeros_aleatorios
 
             // Make a transformation to the PictureBox.
             RectangleF data_bounds =
-                new RectangleF(0, -3f, values.Length, MAX_VALUE);
+                new RectangleF(0, -3f*MAX_VALUE/100, values.Length, MAX_VALUE);
             PointF[] points =
             {
         new PointF(0, height),
@@ -128,7 +138,7 @@ namespace Numeros_aleatorios
                     // Position the range's values
                     PointF[] pointRange =
                      {
-                new PointF(rect.Left + rect.Width / 2.77f, rect.Y-3),
+                new PointF(rect.Left + rect.Width / 6f, rect.Y-3f*MAX_VALUE/100),
             };
                     transformation.TransformPoints(pointRange);
                     rangeLabels[i].Location = new Point(
