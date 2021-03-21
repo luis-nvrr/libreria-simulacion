@@ -1,6 +1,6 @@
-﻿namespace howto_histogram
+﻿namespace Numeros_aleatorios
 {
-    partial class Form1
+    partial class EjemploGrafico
     {
         /// <summary>
         /// Required designer variable.
@@ -34,27 +34,29 @@
             // 
             // picHisto
             // 
-            this.picHisto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.picHisto.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.picHisto.BackColor = System.Drawing.Color.White;
             this.picHisto.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.picHisto.Location = new System.Drawing.Point(8, 6);
+            this.picHisto.Location = new System.Drawing.Point(0, 4);
+            this.picHisto.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picHisto.Name = "picHisto";
-            this.picHisto.Size = new System.Drawing.Size(392, 192);
+            this.picHisto.Size = new System.Drawing.Size(476, 229);
             this.picHisto.TabIndex = 1;
             this.picHisto.TabStop = false;
-            this.picHisto.Resize += new System.EventHandler(this.picHisto_Resize);
-            this.picHisto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picHisto_MouseDown);
             this.picHisto.Paint += new System.Windows.Forms.PaintEventHandler(this.picHisto_Paint);
+            this.picHisto.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picHisto_MouseDown);
+            this.picHisto.Resize += new System.EventHandler(this.picHisto_Resize);
             // 
-            // Form1
+            // EjemploGrafico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(408, 205);
+            this.ClientSize = new System.Drawing.Size(476, 237);
             this.Controls.Add(this.picHisto);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "EjemploGrafico";
             this.Text = "howto_histogram";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picHisto)).EndInit();
