@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios
 {
-    public partial class Ejercicio1 : Form
+    public partial class Generador : Form
     {
         //DataTable dataTable;
         int CANT_ITERACIONES = 20;
@@ -27,7 +27,7 @@ namespace Numeros_aleatorios
         double aleatorioActual;
         float aleatorioActualTruncado;
 
-        public Ejercicio1()
+        public Generador()
         {
             InitializeComponent();
         }
@@ -211,6 +211,11 @@ namespace Numeros_aleatorios
                 k = (a - 3) / 8;
                 enteroK.Text = k + "";
             }
+        }
+
+        private void Ejercicio1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

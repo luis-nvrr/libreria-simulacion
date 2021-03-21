@@ -1,7 +1,7 @@
 ﻿
 namespace Numeros_aleatorios
 {
-    partial class Ejercicio1
+    partial class Generador
     {
         /// <summary>
         ///  Required designer variable.
@@ -304,7 +304,7 @@ namespace Numeros_aleatorios
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
-            // Ejercicio1
+            // Generador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -315,8 +315,9 @@ namespace Numeros_aleatorios
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbOpcion);
-            this.Name = "Ejercicio1";
+            this.Name = "Generador";
             this.Text = "Ejercicio 1 - Simulacion";
+            this.Load += new System.EventHandler(this.Ejercicio1_Load);
             this.gbOpcion.ResumeLayout(false);
             this.gbOpcion.PerformLayout();
             this.groupBox1.ResumeLayout(false);

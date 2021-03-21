@@ -31,7 +31,9 @@ namespace Numeros_aleatorios.Negocio
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.picHisto = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHisto)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,17 +57,27 @@ namespace Numeros_aleatorios.Negocio
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Histograma";
             // 
+            // picHisto
+            // 
+            this.picHisto.Location = new System.Drawing.Point(75, 107);
+            this.picHisto.Name = "picHisto";
+            this.picHisto.Size = new System.Drawing.Size(608, 331);
+            this.picHisto.TabIndex = 4;
+            this.picHisto.TabStop = false;
+            // 
             // Grafico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.picHisto);
             this.Controls.Add(this.panel1);
             this.Name = "Grafico";
             this.Text = "Grafico";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picHisto)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -74,5 +86,6 @@ namespace Numeros_aleatorios.Negocio
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.PictureBox picHisto;
     }
 }
