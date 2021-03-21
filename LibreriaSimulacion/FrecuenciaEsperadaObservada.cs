@@ -9,14 +9,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
     class FrecuenciaEsperadaObservada
     {
-        // para generar numeros aleatorios
-        Random random; // se deberia cambiar dependiendo de la distribucion pedida
+        int CANTIDAD_DECIMALES = 4;
 
         // par truncar
-        Truncador truncador;
+        private Truncador truncador;
 
         // parametros
-        private int CANTIDAD_DECIMALES = 4;
         private int cantidadNumeros;
         private int cantidadIntervalos;
 
@@ -24,42 +22,36 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private float[] inicioIntervalos; // inicio de cada intervalo
         private float[] finIntervalos; // inicio de cada intervalo
 
-        private int[] frecuenciaObservada; // 
+        private int[] frecuenciaObservada;  
         private int[] frecuenciaEsperada;
-        //
 
 
-        // cantidadNumeros: cantidad de aleatorios a generar
-        // cantidadIntervalos: cantidad de intervalos en los que dividir la serie
-        // cantidadDecimales: cantidad de decimales de los numeros aleatorios
-        public FrecuenciaEsperadaObservada(int cantidadNumeros, int cantidadIntervalos, int cantidadDecimales)
+        public FrecuenciaEsperadaObservada(int cantidadNumeros, int cantidadIntervalos, Truncador truncador)
         {
             this.cantidadNumeros = cantidadNumeros;
             this.cantidadIntervalos = cantidadIntervalos;
-            this.CANTIDAD_DECIMALES = cantidadDecimales;
-            this.random = new Random();
-            this.truncador = new Truncador(4);
+            this.truncador = truncador;
+            this.frecuenciaEsperada = new int[cantidadIntervalos];
+            this.frecuenciaObservada = new int[cantidadIntervalos];
+
+            generarIntervalos();
+        }
+        public void contarNumero(float numero)
+        {
+            for (int i = 0; i < cantidadIntervalos; i++)
+            {
+                if (numero >= inicioIntervalos[i] && numero <= finIntervalos[i])
+                {
+                    frecuenciaObservada[i] += 1;
+                    frecuenciaEsperada[i] = cantidadNumeros / cantidadIntervalos;
+                }
+            }
         }
 
-        public int[][] generar()
+        public int[][] obtenerFrecuencias()
         {
-            generarIntervalos();
-            generarSerie();
             int[][] matrizFrecuencias = new int[][] { frecuenciaObservada, frecuenciaObservada };
             return matrizFrecuencias;
-        }
-
-        // genera numeros aleatorios y los cuenta a medida que los genera
-        private void generarSerie()
-        {
-            random = new Random();
-
-            for (int i = 0; i < cantidadNumeros; i++)
-            {
-                double nro = random.NextDouble();
-                float aleatorioTruncado = truncador.truncar(nro);
-                contarNumero(aleatorioTruncado);
-            }
         }
 
         private void generarIntervalos()
@@ -88,24 +80,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 auxiliar += rangoInicio;
                 inicioActual = (float)Math.Round(auxiliar, 2);
                 finActual = truncador.truncar(auxiliar + rangoIntervalo);
-
-                // conteo de frecuencia esperada, solo valido para distribucion UNIFORME
-                frecuenciaEsperada[i] = cantidadNumeros / cantidadIntervalos;
             }
         }
 
-        // recorre los arreglos paralelos de inicio y fin de intervalo para determinar donde
-        // pertenece el numero pasado como parametro, y lo cuenta
-        private void contarNumero(float numero)
-        {
-            for (int i = 0; i < cantidadIntervalos; i++)
-            {
-                if (numero >= inicioIntervalos[i] && numero <= finIntervalos[i])
-                {
-                    frecuenciaObservada[i] += 1;
-                }
-            }
-        }
        
         // calcula el rango de cada intervalo, de acuerdo a la cantidad de intervalos
         private float calcularRangoIntervalos()
@@ -113,8 +90,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return (float)((1.0f / cantidadIntervalos) - (1.0f / Math.Pow(10, CANTIDAD_DECIMALES)));
         }
 
-        // genera una string con los intervalos
-        private void mostrarIntervalos()
+        public string mostrarIntervalos()
         {
             string res = " ";
             for (int i = 0; i < cantidadIntervalos; i++)
@@ -122,10 +98,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 res += inicioIntervalos[i].ToString() + " " + finIntervalos[i].ToString();
                 res += "\n";
             }
+            return res;
         }
 
-        // genera una string con el estado de las frecuencias observadas;
-        private void mostrarFrecuenciasObservadas()
+        public string mostrarFrecuenciasObservadas()
         {
             string res = " ";
             for (int i = 0; i < cantidadIntervalos; i++)
@@ -133,6 +109,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 res += inicioIntervalos[i] + " " + finIntervalos[i] + "=" + frecuenciaObservada[i].ToString();
                 res += "\n";
             }
+            return res;
+        }
+
+        public string mostrarFrecuenciasEsperadas()
+        {
+            string res = " ";
+            for (int i = 0; i < cantidadIntervalos; i++)
+            {
+                res += inicioIntervalos[i] + " " + finIntervalos[i] + "=" + frecuenciaEsperada[i].ToString();
+                res += "\n";
+            }
+            return res;
         }
 
 

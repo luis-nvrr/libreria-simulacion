@@ -21,16 +21,16 @@ namespace Numeros_aleatorios
         private const int MIN_VALUE = 0;
         private int MAX_VALUE; //cantidad de numeros
 
-        // private float[] DataValues = new float[]{0.15f, 0.22f, 0.41f, 0.65f, 0.84f, 0.81f, 0.62f, 0.45f, 0.32f, 0.07f, 0.11f, 0.29f, 0.58f, 0.73f, 0.93f,0.97f, 0.79f, 0.55f, 0.35f, 0.09f,
+        // private float[] frecuenciaObservada = new float[]{0.15f, 0.22f, 0.41f, 0.65f, 0.84f, 0.81f, 0.62f, 0.45f, 0.32f, 0.07f, 0.11f, 0.29f, 0.58f, 0.73f, 0.93f,0.97f, 0.79f, 0.55f, 0.35f, 0.09f,
         //   0.99f, 0.51f, 0.35f, 0.02f, 0.19f, 0.24f, 0.98f, 0.10f, 0.31f, 0.17f};
 
-        //private float[] DataValues = new float[] { 8f, 7f, 5f, 4f, 6f }; // arreglo con las frecuencias
+        //private float[] frecuenciaObservada = new float[] { 8f, 7f, 5f, 4f, 6f }; // arreglo con las frecuencias
         //private Label[] Labels = new Label[5]; // 5 es la cantidad de intervalos
         //private float[] rangeValuesStart = new float[] { 0f, 0.2f, 0.4f, 0.6f, 0.8f }; // inicio de cada intervalo
         //private float[] rangeValuesEnd = new float[] { 0.19f, 0.39f, 0.59f, 0.79f, 0.99f }; // inicio de cada intervalo
         //private Label[] rangeLabels = new Label[10]; // 10 es 2* la cantidad de intervalos
 
-        public int[] DataValues { get; set; }
+        public int[] frecuenciaObservada { get; set; }
         public int[] frecuenciaEsperada { get; set; }
         private Label[] Labels;
         //public float[] rangeValuesStart { get; set; } // no hace falta poner rangos
@@ -48,14 +48,14 @@ namespace Numeros_aleatorios
             //Random rnd = new Random();
 
             // Create data.
-            for (int i = 0; i < DataValues.Length; i++)
+            for (int i = 0; i < frecuenciaObservada.Length; i++)
             {
 
                // Random rnd = new Random(); // esto es para generar valores random
 
                 // Create data.
-               // for (int i = 0; i < DataValues.Length; i++)
-               //    DataValues[i] = rnd.Next(MIN_VALUE + 5, MAX_VALUE - 5);
+               // for (int i = 0; i < frecuenciaObservada.Length; i++)
+               //    frecuenciaObservada[i] = rnd.Next(MIN_VALUE + 5, MAX_VALUE - 5);
 
                 // Make a range label.
                 rangeLabels[i] = new Label();
@@ -68,7 +68,7 @@ namespace Numeros_aleatorios
                 // Make a Label
                 Labels[i] = new Label();
                 Labels[i].Parent = picHisto;
-                Labels[i].Text = DataValues[i].ToString();
+                Labels[i].Text = frecuenciaObservada[i].ToString();
                 Labels[i].ForeColor = Color.Black;
                 Labels[i].BackColor = Color.Transparent;
                 Labels[i].AutoSize = true;
@@ -78,7 +78,7 @@ namespace Numeros_aleatorios
         // Draw the histogram.
         private void picHisto_Paint(object sender, PaintEventArgs e)
         {
-            DrawHistogram(e.Graphics, picHisto.BackColor, DataValues,
+            DrawHistogram(e.Graphics, picHisto.BackColor, frecuenciaObservada,
                 picHisto.ClientSize.Width, picHisto.ClientSize.Height);
         }
 
@@ -133,15 +133,6 @@ namespace Numeros_aleatorios
                         gr.DrawRectangle(thin_pen, rect2.X, rect2.Y,
                             rect2.Width, rect2.Height);
                     }
-                    // tercer rectangulo del grupo
-                    RectangleF rect3 = new RectangleF(i + (2 / 3f), 0, 1 / 3f, frecuenciaEsperada[i]);
-                    using (Brush the_brush =
-                         new SolidBrush(Colors[2]))
-                    {
-                        gr.FillRectangle(the_brush, rect3);
-                        gr.DrawRectangle(thin_pen, rect3.X, rect3.Y,
-                            rect3.Width, rect3.Height);
-                    }
 
 
                     // Position the value's label.
@@ -176,9 +167,9 @@ namespace Numeros_aleatorios
         private void picHisto_MouseDown(object sender, MouseEventArgs e)
         {
             // Determine which data value was clicked.
-            float bar_wid = picHisto.ClientSize.Width / (int)DataValues.Length;
+            float bar_wid = picHisto.ClientSize.Width / (int)frecuenciaObservada.Length;
             int i = (int)(e.X / bar_wid);
-            MessageBox.Show("Item " + i + " has value " + DataValues[i],
+            MessageBox.Show("Item " + i + " has value " + frecuenciaObservada[i],
                 "Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

@@ -39,12 +39,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return truncador.truncar(aleatorioActual);
         }
 
+
         public float[] generarSerie(int cantidadAleatorios)
+        {
+            return generarSerie(cantidadAleatorios, null);
+        }
+
+        public float[] generarSerie(int cantidadAleatorios, FrecuenciaEsperadaObservada contador)
         {
             float[] serieAleatorios = new float[cantidadAleatorios];
             for (int i = 0; i < cantidadAleatorios; i++)
             {
-                serieAleatorios[i] = siguienteAleatorio();
+                float aleatorio = siguienteAleatorio();
+                serieAleatorios[i] = aleatorio;
+                if (contador != null) { contador.contarNumero(aleatorio); }
             }
             return serieAleatorios;
         }
