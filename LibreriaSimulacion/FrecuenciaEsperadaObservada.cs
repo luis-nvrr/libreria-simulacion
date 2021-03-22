@@ -50,7 +50,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         public int[][] obtenerFrecuencias()
         {
-            int[][] matrizFrecuencias = new int[][] { frecuenciaObservada, frecuenciaObservada };
+            int[][] matrizFrecuencias = new int[][] { frecuenciaObservada, frecuenciaEsperada };
             return matrizFrecuencias;
         }
 

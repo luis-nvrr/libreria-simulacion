@@ -1,4 +1,5 @@
-﻿using Numeros_aleatorios.LibreriaSimulacion;
+﻿using Numeros_aleatorios.grafico_excel;
+using Numeros_aleatorios.LibreriaSimulacion;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
 {
     public partial class Prueba_Grafico_Generador : Form
     {
-        EjemploGrafico graficador;
+        GraficadorExcel excel;
         GeneradorCongruencialLineal lineal;
         Truncador truncador;
         FrecuenciaEsperadaObservada frecuenciaEsperadaObservada;
@@ -25,7 +26,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
 
         private void Prueba_Grafico_Generador_Load(object sender, EventArgs e)
         {
-            graficador = new EjemploGrafico();
+            excel = new GraficadorExcel();
             truncador = new Truncador(4);
             frecuenciaEsperadaObservada = new FrecuenciaEsperadaObservada(30, 5, truncador); //8 es cantidad de numeros, 5 es cantidad de intervalos
            
@@ -33,12 +34,9 @@ namespace Numeros_aleatorios.ejemplo_grafico
             float[] aleatorios = lineal.generarSerie(30, frecuenciaEsperadaObservada);
             int[][] frecuencias = frecuenciaEsperadaObservada.obtenerFrecuencias();
 
-            graficador.frecuenciaObservada = frecuencias[0];
-            graficador.frecuenciaEsperada = frecuencias[1];
-            graficador.cantidadIntervalos = 5;
-            graficador.cantidadNumeros = 30;
-            MessageBox.Show(frecuenciaEsperadaObservada.mostrarFrecuenciasEsperadas());
-            graficador.ShowDialog();
+            excel.frecuenciaEsperada = frecuencias[1];
+            excel.frecuenciaObservada = frecuencias[0];
+            excel.ShowDialog();
         }
     }
 }
