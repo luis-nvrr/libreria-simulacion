@@ -17,7 +17,9 @@ namespace Numeros_aleatorios.ejemplo_grafico
         GraficadorExcel excel;
         GeneradorCongruencialLineal lineal;
         Truncador truncador;
-        FrecuenciaEsperadaObservada frecuenciaEsperadaObservada;
+        GeneradorIntervalos intervalos;
+        FrecuenciaObservada frecuenciaObservada;
+        FrecuenciaEsperadaUniforme frecuenciaEsperada;
 
         public Prueba_Grafico_Generador()
         {
@@ -28,14 +30,22 @@ namespace Numeros_aleatorios.ejemplo_grafico
         {
             excel = new GraficadorExcel();
             truncador = new Truncador(4);
-            frecuenciaEsperadaObservada = new FrecuenciaEsperadaObservada(30, 5, truncador); //8 es cantidad de numeros, 5 es cantidad de intervalos
+
+            intervalos = new GeneradorIntervalos(truncador);
+            intervalos.generarIntervalos(5);
+            float[] inicio = intervalos.obtenerInicioIntervalos();
+            float[] fin = intervalos.obtenerFinIntervalos();
+
+            frecuenciaObservada = new FrecuenciaObservada(inicio, fin);
+            frecuenciaEsperada = new FrecuenciaEsperadaUniforme(30, inicio, fin);
            
             lineal = new GeneradorCongruencialLineal(truncador, 17,21,13,32); // parametros de la congruencial
-            float[] aleatorios = lineal.generarSerie(30, frecuenciaEsperadaObservada);
-            int[][] frecuencias = frecuenciaEsperadaObservada.obtenerFrecuencias();
+            float[] aleatorios = lineal.generarSerie(30, frecuenciaObservada, frecuenciaEsperada);
+            int[] frecuenciasObservadas = frecuenciaObservada.obtenerFrecuencias();
+            int[] frecuenciasEsperadas = frecuenciaEsperada.obtenerFrecuencias();
 
-            excel.frecuenciaEsperada = frecuencias[1];
-            excel.frecuenciaObservada = frecuencias[0];
+            excel.frecuenciaEsperada = frecuenciasEsperadas;
+            excel.frecuenciaObservada = frecuenciasObservadas;
             excel.ShowDialog();
         }
     }

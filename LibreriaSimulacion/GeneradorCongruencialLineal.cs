@@ -42,22 +42,27 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         public float[] generarSerie(int cantidadAleatorios)
         {
-            return generarSerie(cantidadAleatorios, null);
+            return generarSerie(cantidadAleatorios, null, null);
         }
 
-        public float[] generarSerie(int cantidadAleatorios, FrecuenciaEsperadaObservada contador)
+
+        public float[] generarSerie(int cantidadAleatorios, FrecuenciaObservada frecuenciaObservada)
+        {
+            return generarSerie(cantidadAleatorios, frecuenciaObservada, null);
+        }
+
+        public float[] generarSerie(int cantidadAleatorios, FrecuenciaObservada frecuenciaObservada, FrecuenciaEsperadaUniforme frecuenciaEsperada)
         {
             float[] serieAleatorios = new float[cantidadAleatorios];
             for (int i = 0; i < cantidadAleatorios; i++)
             {
                 float aleatorio = siguienteAleatorio();
                 serieAleatorios[i] = aleatorio;
-                if (contador != null) { contador.contarNumero(aleatorio); }
+                if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
+                if (frecuenciaEsperada != null) { frecuenciaEsperada.contarNumero(aleatorio); }
             }
             return serieAleatorios;
         }
-
-
 
     }
 }
