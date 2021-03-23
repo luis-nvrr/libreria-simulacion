@@ -81,10 +81,10 @@ namespace Numeros_aleatorios.grafico_excel
             chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
 
             //export chart as picture file
-            chartPage.Export(@"C:\\histograma.bmp", "BMP", misValue);
+            //chartPage.Export(@"C:\\histograma.bmp", "BMP", misValue);
 
             //load picture to picturebox
-            pictureBox1.Image = new Bitmap(@"C:\\histograma.bmp");
+            //pictureBox1.Image = new Bitmap(@"C:\\histograma.bmp");
 
             xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(true, misValue, misValue);
