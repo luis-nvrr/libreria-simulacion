@@ -56,7 +56,7 @@ namespace Numeros_aleatorios.grafico_excel
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             xlWorkSheet.Cells[1, 1] = "";
-            xlWorkSheet.Cells[1, 2] = "Lineal";
+            xlWorkSheet.Cells[1, 2] = "Lin";
             xlWorkSheet.Cells[1, 3] = "Esperado";
 
             grdFrecuencias.Columns.Add("frecuencia", "Frecuencia / Intervalo");
