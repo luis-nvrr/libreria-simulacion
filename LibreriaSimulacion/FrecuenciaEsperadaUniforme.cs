@@ -25,18 +25,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.finIntervalos = finIntervalos;
         }
 
-        public void contarNumero(float numero)
+        private void generarFrecuencia()
         {
-            for (int i = 0; i < cantidadIntervalos; i++)
+            for (int i = 0; i < frecuenciaEsperada.Length; i++)
             {
-                if (numero >= inicioIntervalos[i] && numero <= finIntervalos[i])
-                {
-                    frecuenciaEsperada[i] = cantidadNumeros / cantidadIntervalos;
-                }
+                frecuenciaEsperada[i] = cantidadNumeros / cantidadIntervalos;
             }
         }
 
         public int[] obtenerFrecuencias() {
+            generarFrecuencia();
             return frecuenciaEsperada; 
         }
 

@@ -40,7 +40,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             frecuenciaEsperada = new FrecuenciaEsperadaUniforme(30, inicio, fin);
            
             lineal = new GeneradorCongruencialLineal(truncador, 17,21,13,32); // parametros de la congruencial
-            float[] aleatorios = lineal.generarSerie(30, frecuenciaObservada, frecuenciaEsperada);
+            float[] aleatorios = lineal.generarSerie(30, frecuenciaObservada);
             int[] frecuenciasObservadas = frecuenciaObservada.obtenerFrecuencias();
             int[] frecuenciasEsperadas = frecuenciaEsperada.obtenerFrecuencias();
 
