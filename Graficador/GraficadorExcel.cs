@@ -55,8 +55,7 @@ namespace Numeros_aleatorios.grafico_excel
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-            xlWorkSheet.Cells[1, 1] = "";
-            xlWorkSheet.Cells[1, 2] = "Lin";
+            xlWorkSheet.Cells[1, 2] = "Observado";
             xlWorkSheet.Cells[1, 3] = "Esperado";
 
             grdFrecuencias.Columns.Add("frecuencia", "Frecuencia / Intervalo");
@@ -101,8 +100,6 @@ namespace Numeros_aleatorios.grafico_excel
             releaseObject(xlWorkSheet);
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
-
-            MessageBox.Show(@"Archivo creado! Encontralo en c:\\Users\"+Environment.UserName.ToString()+"\\histogram.bmp");
         }
 
     }
