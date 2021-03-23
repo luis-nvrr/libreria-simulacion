@@ -16,10 +16,8 @@ namespace Numeros_aleatorios.grafico_excel
 {
     public partial class GraficadorExcel : Form
     {
-        public string[] nombresFrecuencias { get; set; }
         public int[] frecuenciaObservada { get; set; }
         public int[] frecuenciaEsperada { get; set; }
-        public int cantidadNumeros { get; set; }
 
 
         public GraficadorExcel()
@@ -57,17 +55,28 @@ namespace Numeros_aleatorios.grafico_excel
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-            //add data 
-
             xlWorkSheet.Cells[1, 1] = "";
             xlWorkSheet.Cells[1, 2] = "Lineal";
             xlWorkSheet.Cells[1, 3] = "Esperado";
+
+            grdFrecuencias.Columns.Add("frecuencia", "Frecuencia / Intervalo");
+            grdFrecuencias.Rows.Add();
+            grdFrecuencias.Rows[0].Cells[0].Value = "Observada";
+            grdFrecuencias.Rows.Add();
+            grdFrecuencias.Rows[1].Cells[0].Value = "Esperada";
+
+            int indice = 1;
 
             for (int i=0 ; i < frecuenciaEsperada.Length; i++)
             {
                 xlWorkSheet.Cells[i + 2, 1] = (i + 1).ToString();
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
                 xlWorkSheet.Cells[i+2, 3] = frecuenciaEsperada[i].ToString();
+
+                grdFrecuencias.Columns.Add("it"+indice, indice.ToString());
+                grdFrecuencias.Rows[0].Cells[indice].Value = frecuenciaObservada[i];
+                grdFrecuencias.Rows[1].Cells[indice].Value = frecuenciaEsperada[i];
+                indice++;
             }
 
             Excel.Range chartRange;
@@ -81,22 +90,19 @@ namespace Numeros_aleatorios.grafico_excel
             chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
 
             //export chart as picture file;
-            // PONER UBICACION DONDE GUARDAR
-            chartPage.Export(@"C:\\Users\luis\histograma.bmp", "BMP", misValue);
+            chartPage.Export(@"C:\\Users\"+Environment.UserName.ToString()+"\\histograma.png", "PNG", misValue);
+            pictureBox1.Image = new Bitmap(@"C:\\Users\" + Environment.UserName.ToString() + "\\histograma.png");
 
-            //load picture to picturebox;
-            // PONER UBICACION DONDE SE GUARDO
-            pictureBox1.Image = new Bitmap(@"C:\\Users\luis\histograma.bmp");
-
-            xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-            xlWorkBook.Close(true, misValue, misValue);
+            // PARA GUARDAR EL EXCEL
+            //xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.Close(false, misValue, misValue);
             xlApp.Quit();
 
             releaseObject(xlWorkSheet);
             releaseObject(xlWorkBook);
             releaseObject(xlApp);
 
-            MessageBox.Show("Excel file created , you can find the file c:\\histograma.xls");
+            MessageBox.Show(@"Archivo creado! Encontralo en c:\\Users\"+Environment.UserName.ToString()+"\\histogram.bmp");
         }
 
     }
