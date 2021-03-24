@@ -130,7 +130,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             {  
                 string estadisticaPrueba = grdResultados2.Rows[i].Cells[3].Value.ToString();
                 estadisticaPruebaAcumulada += float.Parse(estadisticaPrueba);
-                MessageBox.Show(estadisticaPruebaAcumulada + "");
                 grdResultados2.Rows[i].Cells[4].Value = estadisticaPruebaAcumulada;
             }
         }
