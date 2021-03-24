@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Numeros_aleatorios.Pruebas_de_bondad;
 namespace Numeros_aleatorios
 {
     static class Program
@@ -18,7 +19,7 @@ namespace Numeros_aleatorios
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Prueba_Grafico_Generador());
+            Application.Run(new Prueba());
         }
     }
 }
