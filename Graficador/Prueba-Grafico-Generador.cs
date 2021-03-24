@@ -14,7 +14,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
 {
     public partial class Prueba_Grafico_Generador : Form
     {
-        GraficadorExcel excel;
+        GraficadorExcelObservado excel;
         GeneradorCongruencialLineal lineal;
         Truncador truncador;
         GeneradorIntervalos intervalos;
@@ -28,7 +28,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
 
         private void Prueba_Grafico_Generador_Load(object sender, EventArgs e)
         {
-            excel = new GraficadorExcel();
+            excel = new GraficadorExcelObservado();
             truncador = new Truncador(4);
 
             intervalos = new GeneradorIntervalos(truncador);
@@ -44,7 +44,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             int[] frecuenciasObservadas = frecuenciaObservada.obtenerFrecuencias();
             int[] frecuenciasEsperadas = frecuenciaEsperada.obtenerFrecuencias();
 
-            excel.frecuenciaEsperada = frecuenciasEsperadas;
+            //excel.frecuenciaEsperada = frecuenciasEsperadas;
             excel.frecuenciaObservada = frecuenciasObservadas;
             excel.ShowDialog();
         }
