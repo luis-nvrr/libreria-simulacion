@@ -1,5 +1,6 @@
 using Numeros_aleatorios.ejemplo_grafico;
 using Numeros_aleatorios.grafico_excel;
+using Numeros_aleatorios.Pruebas_de_bondad;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Numeros_aleatorios
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Prueba_Grafico_Generador());
+            Application.Run(new Prueba());
         }
     }
 }

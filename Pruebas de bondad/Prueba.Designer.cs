@@ -78,7 +78,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(200, 228);
+            this.grdResultados.Size = new System.Drawing.Size(219, 228);
             this.grdResultados.TabIndex = 3;
             // 
             // iteracion
