@@ -19,6 +19,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         int cantIntervalo;
         float[] numerosAleatorios;
         int[] intervalos;
+        float frecuenciaEsperada;
         // se justifica 95 de nivel de confianza porque la clase Random genera distribucion uniforme
         double[] jiCuadrado = { 0, 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 
                                 18.3, 19.7, 21.0, 22.4, 23.7, 25.0, 26.3, 27.6, 28.9,
@@ -76,8 +77,10 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         {
             grdResultados2.Rows.Clear();
             intervalos = new int[cantIntervalo];
-            double longitudIntervalo = 1.0 / intervalos.Length;
-            double res = longitudIntervalo;
+            float longitudIntervalo = (float) 1.0 / intervalos.Length;
+            float truncadx = truncarDecimales(longitudIntervalo);
+            longitudIntervalo = truncadx;
+            float res = truncadx;
 
             for (int i = 0; i < intervalos.Length; i++)  
             {
@@ -93,20 +96,34 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
             for (int i = 0; i < intervalos.Length; i++)
             {
-                string intervalo = "[" + anterior + "; " + longitudIntervalo + "]";
-                grdResultados2.Rows.Add();
-                grdResultados2.Rows[i].Cells[0].Value = intervalo;
-                grdResultados2.Rows[i].Cells[1].Value = intervalos[i];
-                anterior = longitudIntervalo;
-                longitudIntervalo += res;
-
+                if ((i + 1) == intervalos.Length)
+                {
+                    string intervalo = "[" + truncarDecimales(anterior) + "; " + 1 + "]";
+                    grdResultados2.Rows.Add();
+                    grdResultados2.Rows[i].Cells[0].Value = intervalo;
+                    grdResultados2.Rows[i].Cells[1].Value = intervalos[i];
+                    anterior = longitudIntervalo;
+                    longitudIntervalo = truncarDecimales(longitudIntervalo += res);
+                }
+                else
+                {
+                    string intervalo = "[" + truncarDecimales(anterior) + "; " + longitudIntervalo + "]";
+                    grdResultados2.Rows.Add();
+                    grdResultados2.Rows[i].Cells[0].Value = intervalo;
+                    grdResultados2.Rows[i].Cells[1].Value = intervalos[i];
+                    anterior = longitudIntervalo;
+                    longitudIntervalo = truncarDecimales(longitudIntervalo += res);
+                }
+                
             }
             enfocarFila();
         }
 
         private void calcularFrecuenciaEsperada()
         {
-            float frecuenciaEsperada = (float) n / cantIntervalo;
+            frecuenciaEsperada = (float) n / cantIntervalo;
+            float truncada = truncarDecimales(frecuenciaEsperada);
+            frecuenciaEsperada = truncada;
             for (int i = 0; i < intervalos.Length; i++)
             {
                 grdResultados2.Rows[i].Cells[2].Value = frecuenciaEsperada;
@@ -157,6 +174,11 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             calcularFrecuenciaEsperada();
             calcularEstadisticaPrueba();
             evaluarHipotesis();
+            for (int i = 0; i < intervalos.Length; i++)
+            {
+                MessageBox.Show(intervalos[i].ToString());
+            }
+            MessageBox.Show(frecuenciaEsperada + "");
         }
     }
 }
