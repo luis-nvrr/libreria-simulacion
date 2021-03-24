@@ -59,6 +59,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         private void generarNumerosAleatorios()
         {
+            grdResultados.Rows.Clear();
+            indice = -1;
             aletorio = new Random();
             n = int.Parse(txtCantidadNumero.Text);
             cantIntervalo = int.Parse(txtCantidadIntervalo.Text);
@@ -72,6 +74,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         }
         private void calcularFrecuenciaObservada()
         {
+            grdResultados2.Rows.Clear();
             intervalos = new int[cantIntervalo];
             double longitudIntervalo = 1.0 / intervalos.Length;
             double res = longitudIntervalo;
