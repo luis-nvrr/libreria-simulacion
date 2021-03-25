@@ -78,7 +78,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(219, 228);
+            this.grdResultados.Size = new System.Drawing.Size(229, 228);
             this.grdResultados.TabIndex = 3;
             // 
             // iteracion
@@ -114,7 +114,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 71);
+            this.panel1.Size = new System.Drawing.Size(911, 71);
             this.panel1.TabIndex = 6;
             // 
             // lblTitulo
@@ -157,12 +157,12 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.dataGridViewTextBoxColumn3,
             this.Column1,
             this.Column2});
-            this.grdResultados2.Location = new System.Drawing.Point(247, 172);
+            this.grdResultados2.Location = new System.Drawing.Point(274, 172);
             this.grdResultados2.Name = "grdResultados2";
             this.grdResultados2.RowHeadersVisible = false;
             this.grdResultados2.RowTemplate.Height = 25;
             this.grdResultados2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados2.Size = new System.Drawing.Size(506, 228);
+            this.grdResultados2.Size = new System.Drawing.Size(526, 228);
             this.grdResultados2.TabIndex = 9;
             // 
             // dataGridViewTextBoxColumn1
@@ -197,9 +197,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.lblResultadoHipotesis.AutoSize = true;
             this.lblResultadoHipotesis.Location = new System.Drawing.Point(506, 409);
             this.lblResultadoHipotesis.Name = "lblResultadoHipotesis";
-            this.lblResultadoHipotesis.Size = new System.Drawing.Size(38, 15);
+            this.lblResultadoHipotesis.Size = new System.Drawing.Size(0, 15);
             this.lblResultadoHipotesis.TabIndex = 10;
-            this.lblResultadoHipotesis.Text = "label1";
             // 
             // txtGradosLibertad
             // 
@@ -237,7 +236,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(911, 480);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGradosLibertad);
             this.Controls.Add(this.txtProbabilidad);

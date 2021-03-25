@@ -55,7 +55,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         }
 
 
-        // calcula el rango de cada intervalo, de acuerdo a la cantidad de intervalos
+        // calcula el rango de cada intervalo, de acuerdo a la cantidad de frecuenciaObservada
         private float calcularRangoIntervalos()
         {
             return (float)((1.0f / cantidadIntervalos) - (1.0f / Math.Pow(10, CANTIDAD_DECIMALES)));

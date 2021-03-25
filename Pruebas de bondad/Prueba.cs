@@ -18,7 +18,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         Random aletorio;
         int cantIntervalo;
         float[] numerosAleatorios;
-        int[] intervalos;
+        int[] frecuenciaObservada;
         // se justifica 95 de nivel de confianza porque la clase Random genera distribucion uniforme
         double[] jiCuadrado = { 0, 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 
                                 18.3, 19.7, 21.0, 22.4, 23.7, 25.0, 26.3, 27.6, 28.9,
@@ -75,39 +75,39 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private void calcularFrecuenciaObservada()
         {
             grdResultados2.Rows.Clear();
-            intervalos = new int[cantIntervalo];
-            double longitudIntervalo = 1.0 / intervalos.Length;
-            double res = longitudIntervalo;
+            frecuenciaObservada = new int[cantIntervalo];
+            double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
+            float inicioIntervalo;
+            float finIntervalo;
+            string intervalo;
 
-            for (int i = 0; i < intervalos.Length; i++)  
+            for (int i = 0; i < frecuenciaObservada.Length; i++)  
             {
-                for(int j = 0; j < numerosAleatorios.Length; j++)  
+                inicioIntervalo = truncarDecimales(longitudIntervalo * i);
+                finIntervalo = truncarDecimales(longitudIntervalo * (1 + i)-0.0001f);
+
+                intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
+                grdResultados2.Rows.Add();
+                grdResultados2.Rows[i].Cells[0].Value = intervalo;
+
+                for (int j = 0; j < numerosAleatorios.Length; j++)  
                 {
-                    if ((numerosAleatorios[j] >= (longitudIntervalo * (i))) &&
-                       (numerosAleatorios[j] < longitudIntervalo * (1 + i)))
+                    if (numerosAleatorios[j] >= inicioIntervalo &&
+                       numerosAleatorios[j] < finIntervalo)
                     {
-                        intervalos[i] += 1;
+                        frecuenciaObservada[i] += 1;
+                        grdResultados2.Rows[i].Cells[1].Value = frecuenciaObservada[i];
                     }
                 }
             }
 
-            for (int i = 0; i < intervalos.Length; i++)
-            {
-                string intervalo = "[" + anterior + "; " + longitudIntervalo + "]";
-                grdResultados2.Rows.Add();
-                grdResultados2.Rows[i].Cells[0].Value = intervalo;
-                grdResultados2.Rows[i].Cells[1].Value = intervalos[i];
-                anterior = longitudIntervalo;
-                longitudIntervalo += res;
-
-            }
             enfocarFila();
         }
 
         private void calcularFrecuenciaEsperada()
         {
             float frecuenciaEsperada = (float) n / cantIntervalo;
-            for (int i = 0; i < intervalos.Length; i++)
+            for (int i = 0; i < frecuenciaObservada.Length; i++)
             {
                 grdResultados2.Rows[i].Cells[2].Value = frecuenciaEsperada;
             }
