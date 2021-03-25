@@ -16,6 +16,11 @@ namespace Numeros_aleatorios.grafico_excel
 {
     public partial class GraficadorExcelObservado : Form
     {
+
+        Excel.Application xlApp;
+        Excel.Workbook xlWorkBook;
+        Excel.Worksheet xlWorkSheet;
+        object misValue = System.Reflection.Missing.Value;
         public int[] frecuenciaObservada { get; set; }
         //public int[] frecuenciaEsperada { get; set; }
 
@@ -45,11 +50,6 @@ namespace Numeros_aleatorios.grafico_excel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            Excel.Application xlApp;
-            Excel.Workbook xlWorkBook;
-            Excel.Worksheet xlWorkSheet;
-            object misValue = System.Reflection.Missing.Value;
 
             xlApp = new Excel.Application();
             xlWorkBook = xlApp.Workbooks.Add(misValue);
@@ -84,8 +84,11 @@ namespace Numeros_aleatorios.grafico_excel
             chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
 
             //export chart as picture file;
-            chartPage.Export(@"C:\\Users\"+Environment.UserName.ToString()+"\\histograma.png", "PNG", misValue);
-            pictureBox1.Image = new Bitmap(@"C:\\Users\" + Environment.UserName.ToString() + "\\histograma.png");
+            Random random = new Random();
+            string time = random.Next().ToString();
+            chartPage.Export(@"C:\\Users\"+Environment.UserName.ToString()+"\\histograma"+time+".png", "PNG", misValue);
+            pictureBox1.Image = new Bitmap(@"C:\\Users\" + Environment.UserName.ToString() + "\\histograma"+time+".png");
+
 
             // PARA GUARDAR EL EXCEL
             //xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
@@ -97,5 +100,9 @@ namespace Numeros_aleatorios.grafico_excel
             releaseObject(xlApp);
         }
 
+        private void GraficadorExcelObservado_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }
 }

@@ -17,7 +17,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         int n;
 
         Random aletorio;
-        GraficadorExcelObservado graficador;
 
         int cantIntervalo;
         int[] frecuenciaObservada;
@@ -35,6 +34,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            aletorio = new Random();
 
         }
 
@@ -65,7 +65,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             grdResultados2.Rows.Clear();
 
             indice = -1;
-            aletorio = new Random();
 
 
             n = int.Parse(txtCantidadNumero.Text);
@@ -131,7 +130,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
                 // calculo de estadistica de prueba acumulada
                 string estadisticaPrueba = grdResultados2.Rows[i].Cells[3].Value.ToString();
                 estadisticaPruebaAcumulada += float.Parse(estadisticaPrueba);
-                grdResultados2.Rows[i].Cells[4].Value = estadisticaPruebaAcumulada;
+                grdResultados2.Rows[i].Cells[4].Value = truncarDecimales(estadisticaPruebaAcumulada);
             }
             enfocarFila();
         }
@@ -156,7 +155,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         public void mostrarGrafico()
         {
-            graficador = new GraficadorExcelObservado();
+            GraficadorExcelObservado graficador = new GraficadorExcelObservado();
             graficador.frecuenciaObservada = frecuenciaObservada;
             graficador.Show();
         }
@@ -168,6 +167,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             mostrarGrafico();
             calcularEstadisticaPrueba();
             evaluarHipotesis();
+           
         }
     }
 }
