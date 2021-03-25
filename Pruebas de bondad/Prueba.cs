@@ -77,6 +77,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             float finIntervalo;
 
             string intervalo;
+            float frecuenciaEsperada = (float)n / cantIntervalo;
 
 
             // genera aleatorios y se fija en que intervalo pertenece
@@ -107,23 +108,14 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
              
                         grdResultados2.Rows[j].Cells[0].Value = intervalo;
                         grdResultados2.Rows[j].Cells[1].Value = frecuenciaObservada[j];
-                        
+                        grdResultados2.Rows[j].Cells[2].Value = frecuenciaEsperada;
+
                         break;
                     }
                 }
             }
         }
 
-
-        public void calcularFrecuenciaEsperada()
-        {
-            float frecuenciaEsperada = (float)n / cantIntervalo;
-
-            for (int i = 0; i < frecuenciaObservada.Length; i++)
-            {
-            grdResultados2.Rows[i].Cells[2].Value = frecuenciaEsperada;
-            }
-        }
 
         public void calcularEstadisticaPrueba() 
         {
@@ -168,14 +160,12 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             graficador.frecuenciaObservada = frecuenciaObservada;
             graficador.Show();
         }
-
         
 
         private void btn_Generar_Click(object sender, EventArgs e)
         {
             generarNumerosAleatorios();
             mostrarGrafico();
-            calcularFrecuenciaEsperada();
             calcularEstadisticaPrueba();
             evaluarHipotesis();
         }
