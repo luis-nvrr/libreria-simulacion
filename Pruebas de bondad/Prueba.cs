@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Numeros_aleatorios.grafico_excel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +13,13 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 {
     public partial class Prueba : Form
     {
-        double anterior = 0;
         int indice = -1;
         int n;
+
         Random aletorio;
+        GraficadorExcelObservado graficador;
+
         int cantIntervalo;
-        float[] numerosAleatorios;
         int[] frecuenciaObservada;
         // se justifica 95 de nivel de confianza porque la clase Random genera distribucion uniforme
         double[] jiCuadrado = { 0, 3.84, 5.99, 7.81, 9.49, 11.1, 12.6, 14.1, 15.5, 16.9, 
@@ -60,58 +62,67 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private void generarNumerosAleatorios()
         {
             grdResultados.Rows.Clear();
+            grdResultados2.Rows.Clear();
+
             indice = -1;
             aletorio = new Random();
+
+
             n = int.Parse(txtCantidadNumero.Text);
             cantIntervalo = int.Parse(txtCantidadIntervalo.Text);
-            numerosAleatorios = new float[n];
-            for (int i = 0; i < n; i++)
-            {
-                float truncado = truncarDecimales(aletorio.NextDouble());
-                numerosAleatorios[i] = truncado;
-                agregarFila(truncado);
-            }
-        }
-        private void calcularFrecuenciaObservada()
-        {
-            grdResultados2.Rows.Clear();
             frecuenciaObservada = new int[cantIntervalo];
+
             double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
             float inicioIntervalo;
             float finIntervalo;
+
             string intervalo;
 
-            for (int i = 0; i < frecuenciaObservada.Length; i++)  
+
+            // genera aleatorios y se fija en que intervalo pertenece
+
+            for (int i = 0; i < cantIntervalo; i++)
             {
-                inicioIntervalo = truncarDecimales(longitudIntervalo * i);
-                finIntervalo = truncarDecimales(longitudIntervalo * (1 + i)-0.0001f);
-
-                intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
                 grdResultados2.Rows.Add();
-                grdResultados2.Rows[i].Cells[0].Value = intervalo;
+            }
 
-                for (int j = 0; j < numerosAleatorios.Length; j++)  
+
+            for (int i = 0; i < n; i++)
+            {
+                    float truncado = truncarDecimales(aletorio.NextDouble());
+                    agregarFila(truncado);
+
+                for (int j = 0; j < frecuenciaObservada.Length; j++)
                 {
-                    if (numerosAleatorios[j] >= inicioIntervalo &&
-                       numerosAleatorios[j] < finIntervalo)
+                    inicioIntervalo = truncarDecimales(longitudIntervalo * j);
+                    finIntervalo = truncarDecimales(longitudIntervalo * (1 + j) - 0.0001f);
+
+                    if (truncado >= inicioIntervalo &&
+                           truncado < finIntervalo)
                     {
-                        frecuenciaObservada[i] += 1;
-                        grdResultados2.Rows[i].Cells[1].Value = frecuenciaObservada[i];
+                        intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
+                        frecuenciaObservada[j] += 1;
+
+                        // agrega fila y columnas de frecuencias esperadasa y observadas
+             
+                        grdResultados2.Rows[j].Cells[0].Value = intervalo;
+                        grdResultados2.Rows[j].Cells[1].Value = frecuenciaObservada[j];
+                        
+                        break;
                     }
                 }
             }
-
-            enfocarFila();
         }
 
-        private void calcularFrecuenciaEsperada()
+
+        public void calcularFrecuenciaEsperada()
         {
-            float frecuenciaEsperada = (float) n / cantIntervalo;
+            float frecuenciaEsperada = (float)n / cantIntervalo;
+
             for (int i = 0; i < frecuenciaObservada.Length; i++)
             {
-                grdResultados2.Rows[i].Cells[2].Value = frecuenciaEsperada;
+            grdResultados2.Rows[i].Cells[2].Value = frecuenciaEsperada;
             }
-            enfocarFila();
         }
 
         public void calcularEstadisticaPrueba() 
@@ -150,10 +161,20 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             }
 
         }
+
+        public void mostrarGrafico()
+        {
+            graficador = new GraficadorExcelObservado();
+            graficador.frecuenciaObservada = frecuenciaObservada;
+            graficador.Show();
+        }
+
+        
+
         private void btn_Generar_Click(object sender, EventArgs e)
         {
             generarNumerosAleatorios();
-            calcularFrecuenciaObservada();
+            mostrarGrafico();
             calcularFrecuenciaEsperada();
             calcularEstadisticaPrueba();
             evaluarHipotesis();
