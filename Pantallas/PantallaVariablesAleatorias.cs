@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
-    public partial class PantallaPruebaGenerador : Form
+    public partial class PantallaVariablesAleatorias : Form
     {
         int indice;
         GeneradorUniformeAB uniforme;
@@ -28,7 +28,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         float numeroAleatorio;
 
-        public PantallaPruebaGenerador()
+        public PantallaVariablesAleatorias()
         {
             InitializeComponent();
         }

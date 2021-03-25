@@ -1,7 +1,7 @@
 ﻿
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
-    partial class PantallaPruebaGenerador
+    partial class PantallaVariablesAleatorias
     {
         /// <summary>
         /// Required designer variable.

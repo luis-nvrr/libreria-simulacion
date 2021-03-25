@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios
 {
-    public partial class PantallaGenerador : Form
+    public partial class PantallaGeneradores : Form
     {
         int CANT_ITERACIONES = 20;
 
@@ -34,7 +34,7 @@ namespace Numeros_aleatorios
         Truncador truncador;
 
 
-        public PantallaGenerador()
+        public PantallaGeneradores()
         {
             InitializeComponent();
         }
