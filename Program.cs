@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Numeros_aleatorios.Pruebas_de_bondad;
+using Numeros_aleatorios.LibreriaSimulacion;
+
 namespace Numeros_aleatorios
 {
     static class Program
@@ -20,7 +22,7 @@ namespace Numeros_aleatorios
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Prueba());
+            Application.Run(new PantallaPruebaGenerador());
         }
     }
 }
