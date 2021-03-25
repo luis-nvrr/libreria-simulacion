@@ -17,7 +17,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
         GraficadorExcelObservado excel;
         GeneradorCongruencialLineal lineal;
         Truncador truncador;
-        GeneradorIntervalos intervalos;
+        GeneradorIntervalosUniforme intervalos;
         FrecuenciaObservada frecuenciaObservada;
         FrecuenciaEsperadaUniforme frecuenciaEsperada;
 
@@ -31,7 +31,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             excel = new GraficadorExcelObservado();
             truncador = new Truncador(4);
 
-            intervalos = new GeneradorIntervalos(truncador);
+            intervalos = new GeneradorIntervalosUniforme(truncador);
             intervalos.generarIntervalos(20);
             float[] inicio = intervalos.obtenerInicioIntervalos();
             float[] fin = intervalos.obtenerFinIntervalos();
