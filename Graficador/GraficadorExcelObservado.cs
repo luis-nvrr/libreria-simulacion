@@ -83,6 +83,14 @@ namespace Numeros_aleatorios.grafico_excel
             chartPage.SetSourceData(chartRange, misValue);
             chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
 
+
+            Excel.ChartGroup group = chartPage.ChartGroups(1);
+            group.GapWidth = 0;
+            group.Overlap = 0;
+
+            Excel.Series series = (Excel.Series)chartPage.SeriesCollection(1);
+            series.Border.Color = (int)Excel.XlRgbColor.rgbBlack;
+
             //export chart as picture file;
             Random random = new Random();
             string time = random.Next().ToString();
@@ -91,7 +99,7 @@ namespace Numeros_aleatorios.grafico_excel
 
 
             // PARA GUARDAR EL EXCEL
-            //xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(false, misValue, misValue);
             xlApp.Quit();
 
