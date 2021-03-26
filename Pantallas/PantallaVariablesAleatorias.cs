@@ -67,7 +67,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 generarUniforme();
                 return;
             }
+            if (rbNormal.Checked)
+            {
+                return;
+            }
+            if (rbExponencial.Checked)
+            {
+                return;
+            }
+            if (rbPoisson.Checked)
+            {
+                return;
+            }
         }
+
 
         private void generarUniforme()
         {
@@ -84,6 +97,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 numeroAleatorio = uniforme.siguienteAleatorio();
                 agregarFila(numeroAleatorio);
 
+                // conteo de frecuencias
                 for (int j = 0; j < cantidadIntervalos; j++)
                 {
                     if (numeroAleatorio >= inicioIntervalos[j] &&

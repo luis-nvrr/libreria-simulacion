@@ -98,7 +98,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
                     finIntervalo = truncarDecimales(longitudIntervalo * (1 + j) - 0.0001f);
 
                     if (truncado >= inicioIntervalo &&
-                           truncado < finIntervalo)
+                           truncado <= finIntervalo)
                     {
                         intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
                         frecuenciaObservada[j] += 1;

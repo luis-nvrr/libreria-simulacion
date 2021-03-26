@@ -53,6 +53,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label1 = new System.Windows.Forms.Label();
             this.lblCantidadValores = new System.Windows.Forms.Label();
             this.gbGrafico = new System.Windows.Forms.GroupBox();
+            this.btnJi = new System.Windows.Forms.Button();
+            this.btnKolgomorov = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -216,6 +218,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // 
             // gbResultados
             // 
+            this.gbResultados.Controls.Add(this.btnKolgomorov);
+            this.gbResultados.Controls.Add(this.btnJi);
             this.gbResultados.Controls.Add(this.btnMostrar);
             this.gbResultados.Controls.Add(this.grdResultados);
             this.gbResultados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -230,7 +234,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // 
             this.btnMostrar.Location = new System.Drawing.Point(331, 52);
             this.btnMostrar.Name = "btnMostrar";
-            this.btnMostrar.Size = new System.Drawing.Size(140, 31);
+            this.btnMostrar.Size = new System.Drawing.Size(172, 31);
             this.btnMostrar.TabIndex = 6;
             this.btnMostrar.Text = "Mostrar Gráfico";
             this.btnMostrar.UseVisualStyleBackColor = true;
@@ -303,6 +307,26 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbGrafico.TabStop = false;
             this.gbGrafico.Text = "5. Gráfico";
             // 
+            // btnJi
+            // 
+            this.btnJi.Location = new System.Drawing.Point(331, 89);
+            this.btnJi.Name = "btnJi";
+            this.btnJi.Size = new System.Drawing.Size(172, 31);
+            this.btnJi.TabIndex = 6;
+            this.btnJi.Text = "Prueba de Ji2";
+            this.btnJi.UseVisualStyleBackColor = true;
+            this.btnJi.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
+            // btnKolgomorov
+            // 
+            this.btnKolgomorov.Location = new System.Drawing.Point(331, 126);
+            this.btnKolgomorov.Name = "btnKolgomorov";
+            this.btnKolgomorov.Size = new System.Drawing.Size(172, 31);
+            this.btnKolgomorov.TabIndex = 6;
+            this.btnKolgomorov.Text = "Kolgomorov-Smirnov";
+            this.btnKolgomorov.UseVisualStyleBackColor = true;
+            this.btnKolgomorov.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -356,5 +380,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.TextBox txtCantidadValores;
         private System.Windows.Forms.Button btnCalcular;
         private System.Windows.Forms.GroupBox gbGrafico;
+        private System.Windows.Forms.Button btnKolgomorov;
+        private System.Windows.Forms.Button btnJi;
     }
 }
