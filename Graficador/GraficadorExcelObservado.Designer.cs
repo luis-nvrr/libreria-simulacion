@@ -51,7 +51,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1228, 333);
+            this.pictureBox1.Size = new System.Drawing.Size(696, 343);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -64,7 +64,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1228, 498);
+            this.panel2.Size = new System.Drawing.Size(696, 500);
             this.panel2.TabIndex = 2;
             // 
             // panel3
@@ -74,7 +74,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1228, 333);
+            this.panel3.Size = new System.Drawing.Size(696, 343);
             this.panel3.TabIndex = 2;
             // 
             // panel1
@@ -82,10 +82,10 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.grdFrecuencias);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 333);
+            this.panel1.Location = new System.Drawing.Point(0, 343);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1228, 165);
+            this.panel1.Size = new System.Drawing.Size(696, 157);
             this.panel1.TabIndex = 1;
             // 
             // grdFrecuencias
@@ -105,18 +105,18 @@ namespace Numeros_aleatorios.grafico_excel
             this.grdFrecuencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdFrecuencias.DefaultCellStyle = dataGridViewCellStyle2;
-            this.grdFrecuencias.Location = new System.Drawing.Point(13, 24);
+            this.grdFrecuencias.Location = new System.Drawing.Point(13, 23);
             this.grdFrecuencias.Margin = new System.Windows.Forms.Padding(4);
             this.grdFrecuencias.Name = "grdFrecuencias";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -125,7 +125,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.grdFrecuencias.RowHeadersVisible = false;
             this.grdFrecuencias.RowTemplate.Height = 25;
             this.grdFrecuencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdFrecuencias.Size = new System.Drawing.Size(1091, 119);
+            this.grdFrecuencias.Size = new System.Drawing.Size(670, 107);
             this.grdFrecuencias.TabIndex = 4;
             // 
             // GraficadorExcelObservado
@@ -133,7 +133,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1228, 498);
+            this.ClientSize = new System.Drawing.Size(696, 500);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "GraficadorExcelObservado";

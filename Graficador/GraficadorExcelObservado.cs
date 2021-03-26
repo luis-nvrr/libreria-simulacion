@@ -22,7 +22,7 @@ namespace Numeros_aleatorios.grafico_excel
         Excel.Worksheet xlWorkSheet;
         object misValue = System.Reflection.Missing.Value;
         public int[] frecuenciaObservada { get; set; }
-        //public int[] frecuenciaEsperada { get; set; }
+        public string nombre { get; set; }
 
 
         public GraficadorExcelObservado()
@@ -55,11 +55,11 @@ namespace Numeros_aleatorios.grafico_excel
             xlWorkBook = xlApp.Workbooks.Add(misValue);
             xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
-            xlWorkSheet.Cells[1, 2] = "Observado";
+            xlWorkSheet.Cells[1, 2] = nombre;
 
             grdFrecuencias.Columns.Add("frecuencia", "Frecuencia / Intervalo");
             grdFrecuencias.Rows.Add();
-            grdFrecuencias.Rows[0].Cells[0].Value = "Observada";
+            grdFrecuencias.Rows[0].Cells[0].Value = "Observado";
 
             int indice = 1;
 

@@ -36,7 +36,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void PantallaPruebaGenerador_Load(object sender, EventArgs e)
         {
             truncador = new Truncador(4);
-            graficador = new GraficadorExcelObservado();
+
         }
 
         private void agregarFila(float numeroAleatorio)
@@ -55,6 +55,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
+            grdResultados.Rows.Clear();
             indice = -1;
             cantidadValores = int.Parse(txtCantidadValores.Text);
             cantidadIntervalos = int.Parse(txtCantidadIntervalos.Text);
@@ -93,7 +94,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                     }
                 }
             }
-            graficador.frecuenciaObservada = frecuenciasObservadas;
         }
 
         private void generarIntervalosUniforme(float a, float b)
@@ -109,6 +109,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
+            graficador = new GraficadorExcelObservado();
+            graficador.frecuenciaObservada = frecuenciasObservadas;
+            graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
+
+            gbGrafico.Controls.Clear();
+            graficador.TopLevel = false;
+            graficador.AutoScroll = true;
+            graficador.FormBorderStyle = FormBorderStyle.None;
+            graficador.Dock = DockStyle.Fill;
+            gbGrafico.Controls.Add(graficador);
             graficador.Show();
         }
     }

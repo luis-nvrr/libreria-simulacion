@@ -52,6 +52,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnCalcular = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCantidadValores = new System.Windows.Forms.Label();
+            this.gbGrafico = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -68,7 +69,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.grdResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iteracion,
             this.aleatorio});
-            this.grdResultados.Location = new System.Drawing.Point(245, 43);
+            this.grdResultados.Location = new System.Drawing.Point(55, 52);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
@@ -95,7 +96,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(868, 71);
+            this.panel1.Size = new System.Drawing.Size(1287, 71);
             this.panel1.TabIndex = 7;
             // 
             // lblTitulo
@@ -176,7 +177,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbUniforme.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gbUniforme.Location = new System.Drawing.Point(298, 104);
             this.gbUniforme.Name = "gbUniforme";
-            this.gbUniforme.Size = new System.Drawing.Size(408, 156);
+            this.gbUniforme.Size = new System.Drawing.Size(235, 156);
             this.gbUniforme.TabIndex = 10;
             this.gbUniforme.TabStop = false;
             this.gbUniforme.Text = "2. Ingrese los parámetros";
@@ -220,14 +221,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbResultados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gbResultados.Location = new System.Drawing.Point(12, 394);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(694, 343);
+            this.gbResultados.Size = new System.Drawing.Size(521, 343);
             this.gbResultados.TabIndex = 11;
             this.gbResultados.TabStop = false;
-            this.gbResultados.Text = "3. Resultados";
+            this.gbResultados.Text = "4. Resultados";
             // 
             // btnMostrar
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(480, 43);
+            this.btnMostrar.Location = new System.Drawing.Point(331, 52);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(140, 31);
             this.btnMostrar.TabIndex = 6;
@@ -245,7 +246,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(12, 266);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(694, 122);
+            this.groupBox1.Size = new System.Drawing.Size(521, 122);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "3. Ingrese la cantidad";
@@ -292,17 +293,28 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.lblCantidadValores.TabIndex = 0;
             this.lblCantidadValores.Text = "Cantidad de valores:";
             // 
-            // PantallaPruebaGenerador
+            // gbGrafico
+            // 
+            this.gbGrafico.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbGrafico.Location = new System.Drawing.Point(553, 104);
+            this.gbGrafico.Name = "gbGrafico";
+            this.gbGrafico.Size = new System.Drawing.Size(708, 633);
+            this.gbGrafico.TabIndex = 13;
+            this.gbGrafico.TabStop = false;
+            this.gbGrafico.Text = "5. Gráfico";
+            // 
+            // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 749);
+            this.ClientSize = new System.Drawing.Size(1287, 749);
+            this.Controls.Add(this.gbGrafico);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.gbUniforme);
             this.Controls.Add(this.gbDistribuciones);
             this.Controls.Add(this.panel1);
-            this.Name = "PantallaPruebaGenerador";
+            this.Name = "PantallaVariablesAleatorias";
             this.Text = "PantallaPruebaGenerador";
             this.Load += new System.EventHandler(this.PantallaPruebaGenerador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).EndInit();
@@ -343,5 +355,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.TextBox txtCantidadIntervalos;
         private System.Windows.Forms.TextBox txtCantidadValores;
         private System.Windows.Forms.Button btnCalcular;
+        private System.Windows.Forms.GroupBox gbGrafico;
     }
 }
