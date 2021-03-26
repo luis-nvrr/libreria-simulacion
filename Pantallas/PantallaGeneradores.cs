@@ -28,7 +28,7 @@ namespace Numeros_aleatorios
         int indice;
 
         // generadores
-        GeneradorCongruencialLineal lineal;
+        GeneradorCongruencialLinealMixto lineal;
         GeneradorCongruencialMultiplicativo multiplicativo;
 
         Truncador truncador;
@@ -66,7 +66,7 @@ namespace Numeros_aleatorios
 
         private void congruencialLineal()
         {
-            lineal = new GeneradorCongruencialLineal(truncador, x0, c, a, m);
+            lineal = new GeneradorCongruencialLinealMixto(truncador, x0, c, a, m);
             float[] aleatorios = lineal.generarSerie(CANT_ITERACIONES); 
 
             for (int i = 0; i < CANT_ITERACIONES; i++)

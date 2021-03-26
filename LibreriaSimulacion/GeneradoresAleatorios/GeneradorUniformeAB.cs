@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
-    class GeneradorUniformeAB
+    class GeneradorUniformeAB : IGenerador
     {
         private Truncador truncador;
         private GeneradorUniformeLenguaje generadorUniforme;
@@ -28,25 +24,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         // retorna un aleatorio
         public float siguienteAleatorio()
         {
-            aleatorio01 = generadorUniforme.siguientAleatorio();
+            aleatorio01 = generadorUniforme.siguienteAleatorio();
             return truncador.truncar(a + aleatorio01 * (b - a));
         }
 
-
         public float[] generarSerie(int cantidadAleatorios)
-        {
-            return generarSerie(cantidadAleatorios, null);
-        }
-
-
-        public float[] generarSerie(int cantidadAleatorios, FrecuenciaObservada frecuenciaObservada)
         {
             float[] serieAleatorios = new float[cantidadAleatorios];
             for (int i = 0; i < cantidadAleatorios; i++)
             {
                 float aleatorio = siguienteAleatorio();
                 serieAleatorios[i] = aleatorio;
-                if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
             }
             return serieAleatorios;
         }

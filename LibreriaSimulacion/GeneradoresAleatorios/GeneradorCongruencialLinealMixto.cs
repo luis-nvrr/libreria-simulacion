@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
-    class GeneradorCongruencialLineal
+    class GeneradorCongruencialLinealMixto : IGenerador
     {
         // para la cantidad de decimales de los aleatorios
         private Truncador truncador;
@@ -14,14 +10,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private long entradaAnterior;
         private long entradaActual;
         private double aleatorioActual;
-        private float aleatorioActualTruncado;
 
         // parametros
         private int c;
         private int a;
         private long m;
 
-        public GeneradorCongruencialLineal(Truncador truncador, long semilla, int c, int a, long m)
+        public GeneradorCongruencialLinealMixto(Truncador truncador, long semilla, int c, int a, long m)
         {
             this.entradaAnterior = semilla;
             this.truncador = truncador;
@@ -39,21 +34,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return truncador.truncar(aleatorioActual);
         }
 
-
         public float[] generarSerie(int cantidadAleatorios)
-        {
-            return generarSerie(cantidadAleatorios, null);
-        }
-
-
-        public float[] generarSerie(int cantidadAleatorios, FrecuenciaObservada frecuenciaObservada)
         {
             float[] serieAleatorios = new float[cantidadAleatorios];
             for (int i = 0; i < cantidadAleatorios; i++)
             {
                 float aleatorio = siguienteAleatorio();
                 serieAleatorios[i] = aleatorio;
-                if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
             }
             return serieAleatorios;
         }

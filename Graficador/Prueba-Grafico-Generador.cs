@@ -15,7 +15,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
     public partial class Prueba_Grafico_Generador : Form
     {
         GraficadorExcelObservado excel;
-        GeneradorCongruencialLineal lineal;
+        GeneradorCongruencialLinealMixto lineal;
         Truncador truncador;
         GeneradorIntervalosUniforme intervalos;
         FrecuenciaObservada frecuenciaObservada;
@@ -39,7 +39,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
             frecuenciaObservada = new FrecuenciaObservada(inicio, fin);
             frecuenciaEsperada = new FrecuenciaEsperadaUniforme(100, inicio, fin);
            
-            lineal = new GeneradorCongruencialLineal(truncador, 17,21,13,32); // parametros de la congruencial
+            lineal = new GeneradorCongruencialLinealMixto(truncador, 17,21,13,32); // parametros de la congruencial
             float[] aleatorios = lineal.generarSerie(100, frecuenciaObservada);
             int[] frecuenciasObservadas = frecuenciaObservada.obtenerFrecuencias();
             int[] frecuenciasEsperadas = frecuenciaEsperada.obtenerFrecuencias();
