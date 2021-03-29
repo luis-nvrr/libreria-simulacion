@@ -13,11 +13,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 {
     public partial class PantallaVariablesAleatorias : Form
     {
-        int indice;
         GeneradorUniformeAB uniforme;
         Truncador truncador;
         GeneradorIntervalosUniformeAB generadorIntervalos;
         GraficadorExcelObservado graficador;
+        FrecuenciaObservada frecuenciaObservada;
 
         float[] inicioIntervalos;
         float[] finIntervalos;
@@ -27,6 +27,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         int[] frecuenciasObservadas;
 
         float numeroAleatorio;
+        DataTable dataTable;
+        DataRow dataRow;
 
         public PantallaVariablesAleatorias()
         {
@@ -36,32 +38,27 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void PantallaPruebaGenerador_Load(object sender, EventArgs e)
         {
             truncador = new Truncador(4);
+            grdResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
 
+            dataTable = new DataTable();
+            dataTable.Columns.Add("iteracion");
+            dataTable.Columns.Add("aleatorio");
         }
 
-        private void agregarFila(float numeroAleatorio)
+        private void inicializarVariables()
         {
-            grdResultados.Rows.Add();
-            ++indice;
-            grdResultados.Rows[indice].Cells[0].Value = indice + 1;
-            grdResultados.Rows[indice].Cells[1].Value = numeroAleatorio;
-            enfocarFila();
-        }
-
-        private void enfocarFila()
-        {
-            grdResultados.CurrentCell = grdResultados.Rows[indice].Cells[0];
+            cantidadValores = int.Parse(txtCantidadValores.Text);
+            cantidadIntervalos = int.Parse(txtCantidadIntervalos.Text);
+            frecuenciasObservadas = new int[cantidadIntervalos];
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            grdResultados.Rows.Clear();
             gbGrafico.Controls.Clear();
-            indice = -1;
-            cantidadValores = int.Parse(txtCantidadValores.Text);
-            cantidadIntervalos = int.Parse(txtCantidadIntervalos.Text);
+            grdResultados.DataSource = null;
+            dataTable.Rows.Clear();
 
-            frecuenciasObservadas = new int[cantidadIntervalos];
+            inicializarVariables();
 
             if (rbUniforme.Checked)
             {
@@ -87,16 +84,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         {
             float a = float.Parse(txtA.Text);
             float b = float.Parse(txtB.Text);
-            generarIntervalosUniforme(a,b);
 
             if (b < a) { return; }
 
+            generarIntervalosUniforme(a,b);
+            frecuenciaObservada = new FrecuenciaObservada(inicioIntervalos, finIntervalos);
+   
             uniforme = new GeneradorUniformeAB(truncador, a, b);
-
+            
             for (int i = 0; i < cantidadValores; i++)
             {
                 numeroAleatorio = uniforme.siguienteAleatorio();
-                agregarFila(numeroAleatorio);
+                dataRow = dataTable.NewRow();
+                dataRow["iteracion"] = i;
+                dataRow["aleatorio"] = numeroAleatorio;
+                dataTable.Rows.Add(dataRow);
 
                 // conteo de frecuencias
                 for (int j = 0; j < cantidadIntervalos; j++)
@@ -109,6 +111,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                     }
                 }
             }
+
+            grdResultados.DataSource = dataTable;
         }
 
         private void generarIntervalosUniforme(float a, float b)

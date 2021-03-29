@@ -30,8 +30,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void InitializeComponent()
         {
             this.grdResultados = new System.Windows.Forms.DataGridView();
-            this.iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.rbUniforme = new System.Windows.Forms.RadioButton();
@@ -45,6 +43,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtB = new System.Windows.Forms.TextBox();
             this.txtA = new System.Windows.Forms.TextBox();
             this.gbResultados = new System.Windows.Forms.GroupBox();
+            this.btnKolgomorov = new System.Windows.Forms.Button();
+            this.btnJi = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCantidadIntervalos = new System.Windows.Forms.TextBox();
@@ -53,8 +53,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label1 = new System.Windows.Forms.Label();
             this.lblCantidadValores = new System.Windows.Forms.Label();
             this.gbGrafico = new System.Windows.Forms.GroupBox();
-            this.btnJi = new System.Windows.Forms.Button();
-            this.btnKolgomorov = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -68,28 +66,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.grdResultados.AllowUserToAddRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iteracion,
-            this.aleatorio});
-            this.grdResultados.Location = new System.Drawing.Point(55, 52);
+            this.grdResultados.Location = new System.Drawing.Point(61, 52);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(229, 228);
+            this.grdResultados.Size = new System.Drawing.Size(223, 228);
             this.grdResultados.TabIndex = 4;
-            // 
-            // iteracion
-            // 
-            this.iteracion.HeaderText = "Iteracion";
-            this.iteracion.Name = "iteracion";
-            this.iteracion.ReadOnly = true;
-            // 
-            // aleatorio
-            // 
-            this.aleatorio.HeaderText = "Numero Aleatorio";
-            this.aleatorio.Name = "aleatorio";
-            this.aleatorio.ReadOnly = true;
             // 
             // panel1
             // 
@@ -230,6 +213,26 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "4. Resultados";
             // 
+            // btnKolgomorov
+            // 
+            this.btnKolgomorov.Location = new System.Drawing.Point(331, 126);
+            this.btnKolgomorov.Name = "btnKolgomorov";
+            this.btnKolgomorov.Size = new System.Drawing.Size(172, 31);
+            this.btnKolgomorov.TabIndex = 6;
+            this.btnKolgomorov.Text = "Kolgomorov-Smirnov";
+            this.btnKolgomorov.UseVisualStyleBackColor = true;
+            this.btnKolgomorov.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
+            // btnJi
+            // 
+            this.btnJi.Location = new System.Drawing.Point(331, 89);
+            this.btnJi.Name = "btnJi";
+            this.btnJi.Size = new System.Drawing.Size(172, 31);
+            this.btnJi.TabIndex = 6;
+            this.btnJi.Text = "Prueba de Ji2";
+            this.btnJi.UseVisualStyleBackColor = true;
+            this.btnJi.Click += new System.EventHandler(this.btnMostrar_Click);
+            // 
             // btnMostrar
             // 
             this.btnMostrar.Location = new System.Drawing.Point(331, 52);
@@ -307,26 +310,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbGrafico.TabStop = false;
             this.gbGrafico.Text = "5. Gráfico";
             // 
-            // btnJi
-            // 
-            this.btnJi.Location = new System.Drawing.Point(331, 89);
-            this.btnJi.Name = "btnJi";
-            this.btnJi.Size = new System.Drawing.Size(172, 31);
-            this.btnJi.TabIndex = 6;
-            this.btnJi.Text = "Prueba de Ji2";
-            this.btnJi.UseVisualStyleBackColor = true;
-            this.btnJi.Click += new System.EventHandler(this.btnMostrar_Click);
-            // 
-            // btnKolgomorov
-            // 
-            this.btnKolgomorov.Location = new System.Drawing.Point(331, 126);
-            this.btnKolgomorov.Name = "btnKolgomorov";
-            this.btnKolgomorov.Size = new System.Drawing.Size(172, 31);
-            this.btnKolgomorov.TabIndex = 6;
-            this.btnKolgomorov.Text = "Kolgomorov-Smirnov";
-            this.btnKolgomorov.UseVisualStyleBackColor = true;
-            this.btnKolgomorov.Click += new System.EventHandler(this.btnMostrar_Click);
-            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -357,8 +340,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         #endregion
         private System.Windows.Forms.DataGridView grdResultados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iteracion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aleatorio;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.RadioButton rbUniforme;
