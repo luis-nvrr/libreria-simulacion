@@ -17,7 +17,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private float b;
         private float a;
 
-        public GeneradorUniformeAB(GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double a, double b)
+        public GeneradorUniformeAB(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double a, double b)
         {
             this.truncador = truncador;
             this.a = truncador.truncar(a);
@@ -25,9 +25,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             this.generadorLenguaje = generadorLenguaje;
 
-            this.dataTable = new DataTable();
-            this.dataTable.Columns.Add("iteracion");
-            this.dataTable.Columns.Add("aleatorio");
+            this.dataTable = tabla;
         }
 
         // retorna un aleatorio
@@ -50,8 +48,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             {
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = aleatorio;
+                dataRow[0] = i+1;
+                dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 
                 if( frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }

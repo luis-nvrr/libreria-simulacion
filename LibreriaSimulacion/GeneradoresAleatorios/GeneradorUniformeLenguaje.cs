@@ -13,13 +13,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private float aleatorio;
 
-        public GeneradorUniformeLenguaje(Truncador truncador)
+        public GeneradorUniformeLenguaje(DataTable tabla, Truncador truncador)
         {
             this.random = new Random();
             this.truncador = truncador;
-            this.dataTable = new DataTable();
-            this.dataTable.Columns.Add("iteracion");
-            this.dataTable.Columns.Add("aleatorio");
+            this.dataTable = tabla;
+        }
+
+        public GeneradorUniformeLenguaje(Truncador truncador)
+        {
+            this.truncador = truncador;
+            this.random = new Random();
         }
 
         public float siguienteAleatorio()
@@ -40,8 +44,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             {
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = aleatorio;
+                dataRow[0] = i+1;
+                dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }

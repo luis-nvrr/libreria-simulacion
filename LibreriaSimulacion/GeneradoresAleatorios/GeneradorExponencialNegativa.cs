@@ -21,16 +21,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         // parametros
         private double lambda;
 
-        public GeneradorExponencialNegativa(GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double lambda)
+        public GeneradorExponencialNegativa(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double lambda)
         {
             this.truncador = truncador;
             this.lambda = lambda;
 
             this.generadorLenguaje = generadorLenguaje;
 
-            this.dataTable = new DataTable();
-            this.dataTable.Columns.Add("iteracion");
-            this.dataTable.Columns.Add("aleatorio");
+            this.dataTable = tabla;
         }
 
         // retorna un aleatorio
@@ -53,8 +51,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             {
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = aleatorio;
+                dataRow[0] = i+1;
+                dataRow[1]= aleatorio;
                 dataTable.Rows.Add(dataRow);
 
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }

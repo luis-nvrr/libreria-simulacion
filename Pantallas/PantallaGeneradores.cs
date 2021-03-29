@@ -1,13 +1,7 @@
 ﻿using Numeros_aleatorios.LibreriaSimulacion;
+using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Numeros_aleatorios
@@ -28,12 +22,11 @@ namespace Numeros_aleatorios
         int indice;
 
         // generadores
-        GeneradorCongruencialLinealMixto lineal;
-        GeneradorCongruencialMultiplicativo multiplicativo;
+        IGenerador generador;
 
         Truncador truncador;
         DataTable dataTable;
-
+        DataRow dataRow;
 
         public PantallaGeneradores()
         {
@@ -43,12 +36,16 @@ namespace Numeros_aleatorios
         private void Ejercicio1_Load(object sender, EventArgs e)
         {
             truncador = new Truncador(4);
+            dataTable = new DataTable();
+            dataTable.Columns.Add("iteracion");
+            dataTable.Columns.Add("aleatorio");
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             grdResultados.DataSource = null;
-            indice = -1;
+            dataTable.Rows.Clear();
+            indice = 19;
 
             x0 = int.Parse(semilla.Text);
             k = int.Parse(enteroK.Text);
@@ -67,38 +64,30 @@ namespace Numeros_aleatorios
 
         private void congruencialLineal()
         {
-            lineal = new GeneradorCongruencialLinealMixto(truncador, x0, c, a, m);
-            dataTable = lineal.generarSerie(CANT_ITERACIONES);
-
+            generador = new GeneradorCongruencialLinealMixto(dataTable, truncador, x0, c, a, m);
+            dataTable = generador.generarSerie(CANT_ITERACIONES);
             grdResultados.DataSource = dataTable;
         }
 
         private void congruencialMultiplicativo()
         {
-            multiplicativo = new GeneradorCongruencialMultiplicativo(truncador, x0, a, m);
-            dataTable = multiplicativo.generarSerie(CANT_ITERACIONES);
-
+            generador = new GeneradorCongruencialMultiplicativo(dataTable, truncador, x0, a, m);
+            dataTable = generador.generarSerie(CANT_ITERACIONES);
             grdResultados.DataSource = dataTable;
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            if (rbLineal.Checked)
-            {
-                agregarFila(lineal.siguienteAleatorio());
-            }
-            else
-            {
-                agregarFila(multiplicativo.siguienteAleatorio());
-            }
+            agregarFila(generador.siguienteAleatorio());
         }
 
         private void agregarFila(float numeroAleatorio)
         {
-            grdResultados.Rows.Add();
             ++indice;
-            grdResultados.Rows[indice].Cells[0].Value = indice + 1;
-            grdResultados.Rows[indice].Cells[1].Value = numeroAleatorio;
+            dataRow = dataTable.NewRow();
+            dataRow[0] = indice + 1;
+            dataRow[1] = numeroAleatorio;
+            dataTable.Rows.Add(dataRow);
             enfocarFila();
         }
 
@@ -106,7 +95,6 @@ namespace Numeros_aleatorios
         {
             grdResultados.CurrentCell = grdResultados.Rows[indice].Cells[0];
         }
-
 
         private void enteroK_KeyDown(object sender, KeyEventArgs e)
         {

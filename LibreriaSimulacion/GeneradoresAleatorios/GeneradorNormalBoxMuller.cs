@@ -24,7 +24,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
         private Boolean esNecesarioGenerar;
 
-        public GeneradorNormalBoxMuller(GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double desviacion, double media)
+        public GeneradorNormalBoxMuller(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double desviacion, double media)
         {
             this.truncador = truncador;
             this.desviacion = desviacion;
@@ -32,9 +32,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
             this.generadorLenguaje = generadorLenguaje;
 
-            this.dataTable = new DataTable();
-            this.dataTable.Columns.Add("iteracion");
-            this.dataTable.Columns.Add("aleatorio");
+            this.dataTable = tabla;
         }
 
         // retorna un aleatorio
@@ -64,8 +62,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
                 if(i % 2 == 0) { esNecesarioGenerar = true; }
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = aleatorio;
+                dataRow[0] = i+1;
+                dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }

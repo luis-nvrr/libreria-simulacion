@@ -62,7 +62,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             {
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow[0] = i;
+                dataRow[0] = i+1;
                 dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 

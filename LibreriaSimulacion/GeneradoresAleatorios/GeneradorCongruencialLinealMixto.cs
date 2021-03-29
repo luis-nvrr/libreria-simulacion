@@ -21,16 +21,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private int a;
         private long m;
 
-        public GeneradorCongruencialLinealMixto(Truncador truncador, long semilla, int c, int a, long m)
+        public GeneradorCongruencialLinealMixto(DataTable tabla, Truncador truncador, long semilla, int c, int a, long m)
         {
             this.entradaAnterior = semilla;
             this.truncador = truncador;
             this.a = a;
             this.c = c;
             this.m = m;
-            this.dataTable = new DataTable();
-            this.dataTable.Columns.Add("iteracion");
-            this.dataTable.Columns.Add("aleatorio");
+            this.dataTable = tabla;
         }
 
         // retorna un aleatorio
@@ -55,8 +53,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             {
                 aleatorio = siguienteAleatorio();
                 dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = aleatorio;
+                dataRow[0] = i+1;
+                dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }

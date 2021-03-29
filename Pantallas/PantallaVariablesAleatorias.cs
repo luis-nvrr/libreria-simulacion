@@ -99,7 +99,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             generarIntervalosUniforme(a,b);
             contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            generadorDistribucion = new GeneradorUniformeAB(generadorLenguaje, truncador, a, b);
+            generadorDistribucion = new GeneradorUniformeAB(dataTable, generadorLenguaje, truncador, a, b);
             dataTable = generadorDistribucion.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
             frecuenciasObservadas = contador.obtenerFrecuencias();
@@ -125,7 +125,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             // TODO generar intervalos
 
-            generadorDistribucion = new GeneradorExponencialNegativa(generadorLenguaje, truncador, lambda);
+            generadorDistribucion = new GeneradorExponencialNegativa(dataTable, generadorLenguaje, truncador, lambda);
             dataTable = generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
         }
@@ -158,7 +158,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             // TODO generar intervalos
 
-            generadorDistribucion = new GeneradorNormalBoxMuller(generadorLenguaje, truncador, desviacion, media);
+            generadorDistribucion = new GeneradorNormalBoxMuller(dataTable, generadorLenguaje, truncador, desviacion, media);
             dataTable = generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
         }
