@@ -40,6 +40,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             truncador = new Truncador(4);
             grdResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataTable = new DataTable();
+            dataTable.Columns.Add("iteracion");
+            dataTable.Columns.Add("aleatorio");
             generadorLenguaje = new GeneradorUniformeLenguaje(truncador);
         }
 
@@ -69,6 +71,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             if (rbNormalBoxMuller.Checked)
             {
                 generarNormalBoxMuller();
+                return;
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                generarNormalConvolucion();
                 return;
             }
             if (rbExponencial.Checked)
@@ -157,6 +164,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         }
 
 
+        private void generarNormalConvolucion()
+        {
+            double desviacion = double.Parse(txtDesviacionNormalConvolucion.Text);
+            double media = double.Parse(txtMediaNormalConvolucion.Text);
+
+            if (desviacion < 0 || media < 0) { return; } //restriccion
+
+            // TODO generar intervalos
+
+            generadorDistribucion = new GeneradorNormalConvolucion(dataTable, generadorLenguaje, truncador, desviacion, media);
+            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            grdResultados.DataSource = dataTable;
+        }
+
         private void mostrarGrafico()
         {
             graficador = new GraficadorExcelObservado();
@@ -179,11 +200,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 gbUniforme.Visible = true;
                 gbExponencial.Visible = false;
                 gbNormalBoxMuller.Visible = false;
+                gbNormalConvolucion.Visible = false;
                 return;
             }
             if (rbNormalBoxMuller.Checked)
             {
                 gbNormalBoxMuller.Visible = true;
+                gbUniforme.Visible = false;
+                gbExponencial.Visible = false;
+                gbNormalConvolucion.Visible = false;
+                return;
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                gbNormalConvolucion.Visible = true;
+                gbNormalBoxMuller.Visible = false;
                 gbUniforme.Visible = false;
                 gbExponencial.Visible = false;
                 return;
@@ -193,6 +224,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 gbExponencial.Visible = true;
                 gbUniforme.Visible = false;
                 gbNormalBoxMuller.Visible = false;
+                gbNormalConvolucion.Visible = false;
                 return;
             }
             if (rbPoisson.Checked)
