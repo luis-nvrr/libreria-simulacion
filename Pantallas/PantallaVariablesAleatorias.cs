@@ -17,7 +17,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         Truncador truncador;
         GeneradorIntervalosUniformeAB generadorIntervalos;
         GraficadorExcelObservado graficador;
-        FrecuenciaObservada frecuenciaObservada;
+        ContadorFrecuenciaObservada contador;
 
         float[] inicioIntervalos;
         float[] finIntervalos;
@@ -26,9 +26,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         int cantidadIntervalos;
         int[] frecuenciasObservadas;
 
-        float numeroAleatorio;
         DataTable dataTable;
-        DataRow dataRow;
 
         public PantallaVariablesAleatorias()
         {
@@ -88,31 +86,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             if (b < a) { return; }
 
             generarIntervalosUniforme(a,b);
-            frecuenciaObservada = new FrecuenciaObservada(inicioIntervalos, finIntervalos);
-   
+            contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
             uniforme = new GeneradorUniformeAB(truncador, a, b);
-            
-            for (int i = 0; i < cantidadValores; i++)
-            {
-                numeroAleatorio = uniforme.siguienteAleatorio();
-                dataRow = dataTable.NewRow();
-                dataRow["iteracion"] = i;
-                dataRow["aleatorio"] = numeroAleatorio;
-                dataTable.Rows.Add(dataRow);
-
-                // conteo de frecuencias
-                for (int j = 0; j < cantidadIntervalos; j++)
-                {
-                    if (numeroAleatorio >= inicioIntervalos[j] &&
-                        numeroAleatorio <= finIntervalos[j])
-                    {
-                        frecuenciasObservadas[j] += 1;
-                        break;
-                    }
-                }
-            }
-
+            dataTable = uniforme.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
+            frecuenciasObservadas = contador.obtenerFrecuencias();
         }
 
         private void generarIntervalosUniforme(float a, float b)

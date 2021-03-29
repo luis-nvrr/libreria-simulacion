@@ -50,8 +50,6 @@ namespace Numeros_aleatorios
             this.lblTitulo = new System.Windows.Forms.Label();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.grdResultados = new System.Windows.Forms.DataGridView();
-            this.iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbOpcion.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -271,9 +269,6 @@ namespace Numeros_aleatorios
             this.grdResultados.AllowUserToAddRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iteracion,
-            this.aleatorio});
             this.grdResultados.Location = new System.Drawing.Point(280, 31);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
@@ -281,18 +276,6 @@ namespace Numeros_aleatorios
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdResultados.Size = new System.Drawing.Size(229, 303);
             this.grdResultados.TabIndex = 0;
-            // 
-            // iteracion
-            // 
-            this.iteracion.HeaderText = "Iteracion";
-            this.iteracion.Name = "iteracion";
-            this.iteracion.ReadOnly = true;
-            // 
-            // aleatorio
-            // 
-            this.aleatorio.HeaderText = "Numero Aleatorio";
-            this.aleatorio.Name = "aleatorio";
-            this.aleatorio.ReadOnly = true;
             // 
             // btnMostrar
             // 
@@ -354,8 +337,6 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.GroupBox tabla;
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.DataGridView grdResultados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iteracion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aleatorio;
         private System.Windows.Forms.Button btnMostrar;
     }
 }

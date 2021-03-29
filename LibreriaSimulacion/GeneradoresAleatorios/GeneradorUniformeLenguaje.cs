@@ -1,5 +1,6 @@
 ﻿using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 using System;
+using System.Data;
 
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
@@ -7,11 +8,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion
     {
         Random random;
         Truncador truncador;
+        private DataTable dataTable;
+        private DataRow dataRow;
+
+        private float aleatorio;
 
         public GeneradorUniformeLenguaje(Truncador truncador)
         {
             this.random = new Random();
             this.truncador = truncador;
+            this.dataTable = new DataTable();
+            this.dataTable.Columns.Add("iteracion");
+            this.dataTable.Columns.Add("aleatorio");
         }
 
         public float siguienteAleatorio()
@@ -19,17 +27,26 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return truncador.truncar(random.NextDouble());
         }
 
-        public float[] generarSerie(int cantidadAleatorios)
+        public DataTable generarSerie(int cantidadAleatorios)
         {
-            float[] serieAleatorios = new float[cantidadAleatorios];
-            for (int i = 0; i < cantidadAleatorios; i++)
-            {
-                float aleatorio = siguienteAleatorio();
-                serieAleatorios[i] = aleatorio;
-            }
-            return serieAleatorios;
+            return this.generarSerie(cantidadAleatorios, null);
         }
 
+        public DataTable generarSerie(int cantidadAleatorios, ContadorFrecuenciaObservada frecuenciaObservada)
+        {
+            dataTable.Rows.Clear();
 
+            for (int i = 0; i < cantidadAleatorios; i++)
+            {
+                aleatorio = siguienteAleatorio();
+                dataRow = dataTable.NewRow();
+                dataRow["iteracion"] = i;
+                dataRow["aleatorio"] = aleatorio;
+                dataTable.Rows.Add(dataRow);
+
+                if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
+            }
+            return dataTable;
+        }
     }
 }

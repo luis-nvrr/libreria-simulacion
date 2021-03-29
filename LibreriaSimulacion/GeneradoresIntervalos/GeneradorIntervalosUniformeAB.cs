@@ -43,7 +43,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         }
 
 
-        // calcula el rango de cada intervalo, de acuerdo a la cantidad de frecuenciaObservada
+        // calcula el rango de cada intervalo, de acuerdo a la cantidad de contador
         private double calcularRangoIntervalos(float a, float b)
         {
             return ((double)(b-a) / cantidadIntervalos);

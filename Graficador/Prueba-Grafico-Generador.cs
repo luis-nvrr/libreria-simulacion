@@ -18,7 +18,7 @@ namespace Numeros_aleatorios.ejemplo_grafico
         GeneradorCongruencialLinealMixto lineal;
         Truncador truncador;
         GeneradorIntervalosUniforme intervalos;
-        FrecuenciaObservada frecuenciaObservada;
+        ContadorFrecuenciaObservada frecuenciaObservada;
         FrecuenciaEsperadaUniforme frecuenciaEsperada;
 
         public Prueba_Grafico_Generador()
@@ -36,16 +36,16 @@ namespace Numeros_aleatorios.ejemplo_grafico
             //float[] inicio = intervalos.obtenerInicioIntervalos();
             //float[] fin = intervalos.obtenerFinIntervalos();
 
-            //frecuenciaObservada = new FrecuenciaObservada(inicio, fin);
+            //contador = new FrecuenciaObservada(inicio, fin);
             //frecuenciaEsperada = new FrecuenciaEsperadaUniforme(100, inicio, fin);
            
             //lineal = new GeneradorCongruencialLinealMixto(truncador, 17,21,13,32); // parametros de la congruencial
-            //float[] aleatorios = lineal.generarSerie(100, frecuenciaObservada);
-            //int[] frecuenciasObservadas = frecuenciaObservada.obtenerFrecuencias();
+            //float[] aleatorios = lineal.generarSerie(100, contador);
+            //int[] frecuenciasObservadas = contador.obtenerFrecuencias();
             //int[] frecuenciasEsperadas = frecuenciaEsperada.obtenerFrecuencias();
 
             ////excel.frecuenciaEsperada = frecuenciasEsperadas;
-            //excel.frecuenciaObservada = frecuenciasObservadas;
+            //excel.contador = frecuenciasObservadas;
             //excel.ShowDialog();
         }
     }

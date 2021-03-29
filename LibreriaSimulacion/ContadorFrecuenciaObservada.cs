@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
 
-    class FrecuenciaObservada
+    class ContadorFrecuenciaObservada
     {
         private int[] frecuenciaObservada;
 
@@ -16,7 +16,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private float[] inicioIntervalos;
         private float[] finIntervalos;
 
-        public FrecuenciaObservada(float[] inicioIntervalos, float[] finIntervalos)
+        public ContadorFrecuenciaObservada(float[] inicioIntervalos, float[] finIntervalos)
         {
             this.cantidadIntervalos = inicioIntervalos.Length;
             this.frecuenciaObservada = new int[cantidadIntervalos];

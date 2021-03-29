@@ -32,6 +32,7 @@ namespace Numeros_aleatorios
         GeneradorCongruencialMultiplicativo multiplicativo;
 
         Truncador truncador;
+        DataTable dataTable;
 
 
         public PantallaGeneradores()
@@ -46,7 +47,7 @@ namespace Numeros_aleatorios
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            grdResultados.Rows.Clear();
+            grdResultados.DataSource = null;
             indice = -1;
 
             x0 = int.Parse(semilla.Text);
@@ -67,23 +68,17 @@ namespace Numeros_aleatorios
         private void congruencialLineal()
         {
             lineal = new GeneradorCongruencialLinealMixto(truncador, x0, c, a, m);
-            float[] aleatorios = lineal.generarSerie(CANT_ITERACIONES); 
+            dataTable = lineal.generarSerie(CANT_ITERACIONES);
 
-            for (int i = 0; i < CANT_ITERACIONES; i++)
-            {
-                agregarFila(aleatorios[i]);
-            }
+            grdResultados.DataSource = dataTable;
         }
 
         private void congruencialMultiplicativo()
         {
             multiplicativo = new GeneradorCongruencialMultiplicativo(truncador, x0, a, m);
-            float[] aleatorios = multiplicativo.generarSerie(CANT_ITERACIONES);
+            dataTable = multiplicativo.generarSerie(CANT_ITERACIONES);
 
-            for (int i = 0; i < CANT_ITERACIONES; i++)
-            {
-                agregarFila(aleatorios[i]);
-            }
+            grdResultados.DataSource = dataTable;
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
