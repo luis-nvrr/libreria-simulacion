@@ -69,6 +69,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label7 = new System.Windows.Forms.Label();
             this.txtMediaNormalConvolucion = new System.Windows.Forms.TextBox();
             this.txtDesviacionNormalConvolucion = new System.Windows.Forms.TextBox();
+            this.gbPoisson = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtMediaPoisson = new System.Windows.Forms.TextBox();
+            this.txtLambdaPoisson = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -78,6 +83,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbExponencial.SuspendLayout();
             this.gbNormalBoxMuller.SuspendLayout();
             this.gbNormalConvolucion.SuspendLayout();
+            this.gbPoisson.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdResultados
@@ -420,9 +426,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(16, 50);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 21);
+            this.label5.Size = new System.Drawing.Size(88, 21);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Desvicación:";
+            this.label5.Text = "Desviación:";
             // 
             // txtMediaNormalBoxMuller
             // 
@@ -466,9 +472,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(16, 50);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 21);
+            this.label7.Size = new System.Drawing.Size(88, 21);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Desvicación:";
+            this.label7.Text = "Desviación:";
             // 
             // txtMediaNormalConvolucion
             // 
@@ -484,11 +490,58 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtDesviacionNormalConvolucion.Size = new System.Drawing.Size(100, 29);
             this.txtDesviacionNormalConvolucion.TabIndex = 13;
             // 
+            // gbPoisson
+            // 
+            this.gbPoisson.Controls.Add(this.label8);
+            this.gbPoisson.Controls.Add(this.label9);
+            this.gbPoisson.Controls.Add(this.txtMediaPoisson);
+            this.gbPoisson.Controls.Add(this.txtLambdaPoisson);
+            this.gbPoisson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbPoisson.Location = new System.Drawing.Point(298, 89);
+            this.gbPoisson.Name = "gbPoisson";
+            this.gbPoisson.Size = new System.Drawing.Size(235, 171);
+            this.gbPoisson.TabIndex = 16;
+            this.gbPoisson.TabStop = false;
+            this.gbPoisson.Text = "2. Ingrese los parámetros:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(55, 90);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 21);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Media:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(42, 48);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 21);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Lambda:";
+            // 
+            // txtMediaPoisson
+            // 
+            this.txtMediaPoisson.Location = new System.Drawing.Point(117, 82);
+            this.txtMediaPoisson.Name = "txtMediaPoisson";
+            this.txtMediaPoisson.Size = new System.Drawing.Size(100, 29);
+            this.txtMediaPoisson.TabIndex = 13;
+            // 
+            // txtLambdaPoisson
+            // 
+            this.txtLambdaPoisson.Location = new System.Drawing.Point(117, 43);
+            this.txtLambdaPoisson.Name = "txtLambdaPoisson";
+            this.txtLambdaPoisson.Size = new System.Drawing.Size(100, 29);
+            this.txtLambdaPoisson.TabIndex = 13;
+            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 749);
+            this.Controls.Add(this.gbPoisson);
             this.Controls.Add(this.gbNormalConvolucion);
             this.Controls.Add(this.gbNormalBoxMuller);
             this.Controls.Add(this.gbExponencial);
@@ -517,6 +570,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbNormalBoxMuller.PerformLayout();
             this.gbNormalConvolucion.ResumeLayout(false);
             this.gbNormalConvolucion.PerformLayout();
+            this.gbPoisson.ResumeLayout(false);
+            this.gbPoisson.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -562,5 +617,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtMediaNormalConvolucion;
         private System.Windows.Forms.TextBox txtDesviacionNormalConvolucion;
+        private System.Windows.Forms.GroupBox gbPoisson;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtMediaPoisson;
+        private System.Windows.Forms.TextBox txtLambdaPoisson;
     }
 }
