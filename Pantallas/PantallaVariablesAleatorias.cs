@@ -56,6 +56,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             grdResultados.Rows.Clear();
+            gbGrafico.Controls.Clear();
             indice = -1;
             cantidadValores = int.Parse(txtCantidadValores.Text);
             cantidadIntervalos = int.Parse(txtCantidadIntervalos.Text);

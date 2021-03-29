@@ -27,10 +27,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             finIntervalos = new float[cantidadIntervalos];
 
             double rangoIntervalo = calcularRangoIntervalos(a, b);
+
             for (int i = 0; i < cantidadIntervalos; i++)
             {
-                inicioIntervalos[i] = truncador.truncar(a + rangoIntervalo * i);
-                finIntervalos[i] = truncador.truncar(a + rangoIntervalo * (i + 1) - 0.0001f);
+                double inicio = a + rangoIntervalo * i;
+                double fin = a + rangoIntervalo * (i + 1);
+                if (inicio < 0 || fin < 0) { 
+                    fin += 0.0001f;
+                    inicio -= 0.0001f;
+                }
+                else { fin -= 0.0001f;  }
+                inicioIntervalos[i] = truncador.truncar(inicio);
+                finIntervalos[i] = truncador.truncar(fin);
             }
         }
 
