@@ -46,19 +46,25 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnKolgomorov = new System.Windows.Forms.Button();
             this.btnJi = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbCantidades = new System.Windows.Forms.GroupBox();
             this.txtCantidadIntervalos = new System.Windows.Forms.TextBox();
             this.txtCantidadValores = new System.Windows.Forms.TextBox();
             this.btnCalcular = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblCantidadValores = new System.Windows.Forms.Label();
             this.gbGrafico = new System.Windows.Forms.GroupBox();
+            this.gbExponencial = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtMediaExponencial = new System.Windows.Forms.TextBox();
+            this.txtLambdaExponencial = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
             this.gbUniforme.SuspendLayout();
             this.gbResultados.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbCantidades.SuspendLayout();
+            this.gbExponencial.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdResultados
@@ -105,6 +111,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbUniforme.TabStop = true;
             this.rbUniforme.Text = "Uniforme AB";
             this.rbUniforme.UseVisualStyleBackColor = true;
+            this.rbUniforme.CheckedChanged += new System.EventHandler(this.rbUniforme_CheckedChanged);
             // 
             // gbDistribuciones
             // 
@@ -130,6 +137,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbPoisson.TabStop = true;
             this.rbPoisson.Text = "Poisson";
             this.rbPoisson.UseVisualStyleBackColor = true;
+            this.rbPoisson.CheckedChanged += new System.EventHandler(this.rbPoisson_CheckedChanged);
             // 
             // rbNormal
             // 
@@ -141,6 +149,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbNormal.TabStop = true;
             this.rbNormal.Text = "Normal No Estándar";
             this.rbNormal.UseVisualStyleBackColor = true;
+            this.rbNormal.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
             // 
             // rbExponencial
             // 
@@ -152,6 +161,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbExponencial.TabStop = true;
             this.rbExponencial.Text = "Exponencial Negativa";
             this.rbExponencial.UseVisualStyleBackColor = true;
+            this.rbExponencial.CheckedChanged += new System.EventHandler(this.rbExponencial_CheckedChanged);
             // 
             // gbUniforme
             // 
@@ -243,20 +253,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
-            // groupBox1
+            // gbCantidades
             // 
-            this.groupBox1.Controls.Add(this.txtCantidadIntervalos);
-            this.groupBox1.Controls.Add(this.txtCantidadValores);
-            this.groupBox1.Controls.Add(this.btnCalcular);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.lblCantidadValores);
-            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(12, 266);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(521, 122);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "3. Ingrese la cantidad";
+            this.gbCantidades.Controls.Add(this.txtCantidadIntervalos);
+            this.gbCantidades.Controls.Add(this.txtCantidadValores);
+            this.gbCantidades.Controls.Add(this.btnCalcular);
+            this.gbCantidades.Controls.Add(this.label1);
+            this.gbCantidades.Controls.Add(this.lblCantidadValores);
+            this.gbCantidades.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbCantidades.Location = new System.Drawing.Point(12, 266);
+            this.gbCantidades.Name = "gbCantidades";
+            this.gbCantidades.Size = new System.Drawing.Size(521, 122);
+            this.gbCantidades.TabIndex = 12;
+            this.gbCantidades.TabStop = false;
+            this.gbCantidades.Text = "3. Ingrese la cantidad";
             // 
             // txtCantidadIntervalos
             // 
@@ -310,13 +320,60 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbGrafico.TabStop = false;
             this.gbGrafico.Text = "5. Gráfico";
             // 
+            // gbExponencial
+            // 
+            this.gbExponencial.Controls.Add(this.label3);
+            this.gbExponencial.Controls.Add(this.label2);
+            this.gbExponencial.Controls.Add(this.txtMediaExponencial);
+            this.gbExponencial.Controls.Add(this.txtLambdaExponencial);
+            this.gbExponencial.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbExponencial.Location = new System.Drawing.Point(298, 104);
+            this.gbExponencial.Name = "gbExponencial";
+            this.gbExponencial.Size = new System.Drawing.Size(235, 156);
+            this.gbExponencial.TabIndex = 0;
+            this.gbExponencial.TabStop = false;
+            this.gbExponencial.Text = "2. Ingrese los parámetros:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(38, 83);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 21);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Media:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 21);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Lambda:";
+            // 
+            // txtMediaExponencial
+            // 
+            this.txtMediaExponencial.Location = new System.Drawing.Point(100, 75);
+            this.txtMediaExponencial.Name = "txtMediaExponencial";
+            this.txtMediaExponencial.Size = new System.Drawing.Size(100, 29);
+            this.txtMediaExponencial.TabIndex = 13;
+            // 
+            // txtLambdaExponencial
+            // 
+            this.txtLambdaExponencial.Location = new System.Drawing.Point(100, 35);
+            this.txtLambdaExponencial.Name = "txtLambdaExponencial";
+            this.txtLambdaExponencial.Size = new System.Drawing.Size(100, 29);
+            this.txtLambdaExponencial.TabIndex = 13;
+            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 749);
+            this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbGrafico);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbCantidades);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.gbUniforme);
             this.Controls.Add(this.gbDistribuciones);
@@ -332,8 +389,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbUniforme.ResumeLayout(false);
             this.gbUniforme.PerformLayout();
             this.gbResultados.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbCantidades.ResumeLayout(false);
+            this.gbCantidades.PerformLayout();
+            this.gbExponencial.ResumeLayout(false);
+            this.gbExponencial.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -350,7 +409,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.GroupBox gbUniforme;
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.TextBox txtA;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbCantidades;
         private System.Windows.Forms.Label lblA;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCantidadValores;
@@ -363,5 +422,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.GroupBox gbGrafico;
         private System.Windows.Forms.Button btnKolgomorov;
         private System.Windows.Forms.Button btnJi;
+        private System.Windows.Forms.GroupBox gbExponencial;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtMediaExponencial;
+        private System.Windows.Forms.TextBox txtLambdaExponencial;
     }
 }
