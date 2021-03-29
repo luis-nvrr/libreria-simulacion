@@ -35,7 +35,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbUniforme = new System.Windows.Forms.RadioButton();
             this.gbDistribuciones = new System.Windows.Forms.GroupBox();
             this.rbPoisson = new System.Windows.Forms.RadioButton();
-            this.rbNormal = new System.Windows.Forms.RadioButton();
+            this.rbNormalBoxMuller = new System.Windows.Forms.RadioButton();
             this.rbExponencial = new System.Windows.Forms.RadioButton();
             this.gbUniforme = new System.Windows.Forms.GroupBox();
             this.lblB = new System.Windows.Forms.Label();
@@ -58,6 +58,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label2 = new System.Windows.Forms.Label();
             this.txtMediaExponencial = new System.Windows.Forms.TextBox();
             this.txtLambdaExponencial = new System.Windows.Forms.TextBox();
+            this.gbNormalBoxMuller = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtMediaNormalBoxMuller = new System.Windows.Forms.TextBox();
+            this.txtDesviacionNormalBoxMuller = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -65,6 +70,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbResultados.SuspendLayout();
             this.gbCantidades.SuspendLayout();
             this.gbExponencial.SuspendLayout();
+            this.gbNormalBoxMuller.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdResultados
@@ -116,7 +122,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // gbDistribuciones
             // 
             this.gbDistribuciones.Controls.Add(this.rbPoisson);
-            this.gbDistribuciones.Controls.Add(this.rbNormal);
+            this.gbDistribuciones.Controls.Add(this.rbNormalBoxMuller);
             this.gbDistribuciones.Controls.Add(this.rbExponencial);
             this.gbDistribuciones.Controls.Add(this.rbUniforme);
             this.gbDistribuciones.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -139,17 +145,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbPoisson.UseVisualStyleBackColor = true;
             this.rbPoisson.CheckedChanged += new System.EventHandler(this.rbPoisson_CheckedChanged);
             // 
-            // rbNormal
+            // rbNormalBoxMuller
             // 
-            this.rbNormal.AutoSize = true;
-            this.rbNormal.Location = new System.Drawing.Point(25, 91);
-            this.rbNormal.Name = "rbNormal";
-            this.rbNormal.Size = new System.Drawing.Size(170, 25);
-            this.rbNormal.TabIndex = 8;
-            this.rbNormal.TabStop = true;
-            this.rbNormal.Text = "Normal No Estándar";
-            this.rbNormal.UseVisualStyleBackColor = true;
-            this.rbNormal.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
+            this.rbNormalBoxMuller.AutoSize = true;
+            this.rbNormalBoxMuller.Location = new System.Drawing.Point(25, 91);
+            this.rbNormalBoxMuller.Name = "rbNormalBoxMuller";
+            this.rbNormalBoxMuller.Size = new System.Drawing.Size(159, 25);
+            this.rbNormalBoxMuller.TabIndex = 8;
+            this.rbNormalBoxMuller.TabStop = true;
+            this.rbNormalBoxMuller.Text = "Normal Box Muller";
+            this.rbNormalBoxMuller.UseVisualStyleBackColor = true;
+            this.rbNormalBoxMuller.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
             // 
             // rbExponencial
             // 
@@ -366,11 +372,58 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtLambdaExponencial.Size = new System.Drawing.Size(100, 29);
             this.txtLambdaExponencial.TabIndex = 13;
             // 
+            // gbNormalBoxMuller
+            // 
+            this.gbNormalBoxMuller.Controls.Add(this.label4);
+            this.gbNormalBoxMuller.Controls.Add(this.label5);
+            this.gbNormalBoxMuller.Controls.Add(this.txtMediaNormalBoxMuller);
+            this.gbNormalBoxMuller.Controls.Add(this.txtDesviacionNormalBoxMuller);
+            this.gbNormalBoxMuller.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.gbNormalBoxMuller.Location = new System.Drawing.Point(298, 104);
+            this.gbNormalBoxMuller.Name = "gbNormalBoxMuller";
+            this.gbNormalBoxMuller.Size = new System.Drawing.Size(235, 156);
+            this.gbNormalBoxMuller.TabIndex = 14;
+            this.gbNormalBoxMuller.TabStop = false;
+            this.gbNormalBoxMuller.Text = "2. Ingrese los parámetros:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(55, 90);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 21);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Media:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 50);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(95, 21);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Desvicación:";
+            // 
+            // txtMediaNormalBoxMuller
+            // 
+            this.txtMediaNormalBoxMuller.Location = new System.Drawing.Point(117, 82);
+            this.txtMediaNormalBoxMuller.Name = "txtMediaNormalBoxMuller";
+            this.txtMediaNormalBoxMuller.Size = new System.Drawing.Size(100, 29);
+            this.txtMediaNormalBoxMuller.TabIndex = 13;
+            // 
+            // txtDesviacionNormalBoxMuller
+            // 
+            this.txtDesviacionNormalBoxMuller.Location = new System.Drawing.Point(117, 43);
+            this.txtDesviacionNormalBoxMuller.Name = "txtDesviacionNormalBoxMuller";
+            this.txtDesviacionNormalBoxMuller.Size = new System.Drawing.Size(100, 29);
+            this.txtDesviacionNormalBoxMuller.TabIndex = 13;
+            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1287, 749);
+            this.Controls.Add(this.gbNormalBoxMuller);
             this.Controls.Add(this.gbExponencial);
             this.Controls.Add(this.gbGrafico);
             this.Controls.Add(this.gbCantidades);
@@ -393,6 +446,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbCantidades.PerformLayout();
             this.gbExponencial.ResumeLayout(false);
             this.gbExponencial.PerformLayout();
+            this.gbNormalBoxMuller.ResumeLayout(false);
+            this.gbNormalBoxMuller.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -404,7 +459,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.RadioButton rbUniforme;
         private System.Windows.Forms.GroupBox gbDistribuciones;
         private System.Windows.Forms.RadioButton rbPoisson;
-        private System.Windows.Forms.RadioButton rbNormal;
+        private System.Windows.Forms.RadioButton rbNormalBoxMuller;
         private System.Windows.Forms.RadioButton rbExponencial;
         private System.Windows.Forms.GroupBox gbUniforme;
         private System.Windows.Forms.GroupBox gbResultados;
@@ -427,5 +482,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMediaExponencial;
         private System.Windows.Forms.TextBox txtLambdaExponencial;
+        private System.Windows.Forms.GroupBox gbNormalBoxMuller;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtMediaNormalBoxMuller;
+        private System.Windows.Forms.TextBox txtDesviacionNormalBoxMuller;
     }
 }

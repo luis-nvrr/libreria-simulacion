@@ -15,6 +15,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
     public partial class PantallaVariablesAleatorias : Form
     {
         IGenerador generadorDistribucion;
+        GeneradorUniformeLenguaje generadorLenguaje;
         Truncador truncador;
         GeneradorIntervalosUniformeAB generadorIntervalos;
         GraficadorExcelObservado graficador;
@@ -39,6 +40,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             truncador = new Truncador(4);
             grdResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataTable = new DataTable();
+            generadorLenguaje = new GeneradorUniformeLenguaje(truncador);
         }
 
         private void tomarEntrada()
@@ -64,8 +66,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 generarUniforme();
                 return;
             }
-            if (rbNormal.Checked)
+            if (rbNormalBoxMuller.Checked)
             {
+                generarNormalBoxMuller();
                 return;
             }
             if (rbExponencial.Checked)
@@ -89,7 +92,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             generarIntervalosUniforme(a,b);
             contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            generadorDistribucion = new GeneradorUniformeAB(truncador, a, b);
+            generadorDistribucion = new GeneradorUniformeAB(generadorLenguaje, truncador, a, b);
             dataTable = generadorDistribucion.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
             frecuenciasObservadas = contador.obtenerFrecuencias();
@@ -115,7 +118,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             // TODO generar intervalos
 
-            generadorDistribucion = new GeneradorExponencialNegativa(truncador, lambda);
+            generadorDistribucion = new GeneradorExponencialNegativa(generadorLenguaje, truncador, lambda);
             dataTable = generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
         }
@@ -137,6 +140,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             txtMediaExponencial.Text = media.ToString();
 
             return new double[]{lambda, media};
+        }
+
+        private void generarNormalBoxMuller()
+        {
+            double desviacion = double.Parse(txtDesviacionNormalBoxMuller.Text);
+            double media = double.Parse(txtMediaNormalBoxMuller.Text);
+
+            if (desviacion < 0 || media < 0) { return; } //restriccion
+
+            // TODO generar intervalos
+
+            generadorDistribucion = new GeneradorNormalBoxMuller(generadorLenguaje, truncador, desviacion, media);
+            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            grdResultados.DataSource = dataTable;
         }
 
 
@@ -161,16 +178,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             {
                 gbUniforme.Visible = true;
                 gbExponencial.Visible = false;
+                gbNormalBoxMuller.Visible = false;
                 return;
             }
-            if (rbNormal.Checked)
+            if (rbNormalBoxMuller.Checked)
             {
+                gbNormalBoxMuller.Visible = true;
+                gbUniforme.Visible = false;
+                gbExponencial.Visible = false;
                 return;
             }
             if (rbExponencial.Checked)
             {
                 gbExponencial.Visible = true;
                 gbUniforme.Visible = false;
+                gbNormalBoxMuller.Visible = false;
                 return;
             }
             if (rbPoisson.Checked)

@@ -6,7 +6,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
     class GeneradorUniformeAB : IGenerador
     {
         private Truncador truncador;
-        private GeneradorUniformeLenguaje generadorUniforme;
+        private GeneradorUniformeLenguaje generadorLenguaje;
         private DataTable dataTable;
         private DataRow dataRow;
 
@@ -17,13 +17,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private float b;
         private float a;
 
-        public GeneradorUniformeAB(Truncador truncador, double a, double b)
+        public GeneradorUniformeAB(GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double a, double b)
         {
             this.truncador = truncador;
             this.a = truncador.truncar(a);
             this.b = truncador.truncar(b);
 
-            this.generadorUniforme = new GeneradorUniformeLenguaje(truncador);
+            this.generadorLenguaje = generadorLenguaje;
 
             this.dataTable = new DataTable();
             this.dataTable.Columns.Add("iteracion");
@@ -33,7 +33,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         // retorna un aleatorio
         public float siguienteAleatorio()
         {
-            aleatorio01 = generadorUniforme.siguienteAleatorio();
+            aleatorio01 = generadorLenguaje.siguienteAleatorio();
             return truncador.truncar(a + aleatorio01 * (b - a));
         }
 
