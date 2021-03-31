@@ -52,6 +52,7 @@ namespace Numeros_aleatorios
             this.lblTitulo = new System.Windows.Forms.Label();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.grdResultados = new System.Windows.Forms.DataGridView();
+            this.btnCopiar = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbOpcion.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -118,7 +119,6 @@ namespace Numeros_aleatorios
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "2. Ingrese los valores:";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lblCantidad
             // 
@@ -217,7 +217,6 @@ namespace Numeros_aleatorios
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(100, 29);
             this.txtCantidad.TabIndex = 0;
-            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             // 
             // constanteAditiva
             // 
@@ -260,7 +259,7 @@ namespace Numeros_aleatorios
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1347, 71);
+            this.panel1.Size = new System.Drawing.Size(1364, 71);
             this.panel1.TabIndex = 2;
             // 
             // lblTitulo
@@ -277,6 +276,7 @@ namespace Numeros_aleatorios
             // gbResultados
             // 
             this.gbResultados.Controls.Add(this.grdResultados);
+            this.gbResultados.Controls.Add(this.btnCopiar);
             this.gbResultados.Controls.Add(this.btnMostrar);
             this.gbResultados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gbResultados.Location = new System.Drawing.Point(12, 384);
@@ -289,6 +289,9 @@ namespace Numeros_aleatorios
             // grdResultados
             // 
             this.grdResultados.AllowUserToAddRows = false;
+            this.grdResultados.AllowUserToDeleteRows = false;
+            this.grdResultados.AllowUserToResizeColumns = false;
+            this.grdResultados.AllowUserToResizeRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdResultados.Location = new System.Drawing.Point(275, 31);
@@ -299,13 +302,23 @@ namespace Numeros_aleatorios
             this.grdResultados.Size = new System.Drawing.Size(229, 303);
             this.grdResultados.TabIndex = 0;
             // 
+            // btnCopiar
+            // 
+            this.btnCopiar.Location = new System.Drawing.Point(510, 74);
+            this.btnCopiar.Name = "btnCopiar";
+            this.btnCopiar.Size = new System.Drawing.Size(118, 37);
+            this.btnCopiar.TabIndex = 1;
+            this.btnCopiar.Text = "Copiar";
+            this.btnCopiar.UseVisualStyleBackColor = true;
+            this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+            // 
             // btnMostrar
             // 
             this.btnMostrar.Location = new System.Drawing.Point(510, 31);
             this.btnMostrar.Name = "btnMostrar";
-            this.btnMostrar.Size = new System.Drawing.Size(118, 27);
+            this.btnMostrar.Size = new System.Drawing.Size(118, 37);
             this.btnMostrar.TabIndex = 1;
-            this.btnMostrar.Text = "Mostrar fila";
+            this.btnMostrar.Text = "Agregar fila";
             this.btnMostrar.UseVisualStyleBackColor = true;
             this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
@@ -315,7 +328,7 @@ namespace Numeros_aleatorios
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1364, 749);
+            this.ClientSize = new System.Drawing.Size(1381, 749);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
@@ -362,6 +375,7 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.Button btnMostrar;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.Button btnCopiar;
     }
 }
 

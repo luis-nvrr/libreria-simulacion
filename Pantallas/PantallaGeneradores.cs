@@ -2,6 +2,7 @@
 using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 using System;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Numeros_aleatorios
@@ -184,14 +185,22 @@ namespace Numeros_aleatorios
             }
         }
 
-        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        private String tablaToString()
         {
-
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString());
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void btnCopiar_Click(object sender, EventArgs e)
         {
 
+            Clipboard.SetText(tablaToString());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
