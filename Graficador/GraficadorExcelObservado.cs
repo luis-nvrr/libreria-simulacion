@@ -24,6 +24,8 @@ namespace Numeros_aleatorios.grafico_excel
         public int[] frecuenciaObservada { get; set; }
         public string nombre { get; set; }
 
+        DataTable dataTable;
+        DataRow dataRow;
 
         public GraficadorExcelObservado()
         {
@@ -57,10 +59,10 @@ namespace Numeros_aleatorios.grafico_excel
 
             xlWorkSheet.Cells[1, 2] = nombre;
 
-            grdFrecuencias.Columns.Add("frecuencia", "Frecuencia / Intervalo");
-            grdFrecuencias.Rows.Add();
-            grdFrecuencias.Rows[0].Cells[0].Value = "Observado";
-
+            dataTable = new DataTable();
+            dataTable.Columns.Add("int.");
+            dataTable.Columns.Add("FO");
+            
             int indice = 1;
 
             for (int i=0 ; i < frecuenciaObservada.Length; i++)
@@ -68,10 +70,13 @@ namespace Numeros_aleatorios.grafico_excel
                 xlWorkSheet.Cells[i + 2, 1] = (i + 1).ToString();
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
 
-                grdFrecuencias.Columns.Add("it"+indice, indice.ToString());
-                grdFrecuencias.Rows[0].Cells[indice].Value = frecuenciaObservada[i];
-                indice++;
+                dataRow = dataTable.NewRow();
+                //agregar intervalo
+                dataRow[1] = frecuenciaObservada[i];
+                dataTable.Rows.Add(dataRow);
             }
+
+            grdFrecuencias.DataSource = dataTable;
 
             Excel.Range chartRange;
 
