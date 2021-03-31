@@ -177,7 +177,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.grdFrecuencias.RowHeadersVisible = false;
             this.grdFrecuencias.RowTemplate.Height = 25;
             this.grdFrecuencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdFrecuencias.Size = new System.Drawing.Size(183, 458);
+            this.grdFrecuencias.Size = new System.Drawing.Size(164, 458);
             this.grdFrecuencias.TabIndex = 4;
             // 
             // panel4

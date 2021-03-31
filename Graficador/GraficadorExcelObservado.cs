@@ -22,6 +22,9 @@ namespace Numeros_aleatorios.grafico_excel
         Excel.Worksheet xlWorkSheet;
         object misValue = System.Reflection.Missing.Value;
         public int[] frecuenciaObservada { get; set; }
+        public float[] inicioIntervalos { get; set; }
+        public float[] finIntervalos { get; set; }
+
         public string nombre { get; set; }
 
         DataTable dataTable;
@@ -71,7 +74,7 @@ namespace Numeros_aleatorios.grafico_excel
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
 
                 dataRow = dataTable.NewRow();
-                //agregar intervalo
+                dataRow[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
                 dataRow[1] = frecuenciaObservada[i];
                 dataTable.Rows.Add(dataRow);
             }

@@ -219,6 +219,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             graficador = new GraficadorExcelObservado();
             graficador.frecuenciaObservada = frecuenciasObservadas;
             graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
+            graficador.inicioIntervalos = this.inicioIntervalos;
+            graficador.finIntervalos = this.finIntervalos;
 
             gbGrafico.Controls.Clear();
             graficador.TopLevel = false;
