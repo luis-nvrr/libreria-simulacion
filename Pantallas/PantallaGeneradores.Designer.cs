@@ -68,7 +68,7 @@ namespace Numeros_aleatorios
             this.gbOpcion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gbOpcion.Location = new System.Drawing.Point(12, 98);
             this.gbOpcion.Name = "gbOpcion";
-            this.gbOpcion.Size = new System.Drawing.Size(274, 100);
+            this.gbOpcion.Size = new System.Drawing.Size(329, 100);
             this.gbOpcion.TabIndex = 0;
             this.gbOpcion.TabStop = false;
             this.gbOpcion.Text = "1. Seleccione un método:";
@@ -78,10 +78,10 @@ namespace Numeros_aleatorios
             this.rbMultiplicativo.AutoSize = true;
             this.rbMultiplicativo.Location = new System.Drawing.Point(38, 59);
             this.rbMultiplicativo.Name = "rbMultiplicativo";
-            this.rbMultiplicativo.Size = new System.Drawing.Size(218, 25);
+            this.rbMultiplicativo.Size = new System.Drawing.Size(259, 25);
             this.rbMultiplicativo.TabIndex = 1;
             this.rbMultiplicativo.TabStop = true;
-            this.rbMultiplicativo.Text = "Congruencial multiplicativo";
+            this.rbMultiplicativo.Text = "Congruencial lineal multiplicativo";
             this.rbMultiplicativo.UseVisualStyleBackColor = true;
             // 
             // rbLineal
@@ -89,10 +89,10 @@ namespace Numeros_aleatorios
             this.rbLineal.AutoSize = true;
             this.rbLineal.Location = new System.Drawing.Point(38, 33);
             this.rbLineal.Name = "rbLineal";
-            this.rbLineal.Size = new System.Drawing.Size(161, 25);
+            this.rbLineal.Size = new System.Drawing.Size(204, 25);
             this.rbLineal.TabIndex = 0;
             this.rbLineal.TabStop = true;
-            this.rbLineal.Text = "Congruencial lineal";
+            this.rbLineal.Text = "Congruencial lineal mixto";
             this.rbLineal.UseVisualStyleBackColor = true;
             // 
             // groupBox1
