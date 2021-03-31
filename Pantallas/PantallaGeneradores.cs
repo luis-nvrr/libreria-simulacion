@@ -8,9 +8,9 @@ namespace Numeros_aleatorios
 {
     public partial class PantallaGeneradores : Form
     {
-        int CANT_ITERACIONES = 20;
 
         // parametros
+        int cantidad;
         int x0;
         int k;
         int g;
@@ -35,26 +35,33 @@ namespace Numeros_aleatorios
 
         private void Ejercicio1_Load(object sender, EventArgs e)
         {
+            grdResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             truncador = new Truncador(4);
             dataTable = new DataTable();
             dataTable.Columns.Add("iteracion");
             dataTable.Columns.Add("aleatorio");
+            txtCantidad.Text = "20";
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             grdResultados.DataSource = null;
+            grdResultados.Refresh();
             dataTable.Rows.Clear();
-            indice = 19;
+
 
             x0 = int.Parse(semilla.Text);
             k = int.Parse(enteroK.Text);
             g = int.Parse(enteroG.Text);
             a = int.Parse(constanteMultiplicativa.Text);
             m = long.Parse(modulo.Text);
+            cantidad = int.Parse(txtCantidad.Text);
+            indice = cantidad - 1;
+
 
             if (rbLineal.Checked)
             {
+                if(constanteAditiva.Text == "") { return;  }
                 c = int.Parse(constanteAditiva.Text); 
                 congruencialLineal(); 
             }
@@ -65,14 +72,14 @@ namespace Numeros_aleatorios
         private void congruencialLineal()
         {
             generador = new GeneradorCongruencialLinealMixto(dataTable, truncador, x0, c, a, m);
-            dataTable = generador.generarSerie(CANT_ITERACIONES);
+            generador.generarSerie(cantidad);
             grdResultados.DataSource = dataTable;
         }
 
         private void congruencialMultiplicativo()
         {
             generador = new GeneradorCongruencialMultiplicativo(dataTable, truncador, x0, a, m);
-            dataTable = generador.generarSerie(CANT_ITERACIONES);
+            generador.generarSerie(cantidad);
             grdResultados.DataSource = dataTable;
         }
 
@@ -177,6 +184,14 @@ namespace Numeros_aleatorios
             }
         }
 
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

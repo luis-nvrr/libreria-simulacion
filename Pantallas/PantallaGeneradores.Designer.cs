@@ -33,6 +33,7 @@ namespace Numeros_aleatorios
             this.rbMultiplicativo = new System.Windows.Forms.RadioButton();
             this.rbLineal = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCantidad = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -42,6 +43,7 @@ namespace Numeros_aleatorios
             this.btnCalcular = new System.Windows.Forms.Button();
             this.modulo = new System.Windows.Forms.TextBox();
             this.constanteMultiplicativa = new System.Windows.Forms.TextBox();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.constanteAditiva = new System.Windows.Forms.TextBox();
             this.enteroG = new System.Windows.Forms.TextBox();
             this.enteroK = new System.Windows.Forms.TextBox();
@@ -94,6 +96,7 @@ namespace Numeros_aleatorios
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblCantidad);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -103,17 +106,28 @@ namespace Numeros_aleatorios
             this.groupBox1.Controls.Add(this.btnCalcular);
             this.groupBox1.Controls.Add(this.modulo);
             this.groupBox1.Controls.Add(this.constanteMultiplicativa);
+            this.groupBox1.Controls.Add(this.txtCantidad);
             this.groupBox1.Controls.Add(this.constanteAditiva);
             this.groupBox1.Controls.Add(this.enteroG);
             this.groupBox1.Controls.Add(this.enteroK);
             this.groupBox1.Controls.Add(this.semilla);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(12, 204);
+            this.groupBox1.Location = new System.Drawing.Point(10, 204);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(755, 134);
+            this.groupBox1.Size = new System.Drawing.Size(755, 174);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "2. Ingrese los valores:";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Location = new System.Drawing.Point(186, 119);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(145, 21);
+            this.lblCantidad.TabIndex = 4;
+            this.lblCantidad.Text = "Cantidad a generar:";
             // 
             // label6
             // 
@@ -171,7 +185,7 @@ namespace Numeros_aleatorios
             // 
             // btnCalcular
             // 
-            this.btnCalcular.Location = new System.Drawing.Point(330, 95);
+            this.btnCalcular.Location = new System.Drawing.Point(443, 116);
             this.btnCalcular.Name = "btnCalcular";
             this.btnCalcular.Size = new System.Drawing.Size(118, 27);
             this.btnCalcular.TabIndex = 1;
@@ -196,6 +210,14 @@ namespace Numeros_aleatorios
             this.constanteMultiplicativa.Size = new System.Drawing.Size(100, 29);
             this.constanteMultiplicativa.TabIndex = 0;
             this.constanteMultiplicativa.KeyDown += new System.Windows.Forms.KeyEventHandler(this.constanteMultiplicativa_KeyDown);
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(337, 115);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(100, 29);
+            this.txtCantidad.TabIndex = 0;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             // 
             // constanteAditiva
             // 
@@ -238,7 +260,7 @@ namespace Numeros_aleatorios
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1364, 71);
+            this.panel1.Size = new System.Drawing.Size(1347, 71);
             this.panel1.TabIndex = 2;
             // 
             // lblTitulo
@@ -257,7 +279,7 @@ namespace Numeros_aleatorios
             this.gbResultados.Controls.Add(this.grdResultados);
             this.gbResultados.Controls.Add(this.btnMostrar);
             this.gbResultados.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.gbResultados.Location = new System.Drawing.Point(12, 344);
+            this.gbResultados.Location = new System.Drawing.Point(12, 384);
             this.gbResultados.Name = "gbResultados";
             this.gbResultados.Size = new System.Drawing.Size(755, 442);
             this.gbResultados.TabIndex = 3;
@@ -269,7 +291,7 @@ namespace Numeros_aleatorios
             this.grdResultados.AllowUserToAddRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Location = new System.Drawing.Point(280, 31);
+            this.grdResultados.Location = new System.Drawing.Point(275, 31);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
@@ -279,7 +301,7 @@ namespace Numeros_aleatorios
             // 
             // btnMostrar
             // 
-            this.btnMostrar.Location = new System.Drawing.Point(515, 31);
+            this.btnMostrar.Location = new System.Drawing.Point(510, 31);
             this.btnMostrar.Name = "btnMostrar";
             this.btnMostrar.Size = new System.Drawing.Size(118, 27);
             this.btnMostrar.TabIndex = 1;
@@ -293,7 +315,7 @@ namespace Numeros_aleatorios
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1381, 711);
+            this.ClientSize = new System.Drawing.Size(1364, 749);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
@@ -338,6 +360,8 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.DataGridView grdResultados;
         private System.Windows.Forms.Button btnMostrar;
+        private System.Windows.Forms.Label lblCantidad;
+        private System.Windows.Forms.TextBox txtCantidad;
     }
 }
 
