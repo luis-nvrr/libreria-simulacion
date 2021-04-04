@@ -273,7 +273,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnJi.TabIndex = 6;
             this.btnJi.Text = "Prueba de Ji2";
             this.btnJi.UseVisualStyleBackColor = true;
-            this.btnJi.Click += new System.EventHandler(this.btnMostrar_Click);
+            this.btnJi.Click += new System.EventHandler(this.btnJi_Click);
             // 
             // btnMostrar
             // 

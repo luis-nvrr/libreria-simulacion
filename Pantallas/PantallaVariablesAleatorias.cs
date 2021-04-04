@@ -1,5 +1,6 @@
 ﻿using Numeros_aleatorios.grafico_excel;
 using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
+using Numeros_aleatorios.Pantallas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -101,9 +102,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generarIntervalosUniforme(a,b);
             contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
             generadorDistribucion = new GeneradorUniformeAB(dataTable, generadorLenguaje, truncador, a, b);
-            dataTable = generadorDistribucion.generarSerie(cantidadValores, contador); 
+            generadorDistribucion.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
             frecuenciasObservadas = contador.obtenerFrecuencias();
+
         }
 
         private void generarIntervalosUniforme(float a, float b)
@@ -114,6 +116,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             finIntervalos = generadorIntervalos.obtenerFinIntervalos();
 
             //MessageBox.Show(generadorIntervalos.mostrarIntervalos());
+        }
+
+        private void probarUniforme()
+        {
+            ProbadorUniforme probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
+            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
+            pantallaPrueba.probador = probador;
+            pantallaPrueba.Show();
         }
 
         private void generarExponencial()
@@ -303,6 +313,31 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void rbPoisson_CheckedChanged(object sender, EventArgs e)
         {
             manejarSeleccionDistribucion();
+        }
+
+        private void btnJi_Click(object sender, EventArgs e)
+        {
+            if (rbUniforme.Checked)
+            {
+                probarUniforme();
+                return;
+            }
+            if (rbNormalBoxMuller.Checked)
+            {
+                return;
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                return;
+            }
+            if (rbExponencial.Checked)
+            {
+                return;
+            }
+            if (rbPoisson.Checked)
+            {
+                return;
+            }
         }
     }
 }
