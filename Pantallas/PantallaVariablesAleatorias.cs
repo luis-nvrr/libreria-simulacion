@@ -108,6 +108,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorDistribucion.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
             frecuenciasObservadas = contador.obtenerFrecuencias();
+
+            probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
+            probador.probar();
         }
 
         private void generarIntervalosUniforme(float a, float b)
@@ -116,13 +119,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorIntervalos.generarIntervalos(cantidadIntervalos, a, b);
             inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
             finIntervalos = generadorIntervalos.obtenerFinIntervalos();
-
-            //MessageBox.Show(generadorIntervalos.mostrarIntervalos());
         }
 
         private void probarUniforme()
         {
-            probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
             PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
             pantallaPrueba.probador = probador;
             pantallaPrueba.Show();
@@ -139,7 +139,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // TODO generar intervalos
 
             generadorDistribucion = new GeneradorExponencialNegativa(dataTable, generadorLenguaje, truncador, lambda);
-            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
         }
 
@@ -169,10 +169,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             if (desviacion < 0 || media < 0) { return; } //restriccion
 
-            // TODO generar intervalos
-
             generadorDistribucion = new GeneradorNormalBoxMuller(dataTable, generadorLenguaje, truncador, desviacion, media);
-            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
 
             float menor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMenor();
@@ -182,6 +180,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             MessageBox.Show(mayor.ToString());
 
             probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
+            probador.probar();
+            this.frecuenciasObservadas = ((ProbadorNormal)probador).getFrecuenciasObservadas();
+            this.inicioIntervalos = ((ProbadorNormal)probador).getInicioIntervalos();
+            this.finIntervalos = ((ProbadorNormal)probador).getFinIntervalos();
         }
 
 
@@ -199,10 +201,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             if (desviacion < 0 || media < 0) { return; } //restriccion
 
-            // TODO generar intervalos
-
             generadorDistribucion = new GeneradorNormalConvolucion(dataTable, generadorLenguaje, truncador, desviacion, media);
-            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
 
             float menor = ((GeneradorNormalConvolucion)generadorDistribucion).getMenor();
@@ -212,6 +212,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             MessageBox.Show(mayor.ToString());
 
             probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
+            probador.probar();
+            this.frecuenciasObservadas = ((ProbadorNormal)probador).getFrecuenciasObservadas();
+            this.inicioIntervalos = ((ProbadorNormal)probador).getInicioIntervalos();
+            this.finIntervalos = ((ProbadorNormal)probador).getFinIntervalos();
         }
 
         private void probarNormalConvolucion()
@@ -232,7 +236,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // TODO generar intervalos
 
             generadorDistribucion = new GeneradorPoisson(dataTable, generadorLenguaje, truncador, lambda);
-            dataTable = generadorDistribucion.generarSerie(cantidadValores);
+            generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
         }
 

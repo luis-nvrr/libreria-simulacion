@@ -70,10 +70,10 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel3.Controls.Add(this.panel6);
             this.panel3.Controls.Add(this.panel5);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(191, 0);
+            this.panel3.Location = new System.Drawing.Point(228, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(566, 520);
+            this.panel3.Size = new System.Drawing.Size(529, 520);
             this.panel3.TabIndex = 2;
             // 
             // panel9
@@ -82,7 +82,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(45, 68);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(476, 296);
+            this.panel9.Size = new System.Drawing.Size(439, 296);
             this.panel9.TabIndex = 5;
             // 
             // pictureBox1
@@ -92,7 +92,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(476, 296);
+            this.pictureBox1.Size = new System.Drawing.Size(439, 296);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -108,7 +108,7 @@ namespace Numeros_aleatorios.grafico_excel
             // panel7
             // 
             this.panel7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel7.Location = new System.Drawing.Point(521, 68);
+            this.panel7.Location = new System.Drawing.Point(484, 68);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(45, 296);
             this.panel7.TabIndex = 3;
@@ -118,7 +118,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(0, 364);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(566, 156);
+            this.panel6.Size = new System.Drawing.Size(529, 156);
             this.panel6.TabIndex = 2;
             // 
             // panel5
@@ -126,7 +126,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(566, 68);
+            this.panel5.Size = new System.Drawing.Size(529, 68);
             this.panel5.TabIndex = 1;
             // 
             // panel1
@@ -137,7 +137,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(191, 520);
+            this.panel1.Size = new System.Drawing.Size(228, 520);
             this.panel1.TabIndex = 1;
             // 
             // grdFrecuencias
@@ -177,7 +177,7 @@ namespace Numeros_aleatorios.grafico_excel
             this.grdFrecuencias.RowHeadersVisible = false;
             this.grdFrecuencias.RowTemplate.Height = 25;
             this.grdFrecuencias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdFrecuencias.Size = new System.Drawing.Size(164, 458);
+            this.grdFrecuencias.Size = new System.Drawing.Size(220, 458);
             this.grdFrecuencias.TabIndex = 4;
             // 
             // panel4

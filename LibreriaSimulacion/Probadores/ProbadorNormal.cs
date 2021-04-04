@@ -152,5 +152,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
         {
             return valorCritico;
         }
+
+        public int[] getFrecuenciasObservadas()
+        {
+            return this.frecuenciasObservadas;
+        }
+
+        public float[] getInicioIntervalos()
+        {
+            return this.inicioIntervalos;
+        }
+
+        public float[] getFinIntervalos()
+        {
+            return this.finIntervalos;
+        }
     }
 }
