@@ -44,7 +44,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtB = new System.Windows.Forms.TextBox();
             this.txtA = new System.Windows.Forms.TextBox();
             this.gbResultados = new System.Windows.Forms.GroupBox();
-            this.btnKolgomorov = new System.Windows.Forms.Button();
             this.btnJi = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
@@ -74,6 +73,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label9 = new System.Windows.Forms.Label();
             this.txtMediaPoisson = new System.Windows.Forms.TextBox();
             this.txtLambdaPoisson = new System.Windows.Forms.TextBox();
+            this.btnCopiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -243,7 +243,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // 
             // gbResultados
             // 
-            this.gbResultados.Controls.Add(this.btnKolgomorov);
+            this.gbResultados.Controls.Add(this.btnCopiar);
             this.gbResultados.Controls.Add(this.btnJi);
             this.gbResultados.Controls.Add(this.btnMostrar);
             this.gbResultados.Controls.Add(this.grdResultados);
@@ -254,16 +254,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbResultados.TabIndex = 11;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "4. Resultados";
-            // 
-            // btnKolgomorov
-            // 
-            this.btnKolgomorov.Location = new System.Drawing.Point(331, 126);
-            this.btnKolgomorov.Name = "btnKolgomorov";
-            this.btnKolgomorov.Size = new System.Drawing.Size(172, 31);
-            this.btnKolgomorov.TabIndex = 6;
-            this.btnKolgomorov.Text = "Kolgomorov-Smirnov";
-            this.btnKolgomorov.UseVisualStyleBackColor = true;
-            this.btnKolgomorov.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // btnJi
             // 
@@ -536,6 +526,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtLambdaPoisson.Size = new System.Drawing.Size(100, 29);
             this.txtLambdaPoisson.TabIndex = 13;
             // 
+            // btnCopiar
+            // 
+            this.btnCopiar.Location = new System.Drawing.Point(331, 126);
+            this.btnCopiar.Name = "btnCopiar";
+            this.btnCopiar.Size = new System.Drawing.Size(172, 31);
+            this.btnCopiar.TabIndex = 7;
+            this.btnCopiar.Text = "Copiar";
+            this.btnCopiar.UseVisualStyleBackColor = true;
+            this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+            // 
             // PantallaVariablesAleatorias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -601,7 +601,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.TextBox txtCantidadValores;
         private System.Windows.Forms.Button btnCalcular;
         private System.Windows.Forms.GroupBox gbGrafico;
-        private System.Windows.Forms.Button btnKolgomorov;
         private System.Windows.Forms.Button btnJi;
         private System.Windows.Forms.GroupBox gbExponencial;
         private System.Windows.Forms.Label label3;
@@ -624,5 +623,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtMediaPoisson;
         private System.Windows.Forms.TextBox txtLambdaPoisson;
+        private System.Windows.Forms.Button btnCopiar;
     }
 }

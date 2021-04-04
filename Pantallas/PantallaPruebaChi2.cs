@@ -14,6 +14,7 @@ namespace Numeros_aleatorios.Pantallas
 {
     partial class PantallaPruebaChi2 : Form
     {
+        private DataTable dataTable;
 
         public IProbador probador;
         public PantallaPruebaChi2()
@@ -29,7 +30,28 @@ namespace Numeros_aleatorios.Pantallas
 
             txtValorCritico.Text = probador.getValorCritico().ToString();
             txtEstadisticoPruebaAcumulado.Text = probador.obtenerTotalAcumuladoEstadisticoPrueba().ToString();
-            grdResultados.DataSource = probador.obtenerTablaResultados();
+            dataTable = probador.obtenerTablaResultados();
+            grdResultados.DataSource = dataTable;
+        }
+
+        private String tablaToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    stringBuilder.Append(row[i].ToString()).Append("\t");
+                }
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
+        }
+
+        private void btnCopiar_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tablaToString());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -383,5 +383,22 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 return;
             }
         }
+
+        private String tablaToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString());
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
+        }
+
+        private void btnCopiar_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tablaToString());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

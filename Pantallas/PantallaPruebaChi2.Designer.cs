@@ -38,6 +38,7 @@ namespace Numeros_aleatorios.Pantallas
             this.txtValorCritico = new System.Windows.Forms.TextBox();
             this.lblEstadisticoPruebaAcumulado = new System.Windows.Forms.Label();
             this.lblValorCritico = new System.Windows.Forms.Label();
+            this.btnCopiar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,6 +82,7 @@ namespace Numeros_aleatorios.Pantallas
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnCopiar);
             this.groupBox1.Controls.Add(this.lblResultado);
             this.groupBox1.Controls.Add(this.txtEstadisticoPruebaAcumulado);
             this.groupBox1.Controls.Add(this.txtValorCritico);
@@ -135,6 +137,16 @@ namespace Numeros_aleatorios.Pantallas
             this.lblValorCritico.TabIndex = 10;
             this.lblValorCritico.Text = "Valor critico:";
             // 
+            // btnCopiar
+            // 
+            this.btnCopiar.Location = new System.Drawing.Point(922, 94);
+            this.btnCopiar.Name = "btnCopiar";
+            this.btnCopiar.Size = new System.Drawing.Size(172, 31);
+            this.btnCopiar.TabIndex = 13;
+            this.btnCopiar.Text = "Copiar";
+            this.btnCopiar.UseVisualStyleBackColor = true;
+            this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+            // 
             // PantallaPruebaChi2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -167,5 +179,6 @@ namespace Numeros_aleatorios.Pantallas
         private System.Windows.Forms.TextBox txtValorCritico;
         private System.Windows.Forms.Label lblEstadisticoPruebaAcumulado;
         private System.Windows.Forms.Label lblValorCritico;
+        private System.Windows.Forms.Button btnCopiar;
     }
 }

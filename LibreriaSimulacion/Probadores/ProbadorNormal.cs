@@ -34,18 +34,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             this.truncador = truncador;
             this.resultado = new DataTable();
 
-            crearTabla();
+            crearTabla(resultado);
         }
 
-        private void crearTabla()
+        private void crearTabla(DataTable tabla)
         {
-            resultado.Columns.Add("intervalo");
-            resultado.Columns.Add("MC");
-            resultado.Columns.Add("FO");
-            resultado.Columns.Add("P(x)");
-            resultado.Columns.Add("FE");
-            resultado.Columns.Add("C");
-            resultado.Columns.Add("C(AC)");
+            tabla.Columns.Add("intervalo");
+            tabla.Columns.Add("MC");
+            tabla.Columns.Add("FO");
+            tabla.Columns.Add("P(x)");
+            tabla.Columns.Add("FE");
+            tabla.Columns.Add("C");
+            tabla.Columns.Add("C(AC)");
         }
 
         public void probar()
@@ -131,19 +131,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             return valorCritico;
         }
 
-        public int[] getFrecuenciasObservadas()
+        private void reestructurarTabla()
         {
-            return this.frecuenciasObservadas;
+            DataTable nuevaTabla = new DataTable();
+            crearTabla(nuevaTabla);
+
+            float esperadaTablaVieja;
+            float esperadaAcumulada = 0;
+
+            for (int i = 0; i < cantidadIntervalos; i++)
+            {
+                esperadaTablaVieja = float.Parse(resultado.Rows[i][4].ToString());
+                esperadaAcumulada += esperadaTablaVieja;
+
+            }
         }
 
-        public float[] getInicioIntervalos()
-        {
-            return this.inicioIntervalos;
-        }
-
-        public float[] getFinIntervalos()
-        {
-            return this.finIntervalos;
-        }
     }
 }
