@@ -33,11 +33,11 @@ namespace Numeros_aleatorios.Pantallas
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grdResultados = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblValorCritico = new System.Windows.Forms.Label();
-            this.lblEstadisticoPruebaAcumulado = new System.Windows.Forms.Label();
-            this.txtValorCritico = new System.Windows.Forms.TextBox();
-            this.txtEstadisticoPruebaAcumulado = new System.Windows.Forms.TextBox();
             this.lblResultado = new System.Windows.Forms.Label();
+            this.txtEstadisticoPruebaAcumulado = new System.Windows.Forms.TextBox();
+            this.txtValorCritico = new System.Windows.Forms.TextBox();
+            this.lblEstadisticoPruebaAcumulado = new System.Windows.Forms.Label();
+            this.lblValorCritico = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -93,14 +93,27 @@ namespace Numeros_aleatorios.Pantallas
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resultados";
             // 
-            // lblValorCritico
+            // lblResultado
             // 
-            this.lblValorCritico.AutoSize = true;
-            this.lblValorCritico.Location = new System.Drawing.Point(289, 25);
-            this.lblValorCritico.Name = "lblValorCritico";
-            this.lblValorCritico.Size = new System.Drawing.Size(95, 21);
-            this.lblValorCritico.TabIndex = 10;
-            this.lblValorCritico.Text = "Valor critico:";
+            this.lblResultado.AutoSize = true;
+            this.lblResultado.Location = new System.Drawing.Point(549, 39);
+            this.lblResultado.Name = "lblResultado";
+            this.lblResultado.Size = new System.Drawing.Size(0, 21);
+            this.lblResultado.TabIndex = 12;
+            // 
+            // txtEstadisticoPruebaAcumulado
+            // 
+            this.txtEstadisticoPruebaAcumulado.Location = new System.Drawing.Point(390, 54);
+            this.txtEstadisticoPruebaAcumulado.Name = "txtEstadisticoPruebaAcumulado";
+            this.txtEstadisticoPruebaAcumulado.Size = new System.Drawing.Size(100, 29);
+            this.txtEstadisticoPruebaAcumulado.TabIndex = 11;
+            // 
+            // txtValorCritico
+            // 
+            this.txtValorCritico.Location = new System.Drawing.Point(390, 22);
+            this.txtValorCritico.Name = "txtValorCritico";
+            this.txtValorCritico.Size = new System.Drawing.Size(100, 29);
+            this.txtValorCritico.TabIndex = 11;
             // 
             // lblEstadisticoPruebaAcumulado
             // 
@@ -111,27 +124,14 @@ namespace Numeros_aleatorios.Pantallas
             this.lblEstadisticoPruebaAcumulado.TabIndex = 10;
             this.lblEstadisticoPruebaAcumulado.Text = "Estadistico de prueba acumulado:";
             // 
-            // txtValorCritico
+            // lblValorCritico
             // 
-            this.txtValorCritico.Location = new System.Drawing.Point(390, 22);
-            this.txtValorCritico.Name = "txtValorCritico";
-            this.txtValorCritico.Size = new System.Drawing.Size(100, 29);
-            this.txtValorCritico.TabIndex = 11;
-            // 
-            // txtEstadisticoPruebaAcumulado
-            // 
-            this.txtEstadisticoPruebaAcumulado.Location = new System.Drawing.Point(390, 54);
-            this.txtEstadisticoPruebaAcumulado.Name = "txtEstadisticoPruebaAcumulado";
-            this.txtEstadisticoPruebaAcumulado.Size = new System.Drawing.Size(100, 29);
-            this.txtEstadisticoPruebaAcumulado.TabIndex = 11;
-            // 
-            // lblResultado
-            // 
-            this.lblResultado.AutoSize = true;
-            this.lblResultado.Location = new System.Drawing.Point(549, 39);
-            this.lblResultado.Name = "lblResultado";
-            this.lblResultado.Size = new System.Drawing.Size(0, 21);
-            this.lblResultado.TabIndex = 12;
+            this.lblValorCritico.AutoSize = true;
+            this.lblValorCritico.Location = new System.Drawing.Point(289, 25);
+            this.lblValorCritico.Name = "lblValorCritico";
+            this.lblValorCritico.Size = new System.Drawing.Size(95, 21);
+            this.lblValorCritico.TabIndex = 10;
+            this.lblValorCritico.Text = "Valor critico:";
             // 
             // PantallaPruebaChi2
             // 
@@ -142,6 +142,7 @@ namespace Numeros_aleatorios.Pantallas
             this.Controls.Add(this.panel1);
             this.Name = "PantallaPruebaChi2";
             this.Text = "PantallaPruebaChi2";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PantallaPruebaChi2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

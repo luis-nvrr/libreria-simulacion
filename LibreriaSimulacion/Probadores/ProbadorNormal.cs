@@ -96,7 +96,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
                 row[2] = frecuenciasObservadas[i];
 
-                funcionDensidad = (1 / (desviacion * Math.Sqrt(2 * Math.PI))) * Math.Exp((-0.5f) * Math.Pow((marcaClase - media) / desviacion, 2));
+                funcionDensidad = (1.0f / (desviacion * Math.Sqrt(2 * Math.PI))) * Math.Exp((-0.5f) * Math.Pow((marcaClase - media) / desviacion, 2));
                 probabilidad = funcionDensidad * (finIntervalos[i] - inicioIntervalos[i]);
                 row[3] = truncador.truncar(probabilidad);  // probabilidad
 

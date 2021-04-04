@@ -554,6 +554,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.Controls.Add(this.panel1);
             this.Name = "PantallaVariablesAleatorias";
             this.Text = "PantallaPruebaGenerador";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PantallaPruebaGenerador_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).EndInit();
             this.panel1.ResumeLayout(false);
