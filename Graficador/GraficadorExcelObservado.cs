@@ -74,7 +74,7 @@ namespace Numeros_aleatorios.grafico_excel
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
 
                 dataRow = dataTable.NewRow();
-                dataRow[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                if (inicioIntervalos != null) { dataRow[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]"; } 
                 dataRow[1] = frecuenciaObservada[i];
                 dataTable.Rows.Add(dataRow);
             }
