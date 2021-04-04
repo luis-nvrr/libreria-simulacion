@@ -18,21 +18,19 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
         private DataTable resultado;
         private Truncador truncador;
         private float valorCritico;
-        private float menor;
-        private float mayor;
         private double media;
         private double desviacion;
 
         public ProbadorNormal(Truncador truncador, DataTable numeros,
-            double media, double desviacion,
-            int cantidadIntervalos, float menor, float mayor)
+            double media, double desviacion, float[] inicioIntervalos, float[] finIntervalos, int[] frecuenciasObservadas)
         {
             this.numeros = numeros;
             this.media = media;
             this.desviacion = desviacion;
-            this.cantidadIntervalos = cantidadIntervalos;
-            this.menor = menor;
-            this.mayor = mayor;
+            this.cantidadIntervalos = inicioIntervalos.Length;
+            this.inicioIntervalos = inicioIntervalos;
+            this.finIntervalos = finIntervalos;
+            this.frecuenciasObservadas = frecuenciasObservadas;
             this.truncador = truncador;
             this.resultado = new DataTable();
 
@@ -52,27 +50,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public void probar()
         {
-            obtenerIntervalos();
-            obtenerFrecuenciasObservadas();
             construirTabla();
-        }
-
-
-
-        private void obtenerIntervalos()
-        {
-            GeneradorIntervalosNormal generadorIntervalos = new GeneradorIntervalosNormal(truncador);
-            generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
-            this.inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
-            this.finIntervalos = generadorIntervalos.obtenerFinIntervalos();
-
-        }
-
-        private void obtenerFrecuenciasObservadas()
-        {
-            ContadorFrecuenciaObservada contadorFrecuencias = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            contadorFrecuencias.contarFrecuenciaSerie(numeros);
-            frecuenciasObservadas = contadorFrecuencias.obtenerFrecuencias();
         }
 
         private void construirTabla()

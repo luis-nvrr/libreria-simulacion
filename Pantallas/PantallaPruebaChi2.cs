@@ -23,6 +23,7 @@ namespace Numeros_aleatorios.Pantallas
 
         private void PantallaPruebaChi2_Load(object sender, EventArgs e)
         {
+            probador.probar();
             if (probador.esAceptado()) { lblResultado.Text = "No se rechaza la hipotesis nula"; }
             else { lblResultado.Text = "Se rechaza la hipotesis nula"; }
 

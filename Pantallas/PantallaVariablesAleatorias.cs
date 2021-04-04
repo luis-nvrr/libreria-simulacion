@@ -1,5 +1,6 @@
 ﻿using Numeros_aleatorios.grafico_excel;
 using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
+using Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos;
 using Numeros_aleatorios.LibreriaSimulacion.Probadores;
 using Numeros_aleatorios.Pantallas;
 using System;
@@ -110,7 +111,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             frecuenciasObservadas = contador.obtenerFrecuencias();
 
             probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
-            probador.probar();
         }
 
         private void generarIntervalosUniforme(float a, float b)
@@ -176,16 +176,26 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             float menor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMenor();
             float mayor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMayor();
 
-            MessageBox.Show(menor.ToString());
-            MessageBox.Show(mayor.ToString());
+            generarIntervalosNormal(menor, mayor);
+            obtenerFrecuenciasObservadasNormal(dataTable);
 
-            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
-            probador.probar();
-            this.frecuenciasObservadas = ((ProbadorNormal)probador).getFrecuenciasObservadas();
-            this.inicioIntervalos = ((ProbadorNormal)probador).getInicioIntervalos();
-            this.finIntervalos = ((ProbadorNormal)probador).getFinIntervalos();
+            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, inicioIntervalos, finIntervalos, frecuenciasObservadas);
         }
 
+        private void generarIntervalosNormal(float menor, float mayor)
+        {
+            GeneradorIntervalosNormal generadorIntervalos = new GeneradorIntervalosNormal(truncador);
+            generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
+            this.inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
+            this.finIntervalos = generadorIntervalos.obtenerFinIntervalos();
+        }
+
+        private void obtenerFrecuenciasObservadasNormal(DataTable numeros)
+        {
+            ContadorFrecuenciaObservada contadorFrecuencias = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
+            contadorFrecuencias.contarFrecuenciaSerie(numeros);
+            frecuenciasObservadas = contadorFrecuencias.obtenerFrecuencias();
+        }
 
         private void probarNormalBoxMuller()
         {
@@ -208,14 +218,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             float menor = ((GeneradorNormalConvolucion)generadorDistribucion).getMenor();
             float mayor = ((GeneradorNormalConvolucion)generadorDistribucion).getMayor();
 
-            MessageBox.Show(menor.ToString());
-            MessageBox.Show(mayor.ToString());
+            generarIntervalosNormal(menor, mayor);
+            obtenerFrecuenciasObservadasNormal(dataTable);
 
-            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
-            probador.probar();
-            this.frecuenciasObservadas = ((ProbadorNormal)probador).getFrecuenciasObservadas();
-            this.inicioIntervalos = ((ProbadorNormal)probador).getInicioIntervalos();
-            this.finIntervalos = ((ProbadorNormal)probador).getFinIntervalos();
+            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, inicioIntervalos, finIntervalos, frecuenciasObservadas);
         }
 
         private void probarNormalConvolucion()
