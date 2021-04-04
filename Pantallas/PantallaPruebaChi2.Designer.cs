@@ -50,7 +50,7 @@ namespace Numeros_aleatorios.Pantallas
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1028, 71);
+            this.panel1.Size = new System.Drawing.Size(1198, 71);
             this.panel1.TabIndex = 8;
             // 
             // lblTitulo
@@ -67,14 +67,16 @@ namespace Numeros_aleatorios.Pantallas
             // grdResultados
             // 
             this.grdResultados.AllowUserToAddRows = false;
+            this.grdResultados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.grdResultados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Location = new System.Drawing.Point(181, 94);
+            this.grdResultados.Location = new System.Drawing.Point(279, 94);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(596, 292);
+            this.grdResultados.Size = new System.Drawing.Size(637, 375);
             this.grdResultados.TabIndex = 9;
             // 
             // groupBox1
@@ -88,7 +90,7 @@ namespace Numeros_aleatorios.Pantallas
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(42, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(874, 412);
+            this.groupBox1.Size = new System.Drawing.Size(1111, 506);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Resultados";
@@ -137,7 +139,7 @@ namespace Numeros_aleatorios.Pantallas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 567);
+            this.ClientSize = new System.Drawing.Size(1198, 633);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);
             this.Name = "PantallaPruebaChi2";

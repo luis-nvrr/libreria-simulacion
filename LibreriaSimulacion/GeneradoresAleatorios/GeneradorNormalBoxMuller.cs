@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 {
@@ -42,7 +43,9 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             if (esNecesarioGenerar)
             {
                 aleatorio01_1 = generadorLenguaje.siguienteAleatorio();
+                if(aleatorio01_1 == 0) { aleatorio01_1 = 0.0001f;  }
                 aleatorio01_2 = generadorLenguaje.siguienteAleatorio();
+                if(aleatorio01_2 == 0) { aleatorio01_2 = 0.0001f;  }
 
                 return truncador.truncar((Math.Sqrt(-2 * Math.Log(aleatorio01_1)) * Math.Cos(2 * Math.PI * aleatorio01_2)) * desviacion + media);
             }
@@ -62,6 +65,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             {
                 if(i % 2 == 0) { esNecesarioGenerar = true; }
                 aleatorio = siguienteAleatorio();
+
+                if (double.IsInfinity(aleatorio)){ MessageBox.Show("error " + i); }
 
                 if( i == 0) { inicializarMenorMayor(aleatorio); }
                 actualizarMayor(aleatorio);
