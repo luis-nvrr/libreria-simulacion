@@ -24,14 +24,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
         private Boolean esNecesarioGenerar;
 
+        private float menor;
+        private float mayor;
+
         public GeneradorNormalBoxMuller(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double desviacion, double media)
         {
             this.truncador = truncador;
             this.desviacion = desviacion;
             this.media = media;
-
             this.generadorLenguaje = generadorLenguaje;
-
             this.dataTable = tabla;
         }
 
@@ -61,6 +62,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             {
                 if(i % 2 == 0) { esNecesarioGenerar = true; }
                 aleatorio = siguienteAleatorio();
+
+                if( i == 0) { inicializarMenorMayor(aleatorio); }
+                actualizarMayor(aleatorio);
+                actualizarMenor(aleatorio);
+
                 dataRow = dataTable.NewRow();
                 dataRow[0] = i+1;
                 dataRow[1] = aleatorio;
@@ -69,6 +75,38 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
             }
             return dataTable;
+        }
+
+        private void inicializarMenorMayor(float numero)
+        {
+            menor = numero;
+            mayor = numero;
+        }
+        
+        private void actualizarMenor(float numero)
+        {
+            if(numero < menor)
+            {
+                menor = numero;
+            }
+        }
+
+        private void actualizarMayor(float numero)
+        {
+            if( numero > mayor)
+            {
+                mayor =numero;
+            }
+        }
+
+        public float getMayor()
+        {
+            return mayor;
+        }
+
+        public float getMenor()
+        {
+            return menor;
         }
     }
 }

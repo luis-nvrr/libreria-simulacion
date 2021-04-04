@@ -1,4 +1,5 @@
 ﻿using Numeros_aleatorios.LibreriaSimulacion;
+using Numeros_aleatorios.LibreriaSimulacion.Probadores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace Numeros_aleatorios.Pantallas
     partial class PantallaPruebaChi2 : Form
     {
 
-        public ProbadorUniforme probador;
+        public IProbador probador;
         public PantallaPruebaChi2()
         {
             InitializeComponent();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
         }
 
+        public void contarFrecuenciaSerie(DataTable numeros)
+        {
+            for (int i = 0; i < numeros.Rows.Count; i++)
+            {
+                float aleatorio = float.Parse(numeros.Rows[i][1].ToString());
+                contarNumero(aleatorio);
+            }
+        }
+
+        
         public int[] obtenerFrecuencias()
         {
             return frecuenciaObservada;
@@ -50,5 +61,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             return res;
         }
+
     }
 }

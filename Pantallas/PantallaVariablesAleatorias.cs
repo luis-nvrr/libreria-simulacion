@@ -1,5 +1,6 @@
 ﻿using Numeros_aleatorios.grafico_excel;
 using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
+using Numeros_aleatorios.LibreriaSimulacion.Probadores;
 using Numeros_aleatorios.Pantallas;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         int[] frecuenciasObservadas;
 
         DataTable dataTable;
+
+        IProbador probador;
 
         public PantallaVariablesAleatorias()
         {
@@ -105,7 +108,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorDistribucion.generarSerie(cantidadValores, contador); 
             grdResultados.DataSource = dataTable;
             frecuenciasObservadas = contador.obtenerFrecuencias();
-
         }
 
         private void generarIntervalosUniforme(float a, float b)
@@ -120,7 +122,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void probarUniforme()
         {
-            ProbadorUniforme probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
+            probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
             PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
             pantallaPrueba.probador = probador;
             pantallaPrueba.Show();
@@ -172,8 +174,23 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorDistribucion = new GeneradorNormalBoxMuller(dataTable, generadorLenguaje, truncador, desviacion, media);
             dataTable = generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
+
+            float menor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMenor();
+            float mayor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMayor();
+
+            MessageBox.Show(menor.ToString());
+            MessageBox.Show(mayor.ToString());
+
+            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
         }
 
+
+        private void probarNormalBoxMuller()
+        {
+            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
+            pantallaPrueba.probador = probador;
+            pantallaPrueba.Show();
+        }
 
         private void generarNormalConvolucion()
         {
@@ -187,6 +204,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorDistribucion = new GeneradorNormalConvolucion(dataTable, generadorLenguaje, truncador, desviacion, media);
             dataTable = generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
+
+            float menor = ((GeneradorNormalConvolucion)generadorDistribucion).getMenor();
+            float mayor = ((GeneradorNormalConvolucion)generadorDistribucion).getMayor();
+
+            MessageBox.Show(menor.ToString());
+            MessageBox.Show(mayor.ToString());
+
+            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, cantidadIntervalos, menor, mayor);
+        }
+
+        private void probarNormalConvolucion()
+        {
+            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
+            pantallaPrueba.probador = probador;
+            pantallaPrueba.Show();
         }
 
         private void generarPoisson()
@@ -324,10 +356,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbNormalBoxMuller.Checked)
             {
+                probarNormalBoxMuller();
                 return;
             }
             if (rbNormalConvolucion.Checked)
             {
+                probarNormalConvolucion();
                 return;
             }
             if (rbExponencial.Checked)

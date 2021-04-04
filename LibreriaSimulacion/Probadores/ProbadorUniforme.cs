@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Numeros_aleatorios.LibreriaSimulacion.Probadores;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Numeros_aleatorios.LibreriaSimulacion
 {
-    class ProbadorUniforme
+    class ProbadorUniforme: IProbador
     {
         private DataTable numeros;
         private float[] inicioIntervalos;
