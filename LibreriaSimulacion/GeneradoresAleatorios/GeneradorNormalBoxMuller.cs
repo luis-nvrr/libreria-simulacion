@@ -84,15 +84,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
         private void inicializarMenorMayor(float numero)
         {
-            menor = numero - 0.0001f;
-            mayor = numero + 0.0001f;
+            menor = (float)Math.Floor(numero);
+            mayor = (float)Math.Ceiling(numero);
         }
         
         private void actualizarMenor(float numero)
         {
             if(numero < menor)
             {
-                menor = numero - 0.0001f;
+                menor = (float)Math.Floor(numero);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         {
             if( numero > mayor)
             {
-                mayor = numero +0.0001f;
+                mayor = (float)Math.Ceiling(numero);
             }
         }
 

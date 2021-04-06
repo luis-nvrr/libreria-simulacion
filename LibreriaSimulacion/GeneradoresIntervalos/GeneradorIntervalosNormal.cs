@@ -26,7 +26,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos
             generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
             this.inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
             this.finIntervalos = generadorIntervalos.obtenerFinIntervalos();
-            MessageBox.Show(generadorIntervalos.mostrarIntervalos());
+            //MessageBox.Show(generadorIntervalos.mostrarIntervalos());
         }
 
         public float[] obtenerInicioIntervalos()

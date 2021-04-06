@@ -1,10 +1,12 @@
 ﻿using Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 {
@@ -14,7 +16,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
         private float[] inicioIntervalos;
         private float[] finIntervalos;
         private int[] frecuenciasObservadas;
-        private int cantidadIntervalos;
+        private float[] frecuenciasEsperadas;
+        private float[] probabilidades;
         private DataTable resultado;
         private Truncador truncador;
         private float valorCritico;
@@ -27,14 +30,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             this.numeros = numeros;
             this.media = media;
             this.desviacion = desviacion;
-            this.cantidadIntervalos = inicioIntervalos.Length;
             this.inicioIntervalos = inicioIntervalos;
             this.finIntervalos = finIntervalos;
             this.frecuenciasObservadas = frecuenciasObservadas;
             this.truncador = truncador;
-            this.resultado = new DataTable();
-
-            crearTabla(resultado);
         }
 
         private void crearTabla(DataTable tabla)
@@ -50,11 +49,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public void probar()
         {
-            construirTabla();
+            construirTablaInicial();
+            reestructurarTabla();
+            construirTablaFinal();
         }
 
-        private void construirTabla()
+        private void construirTablaInicial()
         {
+            this.resultado = new DataTable();
+            crearTabla(resultado);
             DataRow row;
             double estadisticoPrueba;
             double estadisticoPruebaAcumuladoAnterior = 0;
@@ -64,7 +67,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             float cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;
 
-            for (int i = 0; i < cantidadIntervalos; i++)
+            for (int i = 0; i < inicioIntervalos.Length; i++)
             {
                 row = resultado.NewRow();
                 row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
@@ -81,6 +84,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[4] = truncador.truncar(frecuenciaEsperada); // frecuenciaEsperada
 
+                // a partir de aqui no es necesario
                 estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
                 row[5] = truncador.truncar(estadisticoPrueba);
                 row[6] = truncador.truncar(estadisticoPruebaAcumuladoAnterior + estadisticoPrueba);
@@ -103,7 +107,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         private int calcularGradosLibertad()
         {
-            return cantidadIntervalos - 1;
+            return inicioIntervalos.Length - 1;
         }
 
         public bool esAceptado()
@@ -133,18 +137,105 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         private void reestructurarTabla()
         {
-            DataTable nuevaTabla = new DataTable();
-            crearTabla(nuevaTabla);
-
             float esperadaTablaVieja;
-            float esperadaAcumulada = 0;
+            double esperadaAcumulada = 0;
+            int observadaAcumulada = 0;
+            float probabilidadTablaVieja;
+            double probabilidadAcumulada = 0;
+            List<float> nuevoInicioIntervalos = new List<float>();
+            List<float> nuevoFinIntervalos = new List<float>();
+            List<int> nuevaFrecuenciaObservada = new List<int>();
+            List<float> nuevaFrecuenciaEsperada = new List<float>();
+            List<float> nuevaProbabilidad = new List<float>();
+            float nuevoInicioIntervalo = 0;
+            float nuevoFinIntervalo = 0;
 
-            for (int i = 0; i < cantidadIntervalos; i++)
+            for (int i = 0; i < inicioIntervalos.Length; i++)
             {
+                if (esperadaAcumulada == 0) { nuevoInicioIntervalo = inicioIntervalos[i]; }
                 esperadaTablaVieja = float.Parse(resultado.Rows[i][4].ToString());
                 esperadaAcumulada += esperadaTablaVieja;
+                probabilidadTablaVieja= float.Parse(resultado.Rows[i][3].ToString());
+                probabilidadAcumulada += probabilidadTablaVieja;
+                observadaAcumulada += frecuenciasObservadas[i];
 
+                if (esperadaAcumulada > 5) 
+                { 
+                    nuevoFinIntervalo = finIntervalos[i];
+              
+                    nuevoInicioIntervalos.Add(nuevoInicioIntervalo);
+                    nuevoFinIntervalos.Add(nuevoFinIntervalo);
+                    nuevaFrecuenciaObservada.Add(observadaAcumulada);
+                    nuevaFrecuenciaEsperada.Add(truncador.truncar(esperadaAcumulada));
+                    nuevaProbabilidad.Add(truncador.truncar(probabilidadAcumulada));
+
+                    probabilidadAcumulada = 0;
+                    esperadaAcumulada = 0;
+                    observadaAcumulada = 0;
+                }
             }
+
+            nuevoFinIntervalos[nuevoFinIntervalos.Count - 1] = finIntervalos[inicioIntervalos.Length - 1];
+            nuevaFrecuenciaObservada[nuevoFinIntervalos.Count - 1] += observadaAcumulada;
+            nuevaFrecuenciaEsperada[nuevoFinIntervalos.Count - 1] = truncador.truncar(esperadaAcumulada + nuevaFrecuenciaEsperada[nuevoFinIntervalos.Count - 1]);
+            nuevaProbabilidad[nuevoFinIntervalos.Count - 1] = truncador.truncar(nuevaProbabilidad[nuevoFinIntervalos.Count - 1] + probabilidadAcumulada);
+
+            this.inicioIntervalos = nuevoInicioIntervalos.ToArray();
+            this.finIntervalos = nuevoFinIntervalos.ToArray();
+            this.frecuenciasObservadas = nuevaFrecuenciaObservada.ToArray();
+            this.frecuenciasEsperadas = nuevaFrecuenciaEsperada.ToArray();
+            this.probabilidades = nuevaProbabilidad.ToArray();
+            //MessageBox.Show(mostrarNuevosIntervalos(nuevoInicioIntervalos, nuevoFinIntervalos));
+        }
+
+
+        private void arreglarUltimaFila()
+        {
+
+        }
+
+        private void construirTablaFinal()
+        {
+            this.resultado = new DataTable();
+            crearTabla(resultado);
+            DataRow row;
+            double estadisticoPrueba;
+            double estadisticoPruebaAcumuladoAnterior = 0;
+            float marcaClase;
+            float frecuenciaEsperada;
+
+            for (int i = 0; i < inicioIntervalos.Length; i++)
+            {
+                row = resultado.NewRow();
+                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+
+                marcaClase = truncador.truncar((inicioIntervalos[i] + finIntervalos[i]) / 2.0f);
+                row[1] = marcaClase;
+
+                row[2] = frecuenciasObservadas[i];
+
+                row[3] = probabilidades[i];  // probabilidad
+
+                frecuenciaEsperada = frecuenciasEsperadas[i];
+                row[4] = frecuenciaEsperada; // frecuenciaEsperada
+
+                estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
+                row[5] = truncador.truncar(estadisticoPrueba);
+                row[6] = truncador.truncar(estadisticoPruebaAcumuladoAnterior + estadisticoPrueba);
+                estadisticoPruebaAcumuladoAnterior += estadisticoPrueba;
+                resultado.Rows.Add(row);
+            }
+        }
+
+        private String mostrarNuevosIntervalos(List<float> inicio, List<float> fin)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < inicio.Count; i++)
+            {
+                stringBuilder.Append(inicio[i]).Append(" ").Append(fin[i]);
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
         }
 
     }
