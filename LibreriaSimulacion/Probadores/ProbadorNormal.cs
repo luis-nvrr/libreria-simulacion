@@ -77,9 +77,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
                 row[2] = frecuenciasObservadas[i];
 
-                funcionDensidad = (1.0f / (desviacion * Math.Sqrt(2 * Math.PI))) * Math.Exp((-0.5f) * Math.Pow((marcaClase - media) / desviacion, 2));
-                probabilidad = funcionDensidad * (finIntervalos[i] - inicioIntervalos[i]);
-                row[3] = truncador.truncar(probabilidad);  // probabilidad
+                // utiliza marcas de clase
+                //funcionDensidad = (1.0f / (desviacion * Math.Sqrt(2 * Math.PI))) * Math.Exp((-0.5f) * Math.Pow((marcaClase - media) / desviacion, 2));
+                //probabilidad = funcionDensidad * (finIntervalos[i] - inicioIntervalos[i]);
+                //row[3] = truncador.truncar(probabilidad);  // probabilidad
+
+                // utiliza tabla normal
+                probabilidad = TablaNormal.normal((finIntervalos[i] - media) / desviacion) - TablaNormal.normal((inicioIntervalos[i] - media) / desviacion);
+                row[3] = truncador.truncar(probabilidad);
+                MessageBox.Show(TablaNormal.normal(1.45f).ToString());
 
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[4] = truncador.truncar(frecuenciaEsperada); // frecuenciaEsperada
