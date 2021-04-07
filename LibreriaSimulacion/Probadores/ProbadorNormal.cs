@@ -85,7 +85,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 // utiliza tabla normal
                 probabilidad = TablaNormal.normal((finIntervalos[i] - media) / desviacion) - TablaNormal.normal((inicioIntervalos[i] - media) / desviacion);
                 row[3] = truncador.truncar(probabilidad);
-                MessageBox.Show(TablaNormal.normal(1.45f).ToString());
+                //MessageBox.Show(TablaNormal.normal(1.45f).ToString());
 
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[4] = truncador.truncar(frecuenciaEsperada); // frecuenciaEsperada

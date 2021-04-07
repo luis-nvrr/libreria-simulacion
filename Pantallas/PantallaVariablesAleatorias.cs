@@ -237,13 +237,24 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             double lambda = parametros[0];
             double media = parametros[1];
 
-            if (lambda < 0 || media < 0) { return; }
+            if(media < 0) { return; }
 
-            // TODO generar intervalos
-
+            contador = new ContadorFrecuenciaObservada();
             generadorDistribucion = new GeneradorPoisson(dataTable, generadorLenguaje, truncador, lambda);
-            generadorDistribucion.generarSerie(cantidadValores);
+            generadorDistribucion.generarSerie(cantidadValores, contador);
+            frecuenciasObservadas = contador.obtenerFrecuenciasPoisson();
             grdResultados.DataSource = dataTable;
+
+            int[] valores = contador.obtenerValoresPoisson();
+
+            probador = new ProbadorPoisson(truncador, dataTable, lambda, valores, frecuenciasObservadas);
+        }
+
+        private void probarPoisson()
+        {
+            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
+            pantallaPrueba.probador = probador;
+            pantallaPrueba.Show();
         }
 
 
@@ -380,6 +391,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbPoisson.Checked)
             {
+                probarPoisson();
                 return;
             }
         }

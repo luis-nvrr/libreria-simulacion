@@ -17,6 +17,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private float[] inicioIntervalos;
         private float[] finIntervalos;
 
+        private Dictionary<int, int> frecuenciasPoisson;
+
+        public ContadorFrecuenciaObservada() {
+            this.frecuenciasPoisson = new Dictionary<int, int>();
+        }
+
         public ContadorFrecuenciaObservada(float[] inicioIntervalos, float[] finIntervalos)
         {
             this.cantidadIntervalos = inicioIntervalos.Length;
@@ -60,6 +66,39 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 res += "\n";
             }
             return res;
+        }
+
+        public void contarPoisson(int numero)
+        {
+            if(!frecuenciasPoisson.ContainsKey(numero)) { frecuenciasPoisson.Add(numero, 0); }
+            int recuperado = frecuenciasPoisson[numero];
+            recuperado += 1;
+            frecuenciasPoisson[numero] = recuperado;
+        }
+
+        public int[] obtenerFrecuenciasPoisson()
+        {
+            int[] resultado = new int[frecuenciasPoisson.Count];
+            int i = 0;
+            foreach (var entry in frecuenciasPoisson)
+            {
+                resultado[i] = entry.Value;
+                i++;
+            }
+            return resultado;
+        }
+
+        public int[] obtenerValoresPoisson()
+        {
+            int[] valores = new int[frecuenciasPoisson.Count];
+            int i = 0;
+
+            foreach (var entry in frecuenciasPoisson)
+            {
+                valores[i] = entry.Key;
+                i++;
+            }
+            return valores;
         }
 
     }

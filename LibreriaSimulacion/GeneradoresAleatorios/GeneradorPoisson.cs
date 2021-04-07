@@ -15,7 +15,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         private DataRow dataRow;
 
         private float aleatorio01;
-        private float aleatorio;
+        private int aleatorio;
 
         // parametros
         private double lambda;
@@ -61,15 +61,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
             for (int i = 0; i < cantidadAleatorios; i++)
             {
-                aleatorio = siguienteAleatorio();
+                aleatorio = (int)siguienteAleatorio();
+
                 dataRow = dataTable.NewRow();
                 dataRow[0] = i + 1;
                 dataRow[1] = aleatorio;
                 dataTable.Rows.Add(dataRow);
 
-                if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
+                if (frecuenciaObservada != null) { frecuenciaObservada.contarPoisson(aleatorio); }
             }
             return dataTable;
         }
+
     }
 }
