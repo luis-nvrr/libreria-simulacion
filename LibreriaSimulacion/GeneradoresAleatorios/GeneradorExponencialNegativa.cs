@@ -18,9 +18,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         private float aleatorio01;
         private float aleatorio;
 
+        private float menor;
+        private float mayor;
+
         // parametros
         private double lambda;
-
+        
         public GeneradorExponencialNegativa(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double lambda)
         {
             this.truncador = truncador;
@@ -50,6 +53,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             for (int i = 0; i < cantidadAleatorios; i++)
             {
                 aleatorio = siguienteAleatorio();
+
+                if (i == 0) { inicializarMenorMayor(aleatorio); }
+                actualizarMayor(aleatorio);
+                actualizarMenor(aleatorio);
                 dataRow = dataTable.NewRow();
                 dataRow[0] = i+1;
                 dataRow[1]= aleatorio;
@@ -58,6 +65,36 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
                 if (frecuenciaObservada != null) { frecuenciaObservada.contarNumero(aleatorio); }
             }
             return dataTable;
+        }
+        private void inicializarMenorMayor(float numero)
+        {
+            menor = numero - 0.0001f;
+            mayor = numero + 0.0001f;
+        }
+        private void actualizarMenor(float numero)
+        {
+            if (numero < menor)
+            {
+                menor = numero - 0.0001f;
+            }
+        }
+
+        private void actualizarMayor(float numero)
+        {
+            if (numero > mayor)
+            {
+                mayor = numero + 0.0001f;
+            }
+        }
+
+        public float getMayor()
+        {
+            return mayor;
+        }
+
+        public float getMenor()
+        {
+            return menor;
         }
     }
 }
