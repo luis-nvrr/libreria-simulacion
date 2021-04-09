@@ -128,21 +128,29 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             pantallaPrueba.Show();
         }
 
+
         private void generarExponencial()
         {
             double[] parametros = calcularLambdaExponencial();
             double lambda = parametros[0];
             double media = parametros[1];
-   
-            if(lambda < 0 || media < 0) { return; }
+
+            if (lambda < 0 || media < 0) { return; }
 
             // TODO generar intervalos
 
             generadorDistribucion = new GeneradorExponencialNegativa(dataTable, generadorLenguaje, truncador, lambda);
             generadorDistribucion.generarSerie(cantidadValores);
             grdResultados.DataSource = dataTable;
-        }
 
+            float menor = ((GeneradorExponencialNegativa)generadorDistribucion).getMenor();
+            float mayor = ((GeneradorExponencialNegativa)generadorDistribucion).getMayor();
+
+            generarIntervalosNormal(menor, mayor);
+            obtenerFrecuenciasObservadasNormal(dataTable);
+
+            probador = new ProbadorExponencial(truncador, dataTable, media, lambda, cantidadIntervalos, mayor, menor);
+        }
         private double[] calcularLambdaExponencial()
         {
             double lambda;
@@ -256,7 +264,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             pantallaPrueba.probador = probador;
             pantallaPrueba.Show();
         }
-
+        private void probarExponencial()
+        {
+            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
+            pantallaPrueba.probador = probador;
+            pantallaPrueba.Show();
+        }
 
         private double[] calcularLambdaPoisson()
         {
@@ -387,6 +400,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbExponencial.Checked)
             {
+                probarExponencial();
                 return;
             }
             if (rbPoisson.Checked)

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 {
@@ -115,14 +116,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
                 row[2] = frecuenciasObservadas[i];
 
-                funcionDensidad = lambda * Math.Exp(-lambda * marcaClase);
-                probabilidad = funcionDensidad * (finIntervalos[i] - inicioIntervalos[i]);
+                probabilidad = (1 - Math.Exp(-lambda * finIntervalos[i])) - (1 - Math.Exp(-lambda * inicioIntervalos[i]));
                 row[3] = truncador.truncar(probabilidad);
 
                 frecuenciaEsperada = probabilidad * cantidadNumeros;
                 row[4] = truncador.truncar(frecuenciaEsperada);
 
-                estadisticoPrueba = Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2 / frecuenciaEsperada);
+                estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
+                MessageBox.Show(frecuenciaEsperada.ToString());
                 row[5] = truncador.truncar(estadisticoPrueba);
 
                 row[6] = truncador.truncar(estadisticoPruebaAcumuladoAnterior + estadisticoPrueba);
