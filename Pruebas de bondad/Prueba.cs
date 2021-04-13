@@ -66,9 +66,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
             indice = -1;
 
-
-            n = int.Parse(txtCantidadNumero.Text);
-            cantIntervalo = int.Parse(txtCantidadIntervalo.Text);
+            tomarEntrada();
+           
             frecuenciaObservada = new int[cantIntervalo];
 
             double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
@@ -160,14 +159,20 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             graficador.Show();
         }
         
-
-        private void btn_Generar_Click(object sender, EventArgs e)
+        private void btnGenerar_Click(object sender, EventArgs e)
         {
             generarNumerosAleatorios();
             mostrarGrafico();
             calcularEstadisticaPrueba();
             evaluarHipotesis();
-           
+        }
+        private void tomarEntrada()
+        {
+            n = int.Parse(tamanioMuestra.Text);
+            if (rb5.Checked) { cantIntervalo = int.Parse(rb5.Text); }
+            if (rb10.Checked) { cantIntervalo = int.Parse(rb10.Text); }
+            if (rb15.Checked) { cantIntervalo = int.Parse(rb15.Text); }
+            if (rb20.Checked) { cantIntervalo = int.Parse(rb20.Text); }
         }
     }
 }

@@ -29,16 +29,11 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_Generar = new System.Windows.Forms.Button();
             this.grdResultados = new System.Windows.Forms.DataGridView();
             this.iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtCantidadNumero = new System.Windows.Forms.TextBox();
-            this.txtCantidadIntervalo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.lblCantidadNumero = new System.Windows.Forms.Label();
-            this.lblCantidadIntervalo = new System.Windows.Forms.Label();
             this.grdResultados2 = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,20 +45,20 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.txtProbabilidad = new System.Windows.Forms.TextBox();
             this.lblGradosLibertad = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rb20 = new System.Windows.Forms.RadioButton();
+            this.rb15 = new System.Windows.Forms.RadioButton();
+            this.rb10 = new System.Windows.Forms.RadioButton();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.btnGenerar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tamanioMuestra = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_Generar
-            // 
-            this.btn_Generar.Location = new System.Drawing.Point(247, 102);
-            this.btn_Generar.Name = "btn_Generar";
-            this.btn_Generar.Size = new System.Drawing.Size(76, 23);
-            this.btn_Generar.TabIndex = 0;
-            this.btn_Generar.Text = "Generar";
-            this.btn_Generar.UseVisualStyleBackColor = true;
-            this.btn_Generar.Click += new System.EventHandler(this.btn_Generar_Click);
             // 
             // grdResultados
             // 
@@ -73,7 +68,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iteracion,
             this.aleatorio});
-            this.grdResultados.Location = new System.Drawing.Point(12, 172);
+            this.grdResultados.Location = new System.Drawing.Point(12, 237);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
@@ -92,20 +87,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.aleatorio.HeaderText = "Numero Aleatorio";
             this.aleatorio.Name = "aleatorio";
             this.aleatorio.ReadOnly = true;
-            // 
-            // txtCantidadNumero
-            // 
-            this.txtCantidadNumero.Location = new System.Drawing.Point(141, 102);
-            this.txtCantidadNumero.Name = "txtCantidadNumero";
-            this.txtCantidadNumero.Size = new System.Drawing.Size(100, 23);
-            this.txtCantidadNumero.TabIndex = 4;
-            // 
-            // txtCantidadIntervalo
-            // 
-            this.txtCantidadIntervalo.Location = new System.Drawing.Point(141, 131);
-            this.txtCantidadIntervalo.Name = "txtCantidadIntervalo";
-            this.txtCantidadIntervalo.Size = new System.Drawing.Size(100, 23);
-            this.txtCantidadIntervalo.TabIndex = 5;
             // 
             // panel1
             // 
@@ -128,24 +109,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Prueba de Ji-Cuadrada ";
             // 
-            // lblCantidadNumero
-            // 
-            this.lblCantidadNumero.AutoSize = true;
-            this.lblCantidadNumero.Location = new System.Drawing.Point(12, 105);
-            this.lblCantidadNumero.Name = "lblCantidadNumero";
-            this.lblCantidadNumero.Size = new System.Drawing.Size(123, 15);
-            this.lblCantidadNumero.TabIndex = 7;
-            this.lblCantidadNumero.Text = "Cantidad de Números";
-            // 
-            // lblCantidadIntervalo
-            // 
-            this.lblCantidadIntervalo.AutoSize = true;
-            this.lblCantidadIntervalo.Location = new System.Drawing.Point(12, 134);
-            this.lblCantidadIntervalo.Name = "lblCantidadIntervalo";
-            this.lblCantidadIntervalo.Size = new System.Drawing.Size(125, 15);
-            this.lblCantidadIntervalo.TabIndex = 8;
-            this.lblCantidadIntervalo.Text = "Cantidad de Intervalos";
-            // 
             // grdResultados2
             // 
             this.grdResultados2.AllowUserToAddRows = false;
@@ -157,7 +120,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.dataGridViewTextBoxColumn3,
             this.Column1,
             this.Column2});
-            this.grdResultados2.Location = new System.Drawing.Point(274, 172);
+            this.grdResultados2.Location = new System.Drawing.Point(256, 235);
             this.grdResultados2.Name = "grdResultados2";
             this.grdResultados2.RowHeadersVisible = false;
             this.grdResultados2.RowTemplate.Height = 25;
@@ -195,21 +158,21 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // lblResultadoHipotesis
             // 
             this.lblResultadoHipotesis.AutoSize = true;
-            this.lblResultadoHipotesis.Location = new System.Drawing.Point(506, 409);
+            this.lblResultadoHipotesis.Location = new System.Drawing.Point(488, 472);
             this.lblResultadoHipotesis.Name = "lblResultadoHipotesis";
             this.lblResultadoHipotesis.Size = new System.Drawing.Size(0, 15);
             this.lblResultadoHipotesis.TabIndex = 10;
             // 
             // txtGradosLibertad
             // 
-            this.txtGradosLibertad.Location = new System.Drawing.Point(293, 406);
+            this.txtGradosLibertad.Location = new System.Drawing.Point(275, 469);
             this.txtGradosLibertad.Name = "txtGradosLibertad";
             this.txtGradosLibertad.Size = new System.Drawing.Size(53, 23);
             this.txtGradosLibertad.TabIndex = 11;
             // 
             // txtProbabilidad
             // 
-            this.txtProbabilidad.Location = new System.Drawing.Point(436, 406);
+            this.txtProbabilidad.Location = new System.Drawing.Point(418, 469);
             this.txtProbabilidad.Name = "txtProbabilidad";
             this.txtProbabilidad.Size = new System.Drawing.Size(53, 23);
             this.txtProbabilidad.TabIndex = 12;
@@ -217,7 +180,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // lblGradosLibertad
             // 
             this.lblGradosLibertad.AutoSize = true;
-            this.lblGradosLibertad.Location = new System.Drawing.Point(274, 409);
+            this.lblGradosLibertad.Location = new System.Drawing.Point(256, 472);
             this.lblGradosLibertad.Name = "lblGradosLibertad";
             this.lblGradosLibertad.Size = new System.Drawing.Size(13, 15);
             this.lblGradosLibertad.TabIndex = 13;
@@ -226,30 +189,123 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(366, 409);
+            this.label1.Location = new System.Drawing.Point(348, 472);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 14;
             this.label1.Text = "Probalidad";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rb20);
+            this.groupBox1.Controls.Add(this.rb15);
+            this.groupBox1.Controls.Add(this.rb10);
+            this.groupBox1.Controls.Add(this.rb5);
+            this.groupBox1.Controls.Add(this.btnGenerar);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.tamanioMuestra);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Location = new System.Drawing.Point(12, 77);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(386, 154);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            // 
+            // rb20
+            // 
+            this.rb20.AutoSize = true;
+            this.rb20.Location = new System.Drawing.Point(138, 122);
+            this.rb20.Name = "rb20";
+            this.rb20.Size = new System.Drawing.Size(37, 19);
+            this.rb20.TabIndex = 11;
+            this.rb20.TabStop = true;
+            this.rb20.Text = "20";
+            this.rb20.UseVisualStyleBackColor = true;
+            // 
+            // rb15
+            // 
+            this.rb15.AutoSize = true;
+            this.rb15.Location = new System.Drawing.Point(69, 122);
+            this.rb15.Name = "rb15";
+            this.rb15.Size = new System.Drawing.Size(37, 19);
+            this.rb15.TabIndex = 10;
+            this.rb15.TabStop = true;
+            this.rb15.Text = "15";
+            this.rb15.UseVisualStyleBackColor = true;
+            // 
+            // rb10
+            // 
+            this.rb10.AutoSize = true;
+            this.rb10.Location = new System.Drawing.Point(138, 97);
+            this.rb10.Name = "rb10";
+            this.rb10.Size = new System.Drawing.Size(37, 19);
+            this.rb10.TabIndex = 9;
+            this.rb10.TabStop = true;
+            this.rb10.Text = "10";
+            this.rb10.UseVisualStyleBackColor = true;
+            // 
+            // rb5
+            // 
+            this.rb5.AutoSize = true;
+            this.rb5.Location = new System.Drawing.Point(69, 97);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(31, 19);
+            this.rb5.TabIndex = 8;
+            this.rb5.TabStop = true;
+            this.rb5.Text = "5";
+            this.rb5.UseVisualStyleBackColor = true;
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.Location = new System.Drawing.Point(312, 129);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerar.TabIndex = 6;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = true;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(0, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(239, 21);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Ingrese el tamaño de la muestra: ";
+            // 
+            // tamanioMuestra
+            // 
+            this.tamanioMuestra.Location = new System.Drawing.Point(239, 19);
+            this.tamanioMuestra.Name = "tamanioMuestra";
+            this.tamanioMuestra.Size = new System.Drawing.Size(100, 23);
+            this.tamanioMuestra.TabIndex = 4;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(-1, 63);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(240, 21);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Ingrese la cantidad de intervalos: ";
+            // 
             // Prueba
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 480);
+            this.ClientSize = new System.Drawing.Size(911, 495);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGradosLibertad);
             this.Controls.Add(this.txtProbabilidad);
             this.Controls.Add(this.txtGradosLibertad);
             this.Controls.Add(this.lblResultadoHipotesis);
             this.Controls.Add(this.grdResultados2);
-            this.Controls.Add(this.lblCantidadIntervalo);
-            this.Controls.Add(this.lblCantidadNumero);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txtCantidadIntervalo);
-            this.Controls.Add(this.txtCantidadNumero);
             this.Controls.Add(this.grdResultados);
-            this.Controls.Add(this.btn_Generar);
             this.Name = "Prueba";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -257,23 +313,19 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_Generar;
         private System.Windows.Forms.DataGridView grdResultados;
         private System.Windows.Forms.DataGridViewTextBoxColumn iteracion;
         private System.Windows.Forms.DataGridViewTextBoxColumn aleatorio;
-        private System.Windows.Forms.TextBox txtCantidadNumero;
-        private System.Windows.Forms.TextBox txtCantidadIntervalo;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitulo;
-        private System.Windows.Forms.Label lblCantidadNumero;
-        private System.Windows.Forms.Label lblCantidadIntervalo;
         private System.Windows.Forms.DataGridView grdResultados2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -285,5 +337,14 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private System.Windows.Forms.TextBox txtProbabilidad;
         private System.Windows.Forms.Label lblGradosLibertad;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rb20;
+        private System.Windows.Forms.RadioButton rb15;
+        private System.Windows.Forms.RadioButton rb10;
+        private System.Windows.Forms.RadioButton rb5;
+        private System.Windows.Forms.Button btnGenerar;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tamanioMuestra;
+        private System.Windows.Forms.Label label4;
     }
 }

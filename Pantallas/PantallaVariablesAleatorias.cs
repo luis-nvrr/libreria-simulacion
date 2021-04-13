@@ -53,7 +53,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private void tomarEntrada()
         {
             cantidadValores = int.Parse(txtCantidadValores.Text);
-            cantidadIntervalos = int.Parse(txtCantidadIntervalos.Text);
+            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
+            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
+            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
+            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)

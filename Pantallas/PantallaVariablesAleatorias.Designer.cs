@@ -44,13 +44,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtB = new System.Windows.Forms.TextBox();
             this.txtA = new System.Windows.Forms.TextBox();
             this.gbResultados = new System.Windows.Forms.GroupBox();
+            this.btnCopiar = new System.Windows.Forms.Button();
             this.btnJi = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
-            this.txtCantidadIntervalos = new System.Windows.Forms.TextBox();
             this.txtCantidadValores = new System.Windows.Forms.TextBox();
             this.btnCalcular = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblCantidadValores = new System.Windows.Forms.Label();
             this.gbGrafico = new System.Windows.Forms.GroupBox();
             this.gbExponencial = new System.Windows.Forms.GroupBox();
@@ -73,7 +72,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label9 = new System.Windows.Forms.Label();
             this.txtMediaPoisson = new System.Windows.Forms.TextBox();
             this.txtLambdaPoisson = new System.Windows.Forms.TextBox();
-            this.btnCopiar = new System.Windows.Forms.Button();
+            this.rb20 = new System.Windows.Forms.RadioButton();
+            this.rb15 = new System.Windows.Forms.RadioButton();
+            this.rb10 = new System.Windows.Forms.RadioButton();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -255,6 +258,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "4. Resultados";
             // 
+            // btnCopiar
+            // 
+            this.btnCopiar.Location = new System.Drawing.Point(331, 126);
+            this.btnCopiar.Name = "btnCopiar";
+            this.btnCopiar.Size = new System.Drawing.Size(172, 31);
+            this.btnCopiar.TabIndex = 7;
+            this.btnCopiar.Text = "Copiar";
+            this.btnCopiar.UseVisualStyleBackColor = true;
+            this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+            // 
             // btnJi
             // 
             this.btnJi.Location = new System.Drawing.Point(331, 89);
@@ -277,29 +290,25 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             // 
             // gbCantidades
             // 
-            this.gbCantidades.Controls.Add(this.txtCantidadIntervalos);
+            this.gbCantidades.Controls.Add(this.rb20);
             this.gbCantidades.Controls.Add(this.txtCantidadValores);
+            this.gbCantidades.Controls.Add(this.rb15);
             this.gbCantidades.Controls.Add(this.btnCalcular);
-            this.gbCantidades.Controls.Add(this.label1);
+            this.gbCantidades.Controls.Add(this.rb10);
             this.gbCantidades.Controls.Add(this.lblCantidadValores);
+            this.gbCantidades.Controls.Add(this.rb5);
+            this.gbCantidades.Controls.Add(this.label1);
             this.gbCantidades.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gbCantidades.Location = new System.Drawing.Point(12, 266);
             this.gbCantidades.Name = "gbCantidades";
-            this.gbCantidades.Size = new System.Drawing.Size(521, 122);
+            this.gbCantidades.Size = new System.Drawing.Size(521, 132);
             this.gbCantidades.TabIndex = 12;
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "3. Ingrese la cantidad";
             // 
-            // txtCantidadIntervalos
-            // 
-            this.txtCantidadIntervalos.Location = new System.Drawing.Point(201, 69);
-            this.txtCantidadIntervalos.Name = "txtCantidadIntervalos";
-            this.txtCantidadIntervalos.Size = new System.Drawing.Size(100, 29);
-            this.txtCantidadIntervalos.TabIndex = 13;
-            // 
             // txtCantidadValores
             // 
-            this.txtCantidadValores.Location = new System.Drawing.Point(201, 29);
+            this.txtCantidadValores.Location = new System.Drawing.Point(164, 32);
             this.txtCantidadValores.Name = "txtCantidadValores";
             this.txtCantidadValores.Size = new System.Drawing.Size(100, 29);
             this.txtCantidadValores.TabIndex = 13;
@@ -314,19 +323,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnCalcular.UseVisualStyleBackColor = true;
             this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 21);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Cantidad de intervalos:";
-            // 
             // lblCantidadValores
             // 
             this.lblCantidadValores.AutoSize = true;
-            this.lblCantidadValores.Location = new System.Drawing.Point(45, 37);
+            this.lblCantidadValores.Location = new System.Drawing.Point(8, 40);
             this.lblCantidadValores.Name = "lblCantidadValores";
             this.lblCantidadValores.Size = new System.Drawing.Size(150, 21);
             this.lblCantidadValores.TabIndex = 0;
@@ -526,15 +526,59 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtLambdaPoisson.Size = new System.Drawing.Size(100, 29);
             this.txtLambdaPoisson.TabIndex = 13;
             // 
-            // btnCopiar
+            // rb20
             // 
-            this.btnCopiar.Location = new System.Drawing.Point(331, 126);
-            this.btnCopiar.Name = "btnCopiar";
-            this.btnCopiar.Size = new System.Drawing.Size(172, 31);
-            this.btnCopiar.TabIndex = 7;
-            this.btnCopiar.Text = "Copiar";
-            this.btnCopiar.UseVisualStyleBackColor = true;
-            this.btnCopiar.Click += new System.EventHandler(this.btnCopiar_Click);
+            this.rb20.AutoSize = true;
+            this.rb20.Location = new System.Drawing.Point(200, 101);
+            this.rb20.Name = "rb20";
+            this.rb20.Size = new System.Drawing.Size(46, 25);
+            this.rb20.TabIndex = 21;
+            this.rb20.TabStop = true;
+            this.rb20.Text = "20";
+            this.rb20.UseVisualStyleBackColor = true;
+            // 
+            // rb15
+            // 
+            this.rb15.AutoSize = true;
+            this.rb15.Location = new System.Drawing.Point(138, 101);
+            this.rb15.Name = "rb15";
+            this.rb15.Size = new System.Drawing.Size(46, 25);
+            this.rb15.TabIndex = 20;
+            this.rb15.TabStop = true;
+            this.rb15.Text = "15";
+            this.rb15.UseVisualStyleBackColor = true;
+            // 
+            // rb10
+            // 
+            this.rb10.AutoSize = true;
+            this.rb10.Location = new System.Drawing.Point(79, 101);
+            this.rb10.Name = "rb10";
+            this.rb10.Size = new System.Drawing.Size(46, 25);
+            this.rb10.TabIndex = 19;
+            this.rb10.TabStop = true;
+            this.rb10.Text = "10";
+            this.rb10.UseVisualStyleBackColor = true;
+            // 
+            // rb5
+            // 
+            this.rb5.AutoSize = true;
+            this.rb5.Location = new System.Drawing.Point(25, 101);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(37, 25);
+            this.rb5.TabIndex = 18;
+            this.rb5.TabStop = true;
+            this.rb5.Text = "5";
+            this.rb5.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(8, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(240, 21);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Ingrese la cantidad de intervalos: ";
             // 
             // PantallaVariablesAleatorias
             // 
@@ -592,12 +636,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.TextBox txtA;
         private System.Windows.Forms.GroupBox gbCantidades;
         private System.Windows.Forms.Label lblA;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblCantidadValores;
         private System.Windows.Forms.Label lblB;
         private System.Windows.Forms.TextBox txtB;
         private System.Windows.Forms.Button btnMostrar;
-        private System.Windows.Forms.TextBox txtCantidadIntervalos;
         private System.Windows.Forms.TextBox txtCantidadValores;
         private System.Windows.Forms.Button btnCalcular;
         private System.Windows.Forms.GroupBox gbGrafico;
@@ -624,5 +666,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private System.Windows.Forms.TextBox txtMediaPoisson;
         private System.Windows.Forms.TextBox txtLambdaPoisson;
         private System.Windows.Forms.Button btnCopiar;
+        private System.Windows.Forms.RadioButton rb20;
+        private System.Windows.Forms.RadioButton rb15;
+        private System.Windows.Forms.RadioButton rb10;
+        private System.Windows.Forms.RadioButton rb5;
+        private System.Windows.Forms.Label label1;
     }
 }

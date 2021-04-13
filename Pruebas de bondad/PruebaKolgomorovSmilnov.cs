@@ -41,10 +41,6 @@ namespace Numeros_aleatorios
 
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
@@ -77,9 +73,8 @@ namespace Numeros_aleatorios
             
             indice = -1;
 
-            
-            n = int.Parse(tamanioMuestra.Text);
-            cantidadIntervalos = int.Parse(cantIntervalos.Text);
+
+            tomarEntrada();
             frecuenciaObservada = new int[cantidadIntervalos];
 
             double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
@@ -231,6 +226,14 @@ namespace Numeros_aleatorios
             tabla2.Columns.Add("| PoAC - PeAC |");
             tabla2.Columns.Add("max(| PoAC - PeAC |)");
 
+        }
+        private void tomarEntrada()
+        {
+            n = int.Parse(tamanioMuestra.Text);
+            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
+            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
+            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
+            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
         }
     }
 }
