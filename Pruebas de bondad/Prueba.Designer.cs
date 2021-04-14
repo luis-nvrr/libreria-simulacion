@@ -65,7 +65,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(229, 228);
+            this.grdResultados.Size = new System.Drawing.Size(229, 254);
             this.grdResultados.TabIndex = 3;
             // 
             // panel1
@@ -75,7 +75,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(911, 71);
+            this.panel1.Size = new System.Drawing.Size(1010, 71);
             this.panel1.TabIndex = 6;
             // 
             // lblTitulo
@@ -99,27 +99,27 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados2.RowHeadersVisible = false;
             this.grdResultados2.RowTemplate.Height = 25;
             this.grdResultados2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados2.Size = new System.Drawing.Size(526, 228);
+            this.grdResultados2.Size = new System.Drawing.Size(526, 256);
             this.grdResultados2.TabIndex = 9;
             // 
             // lblResultadoHipotesis
             // 
             this.lblResultadoHipotesis.AutoSize = true;
-            this.lblResultadoHipotesis.Location = new System.Drawing.Point(488, 472);
+            this.lblResultadoHipotesis.Location = new System.Drawing.Point(678, 500);
             this.lblResultadoHipotesis.Name = "lblResultadoHipotesis";
             this.lblResultadoHipotesis.Size = new System.Drawing.Size(0, 15);
             this.lblResultadoHipotesis.TabIndex = 10;
             // 
             // txtGradosLibertad
             // 
-            this.txtGradosLibertad.Location = new System.Drawing.Point(275, 469);
+            this.txtGradosLibertad.Location = new System.Drawing.Point(465, 497);
             this.txtGradosLibertad.Name = "txtGradosLibertad";
             this.txtGradosLibertad.Size = new System.Drawing.Size(53, 23);
             this.txtGradosLibertad.TabIndex = 11;
             // 
             // txtProbabilidad
             // 
-            this.txtProbabilidad.Location = new System.Drawing.Point(418, 469);
+            this.txtProbabilidad.Location = new System.Drawing.Point(608, 497);
             this.txtProbabilidad.Name = "txtProbabilidad";
             this.txtProbabilidad.Size = new System.Drawing.Size(53, 23);
             this.txtProbabilidad.TabIndex = 12;
@@ -127,7 +127,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // lblGradosLibertad
             // 
             this.lblGradosLibertad.AutoSize = true;
-            this.lblGradosLibertad.Location = new System.Drawing.Point(256, 472);
+            this.lblGradosLibertad.Location = new System.Drawing.Point(446, 500);
             this.lblGradosLibertad.Name = "lblGradosLibertad";
             this.lblGradosLibertad.Size = new System.Drawing.Size(13, 15);
             this.lblGradosLibertad.TabIndex = 13;
@@ -136,7 +136,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(348, 472);
+            this.label1.Location = new System.Drawing.Point(538, 500);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 15);
             this.label1.TabIndex = 14;
@@ -241,7 +241,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // 
             // btnCopiarTabla1
             // 
-            this.btnCopiarTabla1.Location = new System.Drawing.Point(11, 469);
+            this.btnCopiarTabla1.Location = new System.Drawing.Point(12, 496);
             this.btnCopiarTabla1.Name = "btnCopiarTabla1";
             this.btnCopiarTabla1.Size = new System.Drawing.Size(176, 23);
             this.btnCopiarTabla1.TabIndex = 22;
@@ -251,7 +251,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // 
             // copiarPrueba
             // 
-            this.copiarPrueba.Location = new System.Drawing.Point(606, 468);
+            this.copiarPrueba.Location = new System.Drawing.Point(256, 496);
             this.copiarPrueba.Name = "copiarPrueba";
             this.copiarPrueba.Size = new System.Drawing.Size(176, 23);
             this.copiarPrueba.TabIndex = 23;
@@ -263,7 +263,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 495);
+            this.ClientSize = new System.Drawing.Size(1010, 559);
             this.Controls.Add(this.copiarPrueba);
             this.Controls.Add(this.btnCopiarTabla1);
             this.Controls.Add(this.groupBox1);
@@ -277,6 +277,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.Controls.Add(this.grdResultados);
             this.Name = "Prueba";
             this.Text = "Form1";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).EndInit();
             this.panel1.ResumeLayout(false);
