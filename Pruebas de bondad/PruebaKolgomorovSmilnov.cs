@@ -100,10 +100,8 @@ namespace Numeros_aleatorios
             for (int i = 0; i < cantidadIntervalos; i++)
             {
                 filatabla2 = tabla2.NewRow();
-                tabla2.Rows.Add(filatabla2);
-                
+                tabla2.Rows.Add(filatabla2);                
             }
-
 
             for (int i = 0; i < n; i++)
             {
@@ -138,15 +136,10 @@ namespace Numeros_aleatorios
 
                         }
                        
-
-                            intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
+                        intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
                         frecuenciaObservada[j] += 1;
 
-                        probabilidadObservada = truncarDecimales((double)frecuenciaObservada[j] / n);
-                        
-
-                        
-                        
+                        probabilidadObservada = truncarDecimales((double)frecuenciaObservada[j] / n);                        
                         // agrega fila y columnas de frecuencias esperadas y observadas
 
                         tabla2.Rows[j][0] = intervalo;
@@ -155,22 +148,12 @@ namespace Numeros_aleatorios
                         tabla2.Rows[j][3] = probabilidadObservada;
                         tabla2.Rows[j][4] = probabilidadEsperada;
                         tabla2.Rows[j][5] = truncarDecimales(double.Parse(tabla2.Rows[j][3].ToString()) + observadaAcumuladaAnterior);
-                        tabla2.Rows[j][6] = truncarDecimales(double.Parse( tabla2.Rows[j][4].ToString()) + esperadaAcumuladaAnterior) ;
+                        tabla2.Rows[j][6] = truncarDecimales(double.Parse(tabla2.Rows[j][4].ToString()) + esperadaAcumuladaAnterior);
 
                         double diferencia = Math.Abs(double.Parse(tabla2.Rows[j][5].ToString()) - double.Parse(tabla2.Rows[j][6].ToString()));
-                        tabla2.Rows[j][7] = truncarDecimales(diferencia);
-
-                        
-
-
-                       
-                        
-
-                        
+                        tabla2.Rows[j][7] = truncarDecimales(diferencia);                   
                         break;
-                    }
-
-                    
+                    } 
                 }
             }
             tabla2.Rows[0][8] = tabla2.Rows[0][7];
@@ -234,6 +217,39 @@ namespace Numeros_aleatorios
             if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
             if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
             if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
+        }
+
+        private String tabla1ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DataRow row in tabla1.Rows)
+            {
+                stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString());
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
+        }
+        private String tabla2ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (DataRow row in tabla2.Rows)
+            {
+                stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString()).Append("\t").Append(row[2].ToString()).Append("\t").Append(row[3].ToString()).Append("\t").Append(row[4].ToString()).Append("\t").Append(row[5].ToString()).Append("\t").Append(row[6].ToString()).Append("\t").Append(row[7].ToString()).Append("\t").Append(row[8].ToString());
+                stringBuilder.Append("\n");
+            }
+            return stringBuilder.ToString();
+        }
+
+        private void btnCopiar_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tabla1ToString());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(tabla2ToString());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -30,16 +30,9 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private void InitializeComponent()
         {
             this.grdResultados = new System.Windows.Forms.DataGridView();
-            this.iteracion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aleatorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.grdResultados2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblResultadoHipotesis = new System.Windows.Forms.Label();
             this.txtGradosLibertad = new System.Windows.Forms.TextBox();
             this.txtProbabilidad = new System.Windows.Forms.TextBox();
@@ -54,6 +47,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.label2 = new System.Windows.Forms.Label();
             this.tamanioMuestra = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnCopiarTabla1 = new System.Windows.Forms.Button();
+            this.copiarPrueba = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados2)).BeginInit();
@@ -65,9 +60,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.AllowUserToAddRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iteracion,
-            this.aleatorio});
             this.grdResultados.Location = new System.Drawing.Point(12, 237);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
@@ -75,18 +67,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdResultados.Size = new System.Drawing.Size(229, 228);
             this.grdResultados.TabIndex = 3;
-            // 
-            // iteracion
-            // 
-            this.iteracion.HeaderText = "Iteracion";
-            this.iteracion.Name = "iteracion";
-            this.iteracion.ReadOnly = true;
-            // 
-            // aleatorio
-            // 
-            this.aleatorio.HeaderText = "Numero Aleatorio";
-            this.aleatorio.Name = "aleatorio";
-            this.aleatorio.ReadOnly = true;
             // 
             // panel1
             // 
@@ -114,12 +94,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados2.AllowUserToAddRows = false;
             this.grdResultados2.BackgroundColor = System.Drawing.Color.White;
             this.grdResultados2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.Column1,
-            this.Column2});
             this.grdResultados2.Location = new System.Drawing.Point(256, 235);
             this.grdResultados2.Name = "grdResultados2";
             this.grdResultados2.RowHeadersVisible = false;
@@ -127,33 +101,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.grdResultados2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdResultados2.Size = new System.Drawing.Size(526, 228);
             this.grdResultados2.TabIndex = 9;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Intervalo";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Frecuencia Observada";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Frecuencia Esperada";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "C";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "C (AC)";
-            this.Column2.Name = "Column2";
             // 
             // lblResultadoHipotesis
             // 
@@ -292,11 +239,33 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             this.label4.TabIndex = 7;
             this.label4.Text = "Ingrese la cantidad de intervalos: ";
             // 
+            // btnCopiarTabla1
+            // 
+            this.btnCopiarTabla1.Location = new System.Drawing.Point(11, 469);
+            this.btnCopiarTabla1.Name = "btnCopiarTabla1";
+            this.btnCopiarTabla1.Size = new System.Drawing.Size(176, 23);
+            this.btnCopiarTabla1.TabIndex = 22;
+            this.btnCopiarTabla1.Text = "Copiar Números Aleatorios";
+            this.btnCopiarTabla1.UseVisualStyleBackColor = true;
+            this.btnCopiarTabla1.Click += new System.EventHandler(this.btnCopiarTabla1_Click);
+            // 
+            // copiarPrueba
+            // 
+            this.copiarPrueba.Location = new System.Drawing.Point(606, 468);
+            this.copiarPrueba.Name = "copiarPrueba";
+            this.copiarPrueba.Size = new System.Drawing.Size(176, 23);
+            this.copiarPrueba.TabIndex = 23;
+            this.copiarPrueba.Text = "Copiar Prueba";
+            this.copiarPrueba.UseVisualStyleBackColor = true;
+            this.copiarPrueba.Click += new System.EventHandler(this.copiarPrueba_Click);
+            // 
             // Prueba
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 495);
+            this.Controls.Add(this.copiarPrueba);
+            this.Controls.Add(this.btnCopiarTabla1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblGradosLibertad);
@@ -322,16 +291,9 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         #endregion
         private System.Windows.Forms.DataGridView grdResultados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iteracion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aleatorio;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.DataGridView grdResultados2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.Label lblResultadoHipotesis;
         private System.Windows.Forms.TextBox txtGradosLibertad;
         private System.Windows.Forms.TextBox txtProbabilidad;
@@ -346,5 +308,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tamanioMuestra;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnCopiarTabla1;
+        private System.Windows.Forms.Button copiarPrueba;
     }
 }

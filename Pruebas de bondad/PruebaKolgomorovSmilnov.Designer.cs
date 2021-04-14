@@ -53,6 +53,8 @@ namespace Numeros_aleatorios
             this.rb15 = new System.Windows.Forms.RadioButton();
             this.rb10 = new System.Windows.Forms.RadioButton();
             this.rb5 = new System.Windows.Forms.RadioButton();
+            this.btnCopiarTabla1 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados2)).BeginInit();
@@ -281,11 +283,33 @@ namespace Numeros_aleatorios
             this.rb5.Text = "5";
             this.rb5.UseVisualStyleBackColor = true;
             // 
+            // btnCopiarTabla1
+            // 
+            this.btnCopiarTabla1.Location = new System.Drawing.Point(39, 485);
+            this.btnCopiarTabla1.Name = "btnCopiarTabla1";
+            this.btnCopiarTabla1.Size = new System.Drawing.Size(175, 31);
+            this.btnCopiarTabla1.TabIndex = 21;
+            this.btnCopiarTabla1.Text = "Copiar Números Aleatorios";
+            this.btnCopiarTabla1.UseVisualStyleBackColor = true;
+            this.btnCopiarTabla1.Click += new System.EventHandler(this.btnCopiar_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(815, 519);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 31);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Copiar Prueba";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // PruebaKolgomorovSmilnov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 571);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCopiarTabla1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblResultadoHipotesis);
             this.Controls.Add(this.lblGradosLibertad);
@@ -337,5 +361,7 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.RadioButton rb15;
         private System.Windows.Forms.RadioButton rb10;
         private System.Windows.Forms.RadioButton rb5;
+        private System.Windows.Forms.Button btnCopiarTabla1;
+        private System.Windows.Forms.Button button1;
     }
 }
