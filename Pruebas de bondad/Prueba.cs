@@ -61,9 +61,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         {
             tomarEntrada();
             generarNumerosAleatorios();
-            construirTabla();
-            mostrarGrafico();
-            evaluarHipotesis();
+
         }
 
         public void generarNumerosAleatorios()
@@ -175,6 +173,17 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         {
             Clipboard.SetText(tabla2ToString());
             MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            mostrarGrafico();
+        }
+
+        private void btnProbar_Click(object sender, EventArgs e)
+        {
+            construirTabla();
+            evaluarHipotesis();
         }
     }
 }
