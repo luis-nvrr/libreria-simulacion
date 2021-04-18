@@ -26,6 +26,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         float[] inicioIntervalos;
         float[] finIntervalos;
+        int[] valoresDiscretos;
 
         int cantidadValores;
         int cantidadIntervalos;
@@ -154,6 +155,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
             probador = new ProbadorExponencial(truncador, dataTable, media, lambda, cantidadIntervalos, mayor, menor);
         }
+
         private double[] calcularLambdaExponencial()
         {
             double lambda;
@@ -253,12 +255,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             contador = new ContadorFrecuenciaObservada();
             generadorDistribucion = new GeneradorPoisson(dataTable, generadorLenguaje, truncador, lambda);
             generadorDistribucion.generarSerie(cantidadValores, contador);
-            frecuenciasObservadas = contador.obtenerFrecuenciasPoisson();
+
             grdResultados.DataSource = dataTable;
+            
+            frecuenciasObservadas = contador.obtenerFrecuenciasPoisson();
+            valoresDiscretos = contador.obtenerValoresPoisson();
 
-            int[] valores = contador.obtenerValoresPoisson();
-
-            probador = new ProbadorPoisson(truncador, dataTable, lambda, valores, frecuenciasObservadas);
+            probador = new ProbadorPoisson(truncador, dataTable, lambda, valoresDiscretos, frecuenciasObservadas);
         }
 
         private void probarPoisson()
@@ -300,6 +303,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
             graficador.inicioIntervalos = this.inicioIntervalos;
             graficador.finIntervalos = this.finIntervalos;
+            graficador.valoresDiscretos = this.valoresDiscretos;
 
             gbGrafico.Controls.Clear();
             graficador.TopLevel = false;
@@ -314,6 +318,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         {
             if (rbUniforme.Checked)
             {
+                activarRadioButtons();
                 gbUniforme.Visible = true;
                 gbExponencial.Visible = false;
                 gbNormalBoxMuller.Visible = false;
@@ -323,6 +328,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbNormalBoxMuller.Checked)
             {
+                activarRadioButtons();
                 gbNormalBoxMuller.Visible = true;
                 gbUniforme.Visible = false;
                 gbExponencial.Visible = false;
@@ -332,6 +338,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbNormalConvolucion.Checked)
             {
+                activarRadioButtons();
                 gbNormalConvolucion.Visible = true;
                 gbNormalBoxMuller.Visible = false;
                 gbUniforme.Visible = false;
@@ -341,6 +348,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbExponencial.Checked)
             {
+                activarRadioButtons();
                 gbExponencial.Visible = true;
                 gbUniforme.Visible = false;
                 gbNormalBoxMuller.Visible = false;
@@ -350,6 +358,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
             if (rbPoisson.Checked)
             {
+               desactivarRadioButtons();
                 gbPoisson.Visible = true;
                 gbExponencial.Visible = false;
                 gbUniforme.Visible = false;
@@ -357,6 +366,22 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 gbNormalConvolucion.Visible = false;
                 return;
             }
+        }
+
+        private void desactivarRadioButtons()
+        {
+            rb5.Enabled = false;
+            rb10.Enabled = false;
+            rb15.Enabled = false;
+            rb20.Enabled = false;
+        }
+
+        private void activarRadioButtons()
+        {
+            if(!rb5.Enabled) { rb5.Enabled = true; }
+            if (!rb10.Enabled) { rb10.Enabled = true; }
+            if (!rb15.Enabled) { rb15.Enabled = true; }
+            if (!rb20.Enabled) { rb20.Enabled = true; }
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)

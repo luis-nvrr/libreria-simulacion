@@ -74,7 +74,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[3] = (int)Math.Round(frecuenciaEsperada,0);
                 resultado.Rows.Add(row);
 
-                MessageBox.Show(frecuenciaEsperada.ToString());
+                //MessageBox.Show(frecuenciaEsperada.ToString());
             }
         }
 
