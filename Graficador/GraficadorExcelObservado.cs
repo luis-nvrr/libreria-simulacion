@@ -25,6 +25,8 @@ namespace Numeros_aleatorios.grafico_excel
         public float[] inicioIntervalos { get; set; }
         public float[] finIntervalos { get; set; }
 
+        public int[] valoresDiscretos { get; set; }
+
         public string nombre { get; set; }
 
         DataTable dataTable;
@@ -74,7 +76,8 @@ namespace Numeros_aleatorios.grafico_excel
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
 
                 dataRow = dataTable.NewRow();
-                if (inicioIntervalos != null) { dataRow[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]"; } 
+                if (inicioIntervalos != null) { dataRow[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]"; } 
+                if(valoresDiscretos != null) { dataRow[0] = valoresDiscretos[i] + ";"; }
                 dataRow[1] = frecuenciaObservada[i];
                 dataTable.Rows.Add(dataRow);
             }

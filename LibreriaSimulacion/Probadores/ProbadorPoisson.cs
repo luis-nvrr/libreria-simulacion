@@ -74,7 +74,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[3] = (int)Math.Round(frecuenciaEsperada,0);
                 resultado.Rows.Add(row);
 
-                MessageBox.Show(frecuenciaEsperada.ToString());
+                //MessageBox.Show(frecuenciaEsperada.ToString());
             }
         }
 
@@ -127,7 +127,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             int observadaAcumulada = 0;
             float probabilidadTablaVieja;
             double probabilidadAcumulada = 0;
-            List<int> valoresAgruapados = new List<int>();
+            List<int> valoresAgrupados = new List<int>();
             List<List<int>> nuevosValoresAgrupados = new List<List<int>>();
             List<int> nuevaFrecuenciaObservada = new List<int>();
             List<int> nuevaFrecuenciaEsperada = new List<int>();
@@ -135,7 +135,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
             for (int i = 0; i < frecuenciasObservadas.Length; i++)
             {
-                valoresAgruapados.Add(valoresEnteros[i]);
+                valoresAgrupados.Add(valoresEnteros[i]);
                 esperadaTablaVieja = int.Parse(resultado.Rows[i][3].ToString());
                 esperadaAcumulada += esperadaTablaVieja;
                 probabilidadTablaVieja = float.Parse(resultado.Rows[i][2].ToString());
@@ -144,7 +144,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
                 if (esperadaAcumulada > 5)
                 {
-                    nuevosValoresAgrupados.Add(valoresAgruapados);
+                    nuevosValoresAgrupados.Add(valoresAgrupados);
                     nuevaFrecuenciaObservada.Add(observadaAcumulada);
                     nuevaFrecuenciaEsperada.Add(esperadaAcumulada);
                     nuevaProbabilidad.Add(truncador.truncar(probabilidadAcumulada));
@@ -152,10 +152,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                     probabilidadAcumulada = 0;
                     esperadaAcumulada = 0;
                     observadaAcumulada = 0;
-                    valoresAgruapados = new List<int>();
+                    valoresAgrupados = new List<int>();
                 }
             }
 
+            nuevosValoresAgrupados[nuevosValoresAgrupados.Count - 1].AddRange(valoresAgrupados);
             nuevaFrecuenciaObservada[nuevosValoresAgrupados.Count - 1] += observadaAcumulada;
             nuevaFrecuenciaEsperada[nuevosValoresAgrupados.Count - 1] += esperadaAcumulada;
             nuevaProbabilidad[nuevosValoresAgrupados.Count - 1] = truncador.truncar(nuevaProbabilidad[nuevosValoresAgrupados.Count - 1] + probabilidadAcumulada);
@@ -213,5 +214,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             }
             return stringBuilder.ToString();
         }
+
+       
     }
 }
