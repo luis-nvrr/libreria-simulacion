@@ -257,9 +257,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             generadorDistribucion.generarSerie(cantidadValores, contador);
 
             grdResultados.DataSource = dataTable;
-            
-            frecuenciasObservadas = contador.obtenerFrecuenciasPoisson();
-            valoresDiscretos = contador.obtenerValoresPoisson();
+
+            contador.ordenarSeriePoisson();
+            frecuenciasObservadas = contador.getFrecuenciasPoisson();
+            valoresDiscretos = contador.getValoresPoisson();
 
             probador = new ProbadorPoisson(truncador, dataTable, lambda, valoresDiscretos, frecuenciasObservadas);
         }

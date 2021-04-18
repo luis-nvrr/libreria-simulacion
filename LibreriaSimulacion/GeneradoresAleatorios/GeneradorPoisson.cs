@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 {
@@ -72,6 +73,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             }
             return dataTable;
         }
+
 
     }
 }
