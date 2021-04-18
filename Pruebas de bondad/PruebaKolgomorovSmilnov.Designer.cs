@@ -49,6 +49,7 @@ namespace Numeros_aleatorios
             this.lblGradosLibertad = new System.Windows.Forms.Label();
             this.lblResultadoHipotesis = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMostrar = new System.Windows.Forms.Button();
             this.rb20 = new System.Windows.Forms.RadioButton();
             this.rb15 = new System.Windows.Forms.RadioButton();
             this.rb10 = new System.Windows.Forms.RadioButton();
@@ -111,7 +112,7 @@ namespace Numeros_aleatorios
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(312, 129);
+            this.btnGenerar.Location = new System.Drawing.Point(311, 95);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
             this.btnGenerar.TabIndex = 6;
@@ -225,6 +226,7 @@ namespace Numeros_aleatorios
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnMostrar);
             this.groupBox1.Controls.Add(this.rb20);
             this.groupBox1.Controls.Add(this.rb15);
             this.groupBox1.Controls.Add(this.rb10);
@@ -238,6 +240,16 @@ namespace Numeros_aleatorios
             this.groupBox1.Size = new System.Drawing.Size(386, 152);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
+            // 
+            // btnMostrar
+            // 
+            this.btnMostrar.Location = new System.Drawing.Point(311, 129);
+            this.btnMostrar.Name = "btnMostrar";
+            this.btnMostrar.Size = new System.Drawing.Size(75, 23);
+            this.btnMostrar.TabIndex = 12;
+            this.btnMostrar.Text = "Grafico";
+            this.btnMostrar.UseVisualStyleBackColor = true;
+            this.btnMostrar.Click += new System.EventHandler(this.btnMostrar_Click);
             // 
             // rb20
             // 
@@ -363,5 +375,6 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.RadioButton rb5;
         private System.Windows.Forms.Button btnCopiarTabla1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnMostrar;
     }
 }

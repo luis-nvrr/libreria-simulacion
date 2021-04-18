@@ -123,7 +123,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[4] = truncador.truncar(frecuenciaEsperada);
 
                 estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
-                MessageBox.Show(frecuenciaEsperada.ToString());
                 row[5] = truncador.truncar(estadisticoPrueba);
 
                 row[6] = truncador.truncar(estadisticoPruebaAcumuladoAnterior + estadisticoPrueba);
