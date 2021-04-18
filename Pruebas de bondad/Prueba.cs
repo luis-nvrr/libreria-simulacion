@@ -60,7 +60,11 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             tomarEntrada();
-            generarNumerosAleatorios();
+            if(cantidadAleatorios <=0) { MessageBox.Show("El tamaño de la muestra debe ser mayor a 0..."); }
+            if (cantidadAleatorios > 0)
+            {
+                generarNumerosAleatorios();
+            }
 
         }
 

@@ -44,9 +44,13 @@ namespace Numeros_aleatorios
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
-            generarNumerosAleatorios();
-            mostrarGrafico();
-            evaluarHipotesis();
+            tomarEntrada();
+            if (n <= 0) { MessageBox.Show("El tamaño de la muestra debe ser mayor a 0..."); }
+            if (n > 0)
+            {
+                generarNumerosAleatorios();
+                evaluarHipotesis();
+            }
         }
 
         private float truncarDecimales(double numero)
@@ -70,11 +74,8 @@ namespace Numeros_aleatorios
             tabla1.Rows.Clear();
             tabla2.Rows.Clear();
             
-            
             indice = -1;
 
-
-            tomarEntrada();
             frecuenciaObservada = new int[cantidadIntervalos];
 
             double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
@@ -180,7 +181,7 @@ namespace Numeros_aleatorios
         public void evaluarHipotesis()
         {
             txtGradosLibertad.Text = n.ToString();
-            double tabulado = 1.36f / Math.Sqrt(n);
+            double tabulado = truncarDecimales( 1.36f / Math.Sqrt(n));
             txtProbabilidad.Text = tabulado.ToString();
             if (double.Parse(tabla2.Rows[cantidadIntervalos -1][8].ToString()) <= tabulado)
             {
@@ -250,6 +251,16 @@ namespace Numeros_aleatorios
         {
             Clipboard.SetText(tabla2ToString());
             MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnMostrar_Click(object sender, EventArgs e)
+        {
+            mostrarGrafico();
+        }
+
+        private void btnProbar_Click(object sender, EventArgs e)
+        {
+            evaluarHipotesis();
         }
     }
 }
