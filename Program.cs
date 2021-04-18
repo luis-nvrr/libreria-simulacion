@@ -22,7 +22,7 @@ namespace Numeros_aleatorios
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PruebaKolgomorovSmilnov());
+            Application.Run(new PantallaVariablesAleatorias());
         }
     }
 }

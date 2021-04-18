@@ -64,6 +64,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             for (int i = 0; i < cantidadAleatorios; i++)
             {
                 if(i % 2 == 0) { esNecesarioGenerar = true; }
+                else { esNecesarioGenerar = false; }
                 aleatorio = siguienteAleatorio();
 
                 if (double.IsInfinity(aleatorio)){ MessageBox.Show("error " + i); }
