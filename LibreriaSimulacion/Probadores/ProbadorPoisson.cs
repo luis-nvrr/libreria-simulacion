@@ -56,7 +56,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             DataRow row;
             int entero;
             double estadisticoPrueba;
-            double funcionDensidad;
+            double probabilidad;
             float cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;
 
@@ -67,10 +67,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[0] = entero;
                 row[1] = frecuenciasObservadas[i];
 
-                funcionDensidad = ((Math.Pow(lambda,entero))*Math.Exp(-lambda))/(Factorial.factorial(entero)); // TODO arreglar factorial retorna un entero muy grande
-                row[2] = truncador.truncar(funcionDensidad); 
+                probabilidad = ((Math.Pow(lambda,entero))*Math.Exp(-lambda))/(Factorial.factorial(entero)); // TODO arreglar factorial retorna un entero muy grande
+                row[2] = truncador.truncar(probabilidad); 
 
-                frecuenciaEsperada = (funcionDensidad * cantidadNumeros);
+                frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[3] = (int)Math.Round(frecuenciaEsperada,0);
                 resultado.Rows.Add(row);
 

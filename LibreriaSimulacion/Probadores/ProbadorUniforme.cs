@@ -97,7 +97,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             for (int i = 0; i < cantidadIntervalos; i++)
             {
                 row = resultado.NewRow();
-                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
                 row[1] = frecuenciasObservadas[i];
                 row[2] = frecuenciaEsperada;
                 estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);

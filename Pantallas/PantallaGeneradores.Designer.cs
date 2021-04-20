@@ -335,6 +335,7 @@ namespace Numeros_aleatorios
             this.Controls.Add(this.gbOpcion);
             this.Name = "PantallaGeneradores";
             this.Text = "Ejercicio 1 - Simulacion";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Ejercicio1_Load);
             this.gbOpcion.ResumeLayout(false);
             this.gbOpcion.PerformLayout();

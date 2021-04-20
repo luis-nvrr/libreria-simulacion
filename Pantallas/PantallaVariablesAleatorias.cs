@@ -304,7 +304,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
             graficador.inicioIntervalos = this.inicioIntervalos;
             graficador.finIntervalos = this.finIntervalos;
-            graficador.valoresDiscretos = this.valoresDiscretos;
+
+            if (rbPoisson.Checked) { graficador.valoresDiscretos = this.valoresDiscretos; }
+            else { graficador.valoresDiscretos = null; }
+           
 
             gbGrafico.Controls.Clear();
             graficador.TopLevel = false;

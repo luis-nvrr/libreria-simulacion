@@ -334,6 +334,7 @@ namespace Numeros_aleatorios
             this.Controls.Add(this.label1);
             this.Name = "PruebaKolgomorovSmilnov";
             this.Text = "PruebaKolgomorovSmilnov";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PruebaKolgomorovSmilnov_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

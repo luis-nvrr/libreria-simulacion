@@ -70,7 +70,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             for (int i = 0; i < inicioIntervalos.Length; i++)
             {
                 row = resultado.NewRow();
-                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
 
                 marcaClase = truncador.truncar((inicioIntervalos[i] + finIntervalos[i]) / 2.0f);
                 row[1] = marcaClase;
