@@ -65,7 +65,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             gbGrafico.Controls.Clear();
             grdResultados.DataSource = null;
             dataTable.Rows.Clear();
-
+            gbGrafico.Controls.Clear();
             tomarEntrada();
             generarVariablesAleatorias();
         }

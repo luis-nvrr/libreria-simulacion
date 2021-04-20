@@ -159,7 +159,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         public String tabla2ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (DataRow row in tablaAleatorios.Rows)
+            foreach (DataRow row in tablaResultados.Rows)
             {
                 stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString()).Append("\t").Append(row[2].ToString()).Append("\t").Append(row[3].ToString()).Append("\t").Append(row[4].ToString());
                 stringBuilder.Append("\n");
