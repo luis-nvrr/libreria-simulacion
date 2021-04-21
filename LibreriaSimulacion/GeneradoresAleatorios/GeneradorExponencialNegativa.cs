@@ -38,7 +38,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         public float siguienteAleatorio()
         {
             aleatorio01 = generadorLenguaje.siguienteAleatorio();
-            while (aleatorio01 < 0) { aleatorio01 = generadorLenguaje.siguienteAleatorio(); }
             return truncador.truncar((-1/lambda)*(Math.Log(1-aleatorio01)));
         }
 
