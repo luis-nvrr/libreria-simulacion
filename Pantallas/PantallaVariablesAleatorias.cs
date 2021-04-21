@@ -54,11 +54,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void tomasCantidadValores()
         {
+            if (txtCantidadValores.Text.Equals("")) { return; }
             cantidadValores = int.Parse(txtCantidadValores.Text);
         }
 
         private void tomarCantidadIntervalos()
         {
+            if(!rb5.Checked || !rb10.Checked || !rb15.Checked || !rb20.Checked) { return;  }
             if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
             if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
             if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
@@ -96,6 +98,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void generarUniforme()
         {
+            if (txtA.Text.Equals("") || txtB.Text.Equals("")) { return; }
             gestorUniforme = new GestorUniforme(this);
             float a = float.Parse(txtA.Text);
             float b = float.Parse(txtB.Text);
@@ -104,6 +107,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void generarExponencial()
         {
+            if (txtLambdaExponencial.Text.Equals("") && txtMediaExponencial.Text.Equals("")) { return; }
             gestorExponencial = new GestorExponencial(this);
             double[] exponencial = calcularLambdaExponencial();
             double lambda = exponencial[0];
@@ -113,6 +117,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void generarNormalBoxMuller()
         {
+            if (txtMediaNormalBoxMuller.Text.Equals("") || txtDesviacionNormalBoxMuller.Text.Equals("")) { return; }
             gestorNormalBoxMuller = new GestorNormalBoxMuller(this);
             double desviacion = double.Parse(txtDesviacionNormalBoxMuller.Text);
             double media = double.Parse(txtMediaNormalBoxMuller.Text);
@@ -121,6 +126,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void generarNormalConvolucion()
         {
+            if (txtMediaNormalConvolucion.Text.Equals("") || txtDesviacionNormalConvolucion.Text.Equals("")) { return;  }
             gestorNormalConvolucion = new GestorNormalConvolucion(this);
             double desviacion = double.Parse(txtDesviacionNormalConvolucion.Text);
             double media = double.Parse(txtMediaNormalConvolucion.Text);
@@ -129,6 +135,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void generarPoisson()
         {
+            if (txtLambdaPoisson.Text.Equals("") && txtMediaPoisson.Text.Equals("")) { return; }
             gestorPoisson = new GestorPoisson(this);
             double[] parametros = calcularLambdaPoisson();
             double lambda = parametros[0];
@@ -141,6 +148,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             double lambda;
             double media;
 
+         
             if (txtLambdaExponencial.Text.Equals(""))
             {
                 media = double.Parse(txtMediaExponencial.Text);

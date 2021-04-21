@@ -82,15 +82,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
         private void inicializarMenorMayor(float numero)
         {
-            menor = (float)Math.Floor(numero);
-            mayor = (float)Math.Ceiling(numero);
+            menor = truncador.truncar(Math.Floor(numero));
+            mayor = truncador.truncar(Math.Ceiling(numero));
         }
 
         private void actualizarMenor(float numero)
         {
             if (numero < menor)
             {
-                menor = (float)Math.Floor(numero);
+                menor = truncador.truncar(Math.Floor(numero));
             }
         }
 
@@ -98,7 +98,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         {
             if (numero > mayor)
             {
-                mayor = (float)Math.Ceiling(numero);
+                mayor = truncador.truncar(Math.Ceiling(numero));
             }
         }
 

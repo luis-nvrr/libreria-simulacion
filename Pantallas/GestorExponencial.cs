@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Pantallas
 {
@@ -64,12 +65,12 @@ namespace Numeros_aleatorios.Pantallas
             this.menor = ((GeneradorExponencialNegativa)generadorDistribucion).getMenor();
             this.mayor = ((GeneradorExponencialNegativa)generadorDistribucion).getMayor();
 
-            generarIntervalosExponencial(menor, mayor, cantidadIntervalos);
-            obtenerFrecuenciasObservadasExponencial(tablaAleatorios);
+            generarIntervalosExponencial();
+            obtenerFrecuenciasObservadasExponencial();
             pantalla.mostrarResultados(tablaAleatorios);
         }
 
-        private void generarIntervalosExponencial(float menor, float mayor, int cantidadIntervalos)
+        private void generarIntervalosExponencial()
         {
             GeneradorIntervalosNormal generadorIntervalos = new GeneradorIntervalosNormal(truncador);
             generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
@@ -78,17 +79,17 @@ namespace Numeros_aleatorios.Pantallas
             this.finIntervalos = generadorIntervalos.obtenerFinIntervalos();
         }
 
-        private void obtenerFrecuenciasObservadasExponencial(DataTable numeros)
+        private void obtenerFrecuenciasObservadasExponencial()
         {
             ContadorFrecuenciaObservada contadorFrecuencias = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            contadorFrecuencias.contarFrecuenciaSerie(numeros);
+            contadorFrecuencias.contarFrecuenciaSerie(tablaAleatorios);
 
             this.frecuenciasObservadas = contadorFrecuencias.obtenerFrecuencias();
         }
 
         public void probar()
         {
-            IProbador probador = new ProbadorExponencial(truncador, tablaAleatorios, media, lambda, cantidadIntervalos, mayor, menor);
+            IProbador probador = new ProbadorExponencial(truncador, tablaAleatorios, media, lambda, cantidadIntervalos, inicioIntervalos, finIntervalos, frecuenciasObservadas);
             PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
             pantallaPrueba.probador = probador;
             pantallaPrueba.Show();

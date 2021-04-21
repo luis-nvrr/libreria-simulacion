@@ -47,6 +47,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             construirTablaInicial();
             reestructurarIntervalos();
             construirTablaFinal();
+            agregarTotalObservada();
         }
 
         private void construirTablaInicial()
@@ -112,7 +113,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public float obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 1][5].ToString());
+            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][5].ToString());
         }
 
         public float getValorCritico()
@@ -215,6 +216,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             return stringBuilder.ToString();
         }
 
-       
+        private void agregarTotalObservada()
+        {
+            int acum = 0;
+            for (int i = 0; i < frecuenciasObservadas.Length; i++)
+            {
+                acum += frecuenciasObservadas[i];
+            }
+            DataRow row = resultado.NewRow();
+            row[1] = acum;
+            resultado.Rows.Add(row);
+        }
+
+
     }
 }

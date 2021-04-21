@@ -52,6 +52,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             construirTablaInicial();
             reestructurarTabla();
             construirTablaFinal();
+            agregarTotalObservada();
         }
 
         private void construirTablaInicial()
@@ -80,6 +81,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[4] = truncador.truncar(frecuenciaEsperada); // frecuenciaEsperada
 
+                resultado.Rows.Add(row);
             }
         }
 
@@ -117,7 +119,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public float obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 1][6].ToString());
+            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][6].ToString());
         }
 
         public float getValorCritico()
@@ -191,7 +193,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             for (int i = 0; i < inicioIntervalos.Length; i++)
             {
                 row = resultado.NewRow();
-                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
 
                 marcaClase = truncador.truncar((inicioIntervalos[i] + finIntervalos[i]) / 2.0f);
                 row[1] = marcaClase;
@@ -220,6 +222,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 stringBuilder.Append("\n");
             }
             return stringBuilder.ToString();
+        }
+
+        private void agregarTotalObservada()
+        {
+            int acum = 0;
+            for (int i = 0; i < frecuenciasObservadas.Length; i++)
+            {
+                acum += frecuenciasObservadas[i];
+            }
+            DataRow row = resultado.NewRow();
+            row[2] = acum;
+            resultado.Rows.Add(row);
         }
 
     }
