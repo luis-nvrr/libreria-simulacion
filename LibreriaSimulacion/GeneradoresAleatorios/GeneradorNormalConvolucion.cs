@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 {
@@ -69,6 +70,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
                 if (i == 0) { inicializarMenorMayor(aleatorio); }
                 actualizarMayor(aleatorio);
                 actualizarMenor(aleatorio);
+                //if(menor < 0) { MessageBox.Show(menor.ToString()); }
 
                 dataRow = dataTable.NewRow();
                 dataRow[0] = i+1;
@@ -82,7 +84,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
 
         private void inicializarMenorMayor(float numero)
         {
-            menor = truncador.truncar(Math.Floor(numero));
+            menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
             mayor = truncador.truncar(Math.Ceiling(numero));
         }
 
@@ -90,7 +92,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         {
             if (numero < menor)
             {
-                menor = truncador.truncar(Math.Floor(numero));
+                menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
             }
         }
 

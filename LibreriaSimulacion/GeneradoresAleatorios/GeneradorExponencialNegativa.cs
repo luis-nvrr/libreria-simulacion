@@ -68,14 +68,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         }
         private void inicializarMenorMayor(float numero)
         {
-            menor = truncador.truncar(Math.Floor(numero));
+            menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
             mayor = truncador.truncar(Math.Ceiling(numero));
         }
         private void actualizarMenor(float numero)
         {
             if (numero < menor)
             {
-                menor = truncador.truncar(Math.Floor(numero));
+                menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
             }
         }
 
