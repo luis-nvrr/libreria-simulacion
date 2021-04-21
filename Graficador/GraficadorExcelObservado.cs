@@ -70,7 +70,7 @@ namespace Numeros_aleatorios.grafico_excel
             
             int indice = 1;
 
-            for (int i=0 ; i < frecuenciaObservada.Length; i++)
+            for (int i=0 ; i < inicioIntervalos.Length; i++)
             {
                 xlWorkSheet.Cells[i + 2, 1] = (i + 1).ToString();
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
