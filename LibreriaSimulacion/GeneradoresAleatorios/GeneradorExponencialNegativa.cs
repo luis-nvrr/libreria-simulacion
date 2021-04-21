@@ -69,14 +69,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         }
         private void inicializarMenorMayor(float numero)
         {
-            menor = numero - 0.0001f;
-            mayor = numero + 0.0001f;
+            menor = numero;
+            mayor = numero;
         }
         private void actualizarMenor(float numero)
         {
             if (numero < menor)
             {
-                menor = numero - 0.0001f;
+                menor = numero - 0.00001f ;
             }
         }
 
@@ -84,7 +84,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         {
             if (numero > mayor)
             {
-                mayor = numero + 0.0001f;
+                mayor = numero  + 0.00001f;
             }
         }
 
