@@ -36,12 +36,6 @@ namespace Numeros_aleatorios
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             tomarEntrada();
@@ -79,6 +73,7 @@ namespace Numeros_aleatorios
             frecuenciaObservada = new int[cantidadIntervalos];
 
             double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
+            MessageBox.Show(frecuenciaObservada.Length.ToString());
             float inicioIntervalo;
             float finIntervalo;
 
@@ -97,6 +92,7 @@ namespace Numeros_aleatorios
 
             inicioIntervalos = new float[cantidadIntervalos];
             finIntervalos = new float[cantidadIntervalos];
+
 
             for (int i = 0; i < cantidadIntervalos; i++)
             {
@@ -123,20 +119,6 @@ namespace Numeros_aleatorios
                     if (truncado >= inicioIntervalo &&
                            truncado <= finIntervalo)
                     {
-                        esperadaAcumuladaAnterior = 0;
-                        observadaAcumuladaAnterior = 0;
-                       
-                        if (j != 0 && tabla2.Rows[j - 1][6].ToString() != "") 
-                        {
-                            esperadaAcumuladaAnterior = double.Parse(tabla2.Rows[j - 1][6].ToString());
-                            
-                        }
-                        if (j != 0 && tabla2.Rows[j - 1][5].ToString() != "")
-                        {
-                            observadaAcumuladaAnterior = double.Parse(tabla2.Rows[j - 1][5].ToString());
-
-                        }
-                       
                         intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
                         frecuenciaObservada[j] += 1;
 
@@ -148,20 +130,37 @@ namespace Numeros_aleatorios
                         tabla2.Rows[j][2] = frecuenciaEsperada;
                         tabla2.Rows[j][3] = probabilidadObservada;
                         tabla2.Rows[j][4] = probabilidadEsperada;
-                        tabla2.Rows[j][5] = truncarDecimales(double.Parse(tabla2.Rows[j][3].ToString()) + observadaAcumuladaAnterior);
-                        tabla2.Rows[j][6] = truncarDecimales(double.Parse(tabla2.Rows[j][4].ToString()) + esperadaAcumuladaAnterior);
-
-                        double diferencia = Math.Abs(double.Parse(tabla2.Rows[j][5].ToString()) - double.Parse(tabla2.Rows[j][6].ToString()));
-                        tabla2.Rows[j][7] = truncarDecimales(diferencia);                   
                         break;
                     } 
                 }
             }
+
+            for (int i = 0; i < cantidadIntervalos; i++)
+            {
+                esperadaAcumuladaAnterior = 0;
+                observadaAcumuladaAnterior = 0;
+
+                if (i != 0 && tabla2.Rows[i - 1][6].ToString() != "")
+                {
+                    esperadaAcumuladaAnterior = double.Parse(tabla2.Rows[i - 1][6].ToString());
+
+                }
+                if (i != 0 && tabla2.Rows[i - 1][5].ToString() != "")
+                {
+                    observadaAcumuladaAnterior = double.Parse(tabla2.Rows[i - 1][5].ToString());
+                }
+
+                tabla2.Rows[i][5] = truncarDecimales(double.Parse(tabla2.Rows[i][3].ToString()) + observadaAcumuladaAnterior);
+                tabla2.Rows[i][6] = truncarDecimales(double.Parse(tabla2.Rows[i][4].ToString()) + esperadaAcumuladaAnterior);
+                double diferencia = Math.Abs(double.Parse(tabla2.Rows[i][5].ToString()) - double.Parse(tabla2.Rows[i][6].ToString()));
+                tabla2.Rows[i][7] = truncarDecimales(diferencia);
+            }
+
             tabla2.Rows[0][8] = tabla2.Rows[0][7];
 
-            for(int i = 1; i < cantidadIntervalos; i++)
+            for (int i = 1; i < cantidadIntervalos; i++)
             {
-                maximo = max(double.Parse(tabla2.Rows[i-1][8].ToString()), double.Parse(tabla2.Rows[i][7].ToString()));
+                maximo = max(double.Parse(tabla2.Rows[i - 1][8].ToString()), double.Parse(tabla2.Rows[i][7].ToString()));
                 tabla2.Rows[i][8] = truncarDecimales(maximo);
             }
 
@@ -178,12 +177,13 @@ namespace Numeros_aleatorios
             graficador.finIntervalos = this.finIntervalos;
             graficador.Show();
         }
+
         public void evaluarHipotesis()
         {
             txtGradosLibertad.Text = n.ToString();
-            double tabulado = truncarDecimales( 1.36f / Math.Sqrt(n));
+            double tabulado = truncarDecimales(1.36f / Math.Sqrt(n));
             txtProbabilidad.Text = tabulado.ToString();
-            if (double.Parse(tabla2.Rows[cantidadIntervalos -1][8].ToString()) <= tabulado)
+            if (double.Parse(tabla2.Rows[cantidadIntervalos - 1][8].ToString()) <= tabulado)
             {
                 lblResultadoHipotesis.Text = "Con un nivel de significancia de 0,05 NO se rechaza la hipotesis nula";
             }

@@ -63,9 +63,18 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             if(cantidadAleatorios <=0) { MessageBox.Show("El tamaño de la muestra debe ser mayor a 0..."); }
             if (cantidadAleatorios > 0)
             {
+                tablaAleatorios.Clear();
                 generarNumerosAleatorios();
             }
+        }
 
+        private void tomarEntrada()
+        {
+            cantidadAleatorios = int.Parse(tamanioMuestra.Text);
+            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
+            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
+            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
+            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
         }
 
         public void generarNumerosAleatorios()
@@ -88,6 +97,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         private void construirTabla()
         {
+            tablaResultados.Clear();
             DataRow row;
             float frecuenciaEsperada = truncador.truncar((double)cantidadAleatorios / (double)cantidadIntervalos);
             double estadisticoPrueba;
@@ -107,7 +117,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             }
             grdResultados2.DataSource = tablaResultados;
         }
-
 
         public void evaluarHipotesis()
         {
@@ -135,16 +144,6 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
             graficador.Show();
         }
         
-
-        private void tomarEntrada()
-        {
-            cantidadAleatorios = int.Parse(tamanioMuestra.Text);
-            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
-            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
-            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
-            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
-        }
-
         public String tabla1ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();

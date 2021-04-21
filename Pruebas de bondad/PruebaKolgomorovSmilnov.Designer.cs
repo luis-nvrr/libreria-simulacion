@@ -81,7 +81,6 @@ namespace Numeros_aleatorios
             this.lblTitulo.Size = new System.Drawing.Size(452, 41);
             this.lblTitulo.TabIndex = 1;
             this.lblTitulo.Text = "Prueba  De Kolgomorov-Smilnov";
-            this.lblTitulo.Click += new System.EventHandler(this.label2_Click);
             // 
             // panel1
             // 
