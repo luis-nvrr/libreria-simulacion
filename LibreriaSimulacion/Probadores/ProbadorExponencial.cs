@@ -101,7 +101,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             double estadisticoPrueba;
             double estadisticoPruebaAcumuladoAnterior = 0;
             float marcaClase;
-            double funcionDensidad;
             double probabilidad;
             float cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;

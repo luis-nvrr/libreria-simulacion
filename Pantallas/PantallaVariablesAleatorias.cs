@@ -17,24 +17,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 {
     public partial class PantallaVariablesAleatorias : Form
     {
-        IGenerador generadorDistribucion;
-        GeneradorUniformeLenguaje generadorLenguaje;
-        Truncador truncador;
-        GeneradorIntervalosUniformeAB generadorIntervalos;
-        GraficadorExcelObservado graficador;
-        ContadorFrecuenciaObservada contador;
-
-        float[] inicioIntervalos;
-        float[] finIntervalos;
-        int[] valoresDiscretos;
+        GestorUniforme gestorUniforme;
+        GestorExponencial gestorExponencial;
+        GestorNormalBoxMuller gestorNormalBoxMuller;
+        GestorNormalConvolucion gestorNormalConvolucion;
+        GestorPoisson gestorPoisson;
 
         int cantidadValores;
         int cantidadIntervalos;
-        int[] frecuenciasObservadas;
-
-        DataTable dataTable;
-
-        IProbador probador;
 
         public PantallaVariablesAleatorias()
         {
@@ -43,31 +33,36 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void PantallaPruebaGenerador_Load(object sender, EventArgs e)
         {
-            truncador = new Truncador(4);
-            grdResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataTable = new DataTable();
-            dataTable.Columns.Add("iteracion");
-            dataTable.Columns.Add("aleatorio");
-            generadorLenguaje = new GeneradorUniformeLenguaje(truncador);
-        }
-
-        private void tomarEntrada()
-        {
-            cantidadValores = int.Parse(txtCantidadValores.Text);
-            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
-            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
-            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
-            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
+            this.cantidadValores = 1000;
+            this.cantidadIntervalos = 20;
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
+            limpiarControles();
+            tomasCantidadValores();
+            tomarCantidadIntervalos();
+            generarVariablesAleatorias();
+        }
+
+        private void limpiarControles()
+        {
             gbGrafico.Controls.Clear();
             grdResultados.DataSource = null;
-            dataTable.Rows.Clear();
             gbGrafico.Controls.Clear();
-            tomarEntrada();
-            generarVariablesAleatorias();
+        }
+
+        private void tomasCantidadValores()
+        {
+            cantidadValores = int.Parse(txtCantidadValores.Text);
+        }
+
+        private void tomarCantidadIntervalos()
+        {
+            if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
+            if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
+            if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
+            if (rb20.Checked) { cantidadIntervalos = int.Parse(rb20.Text); }
         }
 
         private void generarVariablesAleatorias()
@@ -99,61 +94,46 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             }
         }
 
-
         private void generarUniforme()
         {
+            gestorUniforme = new GestorUniforme(this);
             float a = float.Parse(txtA.Text);
             float b = float.Parse(txtB.Text);
-
-            if (b < a) { return; }
-
-            generarIntervalosUniforme(a,b);
-            contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            generadorDistribucion = new GeneradorUniformeAB(dataTable, generadorLenguaje, truncador, a, b);
-            generadorDistribucion.generarSerie(cantidadValores, contador); 
-            grdResultados.DataSource = dataTable;
-            frecuenciasObservadas = contador.obtenerFrecuencias();
-
-            probador = new ProbadorUniforme(truncador, dataTable, inicioIntervalos, finIntervalos, frecuenciasObservadas);
+            gestorUniforme.generarUniforme(a,b, cantidadValores, cantidadIntervalos);
         }
-
-        private void generarIntervalosUniforme(float a, float b)
-        {
-            generadorIntervalos = new GeneradorIntervalosUniformeAB(truncador);
-            generadorIntervalos.generarIntervalos(cantidadIntervalos, a, b);
-            inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
-            finIntervalos = generadorIntervalos.obtenerFinIntervalos();
-        }
-
-        private void probarUniforme()
-        {
-            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
-            pantallaPrueba.probador = probador;
-            pantallaPrueba.Show();
-        }
-
 
         private void generarExponencial()
         {
-            double[] parametros = calcularLambdaExponencial();
+            gestorExponencial = new GestorExponencial(this);
+            double[] exponencial = calcularLambdaExponencial();
+            double lambda = exponencial[0];
+            double media = exponencial[1];
+            gestorExponencial.generarExponencial(lambda, media, cantidadValores, cantidadIntervalos);
+        }
+
+        private void generarNormalBoxMuller()
+        {
+            gestorNormalBoxMuller = new GestorNormalBoxMuller(this);
+            double desviacion = double.Parse(txtDesviacionNormalBoxMuller.Text);
+            double media = double.Parse(txtMediaNormalBoxMuller.Text);
+            gestorNormalBoxMuller.generarNormalBoxMuller(media, desviacion, cantidadValores, cantidadIntervalos);
+        }
+
+        private void generarNormalConvolucion()
+        {
+            gestorNormalConvolucion = new GestorNormalConvolucion(this);
+            double desviacion = double.Parse(txtDesviacionNormalConvolucion.Text);
+            double media = double.Parse(txtMediaNormalConvolucion.Text);
+            gestorNormalConvolucion.generarNormalConvolucion(media, desviacion, cantidadValores, cantidadIntervalos);
+        }
+
+        private void generarPoisson()
+        {
+            gestorPoisson = new GestorPoisson(this);
+            double[] parametros = calcularLambdaPoisson();
             double lambda = parametros[0];
             double media = parametros[1];
-
-            if (lambda < 0 || media < 0) { return; }
-
-            // TODO generar intervalos
-
-            generadorDistribucion = new GeneradorExponencialNegativa(dataTable, generadorLenguaje, truncador, lambda);
-            generadorDistribucion.generarSerie(cantidadValores);
-            grdResultados.DataSource = dataTable;
-
-            float menor = ((GeneradorExponencialNegativa)generadorDistribucion).getMenor();
-            float mayor = ((GeneradorExponencialNegativa)generadorDistribucion).getMayor();
-
-            generarIntervalosNormal(menor, mayor);
-            obtenerFrecuenciasObservadasNormal(dataTable);
-
-            probador = new ProbadorExponencial(truncador, dataTable, media, lambda, cantidadIntervalos, mayor, menor);
+            gestorPoisson.generarPoisson(lambda, media, cantidadValores);
         }
 
         private double[] calcularLambdaExponencial()
@@ -172,110 +152,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             media = 1 / lambda;
             txtMediaExponencial.Text = media.ToString();
 
-            return new double[]{lambda, media};
+            return new double[] { lambda, media };
         }
 
-        private void generarNormalBoxMuller()
+        public void mostrarResultados(DataTable resultados)
         {
-            double desviacion = double.Parse(txtDesviacionNormalBoxMuller.Text);
-            double media = double.Parse(txtMediaNormalBoxMuller.Text);
-
-            if (desviacion < 0 || media < 0) { return; } //restriccion
-
-            generadorDistribucion = new GeneradorNormalBoxMuller(dataTable, generadorLenguaje, truncador, desviacion, media);
-            generadorDistribucion.generarSerie(cantidadValores);
-            grdResultados.DataSource = dataTable;
-
-            float menor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMenor();
-            float mayor = ((GeneradorNormalBoxMuller)generadorDistribucion).getMayor();
-
-            generarIntervalosNormal(menor, mayor);
-            obtenerFrecuenciasObservadasNormal(dataTable);
-
-            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, inicioIntervalos, finIntervalos, frecuenciasObservadas);
-        }
-
-        private void generarIntervalosNormal(float menor, float mayor)
-        {
-            GeneradorIntervalosNormal generadorIntervalos = new GeneradorIntervalosNormal(truncador);
-            generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
-            this.inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
-            this.finIntervalos = generadorIntervalos.obtenerFinIntervalos();
-        }
-
-        private void obtenerFrecuenciasObservadasNormal(DataTable numeros)
-        {
-            ContadorFrecuenciaObservada contadorFrecuencias = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
-            contadorFrecuencias.contarFrecuenciaSerie(numeros);
-            frecuenciasObservadas = contadorFrecuencias.obtenerFrecuencias();
-        }
-
-        private void probarNormalBoxMuller()
-        {
-            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
-            pantallaPrueba.probador = probador;
-            pantallaPrueba.Show();
-        }
-
-        private void generarNormalConvolucion()
-        {
-            double desviacion = double.Parse(txtDesviacionNormalConvolucion.Text);
-            double media = double.Parse(txtMediaNormalConvolucion.Text);
-
-            if (desviacion < 0 || media < 0) { return; } //restriccion
-
-            generadorDistribucion = new GeneradorNormalConvolucion(dataTable, generadorLenguaje, truncador, desviacion, media);
-            generadorDistribucion.generarSerie(cantidadValores);
-            grdResultados.DataSource = dataTable;
-
-            float menor = ((GeneradorNormalConvolucion)generadorDistribucion).getMenor();
-            float mayor = ((GeneradorNormalConvolucion)generadorDistribucion).getMayor();
-
-            generarIntervalosNormal(menor, mayor);
-            obtenerFrecuenciasObservadasNormal(dataTable);
-
-            probador = new ProbadorNormal(truncador, dataTable, media, desviacion, inicioIntervalos, finIntervalos, frecuenciasObservadas);
-        }
-
-        private void probarNormalConvolucion()
-        {
-            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
-            pantallaPrueba.probador = probador;
-            pantallaPrueba.Show();
-        }
-
-        private void generarPoisson()
-        {
-            double[] parametros = calcularLambdaPoisson();
-            double lambda = parametros[0];
-            double media = parametros[1];
-
-            if(media < 0) { return; }
-
-            contador = new ContadorFrecuenciaObservada();
-            generadorDistribucion = new GeneradorPoisson(dataTable, generadorLenguaje, truncador, lambda);
-            generadorDistribucion.generarSerie(cantidadValores, contador);
-
-            grdResultados.DataSource = dataTable;
-
-            contador.ordenarSeriePoisson();
-            frecuenciasObservadas = contador.getFrecuenciasPoisson();
-            valoresDiscretos = contador.getValoresPoisson();
-
-            probador = new ProbadorPoisson(truncador, dataTable, lambda, valoresDiscretos, frecuenciasObservadas);
-        }
-
-        private void probarPoisson()
-        {
-            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
-            pantallaPrueba.probador = probador;
-            pantallaPrueba.Show();
-        }
-        private void probarExponencial()
-        {
-            PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
-            pantallaPrueba.probador = probador;
-            pantallaPrueba.Show();
+            this.grdResultados.DataSource = resultados;
         }
 
         private double[] calcularLambdaPoisson()
@@ -297,18 +179,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return new double[] { lambda, media };
         }
 
-        private void mostrarGrafico()
+        public void mostrarGrafico(GraficadorExcelObservado graficador)
         {
-            graficador = new GraficadorExcelObservado();
-            graficador.frecuenciaObservada = frecuenciasObservadas;
-            graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
-            graficador.inicioIntervalos = this.inicioIntervalos;
-            graficador.finIntervalos = this.finIntervalos;
-
-            if (rbPoisson.Checked) { graficador.valoresDiscretos = this.valoresDiscretos; }
-            else { graficador.valoresDiscretos = null; }
-           
-
             gbGrafico.Controls.Clear();
             graficador.TopLevel = false;
             graficador.AutoScroll = true;
@@ -388,9 +260,91 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             if (!rb20.Enabled) { rb20.Enabled = true; }
         }
 
+        private void probar()
+        {
+            if (rbUniforme.Checked)
+            {
+                gestorUniforme.probar();
+                return;
+            }
+            if (rbNormalBoxMuller.Checked)
+            {
+                gestorNormalBoxMuller.probar();
+                return;
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                gestorNormalConvolucion.probar();
+                return;
+            }
+            if (rbExponencial.Checked)
+            {
+                gestorExponencial.probar();
+                return;
+            }
+            if (rbPoisson.Checked)
+            {
+                gestorPoisson.probar();
+                return;
+            }
+        }
+
+        private String copiarTabla()
+        {
+            if (rbUniforme.Checked)
+            {
+                return gestorUniforme.copiar();
+                
+            }
+            if (rbNormalBoxMuller.Checked)
+            {
+                return gestorNormalBoxMuller.copiar();
+                
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                return gestorNormalConvolucion.copiar();
+
+            }
+            if (rbExponencial.Checked)
+            {
+                return gestorExponencial.copiar();
+
+            }
+            if (rbPoisson.Checked)
+            {
+                return gestorPoisson.copiar();
+            }
+            return "";
+        }
+
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            mostrarGrafico();
+            if (rbUniforme.Checked)
+            {
+                gestorUniforme.graficar();
+                return;
+            }
+            if (rbNormalBoxMuller.Checked)
+            {
+                gestorNormalBoxMuller.graficar();
+                return;
+            }
+            if (rbNormalConvolucion.Checked)
+            {
+                gestorNormalConvolucion.graficar();
+                return;
+            }
+            if (rbExponencial.Checked)
+            {
+                gestorExponencial.graficar();
+                return;
+            }
+            if (rbPoisson.Checked)
+            {
+                gestorPoisson.graficar();
+                return;
+            }
         }
 
         private void rbUniforme_CheckedChanged(object sender, EventArgs e)
@@ -415,48 +369,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void btnJi_Click(object sender, EventArgs e)
         {
-            if (rbUniforme.Checked)
-            {
-                probarUniforme();
-                return;
-            }
-            if (rbNormalBoxMuller.Checked)
-            {
-                probarNormalBoxMuller();
-                return;
-            }
-            if (rbNormalConvolucion.Checked)
-            {
-                probarNormalConvolucion();
-                return;
-            }
-            if (rbExponencial.Checked)
-            {
-                probarExponencial();
-                return;
-            }
-            if (rbPoisson.Checked)
-            {
-                probarPoisson();
-                return;
-            }
-        }
-
-        private String tablaToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString());
-                stringBuilder.Append("\n");
-            }
-            return stringBuilder.ToString();
+            probar();
         }
 
         private void btnCopiar_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(tablaToString());
+            Clipboard.SetText(copiarTabla());
             MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
     }
 }
