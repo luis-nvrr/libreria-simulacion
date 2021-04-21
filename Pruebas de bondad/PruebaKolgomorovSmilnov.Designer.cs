@@ -49,6 +49,7 @@ namespace Numeros_aleatorios
             this.lblGradosLibertad = new System.Windows.Forms.Label();
             this.lblResultadoHipotesis = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnPrueba = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.rb20 = new System.Windows.Forms.RadioButton();
             this.rb15 = new System.Windows.Forms.RadioButton();
@@ -56,6 +57,8 @@ namespace Numeros_aleatorios
             this.rb5 = new System.Windows.Forms.RadioButton();
             this.btnCopiarTabla1 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.lblCalculado = new System.Windows.Forms.Label();
+            this.txtCalculado = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados2)).BeginInit();
@@ -112,7 +115,7 @@ namespace Numeros_aleatorios
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(311, 95);
+            this.btnGenerar.Location = new System.Drawing.Point(311, 71);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(75, 23);
             this.btnGenerar.TabIndex = 6;
@@ -186,7 +189,7 @@ namespace Numeros_aleatorios
             // lblProbabilidad
             // 
             this.lblProbabilidad.AutoSize = true;
-            this.lblProbabilidad.Location = new System.Drawing.Point(26, 539);
+            this.lblProbabilidad.Location = new System.Drawing.Point(12, 530);
             this.lblProbabilidad.Name = "lblProbabilidad";
             this.lblProbabilidad.Size = new System.Drawing.Size(64, 15);
             this.lblProbabilidad.TabIndex = 15;
@@ -194,14 +197,14 @@ namespace Numeros_aleatorios
             // 
             // txtProbabilidad
             // 
-            this.txtProbabilidad.Location = new System.Drawing.Point(96, 536);
+            this.txtProbabilidad.Location = new System.Drawing.Point(82, 528);
             this.txtProbabilidad.Name = "txtProbabilidad";
             this.txtProbabilidad.Size = new System.Drawing.Size(53, 23);
             this.txtProbabilidad.TabIndex = 16;
             // 
             // txtGradosLibertad
             // 
-            this.txtGradosLibertad.Location = new System.Drawing.Point(290, 536);
+            this.txtGradosLibertad.Location = new System.Drawing.Point(271, 528);
             this.txtGradosLibertad.Name = "txtGradosLibertad";
             this.txtGradosLibertad.Size = new System.Drawing.Size(53, 23);
             this.txtGradosLibertad.TabIndex = 17;
@@ -209,7 +212,7 @@ namespace Numeros_aleatorios
             // lblGradosLibertad
             // 
             this.lblGradosLibertad.AutoSize = true;
-            this.lblGradosLibertad.Location = new System.Drawing.Point(178, 539);
+            this.lblGradosLibertad.Location = new System.Drawing.Point(159, 530);
             this.lblGradosLibertad.Name = "lblGradosLibertad";
             this.lblGradosLibertad.Size = new System.Drawing.Size(106, 15);
             this.lblGradosLibertad.TabIndex = 18;
@@ -218,7 +221,7 @@ namespace Numeros_aleatorios
             // lblResultadoHipotesis
             // 
             this.lblResultadoHipotesis.AutoSize = true;
-            this.lblResultadoHipotesis.Location = new System.Drawing.Point(373, 539);
+            this.lblResultadoHipotesis.Location = new System.Drawing.Point(692, 530);
             this.lblResultadoHipotesis.Name = "lblResultadoHipotesis";
             this.lblResultadoHipotesis.Size = new System.Drawing.Size(111, 15);
             this.lblResultadoHipotesis.TabIndex = 19;
@@ -226,6 +229,7 @@ namespace Numeros_aleatorios
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnPrueba);
             this.groupBox1.Controls.Add(this.btnMostrar);
             this.groupBox1.Controls.Add(this.rb20);
             this.groupBox1.Controls.Add(this.rb15);
@@ -240,6 +244,16 @@ namespace Numeros_aleatorios
             this.groupBox1.Size = new System.Drawing.Size(386, 152);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
+            // 
+            // btnPrueba
+            // 
+            this.btnPrueba.Location = new System.Drawing.Point(311, 100);
+            this.btnPrueba.Name = "btnPrueba";
+            this.btnPrueba.Size = new System.Drawing.Size(75, 23);
+            this.btnPrueba.TabIndex = 13;
+            this.btnPrueba.Text = "Prueba";
+            this.btnPrueba.UseVisualStyleBackColor = true;
+            this.btnPrueba.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnMostrar
             // 
@@ -307,7 +321,7 @@ namespace Numeros_aleatorios
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(815, 519);
+            this.button1.Location = new System.Drawing.Point(1076, 519);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 31);
             this.button1.TabIndex = 22;
@@ -315,11 +329,29 @@ namespace Numeros_aleatorios
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // lblCalculado
+            // 
+            this.lblCalculado.AutoSize = true;
+            this.lblCalculado.Location = new System.Drawing.Point(373, 531);
+            this.lblCalculado.Name = "lblCalculado";
+            this.lblCalculado.Size = new System.Drawing.Size(60, 15);
+            this.lblCalculado.TabIndex = 23;
+            this.lblCalculado.Text = "Calculado";
+            // 
+            // txtCalculado
+            // 
+            this.txtCalculado.Location = new System.Drawing.Point(439, 527);
+            this.txtCalculado.Name = "txtCalculado";
+            this.txtCalculado.Size = new System.Drawing.Size(53, 23);
+            this.txtCalculado.TabIndex = 24;
+            // 
             // PruebaKolgomorovSmilnov
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 571);
+            this.Controls.Add(this.txtCalculado);
+            this.Controls.Add(this.lblCalculado);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCopiarTabla1);
             this.Controls.Add(this.groupBox1);
@@ -377,5 +409,8 @@ namespace Numeros_aleatorios
         private System.Windows.Forms.Button btnCopiarTabla1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnMostrar;
+        private System.Windows.Forms.Button btnPrueba;
+        private System.Windows.Forms.Label lblCalculado;
+        private System.Windows.Forms.TextBox txtCalculado;
     }
 }

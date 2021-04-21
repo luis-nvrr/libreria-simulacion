@@ -1,4 +1,6 @@
 ﻿using Numeros_aleatorios.grafico_excel;
+using Numeros_aleatorios.LibreriaSimulacion;
+using Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,13 +18,14 @@ namespace Numeros_aleatorios
         int indice = -1;
         int n;
         int cantidadIntervalos;
-        int[] frecuenciaObservada;
+        int[] frecuenciasObservadas;
         float[] inicioIntervalos;
         float[] finIntervalos;
         Random random;
-        DataTable tabla1;
+        DataTable tablaAleatorios;
         DataTable tabla2;
         GraficadorExcelObservado graficador;
+        Truncador truncador;
         
         double esperadaAcumuladaAnterior;
         double observadaAcumuladaAnterior;
@@ -36,14 +39,38 @@ namespace Numeros_aleatorios
             InitializeComponent();
         }
 
+        private void PruebaKolgomorovSmilnov_Load(object sender, EventArgs e)
+        {
+            tablaAleatorios = new DataTable();
+            tabla2 = new DataTable();
+            random = new Random();
+            truncador = new Truncador(4);
+
+            tablaAleatorios.Columns.Add("Iteración");
+            tablaAleatorios.Columns.Add("Número Aleatorio");
+
+            tabla2.Columns.Add("Intervalo");
+            tabla2.Columns.Add("Frecuencia Observada");
+            tabla2.Columns.Add("Frecuencia Esperada");
+            tabla2.Columns.Add("PO");
+            tabla2.Columns.Add("PE");
+            tabla2.Columns.Add("PO(ac)");
+            tabla2.Columns.Add("PE(ac)");
+            tabla2.Columns.Add("| PoAC - PeAC |");
+            tabla2.Columns.Add("max(| PoAC - PeAC |)");
+
+        }
+
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             tomarEntrada();
             if (n <= 0) { MessageBox.Show("El tamaño de la muestra debe ser mayor a 0..."); }
             if (n > 0)
             {
-                generarNumerosAleatorios();
-                evaluarHipotesis();
+                tablaAleatorios.Clear();
+                tabla2.Clear();
+                generarAleatorios();
+                
             }
         }
 
@@ -61,117 +88,78 @@ namespace Numeros_aleatorios
             return b;
         }
 
-
-
-        private void generarNumerosAleatorios()
+        private void generarAleatorios()
         {
-            tabla1.Rows.Clear();
-            tabla2.Rows.Clear();
-            
-            indice = -1;
-
-            frecuenciaObservada = new int[cantidadIntervalos];
-
-            double longitudIntervalo = 1.0f / frecuenciaObservada.Length;
-            MessageBox.Show(frecuenciaObservada.Length.ToString());
-            float inicioIntervalo;
-            float finIntervalo;
-
-            string intervalo;
-            
-
-            float probabilidadEsperada = truncarDecimales(1.0f / cantidadIntervalos);
-            float probabilidadObservada;
-            float frecuenciaEsperada = n / cantidadIntervalos ;
-
-            double maximo = 0;
-            // genera aleatorios y se fija en que intervalo pertenece
-
-            DataRow filatabla1;
-            DataRow filatabla2;
-
             inicioIntervalos = new float[cantidadIntervalos];
             finIntervalos = new float[cantidadIntervalos];
+            GeneradorIntervalosUniforme intervalos = new GeneradorIntervalosUniforme(truncador);
 
+            intervalos.generarIntervalos(cantidadIntervalos);
+            inicioIntervalos = intervalos.obtenerInicioIntervalos();
+            finIntervalos = intervalos.obtenerFinIntervalos();
 
-            for (int i = 0; i < cantidadIntervalos; i++)
+            ContadorFrecuenciaObservada contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
+            IGenerador generador = new GeneradorUniformeLenguaje(tablaAleatorios, truncador);
+            generador.generarSerie(n, contador);
+
+            grdResultados.DataSource = tablaAleatorios;
+            frecuenciasObservadas = contador.obtenerFrecuencias();
+        }
+
+        private void construirTabla()
+        {
+            tabla2.Clear();
+            DataRow row;
+            float frecuenciaEsperada = truncador.truncar((double)n / (double)cantidadIntervalos);
+            float probabilidadObservada;
+            float probabilidadEsperada = truncarDecimales(1.0f / cantidadIntervalos);
+            double esperadaAcumuladaAnterior = 0;
+            double observadaAcumuladaAnterior = 0;
+            double maximo = 0;
+
+            for (int i=0; i < cantidadIntervalos; i++)
             {
-                filatabla2 = tabla2.NewRow();
-                tabla2.Rows.Add(filatabla2);                
-            }
 
-            for (int i = 0; i < n; i++)
-            {
-                float truncado = truncarDecimales(random.NextDouble());
 
-                filatabla1 = tabla1.NewRow(); 
-                filatabla1[0] = i + 1;
-                filatabla1[1] = truncado;
-                tabla1.Rows.Add(filatabla1);
+                row = tabla2.NewRow();
+                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[1] = frecuenciasObservadas[i];
+                row[2] = frecuenciaEsperada;
+
+                probabilidadObservada = truncarDecimales((double)frecuenciasObservadas[i] / n);
+                row[3] = probabilidadObservada;
+                row[4] = probabilidadEsperada;
+
+                row[5] = truncador.truncar(observadaAcumuladaAnterior + probabilidadObservada);
+                observadaAcumuladaAnterior += probabilidadObservada;
+
+                row[6] = truncador.truncar(esperadaAcumuladaAnterior + probabilidadEsperada);
+                esperadaAcumuladaAnterior += probabilidadEsperada;
+
+                double diferencia = Math.Abs(observadaAcumuladaAnterior - esperadaAcumuladaAnterior);
+                row[7] = truncador.truncar(diferencia);
                 
-                for (int j = 0; j < frecuenciaObservada.Length; j++)
+                if (i == 0)
                 {
-                    inicioIntervalo = truncarDecimales(longitudIntervalo * j);
-                    finIntervalo = truncarDecimales(longitudIntervalo * (1 + j) - 0.0001f);
-                    inicioIntervalos[j] = inicioIntervalo;
-                    finIntervalos[j] = finIntervalo;
-
-                    if (truncado >= inicioIntervalo &&
-                           truncado <= finIntervalo)
-                    {
-                        intervalo = "[" + inicioIntervalo + "; " + finIntervalo + "]";
-                        frecuenciaObservada[j] += 1;
-
-                        probabilidadObservada = truncarDecimales((double)frecuenciaObservada[j] / n);                        
-                        // agrega fila y columnas de frecuencias esperadas y observadas
-
-                        tabla2.Rows[j][0] = intervalo;
-                        tabla2.Rows[j][1] = frecuenciaObservada[j];
-                        tabla2.Rows[j][2] = frecuenciaEsperada;
-                        tabla2.Rows[j][3] = probabilidadObservada;
-                        tabla2.Rows[j][4] = probabilidadEsperada;
-                        break;
-                    } 
+                    maximo = diferencia;
                 }
-            }
-
-            for (int i = 0; i < cantidadIntervalos; i++)
-            {
-                esperadaAcumuladaAnterior = 0;
-                observadaAcumuladaAnterior = 0;
-
-                if (i != 0 && tabla2.Rows[i - 1][6].ToString() != "")
+                else
                 {
-                    esperadaAcumuladaAnterior = double.Parse(tabla2.Rows[i - 1][6].ToString());
-
+                    maximo = max(maximo,diferencia);
                 }
-                if (i != 0 && tabla2.Rows[i - 1][5].ToString() != "")
-                {
-                    observadaAcumuladaAnterior = double.Parse(tabla2.Rows[i - 1][5].ToString());
-                }
+                row[8] = truncador.truncar(maximo);
 
-                tabla2.Rows[i][5] = truncarDecimales(double.Parse(tabla2.Rows[i][3].ToString()) + observadaAcumuladaAnterior);
-                tabla2.Rows[i][6] = truncarDecimales(double.Parse(tabla2.Rows[i][4].ToString()) + esperadaAcumuladaAnterior);
-                double diferencia = Math.Abs(double.Parse(tabla2.Rows[i][5].ToString()) - double.Parse(tabla2.Rows[i][6].ToString()));
-                tabla2.Rows[i][7] = truncarDecimales(diferencia);
+                tabla2.Rows.Add(row);
             }
-
-            tabla2.Rows[0][8] = tabla2.Rows[0][7];
-
-            for (int i = 1; i < cantidadIntervalos; i++)
-            {
-                maximo = max(double.Parse(tabla2.Rows[i - 1][8].ToString()), double.Parse(tabla2.Rows[i][7].ToString()));
-                tabla2.Rows[i][8] = truncarDecimales(maximo);
-            }
-
-            grdResultados.DataSource = tabla1;
+            txtCalculado.Text = truncador.truncar(maximo).ToString();
             grdResultados2.DataSource = tabla2;
         }
 
+        
         public void mostrarGrafico()
         {
             graficador = new GraficadorExcelObservado();
-            graficador.frecuenciaObservada = frecuenciaObservada;
+            graficador.frecuenciaObservada = frecuenciasObservadas;
            //graficador.nombre = gbDistribuciones.Controls.OfType<RadioButton>().FirstOrDefault(n => n.Checked).Text;
             graficador.inicioIntervalos = this.inicioIntervalos;
             graficador.finIntervalos = this.finIntervalos;
@@ -181,9 +169,12 @@ namespace Numeros_aleatorios
         public void evaluarHipotesis()
         {
             txtGradosLibertad.Text = n.ToString();
-            double tabulado = truncarDecimales(1.36f / Math.Sqrt(n));
+            double tabulado = (1.36f / Math.Sqrt(n));
             txtProbabilidad.Text = tabulado.ToString();
-            if (double.Parse(tabla2.Rows[cantidadIntervalos - 1][8].ToString()) <= tabulado)
+
+            double calculado = double.Parse(txtCalculado.Text);
+
+            if (calculado <= tabulado)
             {
                 lblResultadoHipotesis.Text = "Con un nivel de significancia de 0,05 NO se rechaza la hipotesis nula";
             }
@@ -193,24 +184,7 @@ namespace Numeros_aleatorios
             }
         }
 
-        private void PruebaKolgomorovSmilnov_Load(object sender, EventArgs e)
-        {
-            tabla1 = new DataTable();
-            tabla2 = new DataTable();
-            random = new Random();
-            tabla1.Columns.Add("Iteración");
-            tabla1.Columns.Add("Número Aleatorio");
-            tabla2.Columns.Add("Intervalo");
-            tabla2.Columns.Add("Frecuencia Observada");
-            tabla2.Columns.Add("Frecuencia Esperada");
-            tabla2.Columns.Add("PO");
-            tabla2.Columns.Add("PE");
-            tabla2.Columns.Add("PO(ac)");
-            tabla2.Columns.Add("PE(ac)");
-            tabla2.Columns.Add("| PoAC - PeAC |");
-            tabla2.Columns.Add("max(| PoAC - PeAC |)");
-
-        }
+        
         private void tomarEntrada()
         {
             n = int.Parse(tamanioMuestra.Text);
@@ -223,7 +197,7 @@ namespace Numeros_aleatorios
         private String tabla1ToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (DataRow row in tabla1.Rows)
+            foreach (DataRow row in tablaAleatorios.Rows)
             {
                 stringBuilder.Append(row[0].ToString()).Append("\t").Append(row[1].ToString());
                 stringBuilder.Append("\n");
@@ -258,8 +232,9 @@ namespace Numeros_aleatorios
             mostrarGrafico();
         }
 
-        private void btnProbar_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
+            construirTabla();
             evaluarHipotesis();
         }
     }
