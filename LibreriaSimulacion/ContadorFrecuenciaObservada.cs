@@ -63,9 +63,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         public string mostrarFrecuencias()
         {
+            int acum = 0;
             string res = " ";
             for (int i = 0; i < cantidadIntervalos; i++)
             {
+                acum += frecuenciaObservada[i];
                 res += inicioIntervalos[i] + " " + finIntervalos[i] + "=" + frecuenciaObservada[i].ToString();
                 res += "\n";
             }
@@ -86,7 +88,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             valoresEnterosPoisson = obtenerValoresPoisson();
             frecuenciasEnterasPoisson = obtenerFrecuenciasPoisson();
             Sort(valoresEnterosPoisson, frecuenciasEnterasPoisson, 0, valoresEnterosPoisson.Length - 1);
-            //mostrarValoresFrecuencias();
 
         }
 

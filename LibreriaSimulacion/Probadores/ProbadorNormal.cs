@@ -52,6 +52,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             construirTablaInicial();
             reestructurarTabla();
             construirTablaFinal();
+            agregarTotalObservada();
         }
 
         private void construirTablaInicial()
@@ -59,10 +60,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             this.resultado = new DataTable();
             crearTabla(resultado);
             DataRow row;
-            double estadisticoPrueba;
-            double estadisticoPruebaAcumuladoAnterior = 0;
             float marcaClase;
-            double funcionDensidad;
             double probabilidad;
             float cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;
@@ -77,24 +75,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
                 row[2] = frecuenciasObservadas[i];
 
-                // utiliza marcas de clase
-                //funcionDensidad = (1.0f / (desviacion * Math.Sqrt(2 * Math.PI))) * Math.Exp((-0.5f) * Math.Pow((marcaClase - media) / desviacion, 2));
-                //probabilidad = funcionDensidad * (finIntervalos[i] - inicioIntervalos[i]);
-                //row[3] = truncador.truncar(probabilidad);  // probabilidad
-
-                // utiliza tabla normal
                 probabilidad = TablaNormal.normal((finIntervalos[i] - media) / desviacion) - TablaNormal.normal((inicioIntervalos[i] - media) / desviacion);
                 row[3] = truncador.truncar(probabilidad);
-                //MessageBox.Show(TablaNormal.normal(1.45f).ToString());
 
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[4] = truncador.truncar(frecuenciaEsperada); // frecuenciaEsperada
 
-                // a partir de aqui no es necesario
-                estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
-                row[5] = truncador.truncar(estadisticoPrueba);
-                row[6] = truncador.truncar(estadisticoPruebaAcumuladoAnterior + estadisticoPrueba);
-                estadisticoPruebaAcumuladoAnterior += estadisticoPrueba;
                 resultado.Rows.Add(row);
             }
         }
@@ -133,7 +119,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public float obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 1][6].ToString());
+            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][6].ToString());
         }
 
         public float getValorCritico()
@@ -191,14 +177,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             this.frecuenciasObservadas = nuevaFrecuenciaObservada.ToArray();
             this.frecuenciasEsperadas = nuevaFrecuenciaEsperada.ToArray();
             this.probabilidades = nuevaProbabilidad.ToArray();
-            //MessageBox.Show(mostrarNuevosIntervalos(nuevoInicioIntervalos, nuevoFinIntervalos));
         }
 
-
-        private void arreglarUltimaFila()
-        {
-
-        }
 
         private void construirTablaFinal()
         {
@@ -213,7 +193,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             for (int i = 0; i < inicioIntervalos.Length; i++)
             {
                 row = resultado.NewRow();
-                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
 
                 marcaClase = truncador.truncar((inicioIntervalos[i] + finIntervalos[i]) / 2.0f);
                 row[1] = marcaClase;
@@ -242,6 +222,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 stringBuilder.Append("\n");
             }
             return stringBuilder.ToString();
+        }
+
+        private void agregarTotalObservada()
+        {
+            int acum = 0;
+            for (int i = 0; i < frecuenciasObservadas.Length; i++)
+            {
+                acum += frecuenciasObservadas[i];
+            }
+            DataRow row = resultado.NewRow();
+            row[2] = acum;
+            resultado.Rows.Add(row);
         }
 
     }
