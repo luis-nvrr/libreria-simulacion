@@ -99,7 +99,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         private int calcularGradosLibertad()
         {
-            return inicioIntervalos.Length - 1;
+            return inicioIntervalos.Length - 1 - 2;
         }
 
         public bool esAceptado()

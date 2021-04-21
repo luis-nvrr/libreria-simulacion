@@ -197,8 +197,23 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             graficador.Show();
         }
 
+        private void limpiarCampos()
+        {
+            txtA.Text = "";
+            txtB.Text = "";
+            txtDesviacionNormalConvolucion.Text = "";
+            txtMediaNormalConvolucion.Text = "";
+            txtDesviacionNormalBoxMuller.Text = "";
+            txtMediaNormalBoxMuller.Text = "";
+            txtMediaPoisson.Text = "";
+            txtLambdaPoisson.Text = "";
+            txtLambdaExponencial.Text = "";
+            txtMediaExponencial.Text = "";
+        }
+
         private void manejarSeleccionDistribucion()
         {
+            limpiarCampos();
             if (rbUniforme.Checked)
             {
                 activarRadioButtons();
