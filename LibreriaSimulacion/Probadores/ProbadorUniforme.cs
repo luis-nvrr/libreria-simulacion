@@ -51,6 +51,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         {
             double frecuenciaEsperada = truncador.truncar(numeros.Rows.Count / cantidadIntervalos);
             contruirTabla(frecuenciaEsperada);
+            agregarTotalObservada();
         }
         public Boolean esAceptado() {
             return compararEstadisticoConAcumulado();
@@ -85,7 +86,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         public float obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 1][4].ToString());
+            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][4].ToString());
         }
 
         private void contruirTabla(double frecuenciaEsperada)
@@ -97,7 +98,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             for (int i = 0; i < cantidadIntervalos; i++)
             {
                 row = resultado.NewRow();
-                row[0] = "[" + inicioIntervalos[i] + "-" + finIntervalos[i] + "]";
+                row[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
                 row[1] = frecuenciasObservadas[i];
                 row[2] = frecuenciaEsperada;
                 estadisticoPrueba = (Math.Pow((frecuenciaEsperada - frecuenciasObservadas[i]), 2) / frecuenciaEsperada);
@@ -107,7 +108,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 resultado.Rows.Add(row);
             }
         }
-
+        private void agregarTotalObservada()
+        {
+            int acum = 0;
+            for (int i = 0; i < frecuenciasObservadas.Length; i++)
+            {
+                acum += frecuenciasObservadas[i];
+            }
+            DataRow row = resultado.NewRow();
+            row[1] = acum;
+            resultado.Rows.Add(row);
+        }
 
     }
 }

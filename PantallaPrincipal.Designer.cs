@@ -38,8 +38,9 @@ namespace Numeros_aleatorios
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.White;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.label1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Location = new System.Drawing.Point(51, 9);
             this.label1.Name = "label1";
@@ -50,24 +51,26 @@ namespace Numeros_aleatorios
             // 
             // btnPantallaGeneradores
             // 
+            this.btnPantallaGeneradores.BackColor = System.Drawing.Color.Transparent;
             this.btnPantallaGeneradores.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPantallaGeneradores.Location = new System.Drawing.Point(114, 68);
             this.btnPantallaGeneradores.Name = "btnPantallaGeneradores";
             this.btnPantallaGeneradores.Size = new System.Drawing.Size(154, 52);
             this.btnPantallaGeneradores.TabIndex = 1;
             this.btnPantallaGeneradores.Text = "Ir a Pantalla de generadores";
-            this.btnPantallaGeneradores.UseVisualStyleBackColor = true;
+            this.btnPantallaGeneradores.UseVisualStyleBackColor = false;
             this.btnPantallaGeneradores.Click += new System.EventHandler(this.btnPantallaGeneradores_Click);
             // 
             // btnPruebaJI
             // 
+            this.btnPruebaJI.BackColor = System.Drawing.Color.Transparent;
             this.btnPruebaJI.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnPruebaJI.Location = new System.Drawing.Point(114, 144);
             this.btnPruebaJI.Name = "btnPruebaJI";
             this.btnPruebaJI.Size = new System.Drawing.Size(154, 30);
             this.btnPruebaJI.TabIndex = 2;
             this.btnPruebaJI.Text = "Prueba JI^2";
-            this.btnPruebaJI.UseVisualStyleBackColor = true;
+            this.btnPruebaJI.UseVisualStyleBackColor = false;
             this.btnPruebaJI.Click += new System.EventHandler(this.btnPruebaJI_Click);
             // 
             // btnPruebaKS
@@ -104,7 +107,7 @@ namespace Numeros_aleatorios
             this.Controls.Add(this.btnPantallaGeneradores);
             this.Controls.Add(this.label1);
             this.Name = "PantallaPrincipal";
-            this.Text = "PantallaPrincipal";
+            this.Text = "Simulacion";
             this.ResumeLayout(false);
 
         }

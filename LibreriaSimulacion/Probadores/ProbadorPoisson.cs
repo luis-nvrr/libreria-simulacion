@@ -47,6 +47,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             construirTablaInicial();
             reestructurarIntervalos();
             construirTablaFinal();
+            agregarTotalObservada();
         }
 
         private void construirTablaInicial()
@@ -56,7 +57,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             DataRow row;
             int entero;
             double estadisticoPrueba;
-            double funcionDensidad;
+            double probabilidad;
             float cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;
 
@@ -67,10 +68,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[0] = entero;
                 row[1] = frecuenciasObservadas[i];
 
-                funcionDensidad = ((Math.Pow(lambda,entero))*Math.Exp(-lambda))/(Factorial.factorial(entero)); // TODO arreglar factorial retorna un entero muy grande
-                row[2] = truncador.truncar(funcionDensidad); 
+                probabilidad = ((Math.Pow(lambda,entero))*Math.Exp(-lambda))/(Factorial.factorial(entero)); // TODO arreglar factorial retorna un entero muy grande
+                row[2] = truncador.truncar(probabilidad); 
 
-                frecuenciaEsperada = (funcionDensidad * cantidadNumeros);
+                frecuenciaEsperada = (probabilidad * cantidadNumeros);
                 row[3] = (int)Math.Round(frecuenciaEsperada,0);
                 resultado.Rows.Add(row);
 
@@ -92,7 +93,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         private int calcularGradosLibertad()
         {
-            return valoresAgrupados.Length - 1;
+            return valoresAgrupados.Length - 1 - 1;
         }
 
         public bool esAceptado()
@@ -112,7 +113,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
 
         public float obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 1][5].ToString());
+            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][5].ToString());
         }
 
         public float getValorCritico()
@@ -215,6 +216,18 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             return stringBuilder.ToString();
         }
 
-       
+        private void agregarTotalObservada()
+        {
+            int acum = 0;
+            for (int i = 0; i < frecuenciasObservadas.Length; i++)
+            {
+                acum += frecuenciasObservadas[i];
+            }
+            DataRow row = resultado.NewRow();
+            row[1] = acum;
+            resultado.Rows.Add(row);
+        }
+
+
     }
 }

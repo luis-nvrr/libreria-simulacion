@@ -74,8 +74,9 @@ namespace Numeros_aleatorios
             // lblTitulo
             // 
             this.lblTitulo.AutoSize = true;
-            this.lblTitulo.BackColor = System.Drawing.SystemColors.Control;
+            this.lblTitulo.BackColor = System.Drawing.Color.Transparent;
             this.lblTitulo.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitulo.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblTitulo.Location = new System.Drawing.Point(40, 25);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(452, 41);
@@ -332,7 +333,8 @@ namespace Numeros_aleatorios
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Name = "PruebaKolgomorovSmilnov";
-            this.Text = "PruebaKolgomorovSmilnov";
+            this.Text = "Simulacion";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PruebaKolgomorovSmilnov_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
