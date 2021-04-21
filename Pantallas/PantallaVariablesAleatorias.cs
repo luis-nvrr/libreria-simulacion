@@ -237,6 +237,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 gbNormalBoxMuller.Visible = false;
                 gbNormalConvolucion.Visible = false;
                 gbPoisson.Visible = false;
+                txtMediaExponencial.Enabled = false;
                 return;
             }
             if (rbPoisson.Checked)
@@ -247,6 +248,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                 gbUniforme.Visible = false;
                 gbNormalBoxMuller.Visible = false;
                 gbNormalConvolucion.Visible = false;
+                txtMediaPoisson.Enabled = false;
                 return;
             }
         }
