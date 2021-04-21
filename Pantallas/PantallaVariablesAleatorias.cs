@@ -60,7 +60,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private void tomarCantidadIntervalos()
         {
-            if(!rb5.Checked || !rb10.Checked || !rb15.Checked || !rb20.Checked) { return;  }
             if (rb5.Checked) { cantidadIntervalos = int.Parse(rb5.Text); }
             if (rb10.Checked) { cantidadIntervalos = int.Parse(rb10.Text); }
             if (rb15.Checked) { cantidadIntervalos = int.Parse(rb15.Text); }
