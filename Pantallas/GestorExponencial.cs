@@ -19,8 +19,8 @@ namespace Numeros_aleatorios.Pantallas
         Truncador truncador;
         GraficadorExcelObservado graficador;
 
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
 
         int[] frecuenciasObservadas;
 
@@ -28,8 +28,8 @@ namespace Numeros_aleatorios.Pantallas
         double media;
         int cantidadIntervalos;
         int cantidadValores;
-        float menor;
-        float mayor;
+        double menor;
+        double mayor;
 
         DataTable tablaAleatorios;
         PantallaVariablesAleatorias pantalla;
@@ -50,7 +50,6 @@ namespace Numeros_aleatorios.Pantallas
 
         public void generarExponencial(double lambda, double media, int cantidadValores, int cantidadIntervalos)
         {
-            if (lambda < 0) { return; }
 
             this.lambda = lambda;
             this.media = media;
@@ -68,6 +67,7 @@ namespace Numeros_aleatorios.Pantallas
             generarIntervalosExponencial();
             obtenerFrecuenciasObservadasExponencial();
             pantalla.mostrarResultados(tablaAleatorios);
+            graficar();
         }
 
         private void generarIntervalosExponencial()

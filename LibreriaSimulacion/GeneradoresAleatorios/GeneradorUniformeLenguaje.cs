@@ -11,7 +11,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private DataTable dataTable;
         private DataRow dataRow;
 
-        private float aleatorio;
+        private double aleatorio;
 
         public GeneradorUniformeLenguaje(DataTable tabla, Truncador truncador)
         {
@@ -26,7 +26,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.random = new Random();
         }
 
-        public float siguienteAleatorio()
+        public double siguienteAleatorio()
         {
             return truncador.truncar(random.NextDouble());
         }

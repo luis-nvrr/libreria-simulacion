@@ -10,7 +10,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
     interface IGenerador
     {
 
-        float siguienteAleatorio();
+        double siguienteAleatorio();
         DataTable generarSerie(int cantidadAleatorios);
 
         DataTable generarSerie(int cantidadAleatorios, ContadorFrecuenciaObservada frecuenciaObservada);

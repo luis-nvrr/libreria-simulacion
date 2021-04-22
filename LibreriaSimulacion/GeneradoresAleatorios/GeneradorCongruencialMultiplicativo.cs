@@ -14,7 +14,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private long entradaActual;
         private double aleatorioActual;
 
-        private float aleatorio;
+        private double aleatorio;
 
         // parametros
         private int a;
@@ -31,7 +31,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         }
 
         // retorna un aleatorio
-        public float siguienteAleatorio()
+        public double siguienteAleatorio()
         {
             entradaActual = (a * entradaAnterior) % (m);
             aleatorioActual = (double)entradaActual / (m); // (m-1) para incluir el 1 

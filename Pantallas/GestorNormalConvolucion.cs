@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Pantallas
 {
@@ -17,8 +18,8 @@ namespace Numeros_aleatorios.Pantallas
         GeneradorUniformeLenguaje generadorLenguaje;
         Truncador truncador;
 
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
 
         int[] frecuenciasObservadas;
 
@@ -26,8 +27,8 @@ namespace Numeros_aleatorios.Pantallas
         double media;
         int cantidadIntervalos;
         int cantidadValores;
-        float menor;
-        float mayor;
+        double menor;
+        double mayor;
 
         DataTable tablaAleatorios;
         PantallaVariablesAleatorias pantalla;
@@ -48,8 +49,6 @@ namespace Numeros_aleatorios.Pantallas
 
         public void generarNormalConvolucion(double media, double desviacion, int cantidadValores, int cantidadIntervalos)
         {
-            if (desviacion < 0 || media < 0) { return; } //restriccion
-
             this.media = media;
             this.desviacion = desviacion;
             this.cantidadIntervalos = cantidadIntervalos;
@@ -66,6 +65,7 @@ namespace Numeros_aleatorios.Pantallas
             obtenerFrecuenciasObservadasNormal();
 
             pantalla.mostrarResultados(tablaAleatorios);
+            graficar();
         }
 
         private void generarIntervalosNormal()

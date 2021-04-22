@@ -11,16 +11,16 @@ namespace Numeros_aleatorios.LibreriaSimulacion
     class ProbadorUniforme: IProbador
     {
         private DataTable numeros;
-        private float[] inicioIntervalos;
-        private float[] finIntervalos;
+        private double[] inicioIntervalos;
+        private double[] finIntervalos;
         private int[] frecuenciasObservadas;
         private int cantidadIntervalos;
         private DataTable resultado;
         private Truncador truncador;
-        private float valorCritico;
+        private double valorCritico;
 
         public ProbadorUniforme(Truncador truncador, DataTable numeros,
-            float[] inicioIntervalos, float[] finIntervalos, int[] frecuenciasObservadas)
+            double[] inicioIntervalos, double[] finIntervalos, int[] frecuenciasObservadas)
         {
             this.truncador = truncador;
             this.numeros = numeros;
@@ -33,7 +33,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             crearTabla();
         }
         
-        public float getValorCritico()
+        public double getValorCritico()
         {
             return valorCritico;
         }
@@ -79,14 +79,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return cantidadIntervalos - 1;
         }
 
-        private float obtenerValorCritico(int gradosLibertad)
+        private double obtenerValorCritico(int gradosLibertad)
         {
             return ValorCriticoChi2.obtenerValorCritico(gradosLibertad);
         }
 
-        public float obtenerTotalAcumuladoEstadisticoPrueba()
+        public double obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][4].ToString());
+            return double.Parse(resultado.Rows[resultado.Rows.Count - 2][4].ToString());
         }
 
         private void contruirTabla(double frecuenciaEsperada)

@@ -18,8 +18,8 @@ namespace Numeros_aleatorios.Pantallas
         Truncador truncador;
         GraficadorExcelObservado graficador;
 
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
 
         int[] frecuenciasObservadas;
 
@@ -27,8 +27,8 @@ namespace Numeros_aleatorios.Pantallas
         double media;
         int cantidadIntervalos;
         int cantidadValores;
-        float menor;
-        float mayor;
+        double menor;
+        double mayor;
 
         DataTable tablaAleatorios;
         PantallaVariablesAleatorias pantalla;
@@ -50,7 +50,6 @@ namespace Numeros_aleatorios.Pantallas
 
         public void generarNormalBoxMuller(double media, double desviacion, int cantidadValores, int cantidadIntervalos)
         {
-            if (desviacion < 0 || media < 0) { return; } //restriccion
 
             this.media = media;
             this.desviacion = desviacion;
@@ -67,6 +66,7 @@ namespace Numeros_aleatorios.Pantallas
             generarIntervalosNormal();
             obtenerFrecuenciasObservadasNormal();
             pantalla.mostrarResultados(tablaAleatorios);
+            graficar();
         }
 
         private void generarIntervalosNormal()

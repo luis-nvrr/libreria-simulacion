@@ -15,19 +15,19 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         private DataTable dataTable;
         private DataRow dataRow;
 
-        private float[] aleatorios;
-        private float aleatorio01;
+        private double[] aleatorios;
+        private double aleatorio01;
 
         private double acumulado;
-        private float aleatorio;
+        private double aleatorio;
 
         // parametros
         private double desviacion;
         private double media;
 
 
-        private float menor;
-        private float mayor;
+        private double menor;
+        private double mayor;
 
         public GeneradorNormalConvolucion(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double desviacion, double media)
         {
@@ -36,13 +36,13 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             this.media = media;
 
             this.acumulado = 0;
-            this.aleatorios = new float[12];
+            this.aleatorios = new double[12];
             this.generadorLenguaje = generadorLenguaje;
             this.dataTable = tabla; 
         }
 
         // retorna un aleatorio
-        public float siguienteAleatorio()
+        public double siguienteAleatorio()
         {
             acumulado = 0;
             for (int i = 0; i < aleatorios.Length; i++)
@@ -82,21 +82,21 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             return dataTable;
         }
 
-        private void inicializarMenorMayor(float numero)
+        private void inicializarMenorMayor(double numero)
         {
-            menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
+            menor = truncador.truncar(Math.Floor(numero));
             mayor = truncador.truncar(Math.Ceiling(numero));
         }
 
-        private void actualizarMenor(float numero)
+        private void actualizarMenor(double numero)
         {
             if (numero < menor)
             {
-                menor = truncador.truncar(Math.Floor(numero)) < 0 ? 0 : truncador.truncar(Math.Floor(numero));
+                menor = truncador.truncar(Math.Floor(numero));
             }
         }
 
-        private void actualizarMayor(float numero)
+        private void actualizarMayor(double numero)
         {
             if (numero > mayor)
             {
@@ -104,12 +104,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
             }
         }
 
-        public float getMayor()
+        public double getMayor()
         {
             return mayor;
         }
 
-        public float getMenor()
+        public double getMenor()
         {
             return menor;
         }

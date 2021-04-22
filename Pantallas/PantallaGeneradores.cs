@@ -89,7 +89,7 @@ namespace Numeros_aleatorios
             agregarFila(generador.siguienteAleatorio());
         }
 
-        private void agregarFila(float numeroAleatorio)
+        private void agregarFila(double numeroAleatorio)
         {
             ++indice;
             dataRow = dataTable.NewRow();

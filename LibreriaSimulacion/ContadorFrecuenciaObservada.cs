@@ -15,8 +15,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 
         private int cantidadIntervalos;
 
-        private float[] inicioIntervalos;
-        private float[] finIntervalos;
+        private double[] inicioIntervalos;
+        private double[] finIntervalos;
 
         private Dictionary<int, int> frecuenciasPoisson;
 
@@ -27,14 +27,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.frecuenciasPoisson = new Dictionary<int, int>();
         }
 
-        public ContadorFrecuenciaObservada(float[] inicioIntervalos, float[] finIntervalos)
+        public ContadorFrecuenciaObservada(double[] inicioIntervalos, double[] finIntervalos)
         {
             this.cantidadIntervalos = inicioIntervalos.Length;
             this.frecuenciaObservada = new int[cantidadIntervalos];
             this.inicioIntervalos = inicioIntervalos;
             this.finIntervalos = finIntervalos;
         }
-        public void contarNumero(float numero)
+        public void contarNumero(double numero)
         {
             for (int i = 0; i < cantidadIntervalos; i++)
             {
@@ -49,7 +49,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         {
             for (int i = 0; i < numeros.Rows.Count; i++)
             {
-                float aleatorio = float.Parse(numeros.Rows[i][1].ToString());
+                double aleatorio = double.Parse(numeros.Rows[i][1].ToString());
                 contarNumero(aleatorio);
             }
         }

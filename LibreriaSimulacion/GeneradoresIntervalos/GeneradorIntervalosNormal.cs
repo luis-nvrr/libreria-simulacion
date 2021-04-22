@@ -9,8 +9,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos
 {
     class GeneradorIntervalosNormal
     {
-        private float[] inicioIntervalos;
-        private float[] finIntervalos;
+        private double[] inicioIntervalos;
+        private double[] finIntervalos;
 
         Truncador truncador; 
         GeneradorIntervalosUniformeAB generadorIntervalos;
@@ -21,7 +21,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos
             this.generadorIntervalos = new GeneradorIntervalosUniformeAB(truncador);
         }
 
-        public void generarIntervalos(int cantidadIntervalos, float menor, float mayor)
+        public void generarIntervalos(int cantidadIntervalos, double menor, double mayor)
         {
             generadorIntervalos.generarIntervalos(cantidadIntervalos, menor, mayor);
             this.inicioIntervalos = generadorIntervalos.obtenerInicioIntervalos();
@@ -29,12 +29,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresIntervalos
             //MessageBox.Show(generadorIntervalos.mostrarIntervalos());
         }
 
-        public float[] obtenerInicioIntervalos()
+        public double[] obtenerInicioIntervalos()
         {
             return inicioIntervalos;
         }
 
-        public float[] obtenerFinIntervalos()
+        public double[] obtenerFinIntervalos()
         {
             return finIntervalos;
         }

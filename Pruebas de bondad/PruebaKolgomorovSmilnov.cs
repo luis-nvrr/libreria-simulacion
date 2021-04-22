@@ -19,8 +19,8 @@ namespace Numeros_aleatorios
         int n;
         int cantidadIntervalos;
         int[] frecuenciasObservadas;
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
         Random random;
         DataTable tablaAleatorios;
         DataTable tabla2;
@@ -78,10 +78,10 @@ namespace Numeros_aleatorios
             }
         }
 
-        private float truncarDecimales(double numero)
+        private double truncarDecimales(double numero)
         {
             int factor = 10000;
-            return (float)Math.Truncate(factor * numero) / factor;
+            return (double)Math.Truncate(factor * numero) / factor;
         }
         private double max(double a,double b)
         {
@@ -98,8 +98,8 @@ namespace Numeros_aleatorios
             tablaAleatorios = new DataTable();
             crearTablaAleatorios(tablaAleatorios);
 
-            inicioIntervalos = new float[cantidadIntervalos];
-            finIntervalos = new float[cantidadIntervalos];
+            inicioIntervalos = new double[cantidadIntervalos];
+            finIntervalos = new double[cantidadIntervalos];
             GeneradorIntervalosUniforme intervalos = new GeneradorIntervalosUniforme(truncador);
 
             intervalos.generarIntervalos(cantidadIntervalos);
@@ -120,9 +120,9 @@ namespace Numeros_aleatorios
             crearTablaResultados(tabla2);
 
             DataRow row;
-            float frecuenciaEsperada = truncador.truncar((double)n / (double)cantidadIntervalos);
-            float probabilidadObservada;
-            float probabilidadEsperada = truncarDecimales(1.0f / cantidadIntervalos);
+            double frecuenciaEsperada = truncador.truncar((double)n / (double)cantidadIntervalos);
+            double probabilidadObservada;
+            double probabilidadEsperada = truncarDecimales(1.0f / cantidadIntervalos);
             double esperadaAcumuladaAnterior = 0;
             double observadaAcumuladaAnterior = 0;
             double maximo = 0;

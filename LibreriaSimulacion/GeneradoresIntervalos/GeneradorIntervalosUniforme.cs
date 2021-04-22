@@ -10,8 +10,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
     {
         private int cantidadIntervalos;
 
-        private float[] inicioIntervalos; // inicio de cada intervalo
-        private float[] finIntervalos; // inicio de cada intervalo
+        private double[] inicioIntervalos; // inicio de cada intervalo
+        private double[] finIntervalos; // inicio de cada intervalo
 
         Truncador truncador;
 
@@ -23,8 +23,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         public void generarIntervalos(int cantidadIntervalos)
         {
             this.cantidadIntervalos = cantidadIntervalos;
-            inicioIntervalos = new float[cantidadIntervalos];
-            finIntervalos = new float[cantidadIntervalos];
+            inicioIntervalos = new double[cantidadIntervalos];
+            finIntervalos = new double[cantidadIntervalos];
 
             double rangoIntervalo = calcularRangoIntervalos();
 
@@ -43,11 +43,11 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             return (1.0 / cantidadIntervalos);
         }
 
-        public float[] obtenerInicioIntervalos() {
+        public double[] obtenerInicioIntervalos() {
             return inicioIntervalos;
         }
 
-        public float[] obtenerFinIntervalos()
+        public double[] obtenerFinIntervalos()
         {
             return finIntervalos;
         }

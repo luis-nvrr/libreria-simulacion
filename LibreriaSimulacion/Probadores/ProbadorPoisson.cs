@@ -16,10 +16,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
         private int[][] valoresAgrupados;
         private int[] frecuenciasObservadas;
         private int[] frecuenciasEsperadas;
-        private float[] probabilidades;
+        private double[] probabilidades;
         private DataTable resultado;
         private Truncador truncador;
-        private float valorCritico;
+        private double valorCritico;
         private double lambda;
 
         public ProbadorPoisson(Truncador truncador, DataTable numeros,
@@ -58,7 +58,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             int entero;
             double estadisticoPrueba;
             double probabilidad;
-            float cantidadNumeros = numeros.Rows.Count;
+            double cantidadNumeros = numeros.Rows.Count;
             double frecuenciaEsperada;
 
             for (int i = 0; i < frecuenciasObservadas.Length; i++)
@@ -101,7 +101,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             return compararEstadisticoConAcumulado();
         }
 
-        private float obtenerValorCritico(int gradosLibertad)
+        private double obtenerValorCritico(int gradosLibertad)
         {
             return ValorCriticoChi2.obtenerValorCritico(gradosLibertad);
         }
@@ -111,12 +111,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             return resultado;
         }
 
-        public float obtenerTotalAcumuladoEstadisticoPrueba()
+        public double obtenerTotalAcumuladoEstadisticoPrueba()
         {
-            return float.Parse(resultado.Rows[resultado.Rows.Count - 2][5].ToString());
+            return double.Parse(resultado.Rows[resultado.Rows.Count - 2][5].ToString());
         }
 
-        public float getValorCritico()
+        public double getValorCritico()
         {
             return valorCritico;
         }
@@ -126,20 +126,20 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             int esperadaTablaVieja;
             int esperadaAcumulada = 0;
             int observadaAcumulada = 0;
-            float probabilidadTablaVieja;
+            double probabilidadTablaVieja;
             double probabilidadAcumulada = 0;
             List<int> valoresAgrupados = new List<int>();
             List<List<int>> nuevosValoresAgrupados = new List<List<int>>();
             List<int> nuevaFrecuenciaObservada = new List<int>();
             List<int> nuevaFrecuenciaEsperada = new List<int>();
-            List<float> nuevaProbabilidad = new List<float>();
+            List<double> nuevaProbabilidad = new List<double>();
 
             for (int i = 0; i < frecuenciasObservadas.Length; i++)
             {
                 valoresAgrupados.Add(valoresEnteros[i]);
                 esperadaTablaVieja = int.Parse(resultado.Rows[i][3].ToString());
                 esperadaAcumulada += esperadaTablaVieja;
-                probabilidadTablaVieja = float.Parse(resultado.Rows[i][2].ToString());
+                probabilidadTablaVieja = double.Parse(resultado.Rows[i][2].ToString());
                 probabilidadAcumulada += probabilidadTablaVieja;
                 observadaAcumulada += frecuenciasObservadas[i];
 
@@ -177,8 +177,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             DataRow row;
             double estadisticoPrueba;
             double estadisticoPruebaAcumuladoAnterior = 0;
-            float marcaClase;
-            float frecuenciaEsperada;
+            double marcaClase;
+            double frecuenciaEsperada;
 
             for (int i = 0; i < frecuenciasObservadas.Length; i++)
             {
@@ -205,7 +205,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
             }
         }
 
-        private String mostrarNuevosIntervalos(List<float> inicio, List<float> fin)
+        private String mostrarNuevosIntervalos(List<double> inicio, List<double> fin)
         {
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < inicio.Count; i++)

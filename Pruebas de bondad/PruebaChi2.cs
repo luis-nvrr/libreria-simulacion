@@ -24,8 +24,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         Truncador truncador;
     
 
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
         int cantidadIntervalos;
         int[] frecuenciasObservadas;
 
@@ -79,8 +79,8 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
 
         public void generarNumerosAleatorios()
         {
-            inicioIntervalos = new float[cantidadIntervalos];
-            finIntervalos = new float[cantidadIntervalos];
+            inicioIntervalos = new double[cantidadIntervalos];
+            finIntervalos = new double[cantidadIntervalos];
             GeneradorIntervalosUniforme intervalos = new GeneradorIntervalosUniforme(truncador);
 
             intervalos.generarIntervalos(cantidadIntervalos);
@@ -99,7 +99,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
         {
             tablaResultados.Clear();
             DataRow row;
-            float frecuenciaEsperada = truncador.truncar((double)cantidadAleatorios / (double)cantidadIntervalos);
+            double frecuenciaEsperada = truncador.truncar((double)cantidadAleatorios / (double)cantidadIntervalos);
             double estadisticoPrueba;
             double estadisticoPruebaAcumuladoAnterior = 0;
 

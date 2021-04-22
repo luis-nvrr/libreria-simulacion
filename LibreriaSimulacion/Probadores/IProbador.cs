@@ -12,7 +12,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
         void probar();
         Boolean esAceptado();
         DataTable obtenerTablaResultados();
-        float obtenerTotalAcumuladoEstadisticoPrueba();
-        float getValorCritico();
+        double obtenerTotalAcumuladoEstadisticoPrueba();
+        double getValorCritico();
     }
 }

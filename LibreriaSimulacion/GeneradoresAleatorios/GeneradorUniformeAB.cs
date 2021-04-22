@@ -10,12 +10,12 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private DataTable dataTable;
         private DataRow dataRow;
 
-        private float aleatorio01;
-        private float aleatorio;
+        private double aleatorio01;
+        private double aleatorio;
 
         // parametros
-        private float b;
-        private float a;
+        private double b;
+        private double a;
 
         public GeneradorUniformeAB(DataTable tabla, GeneradorUniformeLenguaje generadorLenguaje, Truncador truncador, double a, double b)
         {
@@ -29,7 +29,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         }
 
         // retorna un aleatorio
-        public float siguienteAleatorio()
+        public double siguienteAleatorio()
         {
             aleatorio01 = generadorLenguaje.siguienteAleatorio();
             return truncador.truncar(a + aleatorio01 * (b - a));

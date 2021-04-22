@@ -23,8 +23,8 @@ namespace Numeros_aleatorios.grafico_excel
         Excel.Worksheet xlWorkSheet;
         object misValue = System.Reflection.Missing.Value;
         public int[] frecuenciaObservada { get; set; }
-        public float[] inicioIntervalos { get; set; }
-        public float[] finIntervalos { get; set; }
+        public double[] inicioIntervalos { get; set; }
+        public double[] finIntervalos { get; set; }
 
         public int[] valoresDiscretos { get; set; }
 

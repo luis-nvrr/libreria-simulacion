@@ -43,7 +43,6 @@ namespace Numeros_aleatorios.Pantallas
 
         public void generarPoisson(double lambda, double media, int cantidadValores)
         {
-            if (media < 0) { return; }
             this.cantidadValores = cantidadValores;
             this.lambda = lambda;
 
@@ -57,6 +56,7 @@ namespace Numeros_aleatorios.Pantallas
             valoresDiscretos = contador.getValoresPoisson();
 
             pantalla.mostrarResultados(tablaAleatorios);
+            graficar();
         }
 
         public void probar()

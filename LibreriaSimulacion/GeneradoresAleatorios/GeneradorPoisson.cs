@@ -15,7 +15,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         private DataTable dataTable;
         private DataRow dataRow;
 
-        private float aleatorio01;
+        private double aleatorio01;
         private int aleatorio;
 
         // parametros
@@ -36,7 +36,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion.GeneradoresAleatorios
         }
 
         // retorna un aleatorio
-        public float siguienteAleatorio()
+        public double siguienteAleatorio()
         {
             p = 1;
             X = -1;

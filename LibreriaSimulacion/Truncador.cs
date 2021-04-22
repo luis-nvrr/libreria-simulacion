@@ -16,15 +16,15 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.CANTIDAD_DECIMALES = cantidadDecimales;
         }
 
-        public float truncar(double numero)
+        public double truncar(double numero)
         {
             int factor = (int)Math.Pow(10, CANTIDAD_DECIMALES);
-            return (float)Math.Truncate(factor * numero) / factor;
+            return Math.Truncate(factor * numero) / factor;
         }
-        public float truncarDecimal(decimal numero)
+        public double truncarDecimal(decimal numero)
         {
             int factor = (int)Math.Pow(10, CANTIDAD_DECIMALES);
-            return (float)Math.Truncate(factor * numero) / factor;
+            return (double)(Math.Truncate(factor * numero) / factor);
         }
     }
 }

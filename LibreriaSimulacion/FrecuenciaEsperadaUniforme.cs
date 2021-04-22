@@ -13,10 +13,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         private int cantidadNumeros;
         private int cantidadIntervalos;
 
-        private float[] inicioIntervalos;
-        private float[] finIntervalos;
+        private double[] inicioIntervalos;
+        private double[] finIntervalos;
 
-        public FrecuenciaEsperadaUniforme(int cantidadNumeros, float[] inicioIntervalos, float[] finIntervalos)
+        public FrecuenciaEsperadaUniforme(int cantidadNumeros, double[] inicioIntervalos, double[] finIntervalos)
         {
             this.cantidadNumeros = cantidadNumeros;
             this.cantidadIntervalos = inicioIntervalos.Length;

@@ -17,8 +17,8 @@ namespace Numeros_aleatorios.Pantallas
         Truncador truncador;
  
 
-        float[] inicioIntervalos;
-        float[] finIntervalos;
+        double[] inicioIntervalos;
+        double[] finIntervalos;
 
         int[] frecuenciasObservadas;
 
@@ -32,7 +32,7 @@ namespace Numeros_aleatorios.Pantallas
             this.pantalla = pantalla;
         }
 
-        public void generarUniforme(float a, float b, int cantidadValores, int cantidadIntervalos)
+        public void generarUniforme(double a, double b, int cantidadValores, int cantidadIntervalos)
         {
             if (b < a) { return; }  
 
@@ -41,9 +41,10 @@ namespace Numeros_aleatorios.Pantallas
             cargarTablaAleatorios(a, b, cantidadValores);
 
             pantalla.mostrarResultados(tablaAleatorios);
+            graficar();
         }
 
-        private void cargarTablaAleatorios(float a, float b, int cantidadValores)
+        private void cargarTablaAleatorios(double a, double b, int cantidadValores)
         {
             ContadorFrecuenciaObservada contador = new ContadorFrecuenciaObservada(inicioIntervalos, finIntervalos);
             IGenerador generadorDistribucion = new GeneradorUniformeAB(tablaAleatorios, generadorLenguaje, truncador, a, b);
@@ -59,7 +60,7 @@ namespace Numeros_aleatorios.Pantallas
             tablaAleatorios.Columns.Add("aleatorio");
         }
 
-        private void generarIntervalosUniforme(float a, float b, int cantidadIntervalos)
+        private void generarIntervalosUniforme(double a, double b, int cantidadIntervalos)
         {
             GeneradorIntervalosUniformeAB generadorIntervalos = new GeneradorIntervalosUniformeAB(truncador);
             generadorIntervalos.generarIntervalos(cantidadIntervalos, a, b);
