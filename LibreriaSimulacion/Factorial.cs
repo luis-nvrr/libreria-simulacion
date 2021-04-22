@@ -8,17 +8,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
 {
     class Factorial
     {
-        public static long factorial(int number)
+        public static double factorial(double numerador, int number)
         {
             int i;
             long fact = 1;
 
             for (i = 1; i <= number; i++)
             {
-                fact = fact * i;
+                numerador = numerador / i;
             }
 
-            return fact;
+            return numerador;
         }
     }
 }

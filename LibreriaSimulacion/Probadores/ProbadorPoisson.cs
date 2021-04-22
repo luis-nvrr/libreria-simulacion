@@ -68,7 +68,8 @@ namespace Numeros_aleatorios.LibreriaSimulacion.Probadores
                 row[0] = entero;
                 row[1] = frecuenciasObservadas[i];
 
-                probabilidad = ((Math.Pow(lambda,entero))*Math.Exp(-lambda))/(Factorial.factorial(entero)); // TODO arreglar factorial retorna un entero muy grande
+                double numerador = Math.Pow(lambda, entero) * Math.Exp(-lambda);
+                probabilidad = Factorial.factorial(numerador, entero); // TODO arreglar factorial retorna un entero muy grande
                 row[2] = truncador.truncar(probabilidad); 
 
                 frecuenciaEsperada = (probabilidad * cantidadNumeros);

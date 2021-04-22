@@ -61,7 +61,10 @@ namespace Numeros_aleatorios.Pantallas
 
         public void probar()
         {
-            IProbador probador = new ProbadorPoisson(truncador, tablaAleatorios, lambda, valoresDiscretos, frecuenciasObservadas);
+            double[] temp = valoresDiscretos.Select(l => (double)l - 0.00001).ToArray();
+            IProbador probador;
+            probador = new ProbadorPoisson(truncador, tablaAleatorios, lambda, valoresDiscretos, frecuenciasObservadas);
+ 
             PantallaPruebaChi2 pantallaPrueba = new PantallaPruebaChi2();
             pantallaPrueba.probador = probador;
             pantallaPrueba.Show();

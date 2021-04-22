@@ -120,7 +120,7 @@ namespace Numeros_aleatorios.grafico_excel
 
 
             // PARA GUARDAR EL EXCEL
-            xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+            //xlWorkBook.SaveAs("histograma", Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue, Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
             xlWorkBook.Close(false, misValue, misValue);
             xlApp.Quit();
 
