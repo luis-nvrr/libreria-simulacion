@@ -94,6 +94,7 @@ namespace Numeros_aleatorios
 
         private void generarAleatorios()
         {
+            grdResultados2.DataSource = null;
             tablaAleatorios = new DataTable();
             crearTablaAleatorios(tablaAleatorios);
 
