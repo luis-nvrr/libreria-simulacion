@@ -185,6 +185,16 @@ namespace Numeros_aleatorios
             }
         }
 
+        private void limpiarCampos()
+        {
+            enteroG.Text = "";
+            enteroK.Text = "";
+            constanteAditiva.Text = "";
+            constanteMultiplicativa.Text = "";
+            modulo.Text = "";
+            semilla.Text = ""; 
+        }
+
         private String tablaToString()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -201,6 +211,24 @@ namespace Numeros_aleatorios
 
             Clipboard.SetText(tablaToString());
             MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void manejarSeleccion()
+        {
+            limpiarCampos();
+            if (rbLineal.Checked) {
+                constanteAditiva.Enabled = true;
+                return;
+            }
+            if (rbMultiplicativo.Checked) {
+                constanteAditiva.Enabled = false;
+                return;
+            }
+        }
+
+        private void rbLineal_CheckedChanged(object sender, EventArgs e)
+        {
+            manejarSeleccion();
         }
     }
 }

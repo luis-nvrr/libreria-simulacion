@@ -94,6 +94,7 @@ namespace Numeros_aleatorios
             this.rbLineal.TabStop = true;
             this.rbLineal.Text = "Congruencial lineal mixto";
             this.rbLineal.UseVisualStyleBackColor = true;
+            this.rbLineal.CheckedChanged += new System.EventHandler(this.rbLineal_CheckedChanged);
             // 
             // groupBox1
             // 
