@@ -14,7 +14,42 @@ namespace Numeros_aleatorios.LibreriaSimulacion
                                 41.3f, 42.6f, 43.8f};
         public static float obtenerValorCritico(int gradosLibertad)
         {
+            if (gradosLibertad >= tabla.Length) { return obtenerCriticoRango(gradosLibertad);}
             return tabla[gradosLibertad];
+        }
+
+        public static float obtenerCriticoRango(int gradosLibertad)
+        {
+            if (gradosLibertad >= 30 && gradosLibertad < 40)
+            {
+                return 43.8f;
+            }
+            if (gradosLibertad >= 40 && gradosLibertad < 40)
+            {
+                return 55.8f;
+            }
+            if (gradosLibertad >= 50 && gradosLibertad < 40)
+            {
+                return 67.5f;
+            }
+            if (gradosLibertad >= 60 && gradosLibertad < 40)
+            {
+                return 79.1f;
+            }
+            if (gradosLibertad >= 70 && gradosLibertad < 40)
+            {
+                return 90.5f;
+            }
+            if (gradosLibertad >= 80 && gradosLibertad < 40)
+            {
+                return 101.9f;
+            }
+            if (gradosLibertad >= 90 && gradosLibertad < 40)
+            {
+                return 113.1f;
+            }
+
+            return 124.3f;
         }
     }
 }
