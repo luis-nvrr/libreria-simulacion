@@ -35,7 +35,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
         public float siguienteAleatorio()
         {
             entradaActual = ((a * entradaAnterior) + c) % (m);
-            aleatorioActual = (double)entradaActual / (m - 1); // (m-1) para incluir el 1 
+            aleatorioActual = (double)entradaActual / (m); // (m-1) para incluir el 1 
             entradaAnterior = entradaActual;
             return truncador.truncar(aleatorioActual);
         }
