@@ -143,6 +143,7 @@ namespace Numeros_aleatorios
             // 
             this.grdResultados.AllowUserToAddRows = false;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
+            this.grdResultados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -201,6 +202,7 @@ namespace Numeros_aleatorios
             this.grdResultados2.AllowUserToAddRows = false;
             this.grdResultados2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdResultados2.BackgroundColor = System.Drawing.Color.White;
+            this.grdResultados2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -229,11 +231,11 @@ namespace Numeros_aleatorios
             // lblProbabilidad
             // 
             this.lblProbabilidad.AutoSize = true;
-            this.lblProbabilidad.Location = new System.Drawing.Point(9, 30);
+            this.lblProbabilidad.Location = new System.Drawing.Point(2, 28);
             this.lblProbabilidad.Name = "lblProbabilidad";
-            this.lblProbabilidad.Size = new System.Drawing.Size(86, 21);
+            this.lblProbabilidad.Size = new System.Drawing.Size(95, 21);
             this.lblProbabilidad.TabIndex = 15;
-            this.lblProbabilidad.Text = "Estadistico:";
+            this.lblProbabilidad.Text = "Valor critico:";
             // 
             // txtProbabilidad
             // 
@@ -252,11 +254,11 @@ namespace Numeros_aleatorios
             // lblGradosLibertad
             // 
             this.lblGradosLibertad.AutoSize = true;
-            this.lblGradosLibertad.Location = new System.Drawing.Point(219, 30);
+            this.lblGradosLibertad.Location = new System.Drawing.Point(291, 31);
             this.lblGradosLibertad.Name = "lblGradosLibertad";
-            this.lblGradosLibertad.Size = new System.Drawing.Size(145, 21);
+            this.lblGradosLibertad.Size = new System.Drawing.Size(70, 21);
             this.lblGradosLibertad.TabIndex = 18;
-            this.lblGradosLibertad.Text = "Grados de Libertad:";
+            this.lblGradosLibertad.Text = "Muestra:";
             // 
             // lblResultadoHipotesis
             // 
@@ -356,7 +358,7 @@ namespace Numeros_aleatorios
             // lblCalculado
             // 
             this.lblCalculado.AutoSize = true;
-            this.lblCalculado.Location = new System.Drawing.Point(16, 66);
+            this.lblCalculado.Location = new System.Drawing.Point(14, 73);
             this.lblCalculado.Name = "lblCalculado";
             this.lblCalculado.Size = new System.Drawing.Size(81, 21);
             this.lblCalculado.TabIndex = 23;
@@ -410,6 +412,7 @@ namespace Numeros_aleatorios
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1303, 708);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
