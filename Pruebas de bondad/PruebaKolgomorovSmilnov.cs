@@ -41,24 +41,30 @@ namespace Numeros_aleatorios
 
         private void PruebaKolgomorovSmilnov_Load(object sender, EventArgs e)
         {
-            tablaAleatorios = new DataTable();
-            tabla2 = new DataTable();
+
             random = new Random();
             truncador = new Truncador(4);
 
-            tablaAleatorios.Columns.Add("Iteración");
-            tablaAleatorios.Columns.Add("Número Aleatorio");
+        }
 
-            tabla2.Columns.Add("Intervalo");
-            tabla2.Columns.Add("Frecuencia Observada");
-            tabla2.Columns.Add("Frecuencia Esperada");
-            tabla2.Columns.Add("PO");
-            tabla2.Columns.Add("PE");
-            tabla2.Columns.Add("PO(ac)");
-            tabla2.Columns.Add("PE(ac)");
-            tabla2.Columns.Add("| PoAC - PeAC |");
-            tabla2.Columns.Add("max(| PoAC - PeAC |)");
+        private void crearTablaAleatorios(DataTable tabla)
+        {
+            tabla.Columns.Add("Iteración");
+            tabla.Columns.Add("Número Aleatorio");
+        }
 
+        private void crearTablaResultados(DataTable tabla)
+        {
+
+            tabla.Columns.Add("Intervalo");
+            tabla.Columns.Add("Frecuencia Observada");
+            tabla.Columns.Add("Frecuencia Esperada");
+            tabla.Columns.Add("PO");
+            tabla.Columns.Add("PE");
+            tabla.Columns.Add("PO(ac)");
+            tabla.Columns.Add("PE(ac)");
+            tabla.Columns.Add("| PoAC - PeAC |");
+            tabla.Columns.Add("max(| PoAC - PeAC |)");
         }
 
         private void btnGenerar_Click(object sender, EventArgs e)
@@ -67,8 +73,6 @@ namespace Numeros_aleatorios
             if (n <= 0) { MessageBox.Show("El tamaño de la muestra debe ser mayor a 0..."); }
             if (n > 0)
             {
-                tablaAleatorios.Clear();
-                tabla2.Clear();
                 generarAleatorios();
                 
             }
@@ -90,6 +94,9 @@ namespace Numeros_aleatorios
 
         private void generarAleatorios()
         {
+            tablaAleatorios = new DataTable();
+            crearTablaAleatorios(tablaAleatorios);
+
             inicioIntervalos = new float[cantidadIntervalos];
             finIntervalos = new float[cantidadIntervalos];
             GeneradorIntervalosUniforme intervalos = new GeneradorIntervalosUniforme(truncador);
@@ -108,7 +115,9 @@ namespace Numeros_aleatorios
 
         private void construirTabla()
         {
-            tabla2.Clear();
+            tabla2 = new DataTable();
+            crearTablaResultados(tabla2);
+
             DataRow row;
             float frecuenciaEsperada = truncador.truncar((double)n / (double)cantidadIntervalos);
             float probabilidadObservada;
