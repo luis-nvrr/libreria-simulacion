@@ -26,27 +26,23 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             inicioIntervalos = new float[cantidadIntervalos];
             finIntervalos = new float[cantidadIntervalos];
 
-            double rangoIntervalo = calcularRangoIntervalos(a, b);
+            decimal rangoIntervalo = calcularRangoIntervalos(a, b);
 
             for (int i = 0; i < cantidadIntervalos; i++)
             {
-                double inicio = a + rangoIntervalo * i;
-                double fin = a + rangoIntervalo * (i + 1);
-                if (inicio < 0 || fin < 0) { 
-                    fin += 0.0001f;
-                    inicio -= 0.0001f;
-                }
-                else { fin -= 0.0001f;  }
-                inicioIntervalos[i] = truncador.truncar(inicio);
-                finIntervalos[i] = truncador.truncar(fin);
+                decimal inicio = (decimal)a + rangoIntervalo * i;
+                decimal fin = (decimal)a + rangoIntervalo * (i + 1);
+                fin -= (decimal)0.0001; 
+                inicioIntervalos[i] = truncador.truncarDecimal(inicio);
+                finIntervalos[i] = truncador.truncarDecimal(fin);
             }
         }
 
 
         // calcula el rango de cada intervalo, de acuerdo a la cantidad de contador
-        private double calcularRangoIntervalos(float a, float b)
+        private decimal calcularRangoIntervalos(float a, float b)
         {
-            return ((double)(b-a) / cantidadIntervalos);
+            return ((decimal)(b-a) / cantidadIntervalos);
         }
 
         public float[] obtenerInicioIntervalos()

@@ -21,5 +21,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             int factor = (int)Math.Pow(10, CANTIDAD_DECIMALES);
             return (float)Math.Truncate(factor * numero) / factor;
         }
+        public float truncarDecimal(decimal numero)
+        {
+            int factor = (int)Math.Pow(10, CANTIDAD_DECIMALES);
+            return (float)Math.Truncate(factor * numero) / factor;
+        }
     }
 }
