@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Pruebas_de_bondad
 {
-    public partial class Prueba : Form
+    public partial class PruebaChi2 : Form
     {
         int indice = -1;
         int cantidadAleatorios;
@@ -34,7 +34,7 @@ namespace Numeros_aleatorios.Pruebas_de_bondad
                                 30.1, 31.4, 32.7, 33.9, 35.2, 36.4, 37.7, 38.9, 40.1, 
                                 41.3, 42.6, 43.8};
         double estadisticoPruebaAcumuladoAnterior;
-        public Prueba()
+        public PruebaChi2()
         {
             InitializeComponent();
 

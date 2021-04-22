@@ -27,7 +27,7 @@ namespace Numeros_aleatorios
 
         private void btnPruebaJI_Click(object sender, EventArgs e)
         {
-            Prueba pantallaPruebaJI = new Prueba();
+            PruebaChi2 pantallaPruebaJI = new PruebaChi2();
             pantallaPruebaJI.Show();
         }
 

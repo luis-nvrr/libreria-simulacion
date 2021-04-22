@@ -71,17 +71,19 @@ namespace Numeros_aleatorios.Pantallas
             this.grdResultados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdResultados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.grdResultados.BackgroundColor = System.Drawing.Color.White;
+            this.grdResultados.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.grdResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdResultados.Location = new System.Drawing.Point(279, 94);
+            this.grdResultados.Location = new System.Drawing.Point(235, 94);
             this.grdResultados.Name = "grdResultados";
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(637, 375);
+            this.grdResultados.Size = new System.Drawing.Size(681, 425);
             this.grdResultados.TabIndex = 9;
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.btnCopiar);
             this.groupBox1.Controls.Add(this.lblResultado);
             this.groupBox1.Controls.Add(this.txtEstadisticoPruebaAcumulado);
@@ -92,10 +94,10 @@ namespace Numeros_aleatorios.Pantallas
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(42, 102);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1111, 506);
+            this.groupBox1.Size = new System.Drawing.Size(1111, 528);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Resultados";
+            this.groupBox1.Text = "1.Resultados";
             // 
             // btnCopiar
             // 
@@ -152,6 +154,7 @@ namespace Numeros_aleatorios.Pantallas
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1198, 633);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel1);

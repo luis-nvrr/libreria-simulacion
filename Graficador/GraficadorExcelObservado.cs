@@ -11,6 +11,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
+using Numeros_aleatorios.LibreriaSimulacion;
 
 namespace Numeros_aleatorios.grafico_excel
 {
@@ -72,12 +73,19 @@ namespace Numeros_aleatorios.grafico_excel
 
             for (int i=0 ; i < frecuenciaObservada.Length; i++)
             {
-                xlWorkSheet.Cells[i + 2, 1] = (i + 1).ToString();
                 xlWorkSheet.Cells[i+2, 2] = frecuenciaObservada[i].ToString();
 
                 dataRow = dataTable.NewRow();
-                if (inicioIntervalos != null) { dataRow[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]"; } 
-                if(valoresDiscretos != null) { dataRow[0] = valoresDiscretos[i] + ";"; }
+
+                if (inicioIntervalos != null) { 
+                    dataRow[0] = "[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]";
+                    xlWorkSheet.Cells[i + 2, 1] = ("[" + inicioIntervalos[i] + ";" + finIntervalos[i] + "]").ToString();
+                } 
+                if(valoresDiscretos != null) { 
+                    dataRow[0] = valoresDiscretos[i] + ";";
+                    xlWorkSheet.Cells[i + 2, 1] = valoresDiscretos[i].ToString();
+                }
+
                 dataRow[1] = frecuenciaObservada[i];
                 dataTable.Rows.Add(dataRow);
             }
@@ -89,10 +97,12 @@ namespace Numeros_aleatorios.grafico_excel
             Excel.ChartObjects xlCharts = (Excel.ChartObjects)xlWorkSheet.ChartObjects(Type.Missing);
             Excel.ChartObject myChart = (Excel.ChartObject)xlCharts.Add(240, 120, 340, 290);
             Excel.Chart chartPage = myChart.Chart;
+       
 
             chartRange = xlWorkSheet.get_Range("A1", "b"+(frecuenciaObservada.Length+1));
             chartPage.SetSourceData(chartRange, misValue);
             chartPage.ChartType = Excel.XlChartType.xlColumnClustered;
+            chartPage.Legend.LegendEntries(chartPage.Legend.LegendEntries().Count).Delete();
 
 
             Excel.ChartGroup group = chartPage.ChartGroups(1);
@@ -122,6 +132,17 @@ namespace Numeros_aleatorios.grafico_excel
         private void GraficadorExcelObservado_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private String copiarTabla()
+        {
+            return CopiadorTabla.tablaToString(dataTable);
+        }
+
+        private void btnCopiar_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(copiarTabla());
+            MessageBox.Show("Texto copiado!", "Clipboard", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

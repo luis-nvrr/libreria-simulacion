@@ -48,9 +48,14 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnJi = new System.Windows.Forms.Button();
             this.btnMostrar = new System.Windows.Forms.Button();
             this.gbCantidades = new System.Windows.Forms.GroupBox();
+            this.rb20 = new System.Windows.Forms.RadioButton();
             this.txtCantidadValores = new System.Windows.Forms.TextBox();
+            this.rb15 = new System.Windows.Forms.RadioButton();
             this.btnCalcular = new System.Windows.Forms.Button();
+            this.rb10 = new System.Windows.Forms.RadioButton();
             this.lblCantidadValores = new System.Windows.Forms.Label();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbGrafico = new System.Windows.Forms.GroupBox();
             this.gbExponencial = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -72,11 +77,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.label9 = new System.Windows.Forms.Label();
             this.txtMediaPoisson = new System.Windows.Forms.TextBox();
             this.txtLambdaPoisson = new System.Windows.Forms.TextBox();
-            this.rb20 = new System.Windows.Forms.RadioButton();
-            this.rb15 = new System.Windows.Forms.RadioButton();
-            this.rb10 = new System.Windows.Forms.RadioButton();
-            this.rb5 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultados)).BeginInit();
             this.panel1.SuspendLayout();
             this.gbDistribuciones.SuspendLayout();
@@ -99,7 +99,7 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.grdResultados.RowHeadersVisible = false;
             this.grdResultados.RowTemplate.Height = 25;
             this.grdResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdResultados.Size = new System.Drawing.Size(223, 228);
+            this.grdResultados.Size = new System.Drawing.Size(235, 250);
             this.grdResultados.TabIndex = 4;
             // 
             // panel1
@@ -167,10 +167,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbNormalConvolucion.AutoSize = true;
             this.rbNormalConvolucion.Location = new System.Drawing.Point(25, 109);
             this.rbNormalConvolucion.Name = "rbNormalConvolucion";
-            this.rbNormalConvolucion.Size = new System.Drawing.Size(172, 25);
+            this.rbNormalConvolucion.Size = new System.Drawing.Size(200, 25);
             this.rbNormalConvolucion.TabIndex = 8;
             this.rbNormalConvolucion.TabStop = true;
-            this.rbNormalConvolucion.Text = "Normal Convolucion";
+            this.rbNormalConvolucion.Text = "Normal por Convolucion";
             this.rbNormalConvolucion.UseVisualStyleBackColor = true;
             this.rbNormalConvolucion.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
             // 
@@ -179,10 +179,10 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.rbNormalBoxMuller.AutoSize = true;
             this.rbNormalBoxMuller.Location = new System.Drawing.Point(25, 82);
             this.rbNormalBoxMuller.Name = "rbNormalBoxMuller";
-            this.rbNormalBoxMuller.Size = new System.Drawing.Size(159, 25);
+            this.rbNormalBoxMuller.Size = new System.Drawing.Size(187, 25);
             this.rbNormalBoxMuller.TabIndex = 8;
             this.rbNormalBoxMuller.TabStop = true;
-            this.rbNormalBoxMuller.Text = "Normal Box Muller";
+            this.rbNormalBoxMuller.Text = "Normal por Box Muller";
             this.rbNormalBoxMuller.UseVisualStyleBackColor = true;
             this.rbNormalBoxMuller.CheckedChanged += new System.EventHandler(this.rbNormal_CheckedChanged);
             // 
@@ -306,12 +306,34 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.gbCantidades.TabStop = false;
             this.gbCantidades.Text = "3. Ingrese la cantidad";
             // 
+            // rb20
+            // 
+            this.rb20.AutoSize = true;
+            this.rb20.Location = new System.Drawing.Point(200, 101);
+            this.rb20.Name = "rb20";
+            this.rb20.Size = new System.Drawing.Size(46, 25);
+            this.rb20.TabIndex = 21;
+            this.rb20.TabStop = true;
+            this.rb20.Text = "20";
+            this.rb20.UseVisualStyleBackColor = true;
+            // 
             // txtCantidadValores
             // 
             this.txtCantidadValores.Location = new System.Drawing.Point(164, 32);
             this.txtCantidadValores.Name = "txtCantidadValores";
             this.txtCantidadValores.Size = new System.Drawing.Size(100, 29);
             this.txtCantidadValores.TabIndex = 13;
+            // 
+            // rb15
+            // 
+            this.rb15.AutoSize = true;
+            this.rb15.Location = new System.Drawing.Point(138, 101);
+            this.rb15.Name = "rb15";
+            this.rb15.Size = new System.Drawing.Size(46, 25);
+            this.rb15.TabIndex = 20;
+            this.rb15.TabStop = true;
+            this.rb15.Text = "15";
+            this.rb15.UseVisualStyleBackColor = true;
             // 
             // btnCalcular
             // 
@@ -323,6 +345,17 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.btnCalcular.UseVisualStyleBackColor = true;
             this.btnCalcular.Click += new System.EventHandler(this.btnCalcular_Click);
             // 
+            // rb10
+            // 
+            this.rb10.AutoSize = true;
+            this.rb10.Location = new System.Drawing.Point(79, 101);
+            this.rb10.Name = "rb10";
+            this.rb10.Size = new System.Drawing.Size(46, 25);
+            this.rb10.TabIndex = 19;
+            this.rb10.TabStop = true;
+            this.rb10.Text = "10";
+            this.rb10.UseVisualStyleBackColor = true;
+            // 
             // lblCantidadValores
             // 
             this.lblCantidadValores.AutoSize = true;
@@ -331,6 +364,27 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.lblCantidadValores.Size = new System.Drawing.Size(150, 21);
             this.lblCantidadValores.TabIndex = 0;
             this.lblCantidadValores.Text = "Cantidad de valores:";
+            // 
+            // rb5
+            // 
+            this.rb5.AutoSize = true;
+            this.rb5.Location = new System.Drawing.Point(25, 101);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(37, 25);
+            this.rb5.TabIndex = 18;
+            this.rb5.TabStop = true;
+            this.rb5.Text = "5";
+            this.rb5.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(8, 77);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(240, 21);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Ingrese la cantidad de intervalos: ";
             // 
             // gbGrafico
             // 
@@ -525,60 +579,6 @@ namespace Numeros_aleatorios.LibreriaSimulacion
             this.txtLambdaPoisson.Name = "txtLambdaPoisson";
             this.txtLambdaPoisson.Size = new System.Drawing.Size(100, 29);
             this.txtLambdaPoisson.TabIndex = 13;
-            // 
-            // rb20
-            // 
-            this.rb20.AutoSize = true;
-            this.rb20.Location = new System.Drawing.Point(200, 101);
-            this.rb20.Name = "rb20";
-            this.rb20.Size = new System.Drawing.Size(46, 25);
-            this.rb20.TabIndex = 21;
-            this.rb20.TabStop = true;
-            this.rb20.Text = "20";
-            this.rb20.UseVisualStyleBackColor = true;
-            // 
-            // rb15
-            // 
-            this.rb15.AutoSize = true;
-            this.rb15.Location = new System.Drawing.Point(138, 101);
-            this.rb15.Name = "rb15";
-            this.rb15.Size = new System.Drawing.Size(46, 25);
-            this.rb15.TabIndex = 20;
-            this.rb15.TabStop = true;
-            this.rb15.Text = "15";
-            this.rb15.UseVisualStyleBackColor = true;
-            // 
-            // rb10
-            // 
-            this.rb10.AutoSize = true;
-            this.rb10.Location = new System.Drawing.Point(79, 101);
-            this.rb10.Name = "rb10";
-            this.rb10.Size = new System.Drawing.Size(46, 25);
-            this.rb10.TabIndex = 19;
-            this.rb10.TabStop = true;
-            this.rb10.Text = "10";
-            this.rb10.UseVisualStyleBackColor = true;
-            // 
-            // rb5
-            // 
-            this.rb5.AutoSize = true;
-            this.rb5.Location = new System.Drawing.Point(25, 101);
-            this.rb5.Name = "rb5";
-            this.rb5.Size = new System.Drawing.Size(37, 25);
-            this.rb5.TabIndex = 18;
-            this.rb5.TabStop = true;
-            this.rb5.Text = "5";
-            this.rb5.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(8, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(240, 21);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Ingrese la cantidad de intervalos: ";
             // 
             // PantallaVariablesAleatorias
             // 
