@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Numeros_aleatorios.Pruebas_de_bondad;
 using Numeros_aleatorios.LibreriaSimulacion;
+using Numeros_aleatorios.Montecarlo;
 
 namespace Numeros_aleatorios
 {
@@ -21,7 +22,7 @@ namespace Numeros_aleatorios
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PantallaPrincipal());
+            Application.Run(new PantallaInventarioBicicletas());
         }
     }
 }
