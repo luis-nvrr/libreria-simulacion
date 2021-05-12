@@ -24,12 +24,7 @@ namespace Numeros_aleatorios.Montecarlo
         private Truncador truncador;
         private IGenerador generadorAleatorios;
 
-        private double CANTIDAD_PEDIDO = 6;
-        private double STOCK_INICIAL = 7;
-        private double PUNTO_PEDIDO = 2;
-        private double COSTO_MANTENIMIENTO = 3;
-        private double COSTO_STOCKOUT = 5;
-        private double COSTO_PEDIDO = 20;
+
 
         public GestorInventarioBicicletas(PantallaInventarioBicicletas pantalla)
         {
@@ -73,14 +68,19 @@ namespace Numeros_aleatorios.Montecarlo
         }
 
 
-        public void simular(int cantidadSemanas, int extremoInferior, int extremoSuperior)
+        public void simular(int cantidadSemanas, int extremoInferior,
+            int extremoSuperior, int puntoPedido, int cantidadPedido, int stockInicial, int costoMantenimiento,
+            int costoStockout, int costoPedido)
         {
-            procesar(cantidadSemanas, extremoInferior, extremoSuperior);
+            procesar(cantidadSemanas, extremoInferior, extremoSuperior, 
+                puntoPedido, cantidadPedido, stockInicial,costoMantenimiento, costoStockout, costoPedido);
             mostrarResultados();
             mostrarRango();
         }
 
-        private void procesar(int cantidadSemanas, int extremoInferior, int extremoSuperior)
+        private void procesar(int cantidadSemanas, int extremoInferior, 
+            int extremoSuperior, int PUNTO_PEDIDO, int CANTIDAD_PEDIDO, int STOCK_INICIAL, int COSTO_MANTENIMIENTO,
+            int COSTO_STOCKOUT, int COSTO_PEDIDO)
         {
             lineaAnterior[0] = 0;
             lineaAnterior[10] = STOCK_INICIAL;
@@ -133,9 +133,9 @@ namespace Numeros_aleatorios.Montecarlo
 
                 lineaActual[6] = entranteActual;
 
-                if(entranteActual != -1)
+                if(entranteActual != -1)  // hay entrante actual
                 {
-                    aleatorioDañadas = generadorAleatorios.siguienteAleatorio();
+                    aleatorioDañadas = generadorAleatorios.siguienteAleatorio(); // aleatorio para dañadas 
                 }
                 else
                 {
@@ -146,16 +146,16 @@ namespace Numeros_aleatorios.Montecarlo
 
                 if(aleatorioDañadas != -1)
                 {
-                    dañadasActual = buscarDaño(aleatorioDañadas);
+                    dañadasActual = buscarDaño(aleatorioDañadas); // calcula dañadas actual
                 }
                 else
                 {
-                    dañadasActual = -1;
+                    dañadasActual = -1; // valor invalido
                 }
 
                 lineaActual[8] = dañadasActual;
 
-                if(dañadasActual == -1)
+                if(dañadasActual == -1) // si no hay entrante
                 {
                     entranteFinal = 0;
                 }
@@ -166,7 +166,7 @@ namespace Numeros_aleatorios.Montecarlo
 
                 lineaActual[9] = entranteFinal;
 
-                /// posibles problemas
+                /// 
                 stockAnterior = lineaAnterior[10];
                 double faltante = stockAnterior + entranteFinal - demandaActual; 
                 stockActual = faltante;
@@ -179,7 +179,7 @@ namespace Numeros_aleatorios.Montecarlo
                 lineaActual[10] = stockActual;
                     
 
-                if (stockActual <= PUNTO_PEDIDO && llegadaAnterior == -1)
+                if (stockActual <= PUNTO_PEDIDO && (llegadaAnterior == -1 || llegadaAnterior == semanaActual))
                 {
                     aleatorioDemora = generadorAleatorios.siguienteAleatorio();
                 }
