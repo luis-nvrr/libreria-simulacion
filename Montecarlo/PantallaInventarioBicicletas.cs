@@ -13,9 +13,9 @@ namespace Numeros_aleatorios.Montecarlo
     public partial class PantallaInventarioBicicletas : Form
     {
         private GestorInventarioBicicletas gestor;
-        private int CANTIDAD_SIMULACIONES = 10000000;
-        private int INICIO = 9999900;
-        private int FIN = 10000000;
+        private int CANTIDAD_SIMULACIONES = 100000;
+        private int INICIO = 99900;
+        private int FIN = 100000;
         private int CANTIDAD_PEDIDO = 6;
         private int STOCK_INICIAL = 7;
         private int PUNTO_PEDIDO = 2;

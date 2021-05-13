@@ -64,7 +64,7 @@ namespace Numeros_aleatorios.Montecarlo
             tabla.Columns.Add("costo stockout");
             tabla.Columns.Add("costo total");
             tabla.Columns.Add("costo acumulado");
-            tabla.Columns.Add("bicicletas con daños");
+            tabla.Columns.Add("costo promedio");
         }
 
 
@@ -106,8 +106,8 @@ namespace Numeros_aleatorios.Montecarlo
             double costoTotal;
             double costoAcumuladoAnterior;
             double costoAcumuladoActual;
-            double bicicletasDañadasAcumuladasAnterior;
-            double bicicletasDañadasAcumuladasActual;
+            double costoPromedioAnterior;
+            double costoPromedioActual;
 
             DataRow row;
 
@@ -224,18 +224,11 @@ namespace Numeros_aleatorios.Montecarlo
                 costoAcumuladoActual = costoAcumuladoAnterior + costoTotal;
                 lineaActual[15] = costoAcumuladoActual;
 
-                bicicletasDañadasAcumuladasAnterior = lineaAnterior[16];
+                costoPromedioAnterior = lineaAnterior[16];
 
-                if(dañadasActual >= 0)
-                {
-                    bicicletasDañadasAcumuladasActual = dañadasActual + bicicletasDañadasAcumuladasAnterior;
-                }
-                else
-                {
-                    bicicletasDañadasAcumuladasActual = bicicletasDañadasAcumuladasAnterior;
-                }
+                costoPromedioActual = (1.0 / semanaActual) * ((semanaActual - 1.0) * costoPromedioAnterior + costoTotal);
         
-                lineaActual[16] = bicicletasDañadasAcumuladasActual;
+                lineaActual[16] = truncador.truncar(costoPromedioActual);
 
                 if(i >= extremoInferior && i <= extremoSuperior)
                 {
