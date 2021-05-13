@@ -14,8 +14,8 @@ namespace Numeros_aleatorios.Montecarlo
     {
         private GestorInventarioBicicletas gestor;
         private int CANTIDAD_SIMULACIONES = 10000000;
-        private int INICIO;
-        private int FIN;
+        private int INICIO = 9999900;
+        private int FIN = 10000000;
         private int CANTIDAD_PEDIDO = 6;
         private int STOCK_INICIAL = 7;
         private int PUNTO_PEDIDO = 2;
@@ -70,7 +70,8 @@ namespace Numeros_aleatorios.Montecarlo
             this.txtCostoMantenimiento.Text = COSTO_MANTENIMIENTO.ToString();
             this.txtCostoStockout.Text = COSTO_STOCKOUT.ToString();
             this.txtCostoPedido.Text = COSTO_PEDIDO.ToString();
-
+            this.txtDesde.Text = INICIO.ToString();
+            this.txtHasta.Text = FIN.ToString();
         }
 
         private void PantallaInventarioBicicletas_Load(object sender, EventArgs e)
