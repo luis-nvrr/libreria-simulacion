@@ -38,7 +38,7 @@ namespace Numeros_aleatorios.Montecarlo
             this.generadorAleatorios = new GeneradorUniformeLenguaje(truncador);
 
             this.demandaAcumulada = new double[] { 0.5, 0.65, 0.9, 1 };
-            this.demoraAcumulada = new double[] { 0.3, 0.4, 1 };
+            this.demoraAcumulada = new double[] { 0.3, 0.7, 1 };
             this.dañoAcumulada = new double[] { 0.7, 1 };
 
             this.tablaResultados = new DataTable();
