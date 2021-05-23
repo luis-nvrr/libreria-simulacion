@@ -36,6 +36,7 @@ namespace Numeros_aleatorios.Colas
 
         public void liberar()
         {
+            this.finCobro = -1;
             this.estado = LIBRE;
         }
     }

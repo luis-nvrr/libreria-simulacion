@@ -9,10 +9,10 @@ namespace Numeros_aleatorios.Colas
 {
     class ColasMunicipalidad
     {
-        double[] probabilidadesEstadosAcum = new double[] { 0.9, 1 };
+        double[] probabilidadesEstadosAcum = new double[] { 0.1, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
-        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.8, 1 };
+        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.9, 1 };
         string[] conoceProcedimiento = new string[] { "si", "no" };
 
         DataTable resultados;
@@ -53,6 +53,7 @@ namespace Numeros_aleatorios.Colas
             tabla.Columns.Add("estado caja 3");
             tabla.Columns.Add("estado caja 4");
             tabla.Columns.Add("estado caja 5");
+            tabla.Columns.Add("cola caja");
         }
 
         public void simular()
@@ -63,7 +64,7 @@ namespace Numeros_aleatorios.Colas
             {
                 Linea lineaActual = new Linea(lineaAnterior);
                 lineaActual.calcularEvento();
-                lineaActual.calcularSiguienteLlegada(60);
+                lineaActual.calcularSiguienteLlegada(5);
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
                 lineaActual.calcularConoceProcedimiento(probabilidadesConoceProcedimientoAcum, conoceProcedimiento);
                 lineaActual.calcularFinInforme(20);
@@ -103,7 +104,7 @@ namespace Numeros_aleatorios.Colas
             row[20] = linea.cajas[2].estado;
             row[21] = linea.cajas[3].estado;
             row[22] = linea.cajas[4].estado;
-
+            row[23] = linea.colaCaja;
 
             resultados.Rows.Add(row);
         }

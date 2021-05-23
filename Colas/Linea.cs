@@ -163,7 +163,7 @@ namespace Numeros_aleatorios.Colas
                 return;
             }
 
-            if (lineaAnterior.tieneFinInforme())
+            if (lineaAnterior.tieneFinInforme() && !this.evento.Equals(FIN_INFORME))
             {
                 this.ventanillaInforme.agregarFinInforme(lineaAnterior.obtenerFinInforme());
                 return;
@@ -198,7 +198,7 @@ namespace Numeros_aleatorios.Colas
                 return;
             }
 
-            if (lineaAnterior.tieneFinActualizacion())
+            if (lineaAnterior.tieneFinActualizacion() && !this.evento.Equals(FIN_ACTUALIZACION))
             {
                 ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
                 return;
@@ -224,8 +224,6 @@ namespace Numeros_aleatorios.Colas
 
         public void calcularFinCobro(double tiempo)
         {
-            
-
             if(this.estadoFactura.Equals("al dia")
                 || this.evento.Equals(FIN_ACTUALIZACION))
             {
@@ -237,6 +235,7 @@ namespace Numeros_aleatorios.Colas
 
                 caja.agregarFinCobro(this.reloj + tiempo);
             }
+           
         }
 
         private Caja buscarCajaLibre()
