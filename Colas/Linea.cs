@@ -5,30 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Colas
 {
     class Linea
     {
-        string LLEGADA_PERSONA = "llegada de persona";
-        string FIN_INFORME = "fin de informe";
-        string FIN_ACTUALIZACION = "fin de actualizacion";
-        string FIN_COBRO = "fin de cobro";
+        public string LLEGADA_PERSONA = "llegada de persona";
+        public string FIN_INFORME = "fin de informe";
+        public string FIN_ACTUALIZACION = "fin de actualizacion";
+        public string FIN_COBRO = "fin de cobro";
 
-        IGenerador aleatorios;
-        Truncador truncador;
-
-        string evento { get; set; }
-        double reloj { get; set; }
-        double llegadaCliente { get; set; }
-        double rndEstadoFactura { get; set; }
-        string estadoFactura { get; set; }
-        double rndConoceProcedimiento { get; set; }
-        string conoceProcedimiento { get; set; }
-        List<Caja> cajas { get; set; }
-        VentanillaActualizacion ventanillaActualizacion { get; set; }
-        VentanillaInforme ventanillaInforme { get; set; }
-        Linea lineaAnterior { get; set; }
+       public IGenerador aleatorios;
+       public Truncador truncador;
+       public string evento { get; set; }
+       public double reloj { get; set; }
+       public double llegadaCliente { get; set; }
+       public double rndEstadoFactura { get; set; }
+       public string estadoFactura { get; set; }
+       public double rndConoceProcedimiento { get; set; }
+       public string conoceProcedimiento { get; set; }
+       public List<Caja> cajas { get; set; }
+       public VentanillaActualizacion ventanillaActualizacion { get; set; }
+       public VentanillaInforme ventanillaInforme { get; set; }
+       public Linea lineaAnterior { get; set; }
+       public int colaCaja { get; set; }
 
 
         public Linea(int cantidadCajas)
@@ -38,7 +39,8 @@ namespace Numeros_aleatorios.Colas
             this.aleatorios = new GeneradorUniformeLenguaje(truncador);
             this.ventanillaInforme = new VentanillaInforme();
             this.ventanillaActualizacion = new VentanillaActualizacion();
-            this.cajas = new List<Caja>(5);
+            this.cajas = new List<Caja>();
+            cargarCajas(cantidadCajas);
         }
 
         public Linea(Linea anterior)
@@ -48,8 +50,19 @@ namespace Numeros_aleatorios.Colas
             this.aleatorios = new GeneradorUniformeLenguaje(truncador);
             this.ventanillaInforme = new VentanillaInforme();
             this.ventanillaActualizacion = new VentanillaActualizacion();
-            this.cajas = new List<Caja>(5);
+            Caja[] temp = new Caja[anterior.cajas.Count];
+            anterior.cajas.CopyTo(temp);
+            this.cajas = new List<Caja>(temp);
         }
+
+        private void cargarCajas(int cantidadCajas)
+        {
+            for (int i = 1; i <= cantidadCajas; i++)
+            {
+                cajas.Add(new Caja(i));
+            }
+        }
+
 
 
 
@@ -57,25 +70,42 @@ namespace Numeros_aleatorios.Colas
         {
             this.reloj = lineaAnterior.llegadaCliente;
             this.evento = LLEGADA_PERSONA;
+            Caja cajaFinCobro = null;
 
-            if (lineaAnterior.ventanillaInforme.finInforme < reloj) {
+            if (lineaAnterior.ventanillaInforme.finInforme >0 && lineaAnterior.ventanillaInforme.finInforme < reloj) {
                 reloj = lineaAnterior.ventanillaInforme.finInforme;
+                //MessageBox.Show("informe" + "-" + reloj.ToString());
                 evento = FIN_INFORME;
             }
 
-            if (lineaAnterior.ventanillaActualizacion.finActualizacion < reloj)
+            if (lineaAnterior.ventanillaActualizacion.finActualizacion > 0 && lineaAnterior.ventanillaActualizacion.finActualizacion < reloj)
             {
                 reloj = lineaAnterior.ventanillaActualizacion.finActualizacion;
+                //MessageBox.Show("actualizacion" + "-" + reloj.ToString());
                 evento = FIN_ACTUALIZACION;
             }
 
             foreach (var caja in lineaAnterior.cajas)
             {
-                if (caja.finCobro < reloj) {
+                if (caja.finCobro < reloj && caja.finCobro > 0) {
                     reloj = caja.finCobro;
+                    //MessageBox.Show("cobro " + caja.id.ToString() + "-" + caja.finCobro.ToString());
+                    cajaFinCobro = (Caja)this.cajas.Where(x => x.id == caja.id).FirstOrDefault();
                     evento = FIN_COBRO;
                 }
             }
+
+            if (evento.Equals(FIN_COBRO))
+            {
+                actualizarCaja(cajaFinCobro);
+            }
+      
+        }
+
+        private void actualizarCaja(Caja caja)
+        {
+            caja.liberar();
+            this.colaCaja -= 1;
         }
 
 
@@ -92,8 +122,8 @@ namespace Numeros_aleatorios.Colas
         {
             if (this.evento.Equals(LLEGADA_PERSONA))
             {
-                double rndFactura = aleatorios.siguienteAleatorio();
-                this.estadoFactura = buscarProbabilidadEnVector(probabilidades, estadosFactura, rndFactura);
+                rndEstadoFactura = aleatorios.siguienteAleatorio();
+                this.estadoFactura = buscarProbabilidadEnVector(probabilidades, estadosFactura, rndEstadoFactura);
                 return;
             }
             this.estadoFactura = "";
@@ -103,10 +133,11 @@ namespace Numeros_aleatorios.Colas
         {
             if (this.estadoFactura.Equals("vencida"))
             {
-                double rndConoce = aleatorios.siguienteAleatorio();
-                this.conoceProcedimiento = buscarProbabilidadEnVector(probabilidades, conoceProcedimiento, rndConoce);
+                rndConoceProcedimiento = aleatorios.siguienteAleatorio();
+                this.conoceProcedimiento = buscarProbabilidadEnVector(probabilidades, conoceProcedimiento, rndConoceProcedimiento);
                 return;
             }
+
             this.conoceProcedimiento = "";
         }
 
@@ -125,22 +156,16 @@ namespace Numeros_aleatorios.Colas
 
         public void calcularFinInforme(double tiempo)
         {
-            if (this.evento.Equals(FIN_INFORME) && lineaAnterior.tieneColaInforme())
+            if ((this.evento.Equals(FIN_INFORME) && lineaAnterior.tieneColaInforme())
+                || (this.conoceProcedimiento.Equals("no") && !this.tieneFinInforme()))
             {
                 ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
                 return;
             }
 
-            if (this.evento.Equals(LLEGADA_PERSONA) && this.conoceProcedimiento.Equals("no"))
+            if (lineaAnterior.tieneFinInforme())
             {
-
-                if (lineaAnterior.tieneFinInforme())
-                {
-                    this.ventanillaInforme.finInforme = lineaAnterior.obtenerFinInforme();
-                    return;
-                }
-
-                this.ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
+                this.ventanillaInforme.agregarFinInforme(lineaAnterior.obtenerFinInforme());
                 return;
             }
 
@@ -165,17 +190,27 @@ namespace Numeros_aleatorios.Colas
         public void calcularFinActualizacion(double tiempo)
         {
 
-            if (this.evento.Equals(FIN_ACTUALIZACION) && lineaAnterior.tieneColaActualizacion()
-                || this.evento.Equals(FIN_INFORME)
-                || this.conoceProcedimiento.Equals("si") && !lineaAnterior.tieneFinActualizacion())
+            if ((this.evento.Equals(FIN_ACTUALIZACION) && lineaAnterior.tieneColaActualizacion())
+                || (this.evento.Equals(FIN_INFORME))
+                || (this.conoceProcedimiento.Equals("si") && !lineaAnterior.tieneFinActualizacion()))
             {
                 ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
+                return;
+            }
+
+            if (lineaAnterior.tieneFinActualizacion())
+            {
+                ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
                 return;
             }
 
             this.ventanillaActualizacion.noGenerarFinActualizacion();
         }
 
+        private double obtenerFinActualizacion()
+        {
+            return this.ventanillaActualizacion.obtenerFinActualizacion();
+        }
 
         private Boolean tieneFinActualizacion()
         {
@@ -187,5 +222,30 @@ namespace Numeros_aleatorios.Colas
             return this.ventanillaActualizacion.tieneCola();
         }
 
+        public void calcularFinCobro(double tiempo)
+        {
+            
+
+            if(this.estadoFactura.Equals("al dia")
+                || this.evento.Equals(FIN_ACTUALIZACION))
+            {
+                Caja caja = buscarCajaLibre();
+                if(caja == null) {
+                    this.colaCaja = lineaAnterior.colaCaja + 1 ;
+                    return;
+                }
+
+                caja.agregarFinCobro(this.reloj + tiempo);
+            }
+        }
+
+        private Caja buscarCajaLibre()
+        {
+            foreach (var caja in cajas)
+            {
+                if (caja.estaLibre()) return caja;
+            }
+            return null;
+        }
     }
 }

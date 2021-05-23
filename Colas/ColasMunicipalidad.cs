@@ -9,7 +9,7 @@ namespace Numeros_aleatorios.Colas
 {
     class ColasMunicipalidad
     {
-        double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
+        double[] probabilidadesEstadosAcum = new double[] { 0.9, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
         double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.8, 1 };
@@ -25,28 +25,87 @@ namespace Numeros_aleatorios.Colas
         {
             this.pantallaResultados = pantallaResultados;
             resultados = new DataTable();
+            crearTabla(resultados);
+        }
+
+        private void crearTabla(DataTable tabla)
+        {
+            tabla.Columns.Add("evento");
+            tabla.Columns.Add("reloj(seg)");
+            tabla.Columns.Add("llegada cliente");
+            tabla.Columns.Add("RND estado factura");
+            tabla.Columns.Add("estado factura");
+            tabla.Columns.Add("RND conoce procedimiento");
+            tabla.Columns.Add("conoce procedimiento");
+            tabla.Columns.Add("fin informe");
+            tabla.Columns.Add("fin actualizacion");
+            tabla.Columns.Add("fin de cobro 1");
+            tabla.Columns.Add("fin de cobro 2");
+            tabla.Columns.Add("fin de cobro 3");
+            tabla.Columns.Add("fin de cobro 4");
+            tabla.Columns.Add("fin de cobro 5");
+            tabla.Columns.Add("estado informe");
+            tabla.Columns.Add("cola informe");
+            tabla.Columns.Add("estado actualizacion");
+            tabla.Columns.Add("cola actualizacion");
+            tabla.Columns.Add("estado caja 1");
+            tabla.Columns.Add("estado caja 2");
+            tabla.Columns.Add("estado caja 3");
+            tabla.Columns.Add("estado caja 4");
+            tabla.Columns.Add("estado caja 5");
         }
 
         public void simular()
         {
             Linea lineaAnterior = new Linea(5);
-            Linea lineaActual = new Linea(lineaAnterior);
-
 
             for (int i = 1; i < 100; i++)
             {
+                Linea lineaActual = new Linea(lineaAnterior);
                 lineaActual.calcularEvento();
                 lineaActual.calcularSiguienteLlegada(60);
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
                 lineaActual.calcularConoceProcedimiento(probabilidadesConoceProcedimientoAcum, conoceProcedimiento);
                 lineaActual.calcularFinInforme(20);
                 lineaActual.calcularFinActualizacion(40);
+                lineaActual.calcularFinCobro(30);
+
+                lineaAnterior = lineaActual;
+                agregarLinea(lineaActual, i);
             }
 
-
-
-
             pantallaResultados.mostrarResultados(resultados);
+        }
+
+        private void agregarLinea(Linea linea, int i)
+        {
+            DataRow row = resultados.NewRow();
+            row[0] = linea.evento;
+            row[1] = linea.reloj;
+            row[2] = linea.llegadaCliente;
+            row[3] = linea.rndEstadoFactura;
+            row[4] = linea.estadoFactura;
+            row[5] = linea.rndConoceProcedimiento;
+            row[6] = linea.conoceProcedimiento;
+            row[7] = linea.ventanillaInforme.finInforme;
+            row[8] = linea.ventanillaActualizacion.finActualizacion;
+            row[9] = linea.cajas[0].finCobro;
+            row[10] = linea.cajas[1].finCobro;
+            row[11] = linea.cajas[2].finCobro;
+            row[12] = linea.cajas[3].finCobro;
+            row[13] = linea.cajas[4].finCobro;
+            row[14] = linea.ventanillaInforme.estado;
+            row[15] = linea.ventanillaInforme.cola;
+            row[16] = linea.ventanillaActualizacion.estado;
+            row[17] = linea.ventanillaActualizacion.cola;
+            row[18] = linea.cajas[0].estado;
+            row[19] = linea.cajas[1].estado;
+            row[20] = linea.cajas[2].estado;
+            row[21] = linea.cajas[3].estado;
+            row[22] = linea.cajas[4].estado;
+
+
+            resultados.Rows.Add(row);
         }
 
     }

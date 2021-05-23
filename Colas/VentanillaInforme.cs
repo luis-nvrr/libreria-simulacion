@@ -16,6 +16,11 @@ namespace Numeros_aleatorios.Colas
         public  double finInforme { get; set; }
 
 
+        public VentanillaInforme()
+        {
+            this.finInforme = -1;
+        }
+
         public void agregarFinInforme(double fin)
         {
                 finInforme = fin;
