@@ -19,6 +19,7 @@ namespace Numeros_aleatorios.Colas
 
         private void PantallaResultados_Load(object sender, EventArgs e)
         {
+            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             ColasMunicipalidad colas = new ColasMunicipalidad(this);
             colas.simular();
         }
@@ -26,6 +27,11 @@ namespace Numeros_aleatorios.Colas
         public void mostrarResultados(DataTable resultados)
         {
             this.grdRangoResultados.DataSource = resultados;
+        }
+
+        private void grdRangoResultados_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.FillWeight = 1;
         }
     }
 }

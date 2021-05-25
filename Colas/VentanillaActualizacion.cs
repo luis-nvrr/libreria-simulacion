@@ -11,9 +11,8 @@ namespace Numeros_aleatorios.Colas
         string LIBRE = "libre";
         string OCUPADO = "ocupado";
 
-        public int tamañoCola { get; set; }
         public string estado { get; set; }
-        public double finActualizacion { get; set; }
+        public long finActualizacion { get; set; }
 
         public Queue<Cliente> cola;
 
@@ -28,10 +27,10 @@ namespace Numeros_aleatorios.Colas
 
         public Boolean tieneCola()
         {
-            return tamañoCola > 0;
+            return cola.Count > 0;
         }
 
-        public void agregarFinActualizacion(double tiempo)
+        public void agregarFinActualizacion(long tiempo)
         {
             this.finActualizacion = tiempo;
             this.estado = OCUPADO;
@@ -48,7 +47,7 @@ namespace Numeros_aleatorios.Colas
             this.finActualizacion = -1;
         }
 
-        public double obtenerFinActualizacion()
+        public long obtenerFinActualizacion()
         {
             return finActualizacion;
         }
@@ -58,15 +57,6 @@ namespace Numeros_aleatorios.Colas
             this.estado = LIBRE;
         }
 
-        public void disminuirCola()
-        {
-            tamañoCola -= 1;
-        }
-
-        public void aumentarCola()
-        {
-            tamañoCola += 1;
-        }
 
         public Boolean estaOcupada()
         {
@@ -76,7 +66,7 @@ namespace Numeros_aleatorios.Colas
         public object Clone()
         {
             VentanillaActualizacion res = new VentanillaActualizacion();
-            res.tamañoCola = this.tamañoCola;
+            //res.tamañoCola = this.tamañoCola;
             res.estado = this.estado;
             res.finActualizacion = this.finActualizacion;
             res.clienteActual = this.clienteActual;

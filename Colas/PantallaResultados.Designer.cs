@@ -84,6 +84,8 @@ namespace Numeros_aleatorios.Colas
             this.grdRangoResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdRangoResultados.Size = new System.Drawing.Size(1114, 381);
             this.grdRangoResultados.TabIndex = 7;
+            this.grdRangoResultados.VirtualMode = true;
+            this.grdRangoResultados.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.grdRangoResultados_ColumnAdded);
             // 
             // PantallaResultados
             // 

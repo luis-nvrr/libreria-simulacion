@@ -12,9 +12,7 @@ namespace Numeros_aleatorios.Colas
         string OCUPADO = "ocupado";
 
         public string estado { get; set; }
-        public double finCobro { get; set; }
-
-        public static int tamañoCola;
+        public long finCobro { get; set; }
 
         public int id;
 
@@ -34,7 +32,7 @@ namespace Numeros_aleatorios.Colas
             return this.estado.Equals(LIBRE);
         }
 
-        public void agregarFinCobro(double fin)
+        public void agregarFinCobro(long fin)
         {
             this.finCobro = fin;
             this.estado = OCUPADO;
@@ -54,7 +52,7 @@ namespace Numeros_aleatorios.Colas
 
         public static Boolean tieneCola()
         {
-            return tamañoCola > 0;
+            return cola.Count > 0;
         }
 
         public static void agregarACola(Cliente cliente)

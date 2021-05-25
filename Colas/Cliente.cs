@@ -16,10 +16,16 @@ namespace Numeros_aleatorios.Colas
         String SIENDO_ATENDIDO_INFORME = "SAI";
 
         public String estado;
-        public long horaEsperaEnCaja;
-        public long horaLlegada;
-        public long  id;
+        public long horaLLegadaACaja;
+        public long tiempoEsperaEnCaja;
 
+
+        public Cliente()
+        {
+            this.estado = "";
+            this.horaLLegadaACaja = 0;
+            this.tiempoEsperaEnCaja = 0;
+        }
 
         public void esperarInforme()
         {
@@ -29,7 +35,7 @@ namespace Numeros_aleatorios.Colas
         public void limpiar()
         {
             estado = "";
-            horaEsperaEnCaja = -1;
+            horaLLegadaACaja = -1;
         }
 
         public Boolean estaLibre()
@@ -52,9 +58,15 @@ namespace Numeros_aleatorios.Colas
             this.estado = SIENDO_ATENDIDO_INFORME;
         }
 
-        public void atenderCaja()
+        public void atenderCaja(int numero, long reloj)
         {
-            this.estado = SIENDO_ATENDIDO_CAJA;
+            if (estado.Equals(ESPERANDO_CAJA))
+            {
+                tiempoEsperaEnCaja = reloj - horaLLegadaACaja;
+                horaLLegadaACaja = -1;
+            }
+           
+            this.estado = SIENDO_ATENDIDO_CAJA + " " + numero;
         }
 
         public void esperarCaja()
