@@ -55,12 +55,12 @@ namespace Numeros_aleatorios.Colas
 
         public void liberar()
         {
-            this.estado = OCUPADO;
+            this.estado = LIBRE;
         }
 
         public void disminuirCola()
         {
-            tamañoCola = tamañoCola > 0 ? tamañoCola - 1 : 0;
+            tamañoCola -= 1;
         }
 
         public void aumentarCola()
@@ -79,6 +79,13 @@ namespace Numeros_aleatorios.Colas
             res.tamañoCola = this.tamañoCola;
             res.estado = this.estado;
             res.finActualizacion = this.finActualizacion;
+            res.clienteActual = this.clienteActual;
+            Cliente[] temp = new Cliente[cola.Count];
+            cola.CopyTo(temp, 0);
+            res.cola = new Queue<Cliente>(temp);
+
+
+
             return res;
         }
 

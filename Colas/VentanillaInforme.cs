@@ -63,7 +63,7 @@ namespace Numeros_aleatorios.Colas
 
         public void disminuirCola()
         {
-            tamañoCola = tamañoCola > 0 ? tamañoCola - 1 : 0;
+            tamañoCola--;
         }
 
         public object Clone()
@@ -72,6 +72,10 @@ namespace Numeros_aleatorios.Colas
             res.tamañoCola = this.tamañoCola;
             res.estado = this.estado;
             res.finInforme = this.finInforme;
+            res.clienteActual = this.clienteActual;
+            Cliente[] temp = new Cliente[cola.Count];
+            cola.CopyTo(temp, 0);
+            res.cola = new Queue<Cliente>(temp);
 
             return res;
         }
@@ -89,6 +93,11 @@ namespace Numeros_aleatorios.Colas
         public Cliente getClienteActual()
         {
             return this.clienteActual;
+        }
+
+        public void agregarACola(Cliente cliente)
+        {
+            cola.Enqueue(cliente);
         }
     }
 }

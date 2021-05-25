@@ -18,6 +18,7 @@ namespace Numeros_aleatorios.Colas
         public String estado;
         public long horaEsperaEnCaja;
         public long horaLlegada;
+        public long  id;
 
 
         public void esperarInforme()
@@ -44,6 +45,21 @@ namespace Numeros_aleatorios.Colas
         public void atenderActualizacion()
         {
             this.estado = SIENDO_ATENDID_ACTUALIZACION;
+        }
+
+        public void atenderInforme()
+        {
+            this.estado = SIENDO_ATENDIDO_INFORME;
+        }
+
+        public void atenderCaja()
+        {
+            this.estado = SIENDO_ATENDIDO_CAJA;
+        }
+
+        public void esperarCaja()
+        {
+            this.estado = ESPERANDO_CAJA;
         }
     }
 }

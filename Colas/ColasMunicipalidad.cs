@@ -13,9 +13,7 @@ namespace Numeros_aleatorios.Colas
         double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
-        double[] probabilidadesConoceProcedimientoAcum = new double[] { 1,
-            
-            1 };
+        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.6, 1 };
         string[] conoceProcedimiento = new string[] { "si", "no" };
 
         DataTable resultados;
@@ -69,6 +67,17 @@ namespace Numeros_aleatorios.Colas
             tabla.Columns.Add("tiempo cliente 5");
         }
 
+
+        private void mostrarClientes(Linea linea)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var cliente in linea.clientes)
+            {
+                stringBuilder.Append("cliente-estado:").Append(cliente.estado).Append("-hora").Append(cliente.horaLlegada).Append("\\n");
+            }
+            MessageBox.Show(stringBuilder.ToString());
+        }
+
         public void simular()
         {
             Linea lineaAnterior = new Linea(5);
@@ -85,8 +94,6 @@ namespace Numeros_aleatorios.Colas
                 lineaActual.calcularFinCobro(30);
                 lineaActual.calcularClientes();
                 cantidadClientes = lineaActual.cantidadClientes();
-
-                //MessageBox.Show(lineaActual.cantidadClientes().ToString());
 
                 lineaAnterior = lineaActual;
                 agregarLinea(lineaActual, i);
@@ -121,7 +128,7 @@ namespace Numeros_aleatorios.Colas
             row[20] = linea.cajas[2].estado;
             row[21] = linea.cajas[3].estado;
             row[22] = linea.cajas[4].estado;
-            row[23] = Caja.tamañoCola;
+            row[23] = linea.colaCaja;
             indice = 23;
 
             if(cantidadClientes > cantidadClientesAnterior)
