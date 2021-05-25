@@ -4,22 +4,25 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Colas
 {
     class ColasMunicipalidad
     {
-        double[] probabilidadesEstadosAcum = new double[] { 0.1, 1 };
+        double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
-        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.9, 1 };
+        double[] probabilidadesConoceProcedimientoAcum = new double[] { 1,
+            
+            1 };
         string[] conoceProcedimiento = new string[] { "si", "no" };
 
         DataTable resultados;
-        List<string> lineaAnterior;
-        List<string> lineaActual;
-
         private PantallaResultados pantallaResultados;
+        private int cantidadClientesAnterior;
+        private int cantidadClientes;
+        private int indice;
 
         public ColasMunicipalidad(PantallaResultados pantallaResultados)
         {
@@ -54,6 +57,16 @@ namespace Numeros_aleatorios.Colas
             tabla.Columns.Add("estado caja 4");
             tabla.Columns.Add("estado caja 5");
             tabla.Columns.Add("cola caja");
+            tabla.Columns.Add("estado cliente 1");
+            tabla.Columns.Add("tiempo cliente 1");
+            tabla.Columns.Add("estado cliente 2");
+            tabla.Columns.Add("tiempo cliente 2");
+            tabla.Columns.Add("estado cliente 3");
+            tabla.Columns.Add("tiempo cliente 3");
+            tabla.Columns.Add("estado cliente 4");
+            tabla.Columns.Add("tiempo cliente 4");
+            tabla.Columns.Add("estado cliente 5");
+            tabla.Columns.Add("tiempo cliente 5");
         }
 
         public void simular()
@@ -70,6 +83,10 @@ namespace Numeros_aleatorios.Colas
                 lineaActual.calcularFinInforme(20);
                 lineaActual.calcularFinActualizacion(40);
                 lineaActual.calcularFinCobro(30);
+                lineaActual.calcularClientes();
+                cantidadClientes = lineaActual.cantidadClientes();
+
+                //MessageBox.Show(lineaActual.cantidadClientes().ToString());
 
                 lineaAnterior = lineaActual;
                 agregarLinea(lineaActual, i);
@@ -96,16 +113,24 @@ namespace Numeros_aleatorios.Colas
             row[12] = linea.cajas[3].finCobro;
             row[13] = linea.cajas[4].finCobro;
             row[14] = linea.ventanillaInforme.estado;
-            row[15] = linea.ventanillaInforme.cola;
+            row[15] = linea.ventanillaInforme.tamañoCola;
             row[16] = linea.ventanillaActualizacion.estado;
-            row[17] = linea.ventanillaActualizacion.cola;
+            row[17] = linea.ventanillaActualizacion.tamañoCola;
             row[18] = linea.cajas[0].estado;
             row[19] = linea.cajas[1].estado;
             row[20] = linea.cajas[2].estado;
             row[21] = linea.cajas[3].estado;
             row[22] = linea.cajas[4].estado;
-            row[23] = linea.colaCaja;
+            row[23] = Caja.tamañoCola;
+            indice = 23;
 
+            if(cantidadClientes > cantidadClientesAnterior)
+            {
+                indice += 1;
+                row[indice] = linea.clientes[0].estado;
+                indice += 1;
+                row[indice] = linea.clientes[0].horaEsperaEnCaja;
+            }
             resultados.Rows.Add(row);
         }
 
