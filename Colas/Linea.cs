@@ -260,11 +260,7 @@ namespace Numeros_aleatorios.Colas
             }
 
             Cliente res = new Cliente();
-
-            if(this.idFila >= filaDesde && this.idFila <= filaHasta)
-            {
-                //colas.agregarColumna();
-            }
+            colas.agregarColumna();
             return res;
         }
 
