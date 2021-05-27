@@ -10,7 +10,7 @@ namespace Numeros_aleatorios.Colas
 {
     class ColasMunicipalidad
     {
-        double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
+        double[] probabilidadesEstadosAcum = new double[] { 0.0, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
         double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.6, 1 };
@@ -23,6 +23,7 @@ namespace Numeros_aleatorios.Colas
         private int indice;
         private int cantidadPaginas;
         private List<DataTable> paginas;
+
 
         public ColasMunicipalidad(PantallaResultados pantallaResultados)
         {
@@ -37,33 +38,33 @@ namespace Numeros_aleatorios.Colas
             tabla.Columns.Add("iteracion");
             tabla.Columns.Add("evento");
             tabla.Columns.Add("reloj");
-            tabla.Columns.Add("LL CL");
-            tabla.Columns.Add("RND E.F.");
-            tabla.Columns.Add("E.F.");
-            tabla.Columns.Add("RND C.P.");
-            tabla.Columns.Add("C.P.");
-            tabla.Columns.Add("F.I.");
-            tabla.Columns.Add("F.A.");
-            tabla.Columns.Add("FC 1");
-            tabla.Columns.Add("FC 2");
-            tabla.Columns.Add("FC 3");
-            tabla.Columns.Add("FC 4");
-            tabla.Columns.Add("FC 5");
-            tabla.Columns.Add("E Inf");
-            tabla.Columns.Add("C Inf");
-            tabla.Columns.Add("E Act");
-            tabla.Columns.Add("C Act");
-            tabla.Columns.Add("EC 1");
-            tabla.Columns.Add("EC 2");
-            tabla.Columns.Add("EC 3");
-            tabla.Columns.Add("EC 4");
-            tabla.Columns.Add("EC 5");
-            tabla.Columns.Add("C Caj");
-            tabla.Columns.Add("Acum TEC");
-            tabla.Columns.Add("Cant Esperan");
-            tabla.Columns.Add("Acum ocup inf");
-            tabla.Columns.Add("Acum ocioso act");
-            tabla.Columns.Add("Max espera caja");
+            tabla.Columns.Add("llegada cliente");
+            tabla.Columns.Add("RND estado factura.");
+            tabla.Columns.Add("estado factura");
+            tabla.Columns.Add("RND conoce");
+            tabla.Columns.Add("conoce procedimiento");
+            tabla.Columns.Add("fin informacion");
+            tabla.Columns.Add("fin actualizacion");
+            tabla.Columns.Add("fin caja 1");
+            tabla.Columns.Add("fin caja 2");
+            tabla.Columns.Add("fin caja 3");
+            tabla.Columns.Add("fin caja 4");
+            tabla.Columns.Add("fin caja 5");
+            tabla.Columns.Add("estado informes");
+            tabla.Columns.Add("cola informes");
+            tabla.Columns.Add("estado actualizacion");
+            tabla.Columns.Add("cola actualizacion");
+            tabla.Columns.Add("estado caja 1");
+            tabla.Columns.Add("estado caja 2");
+            tabla.Columns.Add("estado caja 3");
+            tabla.Columns.Add("estado caja 4");
+            tabla.Columns.Add("estado caja 5");
+            tabla.Columns.Add("cola caja");
+            tabla.Columns.Add("acumulado tiempo espera en caja");
+            tabla.Columns.Add("cantidad que espera");
+            tabla.Columns.Add("tiempo ocupacion informes");
+            tabla.Columns.Add("tiempo ocioso actualizacion");
+            tabla.Columns.Add("maxima espera en caja");
         }
 
 
@@ -73,11 +74,11 @@ namespace Numeros_aleatorios.Colas
             Linea lineaActual = null;
 
 
-            for (int i = 1; i <= 1000000; i++)
+            for (int i = 1; i <= 1000; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
-                lineaActual.calcularSiguienteLlegada(40);
+                lineaActual.calcularSiguienteLlegada(20);
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
                 lineaActual.calcularConoceProcedimiento(probabilidadesConoceProcedimientoAcum, conoceProcedimiento);
                 lineaActual.calcularFinInforme(20);
@@ -99,7 +100,7 @@ namespace Numeros_aleatorios.Colas
             MessageBox.Show("Columnas-" + (resultados.Columns.Count-1).ToString());
             cantidadPaginas = (int)Math.Ceiling((double)(resultados.Columns.Count-1) / (double)10);
 
-            int columnasPorPagina = 10;
+            int columnasPorPagina = 7;
             for (int i = 1; i <= cantidadPaginas; i++)
             {
                 int columnaDesde = i * columnasPorPagina - columnasPorPagina + 1;
@@ -149,8 +150,8 @@ namespace Numeros_aleatorios.Colas
         public void agregarColumna()
         {
             cantidadClientes++;
-            this.resultados.Columns.Add("E " + cantidadClientes);
-            this.resultados.Columns.Add("HE " + cantidadClientes);
+            this.resultados.Columns.Add("estado " + cantidadClientes);
+            this.resultados.Columns.Add("hora espera " + cantidadClientes);
         }
 
         private void agregarLinea(Linea linea, int i)

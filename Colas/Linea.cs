@@ -446,7 +446,7 @@ namespace Numeros_aleatorios.Colas
                         long maxTemp = clienteActual.tiempoEsperaEnCaja;
                         this.acumuladorTiemposEsperaEnCaja += maxTemp;
                         if(maxTemp > tiempoMaximoEsperaEnCola) { tiempoMaximoEsperaEnCola = maxTemp;  }
-                        cantidadClientesEsperan++;
+                        //cantidadClientesEsperan++;
                         cajaLibre.agregarFinCobro(reloj + tiempo);
                     }
                 }

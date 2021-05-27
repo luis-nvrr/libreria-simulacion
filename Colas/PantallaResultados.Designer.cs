@@ -91,6 +91,7 @@ namespace Numeros_aleatorios.Colas
             this.grdRangoResultados.TabIndex = 7;
             this.grdRangoResultados.VirtualMode = true;
             this.grdRangoResultados.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.grdRangoResultados_ColumnAdded);
+            this.grdRangoResultados.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.grdRangoResultados_DataBindingComplete);
             // 
             // btnSiguiente
             // 
