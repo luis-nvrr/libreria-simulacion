@@ -12,16 +12,20 @@ namespace Numeros_aleatorios.Colas
 {
     public partial class PantallaResultados : Form
     {
+        private int paginaActual;
+        private ColasMunicipalidad colas;
         public PantallaResultados()
         {
             InitializeComponent();
+            paginaActual = 1;
         }
 
         private void PantallaResultados_Load(object sender, EventArgs e)
         {
             grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            ColasMunicipalidad colas = new ColasMunicipalidad(this);
-            colas.simular();
+            colas = new ColasMunicipalidad(this);
+            colas.simular(0,100); // 0 es la fila 1, la 0 es inicializacion
+            colas.mostrarPagina(paginaActual);
         }
 
         public void mostrarResultados(DataTable resultados)
@@ -33,6 +37,18 @@ namespace Numeros_aleatorios.Colas
         private void grdRangoResultados_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.FillWeight = 1;
+        }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            paginaActual++;
+            colas.mostrarPagina(paginaActual);
+        }
+
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+            paginaActual--;
+            colas.mostrarPagina(paginaActual);
         }
     }
 }

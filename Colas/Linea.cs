@@ -260,21 +260,12 @@ namespace Numeros_aleatorios.Colas
             }
 
             Cliente res = new Cliente();
-            colas.agregarColumna();
+            if(idFila <= filaHasta)
+            {
+                colas.agregarColumna();
+            }
+         
             return res;
-        }
-
-        public int cantidadClientes()
-        {
-            return this.clientes.Count;
-        }
-
-
-        private Cliente crearNuevoCliente()
-        {
-            Cliente clienteNuevo = new Cliente();
-            this.clientes.Add(clienteNuevo);
-            return clienteNuevo;
         }
 
         private Boolean tieneVentanillaInformeOcupada()

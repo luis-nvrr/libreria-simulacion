@@ -21,12 +21,15 @@ namespace Numeros_aleatorios.Colas
         private PantallaResultados pantallaResultados;
         private int cantidadClientes;
         private int indice;
+        private int cantidadPaginas;
+        private List<DataTable> paginas;
 
         public ColasMunicipalidad(PantallaResultados pantallaResultados)
         {
             this.pantallaResultados = pantallaResultados;
             resultados = new DataTable();
             crearTabla(resultados);
+            this.paginas = new List<DataTable>();
         }
 
         private void crearTabla(DataTable tabla)
@@ -63,13 +66,11 @@ namespace Numeros_aleatorios.Colas
         }
 
 
-        public void simular()
+        public void simular(int filaDesde, int filaHasta)
         {
             Linea lineaAnterior = new Linea(5);
             Linea lineaActual = null;
 
-            int filaDesde = 0;
-            int filaHasta = 100;
 
             for (int i = 0; i < 1000000; i++)
             {
@@ -89,15 +90,40 @@ namespace Numeros_aleatorios.Colas
                 }
             }
 
-            MessageBox.Show("Promedio - " + ((double)lineaActual.acumuladorTiemposEsperaEnCaja / (double)lineaActual.cantidadClientesEsperan).ToString());
-            construirTablaEntre(0, 10);
+            construirPaginas();
+        }
 
-            pantallaResultados.mostrarResultados(temp);
+        private void construirPaginas()
+        {
+            MessageBox.Show("Columnas-" + resultados.Columns.Count.ToString());
+            cantidadPaginas = (int)Math.Ceiling((double)resultados.Columns.Count / (double)10);
+
+            int columnasPorPagina = 10;
+            for (int i = 1; i <= cantidadPaginas; i++)
+            {
+                int columnaDesde = i * columnasPorPagina - columnasPorPagina;
+                int columnaHasta = i * columnasPorPagina;
+                construirTablaEntre(columnaDesde, columnaHasta);
+                paginas.Add(temp);
+            }
+        }
+
+        public void mostrarPagina(int pagina)
+        {
+            if(pagina >=1 && pagina <= cantidadPaginas)
+            {
+                pantallaResultados.mostrarResultados(paginas[pagina - 1]);
+            } 
         }
 
 
         private void construirTablaEntre(int desde, int hasta)
         {
+            if(hasta > resultados.Columns.Count)
+            {
+                hasta = resultados.Columns.Count;
+            }
+
             temp = new DataTable();
             for (int i = desde; i < hasta; i++)
             {
