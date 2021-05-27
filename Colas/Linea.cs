@@ -46,7 +46,7 @@ namespace Numeros_aleatorios.Colas
         public long tiempoMaximoEsperaEnCola;
 
 
-        private int idFila;
+        public int idFila;
         private int filaDesde;
         private int filaHasta;
 

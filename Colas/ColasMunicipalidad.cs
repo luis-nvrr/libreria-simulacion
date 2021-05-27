@@ -34,6 +34,7 @@ namespace Numeros_aleatorios.Colas
 
         private void crearTabla(DataTable tabla)
         {
+            tabla.Columns.Add("iteracion");
             tabla.Columns.Add("evento");
             tabla.Columns.Add("reloj");
             tabla.Columns.Add("LL CL");
@@ -72,7 +73,7 @@ namespace Numeros_aleatorios.Colas
             Linea lineaActual = null;
 
 
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 1; i <= 1000000; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
@@ -95,14 +96,15 @@ namespace Numeros_aleatorios.Colas
 
         private void construirPaginas()
         {
-            MessageBox.Show("Columnas-" + resultados.Columns.Count.ToString());
-            cantidadPaginas = (int)Math.Ceiling((double)resultados.Columns.Count / (double)10);
+            MessageBox.Show("Columnas-" + (resultados.Columns.Count-1).ToString());
+            cantidadPaginas = (int)Math.Ceiling((double)(resultados.Columns.Count-1) / (double)10);
 
             int columnasPorPagina = 10;
             for (int i = 1; i <= cantidadPaginas; i++)
             {
-                int columnaDesde = i * columnasPorPagina - columnasPorPagina;
-                int columnaHasta = i * columnasPorPagina;
+                int columnaDesde = i * columnasPorPagina - columnasPorPagina + 1;
+                int columnaHasta = i * columnasPorPagina + 1;
+                MessageBox.Show(columnaDesde.ToString() + "-" + columnaHasta.ToString());
                 construirTablaEntre(columnaDesde, columnaHasta);
                 paginas.Add(temp);
             }
@@ -119,12 +121,14 @@ namespace Numeros_aleatorios.Colas
 
         private void construirTablaEntre(int desde, int hasta)
         {
-            if(hasta > resultados.Columns.Count)
+            if(hasta > resultados.Columns.Count-1)
             {
-                hasta = resultados.Columns.Count;
+                hasta = resultados.Columns.Count-1;
             }
 
             temp = new DataTable();
+
+            temp.Columns.Add(resultados.Columns[0].ColumnName);
             for (int i = desde; i < hasta; i++)
             {
                 temp.Columns.Add(resultados.Columns[i].ColumnName);
@@ -133,6 +137,7 @@ namespace Numeros_aleatorios.Colas
             foreach(DataRow row in resultados.Rows)
             {
                 var r = temp.Rows.Add();
+                r[0] = row[0];
                 for (int j = desde; j < hasta; j++)
                 {
                     var column = resultados.Columns[j].ColumnName;
@@ -151,37 +156,38 @@ namespace Numeros_aleatorios.Colas
         private void agregarLinea(Linea linea, int i)
         {
             DataRow row = resultados.NewRow();
-            row[0] = linea.evento;
-            row[1] = linea.reloj;
-            row[2] = linea.llegadaCliente;
-            row[3] = linea.rndEstadoFactura;
-            row[4] = linea.estadoFactura;
-            row[5] = linea.rndConoceProcedimiento;
-            row[6] = linea.conoceProcedimiento;
-            row[7] = linea.ventanillaInforme.finInforme;
-            row[8] = linea.ventanillaActualizacion.finActualizacion;
-            row[9] = linea.cajas[0].finCobro;
-            row[10] = linea.cajas[1].finCobro;
-            row[11] = linea.cajas[2].finCobro;
-            row[12] = linea.cajas[3].finCobro;
-            row[13] = linea.cajas[4].finCobro;
-            row[14] = linea.ventanillaInforme.estado;
-            row[15] = linea.ventanillaInforme.cola.Count;
-            row[16] = linea.ventanillaActualizacion.estado;
-            row[17] = linea.ventanillaActualizacion.cola.Count;
-            row[18] = linea.cajas[0].estado;
-            row[19] = linea.cajas[1].estado;
-            row[20] = linea.cajas[2].estado;
-            row[21] = linea.cajas[3].estado;
-            row[22] = linea.cajas[4].estado;
-            row[23] = linea.colaCaja;
-            row[24] = linea.acumuladorTiemposEsperaEnCaja;
-            row[25] = linea.cantidadClientesEsperan;
-            row[26] = linea.acumuladorTiempoOcupacionVentanillaInformes;
-            row[27] = linea.acumuladorTiempoOciosoVentanillaActualizacion;
-            row[28] = linea.tiempoMaximoEsperaEnCola;
+            row[0] = i;
+            row[1] = linea.evento;
+            row[2] = linea.reloj;
+            row[3] = linea.llegadaCliente;
+            row[4] = linea.rndEstadoFactura;
+            row[5] = linea.estadoFactura;
+            row[6] = linea.rndConoceProcedimiento;
+            row[7] = linea.conoceProcedimiento;
+            row[8] = linea.ventanillaInforme.finInforme;
+            row[9] = linea.ventanillaActualizacion.finActualizacion;
+            row[10] = linea.cajas[0].finCobro;
+            row[11] = linea.cajas[1].finCobro;
+            row[12] = linea.cajas[2].finCobro;
+            row[13] = linea.cajas[3].finCobro;
+            row[14] = linea.cajas[4].finCobro;
+            row[15] = linea.ventanillaInforme.estado;
+            row[16] = linea.ventanillaInforme.cola.Count;
+            row[17] = linea.ventanillaActualizacion.estado;
+            row[18] = linea.ventanillaActualizacion.cola.Count;
+            row[19]  = linea.cajas[0].estado;
+            row[20] = linea.cajas[1].estado;
+            row[21] = linea.cajas[2].estado;
+            row[22] = linea.cajas[3].estado;
+            row[23] = linea.cajas[4].estado;
+            row[24] = linea.colaCaja;
+            row[25] = linea.acumuladorTiemposEsperaEnCaja;
+            row[26] = linea.cantidadClientesEsperan;
+            row[27] = linea.acumuladorTiempoOcupacionVentanillaInformes;
+            row[28] = linea.acumuladorTiempoOciosoVentanillaActualizacion;
+            row[29] = linea.tiempoMaximoEsperaEnCola;
 
-            indice = 28;
+            indice = 29;
                 for (int j = 0; j < cantidadClientes; j++)
                 {
                     indice += 1;

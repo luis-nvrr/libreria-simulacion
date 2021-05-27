@@ -24,7 +24,7 @@ namespace Numeros_aleatorios.Colas
         {
             grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             colas = new ColasMunicipalidad(this);
-            colas.simular(0,100); // 0 es la fila 1, la 0 es inicializacion
+            colas.simular(500,1000); // 0 es la fila 1, la 0 es inicializacion
             colas.mostrarPagina(paginaActual);
         }
 
