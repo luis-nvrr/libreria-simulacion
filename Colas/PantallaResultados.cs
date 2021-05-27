@@ -26,7 +26,8 @@ namespace Numeros_aleatorios.Colas
 
         public void mostrarResultados(DataTable resultados)
         {
-            this.grdRangoResultados.DataSource = resultados;
+            DataView dataView = new DataView(resultados);
+            this.grdRangoResultados.DataSource = dataView;
         }
 
         private void grdRangoResultados_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

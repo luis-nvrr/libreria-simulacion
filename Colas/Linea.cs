@@ -45,6 +45,10 @@ namespace Numeros_aleatorios.Colas
         public long tiempoMaximoEsperaEnCola;
 
 
+        private int idFila;
+        private int filaDesde;
+        private int filaHasta;
+
         public Linea(int cantidadCajas)
         {
             this.llegadaCliente = 60;
@@ -58,7 +62,7 @@ namespace Numeros_aleatorios.Colas
             this.colaCaja = 0;
         }
 
-        public Linea(Linea anterior, ColasMunicipalidad colas)
+        public Linea(Linea anterior, ColasMunicipalidad colas, int filaDesde, int filaHasta, int idFila)
         {
             this.lineaAnterior = anterior;
             this.truncador = new Truncador(4);
@@ -73,6 +77,9 @@ namespace Numeros_aleatorios.Colas
             this.colas = colas;
 
 
+            this.filaDesde = filaDesde;
+            this.filaHasta = filaHasta;
+            this.idFila = idFila;
 
             acumuladorTiemposEsperaEnCaja = anterior.acumuladorTiemposEsperaEnCaja;
             cantidadClientesEsperan = anterior.cantidadClientesEsperan;
@@ -244,7 +251,11 @@ namespace Numeros_aleatorios.Colas
                 }
             }
             Cliente res = new Cliente();
-            colas.agregarColumna();
+
+            if(this.idFila >= filaDesde && this.idFila <= filaHasta)
+            {
+                colas.agregarColumna();
+            }
             return res;
         }
 
@@ -337,7 +348,6 @@ namespace Numeros_aleatorios.Colas
                     {
                         ventanillaActualizacion.agregarACola(clienteActual);
                         clienteActual.esperarActualizacion();
-                        //MessageBox.Show(ventanillaActualizacion.tamañoCola.ToString());
                     }
                     else
                     {
@@ -491,9 +501,5 @@ namespace Numeros_aleatorios.Colas
         }
 
 
-        public void calcularClientes()
-        {
-
-        }
     }
 }

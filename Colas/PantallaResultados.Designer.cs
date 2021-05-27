@@ -45,7 +45,7 @@ namespace Numeros_aleatorios.Colas
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1216, 71);
+            this.panel1.Size = new System.Drawing.Size(1364, 71);
             this.panel1.TabIndex = 16;
             // 
             // lblTitulo
@@ -65,7 +65,7 @@ namespace Numeros_aleatorios.Colas
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(12, 115);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1192, 463);
+            this.groupBox2.Size = new System.Drawing.Size(1340, 622);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "3. Grilla";
@@ -73,16 +73,19 @@ namespace Numeros_aleatorios.Colas
             // grdRangoResultados
             // 
             this.grdRangoResultados.AllowUserToAddRows = false;
+            this.grdRangoResultados.AllowUserToDeleteRows = false;
+            this.grdRangoResultados.AllowUserToResizeColumns = false;
+            this.grdRangoResultados.AllowUserToResizeRows = false;
             this.grdRangoResultados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.grdRangoResultados.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.grdRangoResultados.BackgroundColor = System.Drawing.Color.White;
             this.grdRangoResultados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdRangoResultados.Location = new System.Drawing.Point(42, 60);
+            this.grdRangoResultados.Location = new System.Drawing.Point(6, 28);
             this.grdRangoResultados.Name = "grdRangoResultados";
             this.grdRangoResultados.RowHeadersVisible = false;
             this.grdRangoResultados.RowTemplate.Height = 25;
             this.grdRangoResultados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdRangoResultados.Size = new System.Drawing.Size(1114, 381);
+            this.grdRangoResultados.Size = new System.Drawing.Size(1328, 588);
             this.grdRangoResultados.TabIndex = 7;
             this.grdRangoResultados.VirtualMode = true;
             this.grdRangoResultados.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.grdRangoResultados_ColumnAdded);
@@ -91,7 +94,7 @@ namespace Numeros_aleatorios.Colas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1216, 590);
+            this.ClientSize = new System.Drawing.Size(1364, 749);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
             this.Name = "PantallaResultados";
