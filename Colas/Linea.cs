@@ -37,6 +37,7 @@ namespace Numeros_aleatorios.Colas
         public List<Cliente> clientes;
 
         public ColasMunicipalidad colas;
+        public Queue<Cliente> clientesLibre;
 
         public long acumuladorTiemposEsperaEnCaja;
         public long cantidadClientesEsperan;
@@ -60,6 +61,7 @@ namespace Numeros_aleatorios.Colas
             cargarCajas(cantidadCajas);
             this.clientes = new List<Cliente>();
             this.colaCaja = 0;
+            this.clientesLibre = new Queue<Cliente>();
         }
 
         public Linea(Linea anterior, ColasMunicipalidad colas, int filaDesde, int filaHasta, int idFila)
@@ -75,7 +77,7 @@ namespace Numeros_aleatorios.Colas
             this.clientes = anterior.clientes;
             colaCaja = anterior.colaCaja;
             this.colas = colas;
-
+            this.clientesLibre = anterior.clientesLibre;
 
             this.filaDesde = filaDesde;
             this.filaHasta = filaHasta;
@@ -243,18 +245,25 @@ namespace Numeros_aleatorios.Colas
 
         private Cliente buscarClienteLibre()
         {
-            foreach (var cliente in clientes)
+            //foreach (var cliente in clientes)
+            //{
+            //    if (cliente.estaLibre())
+            //    {
+            //        return cliente;
+            //    }
+            //}
+            Cliente libre;
+            Boolean correcto = clientesLibre.TryDequeue(out libre);
+            if (correcto)
             {
-                if (cliente.estaLibre())
-                {
-                    return cliente;
-                }
+                return libre;
             }
+
             Cliente res = new Cliente();
 
             if(this.idFila >= filaDesde && this.idFila <= filaHasta)
             {
-                colas.agregarColumna();
+                //colas.agregarColumna();
             }
             return res;
         }
@@ -463,6 +472,7 @@ namespace Numeros_aleatorios.Colas
                 Cliente clienteViejo = cajaFinCobro.clienteActual;
                
                 clienteViejo.limpiar();
+                clientesLibre.Enqueue(clienteViejo);
 
                 if (lineaAnterior.tieneColaCobro()){
                     Cliente clienteActual = Caja.siguienteCliente();

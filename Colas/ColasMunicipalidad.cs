@@ -71,7 +71,7 @@ namespace Numeros_aleatorios.Colas
             int filaDesde = 0;
             int filaHasta = 100;
 
-            for (int i = 0; i < 100000; i++)
+            for (int i = 0; i < 1000000; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
@@ -90,9 +90,9 @@ namespace Numeros_aleatorios.Colas
             }
 
             MessageBox.Show("Promedio - " + ((double)lineaActual.acumuladorTiemposEsperaEnCaja / (double)lineaActual.cantidadClientesEsperan).ToString());
-            //construirTablaEntre(0, 10);
+            construirTablaEntre(0, 10);
 
-            pantallaResultados.mostrarResultados(resultados);
+            pantallaResultados.mostrarResultados(temp);
         }
 
 
