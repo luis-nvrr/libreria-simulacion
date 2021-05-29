@@ -10,10 +10,10 @@ namespace Numeros_aleatorios.Colas
 {
     class ColasMunicipalidad
     {
-        double[] probabilidadesEstadosAcum = new double[] { 0.0, 1 };
+        double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
 
-        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.6, 1 };
+        double[] probabilidadesConoceProcedimientoAcum = new double[] { 0.8, 1 };
         string[] conoceProcedimiento = new string[] { "si", "no" };
 
         DataTable resultados;
@@ -68,30 +68,30 @@ namespace Numeros_aleatorios.Colas
         }
 
 
-        public void simular(int filaDesde, int filaHasta)
+        public void simular(int filaDesde, int filaHasta, int cantSimulaciones, int TiempoLlegada, int TiempoFinInforme, int TiempoFinActualizacion, int TiempoFinCobro)
         {
             Linea lineaAnterior = new Linea(5);
             Linea lineaActual = null;
 
 
-            for (int i = 1; i <= 1000; i++)
+            for (int i = 1; i <= cantSimulaciones; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
-                lineaActual.calcularSiguienteLlegada(20);
+                lineaActual.calcularSiguienteLlegada(TiempoLlegada);
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
                 lineaActual.calcularConoceProcedimiento(probabilidadesConoceProcedimientoAcum, conoceProcedimiento);
-                lineaActual.calcularFinInforme(20);
-                lineaActual.calcularFinActualizacion(20);
-                lineaActual.calcularFinCobro(60);
+                lineaActual.calcularFinInforme(TiempoFinInforme);
+                lineaActual.calcularFinActualizacion(TiempoFinActualizacion);
+                lineaActual.calcularFinCobro(TiempoFinCobro);
                 lineaAnterior = lineaActual;
 
                 if (i >= filaDesde && i <= filaHasta)
                 {
                     agregarLinea(lineaActual, i);
                 }
-            }
 
+            }
             construirPaginas();
         }
 

@@ -15,6 +15,14 @@ namespace Numeros_aleatorios.Colas
         private int paginaActual;
         private ColasMunicipalidad colas;
         private int filaSeleccionada;
+        int cantSimulaciones;
+        int desde;
+        int hasta;
+        int tiempoLlegada;
+        int tiempoFinInforme;
+        int tiempoFinActualizacion;
+        int tiempoFinCobro;
+
         public PantallaResultados()
         {
             InitializeComponent();
@@ -23,11 +31,26 @@ namespace Numeros_aleatorios.Colas
 
         private void PantallaResultados_Load(object sender, EventArgs e)
         {
-            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            colas = new ColasMunicipalidad(this);
-            colas.simular(0,500); // 0 es la fila 1, la 0 es inicializacion
-            colas.mostrarPagina(paginaActual);
+            txtCantSimulaciones.Text = "1000";
+            txtTiempoPromedioLlegadas.Text = "60";
+            txtTiempoPromedioFinInforme.Text = "20";
+            txtTiempoPromedioFinActualizacion.Text = "40";
+            txtTiempoPromedioFinCobro.Text = "30";
+            txtDesde.Text = "0";
+            txtHasta.Text = "500";
         }
+
+        private void limpiarCampos()
+        {
+            txtCantSimulaciones.Text = "";
+            txtTiempoPromedioLlegadas.Text = "";
+            txtTiempoPromedioFinInforme.Text = "";
+            txtTiempoPromedioFinActualizacion.Text = "";
+            txtTiempoPromedioFinCobro.Text = "";
+            txtDesde.Text = "";
+            txtHasta.Text = "";
+        }
+
 
         public void mostrarResultados(DataTable resultados)
         {
@@ -61,6 +84,30 @@ namespace Numeros_aleatorios.Colas
         private void grdRangoResultados_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             grdRangoResultados.ClearSelection();
+        }
+
+        private void btnSimular_Click(object sender, EventArgs e)
+        {
+            cantSimulaciones = int.Parse(txtCantSimulaciones.Text);
+            desde = int.Parse(txtDesde.Text);
+            hasta = int.Parse(txtHasta.Text);
+            tiempoLlegada = int.Parse(txtTiempoPromedioLlegadas.Text);
+            tiempoFinInforme = int.Parse(txtTiempoPromedioFinInforme.Text);
+            tiempoFinActualizacion = int.Parse(txtTiempoPromedioFinActualizacion.Text);
+            tiempoFinCobro = int.Parse(txtTiempoPromedioFinCobro.Text);
+
+            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            colas = new ColasMunicipalidad(this);
+            if (hasta - desde <= 500) 
+            { 
+                colas.simular(desde, hasta, cantSimulaciones, tiempoLlegada, tiempoFinInforme, tiempoFinActualizacion, tiempoFinCobro); // 0 es la fila 1, la 0 es inicializacion
+                colas.mostrarPagina(paginaActual);
+                limpiarCampos();
+            }
+            else
+            {
+                MessageBox.Show("El rango puede ser hasta 500 filas", "Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            }
         }
     }
 }
