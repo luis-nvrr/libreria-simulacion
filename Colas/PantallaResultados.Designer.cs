@@ -64,7 +64,7 @@ namespace Numeros_aleatorios.Colas
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1594, 71);
+            this.panel1.Size = new System.Drawing.Size(1582, 71);
             this.panel1.TabIndex = 16;
             // 
             // lblTitulo
@@ -283,7 +283,8 @@ namespace Numeros_aleatorios.Colas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1594, 863);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1364, 749);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);

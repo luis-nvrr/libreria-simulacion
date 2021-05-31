@@ -35,7 +35,7 @@ namespace Numeros_aleatorios.Colas
 
         private void crearTabla(DataTable tabla)
         {
-            tabla.Columns.Add("iteracion");
+            tabla.Columns.Add("i");
             tabla.Columns.Add("evento");
             tabla.Columns.Add("reloj");
             tabla.Columns.Add("llegada cliente");
@@ -97,10 +97,11 @@ namespace Numeros_aleatorios.Colas
 
         private void construirPaginas()
         {
-            MessageBox.Show("Columnas-" + (resultados.Columns.Count-1).ToString());
-            cantidadPaginas = (int)Math.Ceiling((double)(resultados.Columns.Count-1) / (double)10);
+            int columnasPorPagina = 8;
+            //MessageBox.Show("Columnas-" + (resultados.Columns.Count-1).ToString());
+            cantidadPaginas = (int)Math.Ceiling((double)(resultados.Columns.Count-1) / (double)columnasPorPagina);
 
-            int columnasPorPagina = 7;
+  
             for (int i = 1; i <= cantidadPaginas; i++)
             {
                 int columnaDesde = i * columnasPorPagina - columnasPorPagina + 1;
@@ -122,9 +123,9 @@ namespace Numeros_aleatorios.Colas
 
         private void construirTablaEntre(int desde, int hasta)
         {
-            if(hasta > resultados.Columns.Count-1)
+            if(hasta > resultados.Columns.Count)
             {
-                hasta = resultados.Columns.Count-1;
+                hasta = resultados.Columns.Count;
             }
 
             temp = new DataTable();
@@ -161,17 +162,17 @@ namespace Numeros_aleatorios.Colas
             row[1] = linea.evento;
             row[2] = linea.reloj;
             row[3] = linea.llegadaCliente;
-            row[4] = linea.rndEstadoFactura;
+            row[4] = linea.rndEstadoFactura.ToString() != "-1" ? linea.rndEstadoFactura.ToString() : "";
             row[5] = linea.estadoFactura;
-            row[6] = linea.rndConoceProcedimiento;
+            row[6] = linea.rndConoceProcedimiento.ToString() != "-1" ? linea.rndConoceProcedimiento.ToString() : "";
             row[7] = linea.conoceProcedimiento;
-            row[8] = linea.ventanillaInforme.finInforme;
-            row[9] = linea.ventanillaActualizacion.finActualizacion;
-            row[10] = linea.cajas[0].finCobro;
-            row[11] = linea.cajas[1].finCobro;
-            row[12] = linea.cajas[2].finCobro;
-            row[13] = linea.cajas[3].finCobro;
-            row[14] = linea.cajas[4].finCobro;
+            row[8] = linea.ventanillaInforme.finInforme.ToString() != "-1" ? linea.ventanillaInforme.finInforme.ToString() : "";
+            row[9] = linea.ventanillaActualizacion.finActualizacion.ToString() != "-1" ? linea.ventanillaActualizacion.finActualizacion.ToString() : "";
+            row[10] = linea.cajas[0].finCobro.ToString() != "-1" ? linea.cajas[0].finCobro.ToString() : "" ;
+            row[11] = linea.cajas[1].finCobro.ToString() != "-1" ? linea.cajas[1].finCobro.ToString() : "";
+            row[12] = linea.cajas[2].finCobro.ToString() != "-1" ? linea.cajas[2].finCobro.ToString() : "";
+            row[13] = linea.cajas[3].finCobro.ToString() != "-1" ? linea.cajas[3].finCobro.ToString() : "";
+            row[14] = linea.cajas[4].finCobro.ToString() != "-1" ? linea.cajas[4].finCobro.ToString() : "";
             row[15] = linea.ventanillaInforme.estado;
             row[16] = linea.ventanillaInforme.cola.Count;
             row[17] = linea.ventanillaActualizacion.estado;
@@ -194,7 +195,7 @@ namespace Numeros_aleatorios.Colas
                     indice += 1;
                     row[indice] = linea.clientes[j].estado;
                     indice += 1;
-                    row[indice] = linea.clientes[j].horaLLegadaACaja;
+                    row[indice] = linea.clientes[j].horaLLegadaACaja.ToString() != "-1" ? linea.clientes[j].horaLLegadaACaja.ToString() : ""; ;
                 }
             resultados.Rows.Add(row);
 

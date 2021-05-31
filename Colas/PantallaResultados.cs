@@ -38,6 +38,7 @@ namespace Numeros_aleatorios.Colas
             txtTiempoPromedioFinCobro.Text = "30";
             txtDesde.Text = "0";
             txtHasta.Text = "500";
+            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
         }
 
         private void limpiarCampos()
@@ -96,7 +97,7 @@ namespace Numeros_aleatorios.Colas
             tiempoFinActualizacion = int.Parse(txtTiempoPromedioFinActualizacion.Text);
             tiempoFinCobro = int.Parse(txtTiempoPromedioFinCobro.Text);
 
-            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+         
             colas = new ColasMunicipalidad(this);
             if (hasta - desde <= 500) 
             { 
