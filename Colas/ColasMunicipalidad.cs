@@ -73,6 +73,9 @@ namespace Numeros_aleatorios.Colas
         {
             Linea lineaAnterior = new Linea(5);
             int i;
+
+            agregarLinea(lineaAnterior, 0);
+
             for (i = 1; i <= cantSimulaciones; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
