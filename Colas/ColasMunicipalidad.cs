@@ -23,6 +23,7 @@ namespace Numeros_aleatorios.Colas
         private int indice;
         private int cantidadPaginas;
         private List<DataTable> paginas;
+        private Linea lineaActual;
 
 
         public ColasMunicipalidad(PantallaResultados pantallaResultados)
@@ -71,10 +72,8 @@ namespace Numeros_aleatorios.Colas
         public void simular(int filaDesde, int filaHasta, int cantSimulaciones, int TiempoLlegada, int TiempoFinInforme, int TiempoFinActualizacion, int TiempoFinCobro)
         {
             Linea lineaAnterior = new Linea(5);
-            Linea lineaActual = null;
-
-
-            for (int i = 1; i <= cantSimulaciones; i++)
+            int i;
+            for (i = 1; i <= cantSimulaciones; i++)
             {
                 lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
@@ -90,8 +89,9 @@ namespace Numeros_aleatorios.Colas
                 {
                     agregarLinea(lineaActual, i);
                 }
-
             }
+
+            agregarLinea(lineaActual, lineaActual.idFila);
             construirPaginas();
         }
 
@@ -106,7 +106,7 @@ namespace Numeros_aleatorios.Colas
             {
                 int columnaDesde = i * columnasPorPagina - columnasPorPagina + 1;
                 int columnaHasta = i * columnasPorPagina + 1;
-                MessageBox.Show(columnaDesde.ToString() + "-" + columnaHasta.ToString());
+                //MessageBox.Show(columnaDesde.ToString() + "-" + columnaHasta.ToString());
                 construirTablaEntre(columnaDesde, columnaHasta);
                 paginas.Add(temp);
             }
@@ -146,6 +146,15 @@ namespace Numeros_aleatorios.Colas
                     r[column] = row[column];
                 }
             }
+
+            //var r1 = temp.Rows.Add();
+            //r1[0] = resultados.Rows[resultados.Rows.Count-1][0];
+            //for (int j = desde; j < hasta; j++)
+            //{
+            //    var column = resultados.Columns[j].ColumnName;
+            //    r1[column] = resultados.Rows[resultados.Rows.Count-1][column];
+            //}
+
         }
 
         public void agregarColumna()

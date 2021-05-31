@@ -103,7 +103,7 @@ namespace Numeros_aleatorios.Colas
             { 
                 colas.simular(desde, hasta, cantSimulaciones, tiempoLlegada, tiempoFinInforme, tiempoFinActualizacion, tiempoFinCobro); // 0 es la fila 1, la 0 es inicializacion
                 colas.mostrarPagina(paginaActual);
-                limpiarCampos();
+                //limpiarCampos();
             }
             else
             {
