@@ -219,7 +219,7 @@ namespace Numeros_aleatorios.Colas
             if (this.conoceProcedimiento.Equals("no"))
             {
                 clienteActual = buscarClienteLibre();
-                this.clientes.Add(clienteActual);
+                //this.clientes.Add(clienteActual);
                 if (lineaAnterior.tieneVentanillaInformeOcupada())
                 {
                     clienteActual.esperarInforme();
@@ -245,13 +245,6 @@ namespace Numeros_aleatorios.Colas
 
         private Cliente buscarClienteLibre()
         {
-            //foreach (var cliente in clientes)
-            //{
-            //    if (cliente.estaLibre())
-            //    {
-            //        return cliente;
-            //    }
-            //}
             Cliente libre;
             Boolean correcto = clientesLibre.TryDequeue(out libre);
             if (correcto)
@@ -260,6 +253,7 @@ namespace Numeros_aleatorios.Colas
             }
 
             Cliente res = new Cliente();
+            this.clientes.Add(res);
             if(idFila <= filaHasta)
             {
                 colas.agregarColumna();
@@ -296,7 +290,7 @@ namespace Numeros_aleatorios.Colas
                 this.acumuladorTiempoOciosoVentanillaActualizacion += (reloj - lineaAnterior.reloj);
             }
 
-            if (this.evento.Equals(FIN_ACTUALIZACION) && !lineaAnterior.tieneColaActualizacion() )
+            if (this.evento.Equals(FIN_ACTUALIZACION) && !lineaAnterior.tieneColaActualizacion())
             {
                 ventanillaActualizacion.liberar();
             }
@@ -318,6 +312,8 @@ namespace Numeros_aleatorios.Colas
                         ventanillaActualizacion.noGenerarFinActualizacion();
                         ventanillaActualizacion.liberar();
                     }
+
+
                     return;
                 }
 
@@ -334,12 +330,13 @@ namespace Numeros_aleatorios.Colas
                         ventanillaActualizacion.clienteActual = clienteActual;
                         clienteActual.atenderActualizacion();
                     }
+                    return;
                 }
 
                 if ((this.conoceProcedimiento.Equals("si")))
                 {
                     clienteActual = buscarClienteLibre();
-                    this.clientes.Add(clienteActual);
+                    //this.clientes.Add(clienteActual);
                     if (lineaAnterior.tieneVentanillaActualizacionOcupada())
                     {
                         ventanillaActualizacion.agregarACola(clienteActual);
@@ -395,7 +392,7 @@ namespace Numeros_aleatorios.Colas
             if (this.estadoFactura.Equals("al dia")) 
             {
                 Cliente nuevoCliente = buscarClienteLibre();
-                clientes.Add(nuevoCliente);
+                //clientes.Add(nuevoCliente);
 
                 Caja cajaLibre = buscarCajaLibre();
                 if (cajaLibre == null)
@@ -417,7 +414,7 @@ namespace Numeros_aleatorios.Colas
 
             if (this.evento.Equals(FIN_ACTUALIZACION))
             {
-                Cliente clienteActual = ventanillaActualizacion.getClienteActual();
+                Cliente clienteActual = lineaAnterior.ventanillaActualizacion.getClienteActual();
                 if (lineaAnterior.tieneColaCobro())
                 {
                     this.colaCaja++;

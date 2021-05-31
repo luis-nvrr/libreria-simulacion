@@ -89,6 +89,7 @@ namespace Numeros_aleatorios.Colas
 
         private void btnSimular_Click(object sender, EventArgs e)
         {
+            grdRangoResultados.DataSource = null;
             cantSimulaciones = int.Parse(txtCantSimulaciones.Text);
             desde = int.Parse(txtDesde.Text);
             hasta = int.Parse(txtHasta.Text);
