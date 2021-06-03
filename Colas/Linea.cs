@@ -50,9 +50,9 @@ namespace Numeros_aleatorios.Colas
         private int filaDesde;
         private int filaHasta;
 
-        public Linea(int cantidadCajas)
+        public Linea(int cantidadCajas, int tiempollegada)
         {
-            this.llegadaCliente = 60;
+            this.llegadaCliente = tiempollegada;
             this.truncador = new Truncador(4);
             this.aleatorios = new GeneradorUniformeLenguaje(truncador);
             this.ventanillaInforme = new VentanillaInforme();

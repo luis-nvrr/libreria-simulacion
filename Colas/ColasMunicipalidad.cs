@@ -71,7 +71,7 @@ namespace Numeros_aleatorios.Colas
 
         public void simular(int filaDesde, int filaHasta, int cantSimulaciones, int TiempoLlegada, int TiempoFinInforme, int TiempoFinActualizacion, int TiempoFinCobro)
         {
-            Linea lineaAnterior = new Linea(5);
+            Linea lineaAnterior = new Linea(5,TiempoLlegada);
             int i;
 
             agregarLinea(lineaAnterior, 0);
