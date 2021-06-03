@@ -38,7 +38,7 @@ namespace Numeros_aleatorios.Colas
             txtTiempoPromedioFinCobro.Text = "30";
             txtDesde.Text = "0";
             txtHasta.Text = "500";
-            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+         
         }
 
         private void limpiarCampos()
@@ -67,8 +67,8 @@ namespace Numeros_aleatorios.Colas
 
         public void mostrarResultados(DataTable resultados)
         {
-            DataView dataView = new DataView(resultados);
-            this.grdRangoResultados.DataSource = dataView;
+            grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdRangoResultados.DataSource = resultados;
         }
 
         private void grdRangoResultados_ColumnAdded(object sender, DataGridViewColumnEventArgs e)

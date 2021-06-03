@@ -62,6 +62,8 @@ namespace Numeros_aleatorios.Colas
             this.clientes = new List<Cliente>();
             this.colaCaja = 0;
             this.clientesLibre = new Queue<Cliente>();
+            this.rndConoceProcedimiento = -1;
+            this.rndEstadoFactura = -1;
         }
 
         public Linea(Linea anterior, ColasMunicipalidad colas, int filaDesde, int filaHasta, int idFila)
