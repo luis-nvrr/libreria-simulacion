@@ -67,6 +67,7 @@ namespace Numeros_aleatorios.Colas
 
         public void mostrarResultados(DataTable resultados)
         {
+            this.grdRangoResultados.DoubleBuffered(true);
             grdRangoResultados.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdRangoResultados.DataSource = resultados;
         }
