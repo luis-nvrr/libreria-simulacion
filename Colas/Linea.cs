@@ -283,85 +283,73 @@ namespace Numeros_aleatorios.Colas
             return this.ventanillaInforme.finInforme;
         }
 
-        public void calcularFinActualizacion(long tiempo)
+        private void sumarTiempoOciosoActualizacion()
         {
-
             if (!lineaAnterior.ventanillaActualizacion.estaOcupada())
             {
                 this.acumuladorTiempoOciosoVentanillaActualizacion += (reloj - lineaAnterior.reloj);
             }
+        }
+        public void calcularFinActualizacion(long tiempo)
+        {
+            sumarTiempoOciosoActualizacion();
+            Cliente clienteActual;
 
-            if (this.evento.Equals(FIN_ACTUALIZACION) && !lineaAnterior.tieneColaActualizacion())
+            if (this.evento.Equals(FIN_ACTUALIZACION))
             {
-                ventanillaActualizacion.liberar();
+                if (this.lineaAnterior.tieneColaActualizacion())
+                {
+                    clienteActual = ventanillaActualizacion.siguienteCliente();
+                    atenderActualizacion(clienteActual, tiempo);
+                }
+                else
+                {
+                    ventanillaActualizacion.liberar();
+                }
             }
 
+            if (this.evento.Equals(FIN_INFORME))
             {
-                Cliente clienteActual;
+                clienteActual = lineaAnterior.ventanillaInforme.getClienteActual();
 
-                if(this.evento.Equals(FIN_ACTUALIZACION))
+                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
                 {
-                    if (lineaAnterior.tieneColaActualizacion())
-                    {
-                        clienteActual = ventanillaActualizacion.siguienteCliente();
-                        clienteActual.atenderActualizacion();
-                        ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
-                        ventanillaActualizacion.clienteActual = clienteActual;
-                    }
-                    else
-                    {
-                        ventanillaActualizacion.noGenerarFinActualizacion();
-                        ventanillaActualizacion.liberar();
-                    }
-
-
-                    return;
+                    esperarActualizacion(clienteActual);
                 }
-
-                if (this.evento.Equals(FIN_INFORME))
+                else
                 {
-                    clienteActual = ventanillaInforme.getClienteActual(); // ventanilla no tiene cliente
-                    if (lineaAnterior.tieneColaActualizacion())
-                    {
-                        clienteActual.esperarActualizacion();
-                    }
-                    else
-                    {
-                        ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
-                        ventanillaActualizacion.clienteActual = clienteActual;
-                        clienteActual.atenderActualizacion();
-                    }
-                    return;
+                    atenderActualizacion(clienteActual, tiempo);
                 }
-
-                if ((this.conoceProcedimiento.Equals("si")))
-                {
-                    clienteActual = buscarClienteLibre();
-                    if (lineaAnterior.tieneVentanillaActualizacionOcupada())
-                    {
-                        ventanillaActualizacion.agregarACola(clienteActual);
-                        clienteActual.esperarActualizacion();
-                    }
-                    else
-                    {
-                        ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
-                        clienteActual.atenderActualizacion();
-                        ventanillaActualizacion.clienteActual = clienteActual;
-                    }
-                }
-                return;
             }
 
-
-            if (lineaAnterior.tieneFinActualizacion() && !this.evento.Equals(FIN_ACTUALIZACION))
+            if ((this.conoceProcedimiento.Equals("si")))
             {
-                this.ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
-                return;
-            }
+                clienteActual = buscarClienteLibre();
+                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
+                {
+                    esperarActualizacion(clienteActual);
+                }
+                else
+                {
+                    atenderActualizacion(clienteActual, tiempo);
 
-            this.ventanillaActualizacion.noGenerarFinActualizacion();
+                }
+            }
         }
 
+        private void atenderActualizacion(Cliente clienteActual, long tiempo)
+        {
+            ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
+            clienteActual.atenderActualizacion();
+            ventanillaActualizacion.clienteActual = clienteActual;
+        }
+
+        private void esperarActualizacion(Cliente clienteActual)
+        {
+            ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
+            ventanillaActualizacion.agregarACola(clienteActual);
+            clienteActual.esperarActualizacion();
+        }
         private Boolean tieneVentanillaActualizacionOcupada()
         {
             return this.ventanillaActualizacion.estaOcupada();

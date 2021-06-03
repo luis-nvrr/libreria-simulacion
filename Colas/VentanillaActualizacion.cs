@@ -42,11 +42,6 @@ namespace Numeros_aleatorios.Colas
             return this.finActualizacion > 0;
         }
 
-        public void noGenerarFinActualizacion()
-        {
-            this.finActualizacion = -1;
-        }
-
         public long obtenerFinActualizacion()
         {
             return finActualizacion;
@@ -55,6 +50,7 @@ namespace Numeros_aleatorios.Colas
         public void liberar()
         {
             this.estado = LIBRE;
+            this.finActualizacion = -1;
         }
 
 
@@ -66,7 +62,6 @@ namespace Numeros_aleatorios.Colas
         public object Clone()
         {
             VentanillaActualizacion res = new VentanillaActualizacion();
-            //res.tamañoCola = this.tamañoCola;
             res.estado = this.estado;
             res.finActualizacion = this.finActualizacion;
             res.clienteActual = this.clienteActual;
