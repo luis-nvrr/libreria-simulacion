@@ -49,15 +49,10 @@ namespace Numeros_aleatorios.Colas
             return finInforme != -1;
         }
 
-        public void noGenerarFinInforme()
-        {
-            this.finInforme = -1;
-        }
-
         public void liberar()
         {
             this.estado = LIBRE;
-       
+            this.finInforme = -1;
         }
 
         public object Clone()
