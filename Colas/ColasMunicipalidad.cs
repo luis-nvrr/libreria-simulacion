@@ -95,7 +95,8 @@ namespace Numeros_aleatorios.Colas
             }
 
             agregarLinea(lineaActual, lineaActual.idFila);
-            construirPaginas();
+            pantallaResultados.mostrarResultados(resultados);
+            //construirPaginas();
         }
 
         private void construirPaginas()

@@ -114,7 +114,7 @@ namespace Numeros_aleatorios.Colas
             if (hasta - desde <= 500) 
             { 
                 colas.simular(desde, hasta, cantSimulaciones, tiempoLlegada, tiempoFinInforme, tiempoFinActualizacion, tiempoFinCobro); // 0 es la fila 1, la 0 es inicializacion
-                colas.mostrarPagina(paginaActual);
+                //colas.mostrarPagina(paginaActual);
                 colas.calcularEstadisticas();
 
             }
