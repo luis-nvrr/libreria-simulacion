@@ -290,51 +290,65 @@ namespace Numeros_aleatorios.Colas
                 this.acumuladorTiempoOciosoVentanillaActualizacion += (reloj - lineaAnterior.reloj);
             }
         }
-        public void calcularFinActualizacion(long tiempo)
+        public void calcularColumnaFinActualizacion(long tiempo)
         {
             sumarTiempoOciosoActualizacion();
-            Cliente clienteActual;
 
+            calcularFinActualizacionEventoFinActualizacion(tiempo);
+            calcularFinActualizacionEventoFinInforme(tiempo);
+            calcularFinActualizacionEventoLlegadaCliente(tiempo);
+        }
+
+        private void calcularFinActualizacionEventoLlegadaCliente(long tiempo)
+        {
+            if ((this.conoceProcedimiento.Equals("si")))
+            {
+                Cliente clienteActual = buscarClienteLibre();
+                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
+                {
+                    esperarActualizacion(clienteActual);
+                }
+                else
+                {
+                    atenderActualizacion(clienteActual, tiempo);
+
+                }
+            }
+        }
+
+        private void calcularFinActualizacionEventoFinInforme(long tiempo)
+        {
+            if (this.evento.Equals(FIN_INFORME))
+            {
+                Cliente clienteActual = lineaAnterior.ventanillaInforme.getClienteActual();
+
+                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
+                {
+                    esperarActualizacion(clienteActual);
+                }
+                else
+                {
+                    atenderActualizacion(clienteActual, tiempo);
+                }
+            }
+        }
+
+        private void calcularFinActualizacionEventoFinActualizacion(long tiempo)
+        {
             if (this.evento.Equals(FIN_ACTUALIZACION))
             {
                 if (this.lineaAnterior.tieneColaActualizacion())
                 {
-                    clienteActual = ventanillaActualizacion.siguienteCliente();
+                    Cliente clienteActual = ventanillaActualizacion.siguienteCliente();
                     atenderActualizacion(clienteActual, tiempo);
                 }
                 else
                 {
                     ventanillaActualizacion.liberar();
                 }
+                return;
             }
 
-            if (this.evento.Equals(FIN_INFORME))
-            {
-                clienteActual = lineaAnterior.ventanillaInforme.getClienteActual();
-
-                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
-                {
-                    esperarActualizacion(clienteActual);
-                }
-                else
-                {
-                    atenderActualizacion(clienteActual, tiempo);
-                }
-            }
-
-            if ((this.conoceProcedimiento.Equals("si")))
-            {
-                clienteActual = buscarClienteLibre();
-                if (lineaAnterior.tieneVentanillaActualizacionOcupada())
-                {
-                    esperarActualizacion(clienteActual);
-                }
-                else
-                {
-                    atenderActualizacion(clienteActual, tiempo);
-
-                }
-            }
         }
 
         private void atenderActualizacion(Cliente clienteActual, long tiempo)

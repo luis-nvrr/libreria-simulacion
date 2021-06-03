@@ -84,7 +84,7 @@ namespace Numeros_aleatorios.Colas
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
                 lineaActual.calcularConoceProcedimiento(probabilidadesConoceProcedimientoAcum, conoceProcedimiento);
                 lineaActual.calcularFinInforme(TiempoFinInforme);
-                lineaActual.calcularFinActualizacion(TiempoFinActualizacion);
+                lineaActual.calcularColumnaFinActualizacion(TiempoFinActualizacion);
                 lineaActual.calcularFinCobro(TiempoFinCobro);
                 lineaAnterior = lineaActual;
 
