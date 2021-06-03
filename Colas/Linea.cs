@@ -104,6 +104,24 @@ namespace Numeros_aleatorios.Colas
             return (VentanillaActualizacion) this.ventanillaActualizacion.Clone();
         }
 
+        public void calcularFinInforme(long tiempo)
+        {
+            calcularTiempoOcupacionInformes();
+
+            calcularFinInformeEventoFinInforme(tiempo);
+            calcularFinInformeEventoLlegadaCliente(tiempo);
+            calcularFinInformeEventoFinActualizacion(tiempo);
+        }
+
+        public void calcularColumnaFinActualizacion(long tiempo)
+        {
+            sumarTiempoOciosoActualizacion();
+
+            calcularFinActualizacionEventoFinActualizacion(tiempo);
+            calcularFinActualizacionEventoFinInforme(tiempo);
+            calcularFinActualizacionEventoLlegadaCliente(tiempo);
+        }
+
         private void cargarCajas(int cantidadCajas)
         {
             for (int i = 1; i <= cantidadCajas; i++)
@@ -188,60 +206,69 @@ namespace Numeros_aleatorios.Colas
             return "";
         }
 
-        public void calcularFinInforme(long tiempo)
+        private void calcularTiempoOcupacionInformes()
         {
             if (lineaAnterior.ventanillaInforme.estaOcupada())
             {
                 this.acumuladorTiempoOcupacionVentanillaInformes += (reloj - lineaAnterior.reloj);
             }
 
-            if(this.evento.Equals(FIN_INFORME) && !lineaAnterior.tieneColaInforme())
+        }
+
+        private void calcularFinInformeEventoFinInforme(long tiempo)
+        {
+
+            if (this.evento.Equals(FIN_INFORME))
             {
-                ventanillaInforme.liberar();
-            }
-
-            Cliente clienteActual;
-
-            if(this.evento.Equals(FIN_INFORME)){
                 if (lineaAnterior.tieneColaInforme())
                 {
-                    clienteActual = ventanillaInforme.siguienteCliente();
-                    clienteActual.atenderInforme();
-                    ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
+                    Cliente clienteActual = ventanillaInforme.siguienteCliente();
+                    atenderInforme(clienteActual, tiempo);
                 }
                 else
                 {
-                    ventanillaInforme.noGenerarFinInforme();
                     ventanillaInforme.liberar();
                 }
-                return;
+            }
+        }
 
-           }
 
-            if (this.conoceProcedimiento.Equals("no"))
+
+        private void esperarInforme(Cliente clienteActual)
+        {
+            ventanillaInforme.agregarFinInforme(lineaAnterior.obtenerFinInforme());
+            ventanillaInforme.agregarACola(clienteActual);
+            clienteActual.esperarInforme();
+        }
+        private void esperarActualizacion(Cliente clienteActual)
+        {
+            ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
+            ventanillaActualizacion.agregarACola(clienteActual);
+            clienteActual.esperarActualizacion();
+        }
+
+        private void atenderInforme(Cliente clienteActual, long tiempo)
+        {
+            clienteActual.atenderInforme();
+            ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
+            ventanillaInforme.clienteActual = clienteActual;
+        }
+
+        private void atenderActualizacion(Cliente clienteActual, long tiempo)
+        {
+            clienteActual.atenderActualizacion();
+            ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
+            ventanillaActualizacion.clienteActual = clienteActual;
+        }
+
+
+
+        private void calcularFinInformeEventoFinActualizacion(long tiempo)
+        {
+            if (this.evento.Equals(FIN_ACTUALIZACION) && lineaAnterior.tieneFinInforme())
             {
-                clienteActual = buscarClienteLibre();
-                if (lineaAnterior.tieneVentanillaInformeOcupada())
-                {
-                    clienteActual.esperarInforme();
-                    ventanillaInforme.agregarACola(clienteActual);
-                }
-                else
-                {
-                    ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
-                    clienteActual.atenderInforme();
-                    ventanillaInforme.clienteActual = clienteActual;
-               
-                }
-                return;
+                ventanillaInforme.agregarFinInforme(lineaAnterior.obtenerFinInforme());
             }
-        
-            if(!this.evento.Equals(FIN_INFORME) && lineaAnterior.tieneFinInforme()) {
-                this.ventanillaInforme.agregarFinInforme(lineaAnterior.obtenerFinInforme());
-                return;
-            }
-
-            this.ventanillaInforme.noGenerarFinInforme();
         }
 
         private Cliente buscarClienteLibre()
@@ -290,14 +317,7 @@ namespace Numeros_aleatorios.Colas
                 this.acumuladorTiempoOciosoVentanillaActualizacion += (reloj - lineaAnterior.reloj);
             }
         }
-        public void calcularColumnaFinActualizacion(long tiempo)
-        {
-            sumarTiempoOciosoActualizacion();
 
-            calcularFinActualizacionEventoFinActualizacion(tiempo);
-            calcularFinActualizacionEventoFinInforme(tiempo);
-            calcularFinActualizacionEventoLlegadaCliente(tiempo);
-        }
 
         private void calcularFinActualizacionEventoLlegadaCliente(long tiempo)
         {
@@ -311,6 +331,23 @@ namespace Numeros_aleatorios.Colas
                 else
                 {
                     atenderActualizacion(clienteActual, tiempo);
+
+                }
+            }
+        }
+
+        private void calcularFinInformeEventoLlegadaCliente(long tiempo)
+        {
+            if (this.conoceProcedimiento.Equals("no"))
+            {
+                Cliente clienteActual = buscarClienteLibre();
+                if (lineaAnterior.tieneVentanillaInformeOcupada())
+                {
+                    esperarInforme(clienteActual);
+                }
+                else
+                {
+                    atenderInforme(clienteActual, tiempo);
 
                 }
             }
@@ -346,24 +383,11 @@ namespace Numeros_aleatorios.Colas
                 {
                     ventanillaActualizacion.liberar();
                 }
-                return;
             }
 
         }
 
-        private void atenderActualizacion(Cliente clienteActual, long tiempo)
-        {
-            ventanillaActualizacion.agregarFinActualizacion(this.reloj + tiempo);
-            clienteActual.atenderActualizacion();
-            ventanillaActualizacion.clienteActual = clienteActual;
-        }
 
-        private void esperarActualizacion(Cliente clienteActual)
-        {
-            ventanillaActualizacion.agregarFinActualizacion(lineaAnterior.obtenerFinActualizacion());
-            ventanillaActualizacion.agregarACola(clienteActual);
-            clienteActual.esperarActualizacion();
-        }
         private Boolean tieneVentanillaActualizacionOcupada()
         {
             return this.ventanillaActualizacion.estaOcupada();
@@ -384,104 +408,89 @@ namespace Numeros_aleatorios.Colas
             return this.ventanillaActualizacion.tieneCola();
         }
 
+        private void esperarCaja(Cliente nuevoCliente)
+        {
+            Caja.agregarACola(nuevoCliente);
+            nuevoCliente.esperarCaja();
+            nuevoCliente.horaLLegadaACaja = this.reloj;
+            this.colaCaja++;
+        }
+
+        private void atenderCaja(Cliente nuevoCliente, Caja cajaLibre, long tiempo)
+        {
+            cajaLibre.clienteActual = nuevoCliente;
+            nuevoCliente.atenderCaja(cajaLibre.id, reloj);
+            cajaLibre.agregarFinCobro(reloj + tiempo);
+        }
+
+        private void actualizarTiempoMaximoEsperaEnCola(Cliente clienteActual)
+        {
+            long maxTemp = clienteActual.tiempoEsperaEnCaja;
+            this.acumuladorTiemposEsperaEnCaja += maxTemp;
+            if (maxTemp > tiempoMaximoEsperaEnCola) { tiempoMaximoEsperaEnCola = maxTemp; }
+        }
+
         public void calcularFinCobro(long tiempo)
         {
-            if (evento.Equals(FIN_COBRO) && cajaFinCobro != null)
+
+            if (this.evento.Equals(FIN_COBRO))
             {
+                Cliente clienteViejo = cajaFinCobro.clienteActual;
+                clienteViejo.limpiar();
+                clientesLibre.Enqueue(clienteViejo);
                 cajaFinCobro.liberar();
+
+                if (lineaAnterior.tieneColaCobro())
+                {
+                    Cliente clienteActual = Caja.siguienteCliente();
+                    colaCaja--;
+                    atenderCaja(clienteActual, cajaFinCobro, tiempo);
+                    actualizarTiempoMaximoEsperaEnCola(clienteActual);
+                    cantidadClientesEsperan++;
+                }
+                else
+                {
+                    
+                }
             }
 
             if (this.estadoFactura.Equals("al dia")) 
             {
                 Cliente nuevoCliente = buscarClienteLibre();
-
                 Caja cajaLibre = buscarCajaLibre();
+
                 if (cajaLibre == null)
                 {
-                    this.colaCaja++;
-                    Caja.agregarACola(nuevoCliente);
-                    nuevoCliente.esperarCaja();
-                    nuevoCliente.horaLLegadaACaja = this.reloj;
-                    return;
+                    esperarCaja(nuevoCliente);
                 }
                 else
                 {
-                    cajaLibre.clienteActual = nuevoCliente;
-                    nuevoCliente.atenderCaja(cajaLibre.id, reloj);
-                    cajaLibre.agregarFinCobro(reloj + tiempo);
+                    atenderCaja(nuevoCliente, cajaLibre, tiempo);
                 }
-                return;
             } 
 
             if (this.evento.Equals(FIN_ACTUALIZACION))
             {
                 Cliente clienteActual = lineaAnterior.ventanillaActualizacion.getClienteActual();
-                if (lineaAnterior.tieneColaCobro())
+                Caja cajaLibre = buscarCajaLibre();
+
+                if (cajaLibre == null)
                 {
-                    this.colaCaja++;
-                    Caja.agregarACola(clienteActual);
-                    clienteActual.esperarCaja();
-                    clienteActual.horaLLegadaACaja = reloj;
-
-
+                    esperarCaja(clienteActual);
                 }
                 else
                 {
-                    Caja cajaLibre = buscarCajaLibre();
-
-                    if (cajaLibre == null)
-                    {
-                        this.colaCaja++;
-                        Caja.agregarACola(clienteActual);
-                        clienteActual.esperarCaja();
-                        clienteActual.horaLLegadaACaja = reloj;
-                        return;
-                    }
-                    else
-                    {
-                        cajaLibre.clienteActual = clienteActual;
-                        clienteActual.atenderCaja(cajaLibre.id, reloj);
-                        long maxTemp = clienteActual.tiempoEsperaEnCaja;
-                        this.acumuladorTiemposEsperaEnCaja += maxTemp;
-                        if(maxTemp > tiempoMaximoEsperaEnCola) { tiempoMaximoEsperaEnCola = maxTemp;  }
-                        //cantidadClientesEsperan++;
-                        cajaLibre.agregarFinCobro(reloj + tiempo);
-                    }
+                    atenderCaja(clienteActual, cajaLibre, tiempo);
+                    actualizarTiempoMaximoEsperaEnCola(clienteActual);
                 }
 
-                return;
             }
 
-            if (this.evento.Equals(FIN_COBRO))
-            {
-                Cliente clienteViejo = cajaFinCobro.clienteActual;
-               
-                clienteViejo.limpiar();
-                clientesLibre.Enqueue(clienteViejo);
-
-                if (lineaAnterior.tieneColaCobro()){
-                    Cliente clienteActual = Caja.siguienteCliente();
-                    this.colaCaja--;
-                    clienteActual.atenderCaja(cajaFinCobro.id, reloj);
-
-                    long maxTemp = clienteActual.tiempoEsperaEnCaja;
-                    this.acumuladorTiemposEsperaEnCaja += maxTemp;
-                    
-                    if(maxTemp > tiempoMaximoEsperaEnCola) { tiempoMaximoEsperaEnCola = maxTemp; }
-
-                    cantidadClientesEsperan++;
-                    cajaFinCobro.clienteActual = clienteActual;
-                    cajaFinCobro.agregarFinCobro(reloj + tiempo);
-                    return;
-                }
-            }
-            return;
         }
-
 
         private Boolean tieneColaCobro()
         {
-            return colaCaja > 0;
+            return Caja.tieneCola();
         }
 
         private Caja buscarCajaLibre()

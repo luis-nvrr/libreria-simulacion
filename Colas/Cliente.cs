@@ -36,6 +36,7 @@ namespace Numeros_aleatorios.Colas
         {
             estado = "";
             horaLLegadaACaja = -1;
+            tiempoEsperaEnCaja = 0;
         }
 
         public Boolean estaLibre()

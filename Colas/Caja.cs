@@ -42,6 +42,7 @@ namespace Numeros_aleatorios.Colas
         {
             this.finCobro = -1;
             this.estado = LIBRE;
+            this.clienteActual = null; 
         }
 
 
