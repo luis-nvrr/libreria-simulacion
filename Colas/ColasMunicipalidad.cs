@@ -101,15 +101,12 @@ namespace Numeros_aleatorios.Colas
         private void construirPaginas()
         {
             int columnasPorPagina = 8;
-            //MessageBox.Show("Columnas-" + (resultados.Columns.Count-1).ToString());
             cantidadPaginas = (int)Math.Ceiling((double)(resultados.Columns.Count-1) / (double)columnasPorPagina);
 
-  
             for (int i = 1; i <= cantidadPaginas; i++)
             {
                 int columnaDesde = i * columnasPorPagina - columnasPorPagina + 1;
                 int columnaHasta = i * columnasPorPagina + 1;
-                //MessageBox.Show(columnaDesde.ToString() + "-" + columnaHasta.ToString());
                 construirTablaEntre(columnaDesde, columnaHasta);
                 paginas.Add(temp);
             }
@@ -121,6 +118,28 @@ namespace Numeros_aleatorios.Colas
             {
                 pantallaResultados.mostrarResultados(paginas[pagina - 1]);
             } 
+        }
+
+        public void calcularEstadisticas()
+        {
+            int tamañoTabla = resultados.Rows.Count-1;
+            string tiempoEspera = resultados.Rows[tamañoTabla][25].ToString();
+            string cantidadEspera = resultados.Rows[tamañoTabla][26].ToString();
+            double tiempoPromedioEsperaEnCajas = cantidadEspera != "0" ?
+                                                    double.Parse(tiempoEspera) / double.Parse(cantidadEspera) : 0;
+
+
+            string ocupacionInformes = resultados.Rows[tamañoTabla][27].ToString();
+            double tiempoOcupacionInformes = double.Parse(ocupacionInformes);
+
+            string ociosoActualizacion = resultados.Rows[tamañoTabla][28].ToString();
+            double tiempoOciosoActualizacion = double.Parse(ociosoActualizacion);
+
+            string maximaEsperaCaja = resultados.Rows[tamañoTabla][29].ToString();
+            double tiempoMaximoEsperaCaja = double.Parse(maximaEsperaCaja);
+
+            pantallaResultados.mostrarEstadisticas(tiempoPromedioEsperaEnCajas, tiempoOcupacionInformes, 
+                tiempoOciosoActualizacion, tiempoMaximoEsperaCaja);
         }
 
 
@@ -149,14 +168,6 @@ namespace Numeros_aleatorios.Colas
                     r[column] = row[column];
                 }
             }
-
-            //var r1 = temp.Rows.Add();
-            //r1[0] = resultados.Rows[resultados.Rows.Count-1][0];
-            //for (int j = desde; j < hasta; j++)
-            //{
-            //    var column = resultados.Columns[j].ColumnName;
-            //    r1[column] = resultados.Rows[resultados.Rows.Count-1][column];
-            //}
 
         }
 

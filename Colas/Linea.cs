@@ -71,10 +71,13 @@ namespace Numeros_aleatorios.Colas
             this.aleatorios = new GeneradorUniformeLenguaje(truncador);
             this.ventanillaInforme = anterior.obtenerVentanillaInforme();
             this.ventanillaActualizacion = anterior.obtenerVentanillaActualizacion();
+
             Caja[] temp = new Caja[anterior.cajas.Count];
             anterior.cajas.CopyTo(temp);
+
             this.cajas = new List<Caja>(temp);
             this.clientes = anterior.clientes;
+
             colaCaja = anterior.colaCaja;
             this.colas = colas;
             this.clientesLibre = anterior.clientesLibre;
@@ -205,7 +208,6 @@ namespace Numeros_aleatorios.Colas
                     clienteActual = ventanillaInforme.siguienteCliente();
                     clienteActual.atenderInforme();
                     ventanillaInforme.agregarFinInforme(this.reloj + tiempo);
-                    //
                 }
                 else
                 {
@@ -219,7 +221,6 @@ namespace Numeros_aleatorios.Colas
             if (this.conoceProcedimiento.Equals("no"))
             {
                 clienteActual = buscarClienteLibre();
-                //this.clientes.Add(clienteActual);
                 if (lineaAnterior.tieneVentanillaInformeOcupada())
                 {
                     clienteActual.esperarInforme();
@@ -336,7 +337,6 @@ namespace Numeros_aleatorios.Colas
                 if ((this.conoceProcedimiento.Equals("si")))
                 {
                     clienteActual = buscarClienteLibre();
-                    //this.clientes.Add(clienteActual);
                     if (lineaAnterior.tieneVentanillaActualizacionOcupada())
                     {
                         ventanillaActualizacion.agregarACola(clienteActual);
@@ -392,7 +392,6 @@ namespace Numeros_aleatorios.Colas
             if (this.estadoFactura.Equals("al dia")) 
             {
                 Cliente nuevoCliente = buscarClienteLibre();
-                //clientes.Add(nuevoCliente);
 
                 Caja cajaLibre = buscarCajaLibre();
                 if (cajaLibre == null)
@@ -471,13 +470,11 @@ namespace Numeros_aleatorios.Colas
                     cantidadClientesEsperan++;
                     cajaFinCobro.clienteActual = clienteActual;
                     cajaFinCobro.agregarFinCobro(reloj + tiempo);
-                    //MessageBox.Show("ok");
                     return;
                 }
             }
             return;
         }
-
 
 
         private Boolean tieneColaCobro()

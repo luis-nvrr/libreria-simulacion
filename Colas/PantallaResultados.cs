@@ -52,6 +52,18 @@ namespace Numeros_aleatorios.Colas
             txtHasta.Text = "";
         }
 
+        public void mostrarEstadisticas(double tiempoPromedioEsperaEnCaja, 
+            double tiempoOcupacionInformes, 
+            double tiempoOciosoActualizacion, 
+            double tiempoMaximoEsperaEnCaja
+            )
+        {
+            txtPromedioEsperaCajas.Text = tiempoPromedioEsperaEnCaja.ToString();
+            txtOcupacionInformes.Text = tiempoOcupacionInformes.ToString();
+            txtOciosoActualizacion.Text = tiempoOciosoActualizacion.ToString();
+            txtMaximaEsperaCajas.Text = tiempoMaximoEsperaEnCaja.ToString();
+
+        }
 
         public void mostrarResultados(DataTable resultados)
         {
@@ -69,7 +81,6 @@ namespace Numeros_aleatorios.Colas
             filaSeleccionada = grdRangoResultados.CurrentCell.RowIndex; 
             paginaActual++;
             colas.mostrarPagina(paginaActual);
-            //grdRangoResultados.Rows[filaSeleccionada].Selected = true;
             grdRangoResultados.CurrentCell = grdRangoResultados.Rows[filaSeleccionada].Cells[0];
         }
 
@@ -78,7 +89,6 @@ namespace Numeros_aleatorios.Colas
             filaSeleccionada = grdRangoResultados.CurrentCell.RowIndex;
             paginaActual--;
             colas.mostrarPagina(paginaActual);
-            //grdRangoResultados.Rows[filaSeleccionada].Selected = true;
             grdRangoResultados.CurrentCell = grdRangoResultados.Rows[filaSeleccionada].Cells[0];
         }
 
@@ -89,6 +99,7 @@ namespace Numeros_aleatorios.Colas
 
         private void btnSimular_Click(object sender, EventArgs e)
         {
+            paginaActual = 1;
             grdRangoResultados.DataSource = null;
             cantSimulaciones = int.Parse(txtCantSimulaciones.Text);
             desde = int.Parse(txtDesde.Text);
@@ -104,7 +115,8 @@ namespace Numeros_aleatorios.Colas
             { 
                 colas.simular(desde, hasta, cantSimulaciones, tiempoLlegada, tiempoFinInforme, tiempoFinActualizacion, tiempoFinCobro); // 0 es la fila 1, la 0 es inicializacion
                 colas.mostrarPagina(paginaActual);
-                //limpiarCampos();
+                colas.calcularEstadisticas();
+
             }
             else
             {

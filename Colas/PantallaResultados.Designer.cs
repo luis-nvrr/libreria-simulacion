@@ -51,10 +51,20 @@ namespace Numeros_aleatorios.Colas
             this.txtTiempoPromedioFinInforme = new System.Windows.Forms.TextBox();
             this.txtTiempoPromedioLlegadas = new System.Windows.Forms.TextBox();
             this.lblTiempoPromedioLlegadas = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.txtMaximaEsperaCajas = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtOciosoActualizacion = new System.Windows.Forms.TextBox();
+            this.txtOcupacionInformes = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtPromedioEsperaCajas = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdRangoResultados)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -64,7 +74,7 @@ namespace Numeros_aleatorios.Colas
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1582, 71);
+            this.panel1.Size = new System.Drawing.Size(1410, 71);
             this.panel1.TabIndex = 16;
             // 
             // lblTitulo
@@ -89,9 +99,9 @@ namespace Numeros_aleatorios.Colas
             this.groupBox2.Controls.Add(this.btnAnterior);
             this.groupBox2.Controls.Add(this.btnSiguiente);
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(12, 313);
+            this.groupBox2.Location = new System.Drawing.Point(12, 325);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1570, 566);
+            this.groupBox2.Size = new System.Drawing.Size(1398, 554);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Grilla Desde Hasta";
@@ -210,7 +220,7 @@ namespace Numeros_aleatorios.Colas
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(12, 87);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1570, 220);
+            this.groupBox1.Size = new System.Drawing.Size(541, 220);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parámetros de la Simulación";
@@ -279,12 +289,95 @@ namespace Numeros_aleatorios.Colas
             this.lblTiempoPromedioLlegadas.TabIndex = 24;
             this.lblTiempoPromedioLlegadas.Text = "Tiempo Promedio de Llegadas:";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtMaximaEsperaCajas);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.txtOciosoActualizacion);
+            this.groupBox3.Controls.Add(this.txtOcupacionInformes);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.txtPromedioEsperaCajas);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBox3.Location = new System.Drawing.Point(590, 87);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(765, 220);
+            this.groupBox3.TabIndex = 24;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Resultados";
+            // 
+            // txtMaximaEsperaCajas
+            // 
+            this.txtMaximaEsperaCajas.Location = new System.Drawing.Point(314, 143);
+            this.txtMaximaEsperaCajas.Name = "txtMaximaEsperaCajas";
+            this.txtMaximaEsperaCajas.Size = new System.Drawing.Size(110, 29);
+            this.txtMaximaEsperaCajas.TabIndex = 32;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(46, 151);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(255, 21);
+            this.label2.TabIndex = 30;
+            this.label2.Text = "Tiempo máximo de espera en cajas:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(71, 116);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(230, 21);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Tiempo ocioso de Actualización:";
+            // 
+            // txtOciosoActualizacion
+            // 
+            this.txtOciosoActualizacion.Location = new System.Drawing.Point(314, 108);
+            this.txtOciosoActualizacion.Name = "txtOciosoActualizacion";
+            this.txtOciosoActualizacion.Size = new System.Drawing.Size(110, 29);
+            this.txtOciosoActualizacion.TabIndex = 26;
+            // 
+            // txtOcupacionInformes
+            // 
+            this.txtOcupacionInformes.Location = new System.Drawing.Point(314, 73);
+            this.txtOcupacionInformes.Name = "txtOcupacionInformes";
+            this.txtOcupacionInformes.Size = new System.Drawing.Size(110, 29);
+            this.txtOcupacionInformes.TabIndex = 25;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(53, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(248, 21);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Tiempo de ocupación de Informes:";
+            // 
+            // txtPromedioEsperaCajas
+            // 
+            this.txtPromedioEsperaCajas.Location = new System.Drawing.Point(314, 38);
+            this.txtPromedioEsperaCajas.Name = "txtPromedioEsperaCajas";
+            this.txtPromedioEsperaCajas.Size = new System.Drawing.Size(110, 29);
+            this.txtPromedioEsperaCajas.TabIndex = 21;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(34, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(267, 21);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Tiempo promedio de espera en cajas:";
+            // 
             // PantallaResultados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1364, 749);
+            this.ClientSize = new System.Drawing.Size(1381, 766);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel1);
@@ -299,6 +392,8 @@ namespace Numeros_aleatorios.Colas
             ((System.ComponentModel.ISupportInitialize)(this.grdRangoResultados)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -327,5 +422,14 @@ namespace Numeros_aleatorios.Colas
         private System.Windows.Forms.Label lblDesde;
         private System.Windows.Forms.TextBox txtHasta;
         private System.Windows.Forms.TextBox txtDesde;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtMaximaEsperaCajas;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtOciosoActualizacion;
+        private System.Windows.Forms.TextBox txtOcupacionInformes;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtPromedioEsperaCajas;
+        private System.Windows.Forms.Label label5;
     }
 }
