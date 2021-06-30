@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Colas
 {
-    class Linea
+    class LineaVector
     {
         public string LLEGADA_PERSONA = "llegada de persona";
         public string FIN_INFORME = "fin de informe";
@@ -28,7 +28,7 @@ namespace Numeros_aleatorios.Colas
        public List<Caja> cajas { get; set; }
        public VentanillaActualizacion ventanillaActualizacion { get; set; }
        public VentanillaInforme ventanillaInforme { get; set; }
-       public Linea lineaAnterior { get; set; }
+       public LineaVector lineaAnterior { get; set; }
 
         public Caja cajaFinCobro;
 
@@ -36,7 +36,7 @@ namespace Numeros_aleatorios.Colas
 
         public List<Cliente> clientes;
 
-        public ColasMunicipalidad colas;
+        public Simulacion colas;
         public Queue<Cliente> clientesLibre;
 
         public long acumuladorTiemposEsperaEnCaja;
@@ -50,7 +50,7 @@ namespace Numeros_aleatorios.Colas
         private int filaDesde;
         private int filaHasta;
 
-        public Linea(int cantidadCajas, int tiempollegada)
+        public LineaVector(int cantidadCajas, int tiempollegada)
         {
             this.llegadaCliente = tiempollegada;
             this.truncador = new Truncador(4);
@@ -66,7 +66,7 @@ namespace Numeros_aleatorios.Colas
             this.rndEstadoFactura = -1;
         }
 
-        public Linea(Linea anterior, ColasMunicipalidad colas, int filaDesde, int filaHasta, int idFila)
+        public LineaVector(LineaVector anterior, Simulacion colas, int filaDesde, int filaHasta, int idFila)
         {
             this.lineaAnterior = anterior;
             this.truncador = new Truncador(4);

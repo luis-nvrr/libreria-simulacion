@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Numeros_aleatorios.Colas
 {
-    class ColasMunicipalidad
+    class Simulacion
     {
         double[] probabilidadesEstadosAcum = new double[] { 0.4, 1 };
         string[] estadosFactura = new string[] { "vencida", "al dia" };
@@ -23,10 +23,10 @@ namespace Numeros_aleatorios.Colas
         private int indice;
         private int cantidadPaginas;
         private List<DataTable> paginas;
-        private Linea lineaActual;
+        private LineaVector lineaActual;
 
 
-        public ColasMunicipalidad(PantallaResultados pantallaResultados)
+        public Simulacion(PantallaResultados pantallaResultados)
         {
             this.pantallaResultados = pantallaResultados;
             resultados = new DataTable();
@@ -71,14 +71,14 @@ namespace Numeros_aleatorios.Colas
 
         public void simular(int filaDesde, int filaHasta, int cantSimulaciones, int TiempoLlegada, int TiempoFinInforme, int TiempoFinActualizacion, int TiempoFinCobro)
         {
-            Linea lineaAnterior = new Linea(5,TiempoLlegada);
+            LineaVector lineaAnterior = new LineaVector(5,TiempoLlegada);
             int i;
 
             agregarLinea(lineaAnterior, 0);
 
             for (i = 1; i <= cantSimulaciones; i++)
             {
-                lineaActual = new Linea(lineaAnterior, this, filaDesde, filaHasta, i);
+                lineaActual = new LineaVector(lineaAnterior, this, filaDesde, filaHasta, i);
                 lineaActual.calcularEvento();
                 lineaActual.calcularSiguienteLlegada(TiempoLlegada);
                 lineaActual.calcularEstadoFactura(probabilidadesEstadosAcum, estadosFactura);
@@ -179,7 +179,7 @@ namespace Numeros_aleatorios.Colas
             this.resultados.Columns.Add("hora espera " + cantidadClientes);
         }
 
-        private void agregarLinea(Linea linea, int i)
+        private void agregarLinea(LineaVector linea, int i)
         {
             DataRow row = resultados.NewRow();
             row[0] = i;

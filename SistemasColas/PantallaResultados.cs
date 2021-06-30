@@ -13,7 +13,7 @@ namespace Numeros_aleatorios.Colas
     public partial class PantallaResultados : Form
     {
         private int paginaActual;
-        private ColasMunicipalidad colas;
+        private Simulacion colas;
         private int filaSeleccionada;
         int cantSimulaciones;
         int desde;
@@ -111,7 +111,7 @@ namespace Numeros_aleatorios.Colas
             tiempoFinCobro = int.Parse(txtTiempoPromedioFinCobro.Text);
 
          
-            colas = new ColasMunicipalidad(this);
+            colas = new Simulacion(this);
             if (hasta - desde <= 500) 
             { 
                 colas.simular(desde, hasta, cantSimulaciones, tiempoLlegada, tiempoFinInforme, tiempoFinActualizacion, tiempoFinCobro); // 0 es la fila 1, la 0 es inicializacion
